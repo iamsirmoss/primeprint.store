@@ -5,9 +5,10 @@ import React from "react";
 const Contact = () => {
   return (
       <div className="py-12 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
-            <div className="block lg:flex items-start gap-4 py-10">
+            <hr />
+            <div className="flex items-center gap-4 flex-col  py-10">
                   {/* Contact Info Section */}
-                  <div className="mt-10 w-full lg:w-[30%]">
+                  <div className="mt-10 w-full lg:w-[55%] order-2">
                         <h2 className="text-3xl sm:text-4xl font-bold">
                               Contact us
                         </h2>
@@ -33,7 +34,7 @@ const Contact = () => {
                         </div>
                   </div>
                   {/* Form Section */}
-                  <div className="mt-14 lg:mt-0 p-0 lg:p-8 w-full lg:w-[70%] mx-auto">
+                  <div className="mt-14 lg:mt-0 p-0 lg:p-8 w-full lg:w-[60%] mx-auto order-1">
                         <form>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               {/* Full Name */}

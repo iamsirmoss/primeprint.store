@@ -36,7 +36,7 @@ const Reviews = () => {
                         {review?.slice(0, 5)?.map((item: any) => (
                         <CarouselItem key={item.id} className="w-full sm:basis-1/2 lg:basis-1/3">
                               <div className="p-1">
-                              <div className='w-full bg-white rounded-lg border' key={item.id}>
+                              <div className='w-full bg-white rounded-lg border hover:border-gray-400 transition-all duration-300' key={item.id}>
                                           <div className='flex justify-between items-center px-4 py-3'>
                                                 <Image src={item.src} alt='avis image' 
                                                 className='w-[10%] object-contain' width={0} height={0} sizes='100vw' />

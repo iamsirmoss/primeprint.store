@@ -32,7 +32,7 @@ const TopServiceCard: React.FC<ServiceCardProps> = ({
                   ></div>
 
                   <div className="p-5 text-black flex flex-col items-center">
-                  <h3 className="text-base font-normal group-hover:underline transition-all duration-500">{title}</h3>
+                  <h3 className="text-base font-normal group-hover:underline transition-transform duration-500">{title}</h3>
                   </div>
             </div>
       </Link>

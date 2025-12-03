@@ -12,7 +12,7 @@ const Service = () => {
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2  
     px-4 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] relative">
       {services.map((service) => (
-        <div key={service.id} className="group hover:bg-blue-400 transition-all duration-300">
+        <div key={service.id} className="group hover:bg-slate-100 transition-all duration-300">
           <div className="">
             <Link
               href={`service/${service.id}`}
@@ -27,15 +27,15 @@ const Service = () => {
                 sizes="100vw"
                 className="w-[40%] sm:w-[50%]"
               />
-              <h5 className="uppercase text-xs mt-5 text-center group-hover:text-white transition-all duration-300">
+              <h5 className="uppercase text-xs mt-5 text-center group-hover:text-black transition-all duration-300">
                 {service.name}
               </h5>
             </Link>
           </div>
-          <div className="absolute left-0 right-0 bg-blue-400 w-full p-10 z-30 opacity-0 translate-x-full 
+          <div className="absolute left-0 right-0 bg-slate-100 w-full p-10 z-30 opacity-0 translate-x-full 
           group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-700">
             <div className="flex items-start gap-10">
-              <div className="text-white capitalize">
+              <div className="text-black capitalize">
                 <h6 className="font-semibold mb-4 text-lg">Products :</h6>
                 <ul className="mb-4">
                   {service.products.map((product) => (
@@ -45,7 +45,7 @@ const Service = () => {
                   ))}
                 </ul>
               </div>
-              <div className="text-white capitalize">
+              <div className="text-black capitalize">
                 <h6 className="font-semibold mb-4 text-lg">Sub-services :</h6>
                 <ul className="">
                   {service.subServices.map((subService) => (

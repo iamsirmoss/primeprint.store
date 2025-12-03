@@ -6,7 +6,7 @@ import React from 'react'
 
 const ProductCard = () => {
   return (
-      <div className='group transition-transform duration-300 hover:scale-105 rounded border-b'>
+      <div className='group transition-all duration-500 border border-transparent rounded shadow-xs hover:shadow-lg hover:border-gray-300 p-1'>
             <Link href={'/'} className='relative'>
                   <div className='w-full overflow-hidden flex flex-col items-center justify-center bg-blue-100 rounded'>
                         <Image src={image} alt='image1' priority width={0} height={0} sizes='100vw'className='object-cover w-[45%] md:w-[60%]' />

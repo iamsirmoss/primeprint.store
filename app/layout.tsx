@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import BackToTop from "@/components/BackToTop";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const kumbhSans = Kumbh_Sans({
   variable: "--font-kumbh-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <BackToTop />
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );

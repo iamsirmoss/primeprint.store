@@ -66,7 +66,7 @@ const Test: React.FC = () => {
                   <CarouselContent className="-mt-1 h-80 w-full">
                   {cards.map((card, index) => (
                   <CarouselItem key={index} className="pt-0 w-full">
-                        <div className="p-4 w-full">
+                        <div className="px-4 pt-2 w-full">
                         <Card
                         key={index}
                         title={card.title}
