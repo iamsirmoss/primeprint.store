@@ -10,7 +10,7 @@ import OrderButton from './OrderButton'
 import TopNav from './TopNav'
 import Search from './Search'
 import CartItem from './CartItem'
-import Accompte from './Accompte'
+import SessionOrNot from './SessionOrNot'
 
 const Navbar = () => {
 
@@ -54,7 +54,7 @@ const Navbar = () => {
                   <div className='flex items-center gap-3 md:gap-5'>
                         <Search />
                         <OrderButton />
-                        <Accompte />
+                        <SessionOrNot />
                         <CartItem />
                         <NavMobile />
                   </div>

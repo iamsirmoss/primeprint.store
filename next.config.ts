@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  trailingSlash: false,  
+  trailingSlash: false, 
+  serverExternalPackages: ["@node-rs/argon2"] 
 };
 
 export default nextConfig;

@@ -3,39 +3,39 @@
 import { signIn } from '@/lib/auth-client'
 import { Eye, EyeOff, Mail } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { BsGoogle } from 'react-icons/bs'
 import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
+import { signInEmailAction } from '@/actions/sign-in-email-action'
 
 const LoginForm = () => {
 
+      const [isPending, setPending] = useState(false);
+      const router = useRouter();
+
       const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
-            evt.preventDefault();
-            const formData = new FormData(evt.target as HTMLFormElement);
-
-
-            const email = String(formData.get('email'));
-            if (!email) return toast.error('Please enter your email.');
-
-            const password = String(formData.get('password'));
-            if (!password) return toast.error('Please enter your password.');
-
-            await signIn.email(
-                  {
-                        email,
-                        password
-                  },
-                  {
-                        onRequest: () => {},
-                        onResponse: () => {},
-                        onError: (ctx) => {
-                              toast.error(ctx.error.message);
-                        },
-                        onSuccess: () => {
-                              toast.success('Signed in successfully.');
-                        }
+                  evt.preventDefault();
+      
+                  setPending(true);
+      
+                  const formData = new FormData(evt.target as HTMLFormElement);
+      
+                  const {error} = await signInEmailAction(formData);
+      
+                  if (error) {
+                        toast.error(error);
+                        setPending(false);
+                  } else {
+                        toast.success('Logged in successfully.');
+                        router.push('/profile');
+                        window.location.href = "/profile";
                   }
-            )
-      }
+      
+                  setPending(false);
+      
+            }
 
   return (
       <>
@@ -71,18 +71,19 @@ const LoginForm = () => {
 
                   {/* Submit Button */}
                   <div className="mt-10 w-full block sm:flex items-center gap-3">
-                        <button
+                        <Button
+                        disabled={isPending}
                         type="submit"
-                        className="bg-red-500 text-white font-semibold px-16 py-4
+                        className="bg-red-500 text-white font-semibold px-16 py-7
                         rounded shadow-md flex items-center gap-2 transition-all duration-300 hover:scale-95 hover:bg-blue-400 cursor-pointer"
                         >
-                              <h5 className='text-center'>Login</h5>
-                        </button>
+                              <h5 className='text-center'>{isPending ? "Loading..." : "Login"}</h5>
+                        </Button>
                         <div className="mt-5 sm:mt-0 flex items-center gap-3">
                               <p className="text-gray-400">
-                                    You don't have an account ?
+                                    You don&apos;t have an account ?
                               </p>
-                              <Link href={'/login'} className='font-bold text-red-500 hover:text-blue-400 
+                              <Link href={'/register'} className='font-bold text-red-500 hover:text-blue-400 
                               transition-all duration-500'>
                                     Sign up
                               </Link>
@@ -91,14 +92,14 @@ const LoginForm = () => {
             </form>
             <div className='mt-8 w-full flex flex-col justify-center items-center'>
                   <div className='flex items-center justify-center mt-4 w-full'>
-                        <button type='button' 
-                        className='flex flex-col justify-center items-center gap-3 py-4 rounded bg-black 
+                        <Button type='button' 
+                        className='flex flex-col justify-center items-center gap-3 py-7 rounded bg-black 
                         hover:bg-black/80 w-full transition-all duration-300 cursor-pointer'>
                               <div className='flex items-center gap-2'>
                                     <BsGoogle className='text-white' />
                                     <p className='font-light text-white'>Connect with Google</p>
                                </div>
-                        </button>
+                        </Button>
                   </div>
             </div>
       </>
