@@ -22,9 +22,11 @@ const ProductCard = () => {
                               </h5>
                         </div>
                         <p className='text-gray-500 mt-3 text-sm'>Lorem ipsum vitae accumsan orci fringilla a</p>
+                        <div className='flex flex-col items-end'>
                         <button className="mt-6 border rounded py-2 px-4 hover:bg-black hover:text-white transition-all duration-300">
                               <h5 className="text-sm">Add to cart</h5>
                         </button>
+                        </div>
                   </div>
             </Link>
       </div>
