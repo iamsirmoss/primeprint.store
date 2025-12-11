@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Kumbh_Sans } from "next/font/google";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import BackToTop from "@/components/BackToTop";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -27,9 +25,7 @@ export default function RootLayout({
       <body
         className={`${kumbhSans.variable} overflow-x-hidden`}
       >
-        <Navbar />
         {children}
-        <Footer />
         <BackToTop />
         <Toaster position="top-center" richColors />
       </body>

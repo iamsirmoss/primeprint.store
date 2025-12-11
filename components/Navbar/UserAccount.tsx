@@ -1,4 +1,4 @@
-import { Lock, LogOut, Settings, User as Use, LayoutDashboard } from "lucide-react";
+import { Lock, LogOut, Settings, User as Use, LayoutDashboard, LayoutDashboardIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -23,6 +23,7 @@ interface UserAccountProps {
     name?: string | null;
     email?: string | null;
     image?: string | null;
+    role: "USER" | "ADMIN";
   };
 }
 
@@ -30,7 +31,7 @@ const UserAccount = ({user}: UserAccountProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" className="flex-none rounded-full border border-red-500 cursor-pointer">
+        <Button size="icon" className="flex-none rounded-full border border-white cursor-pointer">
           {
             user.image ? 
             (<Image
@@ -53,6 +54,17 @@ const UserAccount = ({user}: UserAccountProps) => {
         <DropdownMenuLabel>{user.name || "User"}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          { user.role === "ADMIN" && (
+          <>
+          <DropdownMenuItem asChild>
+            <Link href="/admin/dashboard" className="cursor-pointer">
+              <LayoutDashboardIcon className="mr-2 h-4 w-4 text-black" />
+              <span className="text-sm">Admin Dashboard</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          </>
+          )}
           <DropdownMenuItem asChild>
             <Link href="/profile" className="cursor-pointer">
               <Use className="mr-2 h-4 w-4 text-black" />
@@ -60,17 +72,10 @@ const UserAccount = ({user}: UserAccountProps) => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild>
-            <Link href="/parametres" className="cursor-pointer">
-              <Settings className="mr-2 h-4 w-4 text-black" />
-              <span className="text-sm">Paramètres</span>
-            </Link>
+          <DropdownMenuItem asChild> 
+            <SignOutButton />
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild> 
-          <SignOutButton />
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

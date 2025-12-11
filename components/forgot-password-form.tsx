@@ -1,0 +1,62 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Mail } from "lucide-react";
+import { requestPasswordReset } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
+
+export const ForgotPasswordForm = () => {
+  const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
+
+  async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+    const formData = new FormData(evt.currentTarget);
+    const email = String(formData.get("email"));
+
+    if (!email) return toast.error("Please enter your email.");
+
+    await requestPasswordReset({
+      email,
+      redirectTo: "/auth/reset-password",
+      fetchOptions: {
+        onRequest: () => {
+          setIsPending(true);
+        },
+        onResponse: () => {
+          setIsPending(false);
+        },
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        },
+        onSuccess: () => {
+          toast.success("Reset link sent to your email.");
+          router.push("/auth/forgot-password/success");
+        },
+      },
+    });
+  }
+
+  return (
+    <form className="w-full space-y-4 mt-10" onClick={handleSubmit}>
+      <div className="relative mt-8">
+            <Mail className="absolute top-2 text-blue-300" />
+            <input
+                  name='email'
+                  type="email"
+                  id="email"
+                  className="w-full border-b border-blue-300 pl-9 py-2 focus:outline-none 
+                  hover:border-b-red-500 transition-all duration-300 bg-transparent" placeholder="Email"
+            />
+      </div>
+
+      <Button size="lg" type="submit" disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400">
+        Send reset link
+      </Button>
+    </form>
+  );
+};

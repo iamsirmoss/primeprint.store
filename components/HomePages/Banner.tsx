@@ -25,21 +25,23 @@ const Banner = () => {
                   </motion.div>
                   <div className='flex flex-wrap items-center gap-4 mt-10'>
                         
-                        <button
+                        <Link href={'/services'} className='group'>
+                              <button
                               className='bg-red-500 text-white rounded px-4 py-4 md:px-5 md:py-5 
-                              shadow-[rgba(13,38,76,0.19)_0px_9px_20px] group'>
-                                    <Link href={'/services'} className='flex items-center gap-2'>
+                              shadow-[rgba(13,38,76,0.19)_0px_9px_20px] cursor-pointer flex items-center gap-2'>
+                                    
                                     <h5 className='font-semibold text-sm md:text-[16px]'>Explore services</h5>
                                     <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
-                                    </Link>
-                        </button>
-                        <button
+                              </button>
+                        </Link>
+                        <Link href={'/shop'}>
+                              <button
                               className='bg-white text-red-500 rounded px-4 py-4 md:px-5 md:py-5 shadow-[rgba(13,38,76,0.19)_0px_9px_20px]
-                              hover:translate-x-3 transition-all duration-300'>
-                                    <Link href={'/shop'}>
+                              hover:bg-black hover:text-white transition-all duration-300 cursor-pointer'>
+                                    
                                     <h5 className='font-semibold text-sm md:text-[16px]'>Shop now</h5>
-                                    </Link>
-                        </button>
+                              </button>
+                        </Link>
                   </div>
             </div>
             <motion.div 

@@ -1,6 +1,7 @@
 "use server"
 
-import { auth } from "@/lib/auth";
+import { auth, ErrorCode } from "@/lib/auth";
+import { APIError } from "better-auth/api"
 
 export async function signUpEmailAction(formData: FormData) {
 
@@ -24,8 +25,15 @@ export async function signUpEmailAction(formData: FormData) {
 
                         return { error: null };
                   } catch (err) {
-                        if (err instanceof Error) {
-                              return { error: "Oups! Something went wrong while registering." };
+                        if (err instanceof APIError) {
+                              const errCode = err.body ? (err.body.code as ErrorCode) : "unknown";
+
+                              switch (errCode) {
+                                    case "USER_ALREADY_EXISTS":
+                                          return { error: 'A user already exists.' };
+                                    default:
+                                          return { error: err.message };
+                              }
                         }
 
                         return {error: 'Internal server error.'};
