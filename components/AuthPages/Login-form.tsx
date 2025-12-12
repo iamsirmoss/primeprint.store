@@ -57,7 +57,7 @@ const LoginForm = () => {
 
                         {/* Password */}
                         <div className="relative mt-8">
-                              <EyeOff className="absolute top-1.5 text-blue-300" />
+                              <EyeOff className="absolute top-2 text-blue-300" />
                               <input
                               name='password'
                               type="password"
@@ -66,6 +66,12 @@ const LoginForm = () => {
                               hover:border-b-red-500 transition-all duration-300 bg-transparent"
                               placeholder="Password ****"
                               />
+                        </div>
+
+                        <div className='mt-6 flex flex-col items-end'>
+                              <Link href="/auth/forgot-password" className='text-sm italic text-muted-foreground hover:text-foreground'>
+                                    Forgot password ?
+                              </Link>
                         </div>
                   </div>
 

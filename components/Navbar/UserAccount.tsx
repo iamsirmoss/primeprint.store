@@ -42,10 +42,11 @@ const UserAccount = ({user}: UserAccountProps) => {
             />) 
             : 
             (
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <div className="size-6 md:size-8 border border-primary rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+                <span className="uppercase text-sm font-semibold">
+                  {user.name?.slice(0, 2)}
+                </span>
+              </div>
             )
           }
         </Button>

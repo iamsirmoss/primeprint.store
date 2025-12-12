@@ -2,6 +2,9 @@ import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { headers } from "next/headers"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import { UpdateUserForm } from "@/components/update-user-form"
+import { ChangePasswordForm } from "@/components/change-password-form"
 
 const page = async () => {
 
@@ -39,8 +42,39 @@ const page = async () => {
             <div className="text-2xl font-bold">Permissions</div>
 
             <div className="space-x-4">
-                  <Button size='sm'>MANAGE OWN POSTS</Button>
-                  <Button size='sm' disabled={!FULL_POST_ACCESS.success}>MANAGE ALL POSTS</Button>
+                  <Button size='sm' className="rounded">MANAGE OWN POSTS</Button>
+                  <Button size='sm' className="rounded" disabled={!FULL_POST_ACCESS.success}>MANAGE ALL POSTS</Button>
+            </div>
+
+            <div className="mt-10">
+                  {session.user.image ? (
+                  <Image
+                        src={session.user.image}
+                        alt="User profile picture"
+                        priority width={0} height={0} sizes='100vw'
+                        className="size-24 border border-primary rounded-full object-cover"
+                  />
+                  ) : (
+                  <div className="size-24 border border-primary rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+                        <span className="uppercase text-lg font-bold">
+                              {session.user.name.slice(0, 2)}
+                        </span>
+                  </div>
+                  )}
+            </div>
+
+            <div className="mt-10 space-y-4 p-4 rounded-b-md  border border-t-8 border-blue-400">
+                  <h2 className="text-2xl font-bold">Update user</h2>
+
+                  <UpdateUserForm
+                        name={session.user.name}
+                  />
+            </div>
+
+            <div className="mt-10 space-y-4 p-4 rounded-b-md  border border-t-8 border-red-400">
+                  <h2 className="text-2xl font-bold">Change password</h2>
+
+                  <ChangePasswordForm />
             </div>
 
             <pre className="text-sm overflow-clip mt-6">

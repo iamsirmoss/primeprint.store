@@ -1,8 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { RiCloseFill } from "react-icons/ri";
+
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+const cartVariants = {
+  hidden: { x: "100%" },
+  visible: { x: "0%" },
+  exit: { x: "100%" },
+};
 
 const CartView = ({
   openCart,
@@ -12,54 +24,68 @@ const CartView = ({
   open: boolean;
 }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: open ? 1 : 0 }}
-      transition={{ duration: 2 }}
-      className="w-full z-50 fixed top-0 left-0 inset-0 flex items-center"
-    >
-      {/* Background Overlay */}
-      <div
-        className="bg-[#000000b4] w-[62%] h-full"
-        onClick={openCart}
-      ></div>
+    <AnimatePresence mode="wait">
+      {open && (
+        <motion.div
+          key="cart-wrapper"
+          className="fixed inset-0 z-50 flex"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          {/* Overlay */}
+          <motion.div
+            variants={overlayVariants}
+            transition={{ duration: 0.35 }}
+            className="bg-black/70 w-[62%] h-full"
+            onClick={openCart}
+          />
 
-      {/* Sliding Cart */}
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: open ? "0%" : "100%" }}
-        transition={{ type: "spring", stiffness: 90, damping: 20 }}
-        className="w-full md:w-[40%] bg-white shadow h-full"
-      >
-        {/* Cart Header */}
-        <div className="border-b-2 py-10 xl:py-5">
-          <div className="flex justify-between items-center px-4">
-            <h2 className="text-xl md:text-2xl font-bold">Your cart</h2>
-            <RiCloseFill
-              onClick={openCart}
-              color="black"
-              className="text-xl sm:text-2xl font-bold cursor-pointer"
-            />
-          </div>
-        </div>
+          {/* Cart */}
+          <motion.div
+            variants={cartVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{
+              x: {
+                type: "spring",
+                stiffness: 260,
+                damping: 26,
+                mass: 0.9,
+              },
+            }}
+            className="w-full md:w-[40%] bg-white shadow h-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="border-b-2 py-10 xl:py-5">
+              <div className="flex justify-between items-center px-4">
+                <h2 className="text-xl md:text-2xl font-bold">Your cart</h2>
+                <RiCloseFill
+                  onClick={openCart}
+                  className="text-xl sm:text-2xl cursor-pointer"
+                />
+              </div>
+            </div>
 
-        {/* Empty Cart Message */}
-        <div className="mt-48 flex flex-col items-center justify-center">
-          <h5 className="mb-10 text-lg text-slate-500">No items found.</h5>
-          <div>
-            <Link href={"/order"} onClick={openCart}>
-              <motion.button
-                whileHover={{ y: -10, transition: { type: "spring" } }}
-                className="flex items-center gap-2 bg-red-500 text-white rounded px-10 py-6 
-                shadow-[rgba(13,38,76,0.19)_0px_9px_20px]"
-              >
-                <h5 className="font-semibold text-base sm:text-[20px]">Go to order</h5>
-              </motion.button>
-            </Link>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
+            {/* Empty state */}
+            <div className="mt-48 flex flex-col items-center justify-center">
+              <h5 className="mb-10 text-lg text-slate-500">No items found.</h5>
+
+              <Link href="/order" onClick={openCart}>
+                <motion.button
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-red-500 text-white rounded px-10 py-5 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium"
+                >
+                  Go to order
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

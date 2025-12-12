@@ -22,19 +22,19 @@ const Accompte = () => {
       <DropdownMenuTrigger asChild>
         <User className='text-2xl md:text-3xl text-black hover:text-blue-400 transition-all duration-300 cursor-pointer relative' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-32" align="start">
+      <DropdownMenuContent className="w-36" align="start">
         {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <Link href={'/login'} 
-              className='cursor-pointer font-semibold text-lg'>
+              className='cursor-pointer font-medium text-lg'>
                 Sign in        
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             <Link href={'/register'} 
-              className='cursor-pointer font-semibold text-lg border-t text-gray-500'>
+              className='cursor-pointer font-medium text-lg border-t'>
                 Sign up       
             </Link>
           </DropdownMenuItem>

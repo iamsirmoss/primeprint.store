@@ -28,10 +28,10 @@ const Banner = () => {
                         <Link href={'/services'} className='group'>
                               <button
                               className='bg-red-500 text-white rounded px-4 py-4 md:px-5 md:py-5 
-                              shadow-[rgba(13,38,76,0.19)_0px_9px_20px] cursor-pointer flex items-center gap-2'>
+                              shadow-[rgba(13,38,76,0.19)_0px_9px_20px] cursor-pointer flex items-center gap-2 group-hover:bg-red-500/80 transition-all duration-300'>
                                     
                                     <h5 className='font-semibold text-sm md:text-[16px]'>Explore services</h5>
-                                    <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
+                                    <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-300' />
                               </button>
                         </Link>
                         <Link href={'/shop'}>

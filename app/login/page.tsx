@@ -1,4 +1,5 @@
 import LoginForm from '@/components/AuthPages/Login-form'
+import { MagicLinkLoginForm } from '@/components/magic-link-login-form'
 import ReturnButton from '@/components/return-button'
 import SignInOAuthButton from '@/components/sign-in-oauth-button'
 
@@ -11,6 +12,7 @@ const page = () => {
                         <div className='mb-8 bg-slate-200 py-3 rounded w-full'>
                               <h5 className='text-center text-2xl font-semibold'>Sign in</h5>
                         </div>
+                        <MagicLinkLoginForm />
                         <LoginForm />
 
                         <div className='mt-8 w-full flex flex-col justify-center items-center gap-4'>

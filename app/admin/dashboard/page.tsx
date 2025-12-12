@@ -1,14 +1,13 @@
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { headers } from "next/headers"
-import { prisma } from "@/lib/prisma";
 import { DeleteUserButton, PlaceholderDeleteUserButton } from "@/components/delete-user-button";
 import UserRoleSelect from "@/components/user-role-select";
 import { UserRole } from "@/lib/generated/prisma/enums";
+import ReturnButton from "@/components/return-button";
 
-export default async function page () {
-
-      const headerList = await headers();
+const page = async () => {
+   const headerList = await headers();
 
       const session = await auth.api.getSession({
             headers: headerList,
@@ -20,6 +19,7 @@ export default async function page () {
 
             return (
                   <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] mt-16 mb-40'>
+                        <ReturnButton href='/' label='Back to Home' />
                         <hr />
                               <div className="py-10 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto flex flex-col justify-center items-center">
                                     <div className='mb-8 bg-slate-200 py-3 w-full'>
@@ -29,18 +29,6 @@ export default async function page () {
                               </div>
                   </div>
                   )}
-
-            // const users = await prisma.user.findMany({
-            //       select: {
-            //             id: true,
-            //             name: true,
-            //             email: true,
-            //             role: true,
-            //       },
-            //       orderBy: {
-            //             createdAt: 'asc'
-            //       }
-            // });
 
             const { users } = await auth.api.listUsers({
                   headers: headerList,
@@ -57,6 +45,7 @@ export default async function page () {
             
             return (
                   <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] mt-16 mb-40'>
+                        <ReturnButton href='/' label='Back to Home' />
                         <hr />
                               <div className="py-10 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto flex flex-col justify-center items-center">
                                     <div className='mb-8 bg-slate-200 py-3 w-full'>
@@ -100,3 +89,5 @@ export default async function page () {
             )
 
       }
+
+export default page

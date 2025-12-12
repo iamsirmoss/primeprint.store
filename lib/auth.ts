@@ -1,7 +1,7 @@
-import { betterAuth } from "better-auth";
+import { betterAuth, type BetterAuthOptions } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js"
-import { admin } from "better-auth/plugins"
+import { admin, customSession, magicLink } from "better-auth/plugins"
 
 import { prisma } from "@/lib/prisma";
 import { hashPassword, verifyPassword } from "@/lib/argon2";
@@ -11,7 +11,7 @@ import { UserRole } from "./generated/prisma/enums";
 import { ac, roles } from "@/lib/permissions";
 import { sendEmailAction } from "@/actions/send-email-action";
 
-export const auth = betterAuth({
+const options = {
       database: prismaAdapter(prisma, {
             provider: "postgresql",
       }),
@@ -83,11 +83,39 @@ export const auth = betterAuth({
                                     body: {
                                           ...ctx.body,
                                           name
-                                    }
-                              }
-                        }
+                                    },
+                              },
+                        };
                   }
-            })
+
+                  if (ctx.path === "/sign-in/magic-link") {
+                        const name = normalizeName(ctx.body.name)
+
+                        return {
+                              context: {
+                                    ...ctx,
+                                    body: { 
+                                          ...ctx.body,
+                                          name
+                                    },
+                              },
+                        };
+                  }
+
+                  if (ctx.path === "/update-user") {
+                        const name = normalizeName(ctx.body.name);
+
+                        return {
+                              context: {
+                                    ...ctx,
+                                    body: { 
+                                          ...ctx.body,
+                                          name
+                                    },
+                              },
+                        };
+                  }
+            }),
       },
       databaseHooks: {
             user: {
@@ -113,7 +141,11 @@ export const auth = betterAuth({
             }
       },
       session: {
-            expiresIn: 60 * 60 * 24 * 30,
+            expiresIn: 30 * 24 * 60 * 60,
+            cookieCache: {
+                  enabled: true,
+                  maxAge: 5 * 60,
+            },
       },
       account: {
             accountLinking: {
@@ -132,7 +164,43 @@ export const auth = betterAuth({
                   adminRoles: [UserRole.ADMIN],
                   ac,
                   roles,
+            }),
+            magicLink({
+                  sendMagicLink: async ({ email, url }) => {
+                        await sendEmailAction({
+                              to: email,
+                              subject: "Magic link login",
+                              meta: {
+                                    description: "Please click the link below to log in.",
+                                    link: url
+                              }
+                        })
+                  }
             })
+      ]
+} satisfies BetterAuthOptions
+
+export const auth = betterAuth({
+      ...options,
+      plugins: [
+            ...(options.plugins ?? []),
+            customSession(async ({user, session}) => {
+                  return {
+                        session: {
+                              expiresAt: session.expiresAt,
+                              token: session.token,
+                              userAgent: session.userAgent
+                        },
+                        user: {
+                              id: user.id,
+                              name: user.name,
+                              email: user.email,
+                              image: user.image,
+                              createdAt: user.createdAt,
+                              role: user.role
+                        }
+                  }
+            }, options)
       ]
 });
 

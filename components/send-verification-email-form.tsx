@@ -47,7 +47,7 @@ export const SendVerificationEmailForm = () => {
             <Mail className="absolute top-2 text-blue-300" />
             <input
             name='email'
-            type="email"
+            type="email" 
             id="email"
             className="w-full border-b border-blue-300 pl-9 py-2 focus:outline-none 
             hover:border-b-red-500 transition-all duration-300 bg-transparent" placeholder="Email"

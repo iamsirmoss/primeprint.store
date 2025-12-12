@@ -3,6 +3,7 @@
 import { useSession } from "@/lib/auth-client";
 import UserAccount from "./UserAccount";
 import Accompte from "./Accompte";
+import { Skeleton } from "@/components/ui/skeleton"
 
 const SessionOrNot = () => {
   const { data: session, isPending } = useSession();
@@ -10,7 +11,7 @@ const SessionOrNot = () => {
   if (isPending) {
   return (
     <div className="flex justify-center items-center">
-      <div className="w-5 h-5 border-2 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
+      <Skeleton className="h-8 w-8 rounded-full" />
     </div>
   );
 }
