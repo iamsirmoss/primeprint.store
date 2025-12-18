@@ -11,20 +11,73 @@ import Help from "@/components/HomePages/Help";
 import TopService from "@/components/HomePages/TopService";
 import Articles from "@/components/HomePages/Articles";
 import Reviews from "@/components/HomePages/Reviews";
+import { prisma } from "@/lib/prisma";
 
 
-export default function Home() {
+export default async function Home() {
+
+  const services = await prisma.service.findMany({
+    take: 8,
+    orderBy: {
+      position: "asc"
+    },
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      icon: true,
+      products: {
+        select: {
+          id: true,
+          slug: true,
+          title: true
+        }
+      },
+      subServices: {
+        select: {
+          id: true,
+          slug: true,
+          title: true
+        }
+      }
+    },
+  })
+
+  const products = await prisma.product.findMany({
+    take: 3,
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      description: true,
+      price: true,
+      images: true
+    } 
+  })
+
+  const productsHome = await prisma.product.findMany({
+    take: 8,
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      description: true,
+      price: true,
+      images: true
+    } 
+  })
+
   return (
     <div>
       <Banner />
-      <Service />
-      <Test />
-      <TopService />
+      <Service services={services} />
+      <Test products={products} />
+      <TopService services={services} />
       {/* <GetUp /> */}
       <Banner2 />
-      <Products />
+      <Products products={productsHome} />
       <Banner3 />
-      <Sellings />
+      <Sellings products={productsHome} />
       {/* <Trendings /> */}
       {/* <Help /> */}
       <Reviews />

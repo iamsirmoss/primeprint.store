@@ -1,4 +1,4 @@
-import { Lock, LogOut, Settings, User as Use, LayoutDashboard, LayoutDashboardIcon } from "lucide-react";
+import { User as Use, LayoutDashboardIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -11,11 +11,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
 import SignOutButton from "../AuthPages/Sign-out-button";
 
 interface UserAccountProps {

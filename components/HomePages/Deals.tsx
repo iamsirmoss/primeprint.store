@@ -15,27 +15,16 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
-const Test: React.FC = () => {
-  const cards = [
-    {
-      title: "Lorem ipsum",
-      description: "Mauris et laoreet erat, at iaculis orci.",
-      imageUrl: image1,
-      price: 99
-    },
-    {
-      title: "Lorem ipsum",
-      description: "Mauris et laoreet erat, at iaculis orci.",
-      imageUrl: image1,
-      price: 99
-    },
-    {
-      title: "Lorem ipsum",
-      description: "Mauris et laoreet erat, at iaculis orci.",
-      imageUrl: image1,
-      price: 99
-    },
-  ];
+interface ProductProps {
+  id: string;
+  slug: string;
+  title: string;
+  description: string | null;
+  price: number;
+  images: string[];
+}
+
+const Test = ({products}: {products: ProductProps[]}) => {
 
   return (
     <div className="block lg:flex gap-8 justify-center items-center mt-10">
@@ -48,12 +37,15 @@ const Test: React.FC = () => {
                   Take advantage of our exclusive promotions and explore our showcase of limited-time offers today!
             </p>
             
-            <button className='bg-red-500 text-white rounded px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] group hover:bg-blue-400 transition-all duration-500'>
-                  <Link href={'/services'} className="flex items-center gap-2">
-                        <h5 className='font-semibold text-base'>Learn more</h5>
-                        <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
+            <div className="w-fit">
+                  <Link href={'/services'} className="group">
+                        <button className='bg-red-500 text-white rounded px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
+                        group-hover:bg-blue-400 transition-all duration-500 flex items-center gap-2 cursor-pointer'>
+                              <h5 className='font-semibold text-base'>Learn more</h5>
+                              <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' /> 
+                        </button>
                   </Link>
-            </button>
+            </div>
       </div>
       <div className="w-full lg:w-[50%] bg-slate-100 py-32 px-4 xl:px-14 xxl:px-40">
             <Carousel
@@ -64,15 +56,16 @@ const Test: React.FC = () => {
                   className="w-full max-w-full py-7"
             >
                   <CarouselContent className="-mt-1 h-80 w-full">
-                  {cards.map((card, index) => (
+                  {products.map((product, index) => (
                   <CarouselItem key={index} className="pt-0 w-full">
                         <div className="px-4 pt-2 w-full">
                         <Card
-                        key={index}
-                        title={card.title}
-                        description={card.description}
-                        imageUrl={card.imageUrl}
-                        price={card.price}
+                        key={product.id}
+                        slug={product.slug}
+                        title={product.title}
+                        description={product.description ?? ""}
+                        imageUrl={product.images}
+                        price={product.price}
                         />
                         </div>
                   </CarouselItem>

@@ -46,7 +46,7 @@ const NavMobile = () => {
   return (
       <div className='xl:hidden block fixed top-0 left-0 right-0 z-50 bg-blue-400 shadow-md'>
             <div className="flex items-center justify-between px-4 py-1">
-                  <p className="text-gray-700">.</p>
+                  <p className="text-blue-400">.</p>
                   <button className='text-white cursor-pointer'>
                         <div onClick={toggle}>
                               {

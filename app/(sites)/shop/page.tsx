@@ -1,12 +1,24 @@
 import Banner from '@/components/ShopPage/Banner'
 import Products from '@/components/ShopPage/Products'
-import React from 'react'
+import { prisma } from '@/lib/prisma'
 
-const page = () => {
+const page = async () => {
+
+  const products = await prisma.product.findMany({
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      description: true,
+      price: true,
+      images: true
+    } 
+  })
+
   return (
       <div>
             <Banner />
-            <Products />
+            <Products products={products} />
       </div>
   )
 }

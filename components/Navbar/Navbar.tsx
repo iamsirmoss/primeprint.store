@@ -11,10 +11,15 @@ import TopNav from './TopNav'
 import Search from './Search'
 import CartItem from './CartItem'
 import SessionOrNot from './SessionOrNot'
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
 
       const [isSticky, setIsSticky] = useState(false);
+
+      const pathname = usePathname()
+
+      const isHome = pathname === '/'
 
       useEffect(() => {
       const handleScroll = () => {
@@ -33,7 +38,7 @@ const Navbar = () => {
 
   return (
       <>
-            <TopNav />
+            {isHome && <TopNav />}
             <div className={`flex justify-between items-center z-40 transition-all duration-300 ${ 
                   isSticky 
                   ? `fixed top-0 left-0 right-0 bg-white shadow-lg px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] 

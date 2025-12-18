@@ -60,7 +60,7 @@ const Reviews = () => {
                   <CarouselNext className='hover:bg-red-500 hover:text-white' />
                   </Carousel>
             </div>
-            <div className='mt-10 text-xl border-b text-blue-700 w-fit border-b-blue-700'>
+            <div className='mt-10 text-xl border-b text-blue-400 w-fit border-b-blue-400'>
                   <Link href={''} className='flex items-center gap-2 group'>
                         View all
                         <BsArrowRight className='text-xl group-hover:translate-x-2 transition-all duration-500' />

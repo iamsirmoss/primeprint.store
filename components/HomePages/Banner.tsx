@@ -27,17 +27,17 @@ const Banner = () => {
                         
                         <Link href={'/services'} className='group'>
                               <button
-                              className='bg-red-500 text-white rounded px-4 py-4 md:px-5 md:py-5 
-                              shadow-[rgba(13,38,76,0.19)_0px_9px_20px] cursor-pointer flex items-center gap-2 group-hover:bg-red-500/80 transition-all duration-300'>
+                              className='bg-red-500 text-white rounded px-4 py-4 md:px-5 md:py-5 border border-transparent
+                              shadow-[rgba(13,38,76,0.19)_0px_9px_20px] cursor-pointer flex items-center gap-2 group-hover:bg-transparent group-hover:border-color group-hover:border-white transition-all duration-500'>
                                     
                                     <h5 className='font-semibold text-sm md:text-[16px]'>Explore services</h5>
-                                    <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-300' />
+                                    <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
                               </button>
                         </Link>
-                        <Link href={'/shop'}>
+                        <Link href={'/shop'} className='group'>
                               <button
-                              className='bg-white text-red-500 rounded px-4 py-4 md:px-5 md:py-5 shadow-[rgba(13,38,76,0.19)_0px_9px_20px]
-                              hover:bg-black hover:text-white transition-all duration-300 cursor-pointer'>
+                              className='bg-white text-red-500 rounded px-4 py-4 md:px-5 md:py-5 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] border border-transparent
+                              group-hover:bg-transparent group-hover:text-white group-hover:border-color group-hover:border-white transition-all duration-500 cursor-pointer'>
                                     
                                     <h5 className='font-semibold text-sm md:text-[16px]'>Shop now</h5>
                               </button>

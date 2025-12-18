@@ -17,12 +17,15 @@ const Banner3 = () => {
                               Our customizable post card widget lets you design beautiful and unique post 
                               cards that perfectly align with your brand or personal style
                         </p>
-                        <button className='bg-red-500 text-white rounded px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] group hover:bg-blue-400 transition-all duration-500'>
-                          <Link href={'/learn-more'} className='flex items-center gap-2'>
-                                <h5 className='font-semibold text-sm md:text-base'>Learn more</h5>
-                                <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
-                          </Link>
-                        </button>
+                        <div className='w-fit'>
+                              <Link href={'/learn-more'} className=''>
+                                    <button className='bg-red-500 text-white rounded px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] hover:bg-blue-400 
+                                    transition-all duration-500 flex items-center gap-2 cursor-pointer group'>
+                                          <h5 className='font-semibold text-sm md:text-base'>Learn more</h5>
+                                          <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
+                                    </button>
+                              </Link>
+                        </div>
                   </div>
                   <div className='w-full md:w-1/2 block md:flex flex-col items-end'>
                         <Image src={image} alt='image1' priority width={0} height={0} sizes='100vw'

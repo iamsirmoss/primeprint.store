@@ -5,37 +5,52 @@ import { BsArrowRight } from "react-icons/bs";
 
 interface ServiceCardProps {
   title: string;
-  imageUrl: any;
+  icon: string;
+  slug: string;
 }
 
 const TopServiceCard: React.FC<ServiceCardProps> = ({
   title,
-  imageUrl,
+  icon,
+  slug
 }) => {
   return (
-      <Link href={''}>
-            <div className="relative group overflow-hidden pt-5 bg-slate-100 rounded-sm">
-                  <div className="overflow-hidden flex flex-col items-center">
-                  <Image
-                  src={imageUrl}
-                  alt={title}
-                  priority
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className="w-1/3 object-contain transition-transform duration-500"
-                  />
-                  </div>
-
-                  <div
-                  className="absolute inset-0 group-hover:bg-black/30 transition-colors duration-500"
-                  ></div>
-
-                  <div className="p-5 text-black flex flex-col items-center">
-                  <h3 className="text-base font-normal group-hover:underline transition-transform duration-500">{title}</h3>
-                  </div>
+        <div className="border p-3 rounded-sm">
+          <div className="overflow-hidden pb-3">
+            <Image
+                src={`/images/${icon}`}
+                alt={title}
+                priority
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-16 h-16 object-fit transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
+          <Link href={`/service/${slug}`}>
+            <div className="relative group overflow-hidden rounded-sm shadow-lg">
+              <div className="h-32">
+                
+              </div>
+    
+              <div
+                className="absolute inset-0 bg-transparent group-hover:bg-black/75 transition-colors duration-500"
+              ></div>
+    
+              <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4 text-white">
+                <h3 className="text-lg font-bold text-black group-hover:text-white transition-colors duration-500">{title}</h3>
+    
+                <button
+                  className="mt-4 px-4 py-2 bg-transparent border border-white text-white rounded opacity-0 translate-y-10 group
+                  group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer"
+                >
+                  more
+                  <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
+                </button>
+              </div>
             </div>
-      </Link>
+          </Link>
+        </div>
   );
 };
 

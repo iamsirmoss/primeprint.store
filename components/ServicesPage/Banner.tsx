@@ -5,7 +5,7 @@ const Banner = () => {
   return (
       <div className='w-full relative'>
             <div className='bg-[url(/images/bg-hero2.jpg)] relative bg-no-repeat bg-center bg-cover z-0'>
-                  <div className='w-full relative top-0 left-0 right-0 -z-10 bg-gray-800/75 py-10 md:py-16 lg:py-24'>
+                  <div className='w-full relative top-0 left-0 right-0 -z-10 bg-black/75 py-10 md:py-16 lg:py-24'>
                         <div
                         className='w-full flex flex-col justify-center items-center'>
                               <h3 className='text-3xl lg:text-[50px] font-bold mb-6 text-white'>
