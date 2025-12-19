@@ -68,7 +68,7 @@ export default async function Home() {
   })
 
   return (
-    <div>
+    <div className="min-h-screen w-full overflow-x-hidden">
       <Banner />
       <Service services={services} />
       <Test products={products} />

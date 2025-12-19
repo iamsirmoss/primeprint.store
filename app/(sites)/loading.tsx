@@ -12,7 +12,7 @@ import BannerSkeleton from "@/components/Skeletons/BannerSkeleton";
 export default function Loading() {
 
   return (
-      <>
+      <div>
             <BannerSkeleton />
             <div
                   className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2  
@@ -30,6 +30,6 @@ export default function Loading() {
             <SellingsSkeleton />
             <Reviews />
             <Articles />
-    </>
+    </div>
   );
 }

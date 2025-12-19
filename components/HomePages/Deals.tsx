@@ -27,27 +27,26 @@ interface ProductProps {
 const Test = ({products}: {products: ProductProps[]}) => {
 
   return (
-    <div className="block lg:flex gap-8 justify-center items-center mt-10">
-      <div className="w-full lg:w-[50%] py-10 px-4 xl:px-14 xxl:pl-40 xll:pl-80 xxx:pl-[22%] 
-      lll:p-[25%]">
-            <h2 className="text-5xl font-bold">
+    <div className="block lg:flex gap-8 justify-center items-center mt-10 px-4 xl:px-10 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
+      <div className="w-full lg:w-[50%] py-10">
+            <h2 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
                   Exclusive promotions : Offers you can't miss
             </h2>
-            <p className="my-10 text-lg text-gray-600">
+            <p className="my-10 text-base md:text-lg text-gray-600">
                   Take advantage of our exclusive promotions and explore our showcase of limited-time offers today!
             </p>
             
             <div className="w-fit">
                   <Link href={'/services'} className="group">
-                        <button className='bg-red-500 text-white rounded px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
+                        <button className='bg-red-500 text-white rounded px-6 py-3 xs:px-10 xs:py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
                         group-hover:bg-blue-400 transition-all duration-500 flex items-center gap-2 cursor-pointer'>
-                              <h5 className='font-semibold text-base'>Learn more</h5>
+                              <h5 className='font-semibold text-sm xs:text-base'>Learn more</h5>
                               <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' /> 
                         </button>
                   </Link>
             </div>
       </div>
-      <div className="w-full lg:w-[50%] bg-slate-100 py-32 px-4 xl:px-14 xxl:px-40">
+      <div className="w-full lg:w-[50%] bg-slate-100 py-24 md:py-32 px-4">
             <Carousel
                   opts={{
                   align: "start",

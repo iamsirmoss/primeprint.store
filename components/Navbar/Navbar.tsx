@@ -37,13 +37,12 @@ const Navbar = () => {
       }, []);
 
   return (
-      <>
-            {isHome && <TopNav />}
-            <div className={`flex justify-between items-center z-40 transition-all duration-300 ${ 
+      <nav className='w-full'>
+            <TopNav isHome={isHome} />
+            <div className={`flex justify-between items-center z-40 transition-all duration-300 w-full px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] ${ 
                   isSticky 
-                  ? `fixed top-0 left-0 right-0 bg-white shadow-lg px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] 
-                  mt-8 xl:mt-0 py-0.5`
-                  : `px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] mt-1 xl:mt-0 py-0.5`}`}>
+                  ? `fixed top-0 left-0 right-0 bg-white shadow-lg mt-8 xl:mt-0 py-0.5`
+                  : `mt-1 xl:mt-0 py-0.5`}`}>
                   <div className='w-[170px] md:w-[200px] xl:w-[220px]'>
                         <Link href='/'>
                               <Image src={image1} alt='image1' priority width={0} height={0} sizes='100vw' 
@@ -61,10 +60,10 @@ const Navbar = () => {
                         <OrderButton />
                         <SessionOrNot />
                         <CartItem />
-                        <NavMobile />
+                        <NavMobile isHome={isHome} />
                   </div>
             </div>
-      </>
+      </nav>
   )
 }
 

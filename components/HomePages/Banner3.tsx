@@ -10,7 +10,7 @@ const Banner3 = () => {
             <div className='bg-slate-500 w-full block md:flex items-center justify-between'>
                   <div className='w-full md:w-1/2 rounded px-4 xl:px-10 xxl:pl-40 xll:pl-80 xxx:pl-[22%] lll:pl-[25%] py-20 
                   '>
-                        <h2 className='text-3xl lg:text-5xl font-extrabold text-white'>
+                        <h2 className='text-2xl md:text-3xl lg:text-5xl font-extrabold text-white'>
                               Bring your ideas to life with our post card design options
                         </h2>
                         <p className='my-5 font-normal text-base md:text-lg text-white'>
