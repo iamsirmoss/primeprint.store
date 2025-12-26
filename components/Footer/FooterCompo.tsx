@@ -25,31 +25,31 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                                     <Image src={image1} alt='image1' priority width={0} height={0} sizes='100vw' className='w-full' />
                               </Link>
                         </div>
-                        <p className='text-gray-500 mt-10 max-w-full md:max-w-xs'>
+                        {/* <p className='text-gray-500 mt-10 max-w-full md:max-w-sm text-md'>
                               Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                               Donec convallis ipsum massa, vitae accumsan orci fringilla a.
-                        </p>
+                        </p> */}
                         <div className='mt-10'>
-                              <h4 className='font-bold text-xl'>Accepted payments</h4>
+                              <h4 className='font-medium text-md'>Accepted payments</h4>
                               <div className='mt-5 grid grid-cols-3 gap-2'>
-                                    <div className='border px-2 flex flex-col items-center justify-center rounded-md'>
-                                          <FaStripe size={40} className='text-blue-400' />
+                                    <div className='border border-white px-2 py-4 flex flex-col items-center justify-center rounded-lg'>
+                                          <FaStripe size={40} className='text-white' />
                                     </div>
-                                    <div className='border px-2 flex flex-col items-center justify-center rounded-md'>
-                                          <RiVisaLine size={40} className='text-blue-400' />
+                                    <div className='border border-white px-2 py-4 flex flex-col items-center justify-center rounded-lg'>
+                                          <RiVisaLine size={40} className='text-white' />
                                     </div>
-                                    <div className='border px-2 flex flex-col items-center justify-center rounded-md'>
-                                          <FaApplePay size={40} className='text-blue-400' />
+                                    <div className='border border-white px-2 py-4 flex flex-col items-center justify-center rounded-lg'>
+                                          <FaApplePay size={40} className='text-white' />
                                     </div>
                               </div>
                         </div>
                   </div>
                   <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 mt-10 lg:mt-0 w-[70%]'>
                   <div className=''>
-                        <h4 className='font-bold text-xl'>Department</h4>
+                        <h4 className='font-medium text-md'>Department</h4>
                         <div className='mt-5'>
                               {products && products.map((product) => (
-                                    <h5 key={product.id} className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500 capitalize'>
+                                    <h5 key={product.id} className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500 capitalize'>
                                           <Link href={`/product/${product.slug}`}>
                                                 {product.title}
                                           </Link>
@@ -58,24 +58,24 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         </div>
                   </div>
                   <div>
-                        <h4 className='font-bold text-xl'>About us</h4>
+                        <h4 className='font-medium text-md'>About us</h4>
                         <div className='mt-5'>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           About
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           News & blog
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           Press center
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           Careers
                                     </Link>
@@ -83,10 +83,10 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         </div>
                   </div>
                   <div>
-                        <h4 className='font-bold text-xl'>Services</h4>
+                        <h4 className='font-medium text-md'>Services</h4>
                         <div className='mt-5'>
                               {services && services.map((service) => (
-                                    <h5 key={service.id} className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500 capitalize'>
+                                    <h5 key={service.id} className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500 capitalize'>
                                           <Link href={`/service/${service.slug}`}>
                                                 {service.title}
                                           </Link>
@@ -95,24 +95,24 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         </div>
                   </div>
                   <div>
-                        <h4 className='font-bold text-xl'>Help</h4>
+                        <h4 className='font-medium text-md'>Help</h4>
                         <div className='mt-5'>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           Shopcart help
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           Contact us
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           Feedback
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-1 max-w-fit hover:translate-x-2 transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-1 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
                                     <Link href={'/'}>
                                           Track orders
                                     </Link>

@@ -9,13 +9,13 @@ interface ServiceCardProps {
   slug: string;
 }
 
-const TopServiceCard: React.FC<ServiceCardProps> = ({
+const SubServiceCard: React.FC<ServiceCardProps> = ({
   title,
   icon,
   slug
 }) => {
   return (
-        <div className="border border-blue-200 p-3 rounded-sm">
+        <div className="border border-blue-200 p-3 rounded-2xl">
           <div className="overflow-hidden pb-3">
             {icon ?
             (<Image
@@ -32,8 +32,8 @@ const TopServiceCard: React.FC<ServiceCardProps> = ({
             </div>)
             }
           </div>
-          <Link href={`/service/${slug}`}>
-            <div className="relative group overflow-hidden rounded-sm shadow-lg">
+          <Link href={`/service/sub-service/${slug}`}>
+            <div className="relative group overflow-hidden rounded-2xl shadow-lg">
               <div className="h-32">
                 
               </div>
@@ -59,4 +59,4 @@ const TopServiceCard: React.FC<ServiceCardProps> = ({
   );
 };
 
-export default TopServiceCard;
+export default SubServiceCard;

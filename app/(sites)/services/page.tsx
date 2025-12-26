@@ -1,3 +1,4 @@
+import Articles from '@/components/HomePages/Articles'
 import Banner from '@/components/ServicesPage/Banner'
 import Services from '@/components/ServicesPage/Services'
 import { prisma } from '@/lib/prisma'
@@ -22,6 +23,7 @@ const page = async () => {
     <div>
       <Banner />
       <Services services={services} />
+      <Articles />
     </div>
   )
 }

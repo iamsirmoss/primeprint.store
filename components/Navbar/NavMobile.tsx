@@ -23,7 +23,7 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
   return (
     <div
       className={`block xl:hidden fixed top-0 left-0 right-0 z-50 shadow-md ${
-        isHome ? "bg-blue-400" : "bg-black"
+        isHome ? "bg-linear-to-r from-[#ef084a] via-[#5191db] to-[#3e61ef]" : "bg-linear-to-r from-[#ef084a] via-[#5191db] to-[#3e61ef]"
       }`}
     >
       {/* top bar */}

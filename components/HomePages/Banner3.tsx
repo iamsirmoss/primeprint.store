@@ -7,7 +7,7 @@ import image from '@/public/images/post-card.png'
 const Banner3 = () => {
   return (
     <div className=''>
-            <div className='bg-slate-500 w-full block md:flex items-center justify-between'>
+            <div className='bg-linear-to-r from-[#5191db] via-[#3e61ef] to-[#ef084a] w-full block md:flex items-center justify-between'>
                   <div className='w-full md:w-1/2 rounded px-4 xl:px-10 xxl:pl-40 xll:pl-80 xxx:pl-[22%] lll:pl-[25%] py-20 
                   '>
                         <h2 className='text-2xl md:text-3xl lg:text-5xl font-extrabold text-white'>

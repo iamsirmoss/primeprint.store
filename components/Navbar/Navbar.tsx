@@ -46,7 +46,7 @@ const Navbar = () => {
                   <div className='w-[170px] md:w-[200px] xl:w-[220px]'>
                         <Link href='/'>
                               <Image src={image1} alt='image1' priority width={0} height={0} sizes='100vw' 
-                              className={`transition-all duration-300 w-[50%] md:w-[60%] ${
+                              className={`transition-all duration-300 w-[45%] md:w-[50%] ${
                                     isSticky ? "scale-90" : "scale-100"
                                   }`} 
                               />

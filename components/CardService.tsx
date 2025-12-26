@@ -17,7 +17,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   slug,
 }) => {
   return (
-    <div className="border p-3 rounded-sm">
+    <div className="border border-blue-200 p-3 rounded-sm">
       <div className="overflow-hidden pb-3">
         <Image
             src={`/images/${icon}`}
@@ -31,20 +31,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
       <Link href={`/service/${slug}`}>
         <div className="relative group overflow-hidden rounded-sm shadow-lg">
-          <div className="h-72">
+          <div className="h-64 md:h-72">
             
           </div>
 
           <div
-            className="absolute inset-0 bg-black/75 group-hover:bg-black/50 transition-colors duration-500"
+            className="absolute inset-0 bg-transparent group-hover:bg-blue-400 transition-colors duration-500"
           ></div>
 
-          <div className="absolute inset-0 flex flex-col items-start justify-end p-10 text-white">
-            <h3 className="text-2xl font-bold">{title}</h3>
-            <p className="mt-4 text-base">{description}</p>
+          <div className="absolute inset-0 flex flex-col items-start justify-end pt-4 pb-8 px-4">
+            <h3 className="text-2xl font-bold text-black group-hover:text-white transition-colors duration-500 capitalize">{title}</h3>
+            <p className="mt-4 text-sm line-clamp-2 text-gray-500 group-hover:text-white transition-colors duration-500 max-w-full md:max-w-xs">{description}</p>
 
             <button
-              className="mt-8 px-6 py-3 bg-transparent border border-white text-white rounded opacity-0 translate-y-10 group
+              className="mt-8 px-4 py-2 bg-transparent border border-white text-white rounded opacity-0 translate-y-10 group
               group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer"
             >
               more
