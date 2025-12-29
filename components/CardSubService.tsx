@@ -27,8 +27,8 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
                 sizes="100vw"
                 className="w-16 h-16 object-fit transition-transform duration-500 group-hover:scale-110"
             />) :
-            (<div className="p-2 w-16 h-16 rounded-2xl border border-dashed border-gray-300 bg-gray-50 flex items-center justify-center text-gray-400 text-xs">
-                No image
+            (<div className="p-2 w-16 h-16 rounded-2xl border border-gray-300 bg-gray-50 flex items-center justify-center text-gray-400 text-xs">
+              IMG
             </div>)
             }
           </div>

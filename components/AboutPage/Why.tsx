@@ -33,13 +33,13 @@ const Why = () => {
                         <h1 className='text-[45px] xl:text-7xl font-semibold'>
                               Why work with Primeprint.store ?
                         </h1>
-                        <p className='text-gray-400 mt-10 text-[17px]'>
+                        <p className='text-gray-400 mt-10 text-sm md:text-base lg:text-[17px]'>
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                               Perspiciatis, incidunt harum. Enim aliquid nulla debitis 
                               placeat et dignissimos tempore obcaecati. Odio at hic rem quae, 
                               est quaerat quia! Libero, ratione
                         </p>
-                        <p className='text-gray-400 mt-5 text-[17px]'>
+                        <p className='text-gray-400 mt-5 text-sm md:text-base lg:text-[17px]'>
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                               Perspiciatis, incidunt harum. Enim aliquid nulla debitis 
                               placeat et dignissimos tempore obcaecati. Odio at hic rem quae, 

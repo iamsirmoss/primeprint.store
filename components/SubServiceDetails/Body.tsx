@@ -275,7 +275,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                 <div className="mt-6">
                   <button
                     type="button"
-                    className="w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90 active:opacity-80"
+                    className="w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer"
                     onClick={() => {
                       // TODO: ici tu ajoutes au localStorage cart (type=PACKAGE + packageId + billing)
                       // Exemple payload:

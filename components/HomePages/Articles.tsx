@@ -7,7 +7,7 @@ const Articles = () => {
   return (
       <div
       className='py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]'>
-            <h3 className='text-5xl font-bold'>Latest articles</h3>
+            <h3 className='text-2xl xs:text-3xl lg:text-5xl font-bold'>Latest articles</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-20">
                   <div className="w-full">
                   <div className="w-full h-48 rounded-xl overflow-hidden">

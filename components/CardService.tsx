@@ -26,7 +26,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             width={0}
             height={0}
             sizes="100vw"
-            className="w-20 h-20 object-fit transition-transform duration-500 group-hover:scale-110"
+            className="w-14 h-14 lg:w-20 lg:h-20 object-fit transition-transform duration-500 group-hover:scale-110"
         />
       </div>
       <Link href={`/service/${slug}`}>

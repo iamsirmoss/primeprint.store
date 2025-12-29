@@ -12,7 +12,7 @@ const Contact = () => {
                         <h2 className="text-3xl sm:text-4xl font-bold">
                               Contact us
                         </h2>
-                        <p className="mt-4 text-xl text-gray-600">Give us a call or send us an email </p>
+                        <p className="mt-4 text-lg lg:text-xl text-gray-600">Give us a call or send us an email </p>
                         <div className="mt-6 space-y-3">
                               <p className="text-gray-700">
                                     <strong>Email :</strong> contact@primeprintstore.com
@@ -103,8 +103,8 @@ const Contact = () => {
                         <div className="mt-10 block sm:flex items-center gap-5">
                               <button
                               type="submit"
-                              className="bg-red-500 text-white font-semibold px-12 py-4
-                              rounded shadow-md flex items-center gap-2 transition-all duration-500 hover:scale-95 hover:bg-blue-400 cursor-pointer"
+                              className="bg-red-500 text-white font-semibold px-8 py-3 md:px-12 md:py-4
+                              rounded shadow-md flex items-center gap-2 transition-all duration-500 hover:bg-blue-400 cursor-pointer"
                               >
                                     <Send className="text-white" />
                                     <h5>Send</h5>

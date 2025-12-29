@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({ slug, title, description, imageUrl, price }
             <Link href={`/product/${slug}`}>
                   <div className="group relative w-full rounded-lg bg-white p-5 border border-transparent hover:border-gray-200 hover:shadow-xl transition-all duration-500 pb-16">
                         {/* Image Section */}
-                        <div className="relative w-[80%] md:w-1/2 lg:w-full overflow-hidden">
+                        <div className="relative w-full sm:w-[80%] md:w-1/2 lg:w-full overflow-hidden">
                         <Image src={imageUrl?.[0] ? `/images/${imageUrl[0]}` : "/images/placeholder.png"} alt='product image' priority width={0} height={0} sizes='100vw'
                               className='object-cover transition-transform duration-500 rounded-sm w-[25%]' />
                         </div>
@@ -33,7 +33,7 @@ const Card: React.FC<CardProps> = ({ slug, title, description, imageUrl, price }
                   </div>
             </Link>
             <div className="absolute bottom-3 right-5">
-                  <button className="mt-3 border border-black rounded py-4 px-5 hover:bg-black hover:text-white transition-all duration-300 cursor-pointer">
+                  <button className="mt-3 border border-black rounded-md py-2 px-5 md:py-3 md:px-8 bg-black text-white hover:bg-black/75 transition-all duration-300 cursor-pointer">
                         <h5 className="text-sm">Add to cart</h5>
                   </button>
             </div>

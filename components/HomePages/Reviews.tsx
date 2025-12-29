@@ -24,7 +24,7 @@ const Reviews = () => {
 
   return (
       <div className='py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] bg-slate-100'>
-            <h1 className='text-5xl font-bold'>Your opinions matter : <br />Read our latest reviews</h1>
+            <h1 className='text-2xl xs:text-3xl lg:text-5xl font-bold'>Your opinions matter : <br />Read our latest reviews</h1>
             <div className='w-[80%] xl:w-[90%] rounded-lg flex flex-col items-center justify-center py-5 mx-auto'>
                   <Carousel
                   opts={{

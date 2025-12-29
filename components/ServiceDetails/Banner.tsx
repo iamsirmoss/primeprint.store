@@ -25,7 +25,7 @@ interface ServiceProps {
 const Banner = ({service}: {service: ServiceProps}) => {
   return (
     <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10'>
-      <div className="mt-10 flex items-end gap-5 flex-wrap border-y border-slate-200 py-3 px-5">
+      <div className="mt-10 flex items-end gap-5 flex-wrap border-b border-slate-200 py-3 px-5">
         <Link href="/" className="text-blue-400 hover:underline transition-all duration-500">
           Home
         </Link>
@@ -41,12 +41,12 @@ const Banner = ({service}: {service: ServiceProps}) => {
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-2xl">
       
-                  <h1 className="mt-2 text-3xl md:text-[64px] font-bold text-gray-900 capitalize">
+                  <h1 className="mt-2 text-2xl md:text-3xl lg:text-[64px] font-bold text-gray-900 capitalize">
                     {service.title}
                   </h1>
       
                   {service.description ? (
-                    <p className="mt-4 text-gray-600 leading-relaxed">
+                    <p className="mt-4 text-gray-600 leading-relaxed text-sm md:text-base">
                       {service.description}
                     </p>
                   ) : (
