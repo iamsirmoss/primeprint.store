@@ -7,7 +7,7 @@ import image from '@/public/images/ban.png'
 const Banner2 = () => {
   return (
       <div className=''>
-            <div className='p-10 xl:p-14 block md:flex items-center justify-between gap-4 bg-linear-to-r from-[#ef084a] via-[#5191db] to-[#3e61ef]'>
+            <div className='p-10 xl:p-14 block md:flex items-center justify-between gap-4 bg-gray-500'>
                   <div className='w-full md:w-1/2 md:block'>
                         <Image src={image} alt='image1' priority width={0} height={0} sizes='100vw'
                               className='object-cover w-1/2 md:w-[70%]' />

@@ -141,7 +141,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs uppercase tracking-wider text-gray-500">PrimePrint</p>
-                <h1 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900">
+                <h1 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900 capitalize">
                   {product.title}
                 </h1>
 

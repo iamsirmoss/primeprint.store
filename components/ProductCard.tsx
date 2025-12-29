@@ -21,7 +21,7 @@ const ProductCard = ({slug, title, description, price, images}: ProductProps) =>
                   </div>
                   <div className='py-6 px-5'>
                         <div className='flex justify-between items-center mt-2'>
-                              <h5 className='text-xl font-medium capitalize'>{title}</h5>
+                              <h5 className='text-lg capitalize'>{title}</h5>
                               <Heart size={18} />
                         </div>
                         <p className='text-gray-500 mt-3 text-sm line-clamp-1'>{description}</p>
@@ -29,13 +29,13 @@ const ProductCard = ({slug, title, description, price, images}: ProductProps) =>
             
                   <div className='flex justify-between gap-2 items-center px-5 pb-4'>
                         <div>
-                              <h5 className='mt-2 text-lg font-bold max-w-fit text-blue-400'>
-                                    {price}.00 <span className='text-black text-lg'>$</span>
+                              <h5 className='mt-2 text-base max-w-fit'>
+                                    {price}.00 <span className='text-black font-bold text-base'>$</span>
                               </h5>
                         </div>
                         <div className=''>
-                              <button className="border bg-black rounded py-2 px-4 hover:bg-black/75 text-white transition-all duration-300 cursor-pointer">
-                                    <h5 className="text-sm">Add to cart</h5>
+                              <button className="border bg-black rounded-md py-3 px-6 hover:bg-black/75 text-white transition-all duration-300 cursor-pointer">
+                                    <h5 className="text-xs">Add to cart</h5>
                               </button>
                         </div>
                   </div>
