@@ -52,7 +52,7 @@ const page = async () => {
                         src={session.user.image}
                         alt="User profile picture"
                         priority width={0} height={0} sizes='100vw'
-                        className="size-24 border border-primary rounded-full object-cover"
+                        className="size-16 border border-primary rounded-full object-cover"
                   />
                   ) : (
                   <div className="size-24 border border-primary rounded-full bg-primary text-primary-foreground flex items-center justify-center">

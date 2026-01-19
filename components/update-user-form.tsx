@@ -51,8 +51,12 @@ export const UpdateUserForm = ({ name }: UpdateUserFormProps) => {
     <form className="max-w-md w-full space-y-4 mt-10" onSubmit={handleSubmit}>
       <div className="relative mt-8">
         <User className="absolute top-2 text-blue-300" />
-        <input id="name" name="name" defaultValue={name} className="w-full border-b border-blue-300 pl-9 py-2 focus:outline-none 
-      hover:border-b-red-500 transition-all duration-300 bg-transparent" />
+        <input id="name" name="name" defaultValue={name} className="peer w-full bg-transparent pl-9 py-2 focus:outline-none" />
+        {/* base line */}
+        <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+
+        {/* focus line */}
+        <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
       </div>
 
       {/* <div className="relative mt-8">

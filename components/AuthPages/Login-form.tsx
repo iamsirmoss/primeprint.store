@@ -1,7 +1,7 @@
 "use client"
 
 import { signIn } from '@/lib/auth-client'
-import { Eye, EyeOff, Mail } from 'lucide-react'
+import { Eye, EyeOff, KeySquare, Mail } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -14,6 +14,7 @@ const LoginForm = () => {
 
       const [isPending, setPending] = useState(false);
       const router = useRouter();
+      const [showPassword, setShowPassword] = useState(false);
 
       const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
                   evt.preventDefault();
@@ -49,23 +50,43 @@ const LoginForm = () => {
                               name='email'
                               type="email"
                               id="email"
-                              className="w-full border-b border-blue-300 pl-9 py-2 focus:outline-none 
-                              hover:border-b-red-500 transition-all duration-300 bg-transparent"
+                              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none"
                               placeholder="Email"
                               />
+
+                              {/* base line */}
+                              <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+
+                              {/* focus line */}
+                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
                         </div>
 
                         {/* Password */}
                         <div className="relative mt-8">
-                              <EyeOff className="absolute top-2 text-blue-300" />
+                              <KeySquare className="absolute top-2 text-blue-300" />
                               <input
-                              name='password'
-                              type="password"
-                              id="password"
-                              className="w-full border-b border-blue-300 pl-9 py-2 focus:outline-none 
-                              hover:border-b-red-500 transition-all duration-300 bg-transparent"
-                              placeholder="Password ****"
+                                    name="password"
+                                    type={showPassword ? "text" : "password"}
+                                    id="password"
+                                    className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none"
+                                    placeholder="********"
                               />
+                        
+                              {/* base line */}
+                              <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+                        
+                              {/* focus line */}
+                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+                        
+                              {/* Toggle icon */}
+                              <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-0 top-2 text-gray-400 hover:text-blue-400 transition"
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                              >
+                                    {showPassword ? <EyeOff /> : <Eye />}
+                              </button>
                         </div>
 
                         <div className='mt-6 flex flex-col items-end'>
@@ -89,7 +110,7 @@ const LoginForm = () => {
                               <p className="text-gray-400">
                                     You don&apos;t have an account ?
                               </p>
-                              <Link href={'/register'} className='font-semibold hover:text-red-500 text-blue-400 
+                              <Link href={'/register'} className='font-semibold hover:underline text-blue-400 
                               transition-all duration-500'>
                                     Sign up
                               </Link>

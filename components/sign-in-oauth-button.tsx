@@ -33,8 +33,8 @@ const SignInOAuthButton = ({ provider, signUp }: SignInOAuthButtonProps) => {
             })
       }
 
-      const action = signUp ? 'Up' : 'In';
-      const providerName = provider === 'google' ? 'Google' : 'GitHub';
+      const action = signUp ? 'up' : 'in';
+      const providerName = provider === 'google' ? 'google' : 'gitHub';
 
   return (
     <Button type='button' onClick={handleClick} disabled={isPending} className='flex flex-col justify-center items-center gap-3 py-7 rounded bg-black 

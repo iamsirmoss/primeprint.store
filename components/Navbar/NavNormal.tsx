@@ -35,7 +35,7 @@ const NavNormal = () => {
             {links.map((link, index) => (
                   <Link key={index} href={link.path} className={`${link.path === pathName && `text-blue-400 
                   font-semibold transition-all duration-300`}
-                  font-semibold hover:text-blue-400 hover:scale-95 transition-all duration-300
+                  font-semibold hover:text-blue-400 transition-all duration-500
                   `}>
                         <h5>{link.name}</h5>
                   </Link>

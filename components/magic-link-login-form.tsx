@@ -47,7 +47,7 @@ export const MagicLinkLoginForm = () => {
       ref={ref}
       className="w-full rounded border border-blue-400 overflow-hidden"
     >
-      <summary className="flex gap-2 items-center px-2 py-2 bg-black text-white hover:bg-black/80 transition duration-300 cursor-pointer">
+      <summary className="flex gap-2 items-center justify-center px-2 py-4 bg-black text-white hover:bg-black/80 transition duration-300 cursor-pointer">
         Try magic link <StarIcon size={16} />
       </summary>
 
@@ -58,8 +58,12 @@ export const MagicLinkLoginForm = () => {
         <div className="flex gap-2 items-center">
             <div className="relative w-full">
                   <Mail className="absolute top-2.5 text-blue-300" />
-                  <input type="email" id="email" name="email" className="w-full border-b border-blue-300 pl-9 py-2 focus:outline-none 
-                  hover:border-b-red-500 transition-all duration-300 bg-transparent" placeholder="Email" />
+                  <input type="email" id="email" name="email" className="peer w-full bg-transparent pl-9 py-2 focus:outline-none" placeholder="Email" />
+                  {/* base line */}
+                  <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+
+                  {/* focus line */}
+                  <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
             </div>
           <Button disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400">Send</Button>
         </div>

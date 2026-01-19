@@ -49,9 +49,13 @@ export const ForgotPasswordForm = () => {
                   name='email'
                   type="email"
                   id="email"
-                  className="w-full border-b border-blue-300 pl-9 py-2 focus:outline-none 
-                  hover:border-b-red-500 transition-all duration-300 bg-transparent" placeholder="Email"
+                  className="peer w-full bg-transparent pl-9 py-2 focus:outline-none" placeholder="Email"
             />
+            {/* base line */}
+            <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+
+            {/* focus line */}
+            <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
       </div>
 
       <Button size="lg" type="submit" disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400">
