@@ -3,6 +3,8 @@
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
+import { toast } from "sonner";
+import { addToCart } from "@/lib/cart";
 
 type Review = {
   id: string;
@@ -21,6 +23,8 @@ type ProductDetailsProps = {
     price: number;
     images: string[];
     sku?: string | null;
+    currency: string;
+    stockQty?: number | null;
   };
   reviews: Review[];
 };
@@ -50,8 +54,46 @@ function getInitials(name: string) {
 }
 
 export default function ProductDetails({ product, reviews }: ProductDetailsProps) {
+  const {
+    id,
+    slug,
+    title,
+    description,
+    price,
+    images,
+    sku,
+    stockQty,
+    currency = "USD",
+  } = product;
   const [activeImage, setActiveImage] = useState(0);
   const [tab, setTab] = useState<"details" | "reviews" | "discussion">("reviews");
+  const [added, setAdded] = useState(false);
+        
+              const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+        
+                    // ✅ stock check
+                    if (typeof product.stockQty === "number" && product.stockQty <= 0) {
+                          toast.error("Out of stock");
+                          return;
+                    }
+        
+                    addToCart({
+                        productId: id,
+                        slug,
+                        sku: sku ?? null,
+                        title,
+                        price,
+                        currency,
+                        image: images?.[0] ? `/images/${images[0]}` : "/images/placeholder.png",
+                    });
+        
+                    toast.success("Product added to cart ✅");
+        
+                    setAdded(true);
+                    window.setTimeout(() => setAdded(false), 900);
+              };
 
   // Exemple: options (tu peux brancher tes vraies options)
   const colors = [
@@ -76,12 +118,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
 
   const totalReviews = reviews.length || 1;
 
-  const mainImage = product.images?.[activeImage] || product.images?.[0];
-
-  const addToCart = () => {
-    // localStorage.setItem("cart", JSON.stringify([...]))
-    alert(`Added to cart:\n${product.title}\nColor: ${selectedColor}\nSize: ${selectedSize}`);
-  };
+  const mainImage = images?.[activeImage] || images?.[0];
 
   return (
     <main className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-6 md:py-10">
@@ -95,7 +132,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
               {mainImage ? (
                 <Image
                   src={`/images/${mainImage}`}
-                  alt={product.title}
+                  alt={title}
                   fill
                   className="object-contain"
                   sizes="(max-width:1024px) 100vw, 60vw"
@@ -110,7 +147,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
 
             {/* Thumbnails */}
             <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
-              {(product.images ?? []).slice(0, 6).map((img, i) => {
+              {(images ?? []).slice(0, 6).map((img, i) => {
                 const active = i === activeImage;
                 return (
                   <button
@@ -126,9 +163,9 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
                   </button>
                 );
               })}
-              {(product.images?.length ?? 0) > 6 && (
+              {(images?.length ?? 0) > 6 && (
                 <div className="h-16 w-16 shrink-0 rounded-xl border border-gray-200 bg-gray-50 flex items-center justify-center text-xs text-gray-600">
-                  +{(product.images.length ?? 0) - 6} more
+                  +{(images.length ?? 0) - 6} more
                 </div>
               )}
             </div>
@@ -142,7 +179,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
               <div>
                 <p className="text-xs uppercase tracking-wider text-gray-500">PrimePrint</p>
                 <h1 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900 capitalize">
-                  {product.title}
+                  {title}
                 </h1>
 
                 <div className="mt-2 flex items-center gap-3">
@@ -154,12 +191,16 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
               {product.sku ? (
                 <div className="text-right">
                   <p className="text-[11px] text-gray-500">SKU</p>
-                  <p className="text-xs font-semibold text-gray-900">{product.sku}</p>
+                  <p className="text-xs font-semibold text-gray-900">{sku}</p>
                 </div>
               ) : null}
             </div>
 
-            <p className="mt-5 text-3xl font-bold text-gray-900">{formatMoney(product.price)}</p>
+            {/* <p className="mt-5 text-3xl font-bold text-gray-900">{formatMoney(product.price)}</p> */}
+            <h5 className='mt-5 text-3xl max-w-fit'>
+              {price.toFixed(2)}{" "}
+              <span className="text-gray-900 font-bold">{currency}</span>
+            </h5>
 
             {/* Color */}
             <div className="mt-6">
@@ -218,10 +259,16 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
             <div className="mt-7 flex items-center gap-3">
               <button
                 type="button"
-                onClick={addToCart}
-                className="flex-1 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-black/70 transition-all duration-300 cursor-pointer"
+                onClick={handleAddToCart}
+                disabled={typeof stockQty === "number" && stockQty <= 0}
+                className={`flex-1 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-black/70 transition-all duration-300 cursor-pointer
+                  ${
+                    typeof stockQty === "number" && stockQty <= 0
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-black hover:bg-black/75"
+                  }`}
               >
-                Add to cart
+                {added ? "Added ✓" : "Add to cart"}
               </button>
 
               <button
@@ -239,9 +286,9 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
             </div> */}
 
             {/* Short description */}
-            {product.description ? (
+            {description ? (
               <p className="mt-6 text-sm text-gray-600 line-clamp-3">
-                {product.description}
+                {description}
               </p>
             ) : null}
           </div>

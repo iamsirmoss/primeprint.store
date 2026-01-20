@@ -1,17 +1,54 @@
+"use client"
+
 import Image from 'next/image'
-import image from '@/public/images/note.png'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
+import { toast } from "sonner";
+import { addToCart } from "@/lib/cart";
+import { useState } from "react";
 
 interface ProductProps {
+  id: string;
   slug: string;
   title: string;
   description: string | null;
   price: number;
   images: string[];
+  currency: string;
+  stockQty?: number | null;
+  sku?: string | null;
 }
 
-const ProductCard = ({slug, title, description, price, images}: ProductProps) => {
+const ProductCard = ({id, slug, title, description, price, images, currency = "USD", stockQty, sku}: ProductProps) => {
+
+      const [added, setAdded] = useState(false);
+
+      const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // ✅ stock check
+            if (typeof stockQty === "number" && stockQty <= 0) {
+                  toast.error("Out of stock");
+                  return;
+            }
+
+            addToCart({
+                  productId: id,
+                  slug,
+                  sku: sku ?? null,
+                  title,
+                  price,
+                  currency,
+                  image: images?.[0] ? `/images/${images[0]}` : "/images/placeholder.png",
+            });
+
+            toast.success("Product added to cart ✅");
+
+            setAdded(true);
+            window.setTimeout(() => setAdded(false), 900);
+      };
+
   return (
       <div className='group transition-all duration-500 border rounded-md shadow-xs hover:shadow-lg hover:border-blue-400 p-2 relative'>
             <Link href={`/product/${slug}`}>
@@ -30,12 +67,29 @@ const ProductCard = ({slug, title, description, price, images}: ProductProps) =>
                   <div className='flex justify-between gap-2 items-center px-5 pb-4'>
                         <div>
                               <h5 className='mt-2 text-base max-w-fit'>
-                                    {price}.00 <span className='text-black font-bold text-base'>$</span>
+                                    {price.toFixed(2)}{" "}
+                                    <span className="text-black font-bold text-base">{currency}</span>
                               </h5>
+
+                              {typeof stockQty === "number" && (
+                                    <p className="mt-1 text-xs text-gray-500">
+                                          {stockQty > 0 ? `${stockQty} in stock` : "Out of stock"}
+                                    </p>
+                              )}
                         </div>
-                        <div className=''>
-                              <button className="border bg-black rounded-md py-3 px-6 hover:bg-black/75 text-white transition-all duration-300 cursor-pointer">
-                                    <h5 className="text-xs">Add to cart</h5>
+                        <div>
+                              <button
+                                    type="button"
+                                    onClick={handleAddToCart}
+                                    disabled={typeof stockQty === "number" && stockQty <= 0}
+                                    className={`border rounded py-3 px-6 text-white transition-all duration-300 cursor-pointer
+                                    ${
+                                    typeof stockQty === "number" && stockQty <= 0
+                                          ? "bg-gray-400 cursor-not-allowed"
+                                          : "bg-black hover:bg-black/75"
+                                    }`}
+                              >
+                                    <h5 className="text-xs">{added ? "Added ✓" : "Add to cart"}</h5>
                               </button>
                         </div>
                   </div>

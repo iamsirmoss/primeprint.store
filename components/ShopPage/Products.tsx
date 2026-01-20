@@ -8,6 +8,9 @@ interface ProductProps {
   description: string | null;
   price: number;
   images: string[];
+  currency: string;
+  stockQty?: number | null;
+  sku?: string | null;
 }
 
 const Products = ({products}: {products: ProductProps[]}) => {
@@ -32,11 +35,15 @@ const Products = ({products}: {products: ProductProps[]}) => {
                         products.map((product) => (
                               <ProductCard 
                                     key={product.id} 
+                                    id={product.id}
                                     slug={product.slug}
                                     title={product.title}
                                     description={product.description ?? ""}
                                     price={product.price}
                                     images={product.images}
+                                    currency={product.currency}
+                                    stockQty={product.stockQty ?? null}
+                                    sku={product.sku ?? null}
                                />
                         ))
                   }
