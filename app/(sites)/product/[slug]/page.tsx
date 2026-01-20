@@ -24,6 +24,8 @@ const page = async ({ params }: ProductPageProps) => {
                   title: true,
                   images: true,
                   sku: true,
+                  currency: true,
+                  stockQty: true,
             },
       })
 
