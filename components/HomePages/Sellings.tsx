@@ -8,7 +8,7 @@ interface ProductProps {
   description: string | null;
   price: number;
   images: string[];
-  currency: string;
+  currency?: string;
   stockQty?: number | null;
   sku?: string | null;
 }
@@ -28,7 +28,7 @@ const Sellings = ({products}: {products: ProductProps[]}) => {
                                     description={product.description ?? ""}
                                     price={product.price}
                                     images={product.images}
-                                    currency={product.currency}
+                                    currency={product.currency ?? "USD"}
                                     stockQty={product.stockQty}
                                     sku={product.sku}
                                />

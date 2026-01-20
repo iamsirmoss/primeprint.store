@@ -22,7 +22,7 @@ interface ProductProps {
   description: string | null;
   price: number;
   images: string[];
-  currency: string;
+  currency?: string;
   stockQty?: number | null;
   sku?: string | null;
 }
@@ -69,7 +69,7 @@ const Test = ({products}: {products: ProductProps[]}) => {
                         description={product.description ?? ""}
                         imageUrl={product.images}
                         price={product.price}
-                        currency={product.currency}
+                        currency={product.currency ?? "USD"}
                         stockQty={product.stockQty ?? null}
                         sku={product.sku ?? null}
                         />
