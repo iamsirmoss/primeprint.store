@@ -50,11 +50,12 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
       };
 
   return (
-      <div className='group transition-all duration-500 border rounded-md shadow-xs hover:shadow-lg hover:border-blue-400 p-2 relative'>
+      <div className='group transition-all duration-500 border-y p-1 relative group'>
             <Link href={`/product/${slug}`}>
-                  <div className='w-full overflow-hidden flex flex-col items-center justify-center bg-blue-100 rounded-md h-32 md:h-44'>
+                  <div className='w-full overflow-hidden flex flex-col items-center justify-center bg-blue-100 h-32 md:h-44'>
                         <Image src={images?.[0] ? `/images/${images[0]}` : "/images/placeholder.png"} alt='product images' 
-                        priority width={0} height={0} sizes='100vw'className='object-cover w-[35%] sm:w-[40%] md:w-[50%] lg:w-[60%]' />
+                        priority width={0} height={0} sizes='100vw'className='object-cover w-[35%] sm:w-[40%] md:w-[50%] lg:w-[60%] 
+                        group-hover:scale-110 transition-all duration-500 ease-in-out' />
                   </div>
                   <div className='py-6 px-5'>
                         <div className='flex justify-between items-center mt-2'>
@@ -82,7 +83,7 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
                                     type="button"
                                     onClick={handleAddToCart}
                                     disabled={typeof stockQty === "number" && stockQty <= 0}
-                                    className={`border rounded py-3 px-6 text-white transition-all duration-300 cursor-pointer
+                                    className={`border rounded py-3 px-8 text-white transition-all duration-300 cursor-pointer
                                     ${
                                     typeof stockQty === "number" && stockQty <= 0
                                           ? "bg-gray-400 cursor-not-allowed"

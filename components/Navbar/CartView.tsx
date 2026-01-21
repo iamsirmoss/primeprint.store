@@ -8,7 +8,16 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { useCart } from "@/hooks/use-cart";
-import { decQty, incQty, removeFromCart } from "@/lib/cart";
+import {
+  decQty,
+  incQty,
+  removeFromCart,
+  removePackageFromCart,
+  incPackageQty,
+  decPackageQty,
+  isPackageItem,
+} from "@/lib/cart";
+
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -100,77 +109,103 @@ const CartView = ({
               <>
                 {/* Items list (scrollable) */}
                 <div className="h-[calc(100vh-220px)] overflow-y-auto px-4 py-4 space-y-4">
-                  {items.map((it) => (
-                    <div
-                      key={`${it.productId}-${it.slug}`}
-                      className="flex gap-3 rounded-xl border p-3"
-                    >
-                      <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-100">
-                        <Image
-                          src={it.image || "/images/placeholder.png"}
-                          alt={it.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
+                  {items.map((it) => {
+                    const isPkg = isPackageItem(it);
 
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between gap-3 flex-wrap">
-                          <div>
-                            <p className="font-semibold leading-5 capitalize">
-                              {it.title}
-                            </p>
-                            <p className="text-xs text-slate-500 mt-1">
-                              {it.price.toFixed(2)} {it.currency}
-                            </p>
-                          </div>
+                    const key = isPkg ? `${it.packageId}-${it.billing}` : `${it.productId}-${it.slug}`;
+                    const title = isPkg ? it.name : it.title;
+                    const currency = it.currency ?? "USD";
+                    const unitPrice = isPkg ? it.unitPrice : it.price;
 
-                          <button
-                            type="button"
-                            onClick={() => {
-                              removeFromCart(it.productId);
-                              toast.success("Product removed from cart");
-                            }}
-                            className="rounded-md p-2 hover:bg-slate-100"
-                            aria-label="Remove item"
-                          >
-                            <Trash2 className="h-4 w-4 text-slate-600" />
-                          </button>
+                    return (
+                      <div key={key} className="flex gap-3 rounded-xl border p-3">
+                        <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-100">
+                          <Image
+                            src={it.image || "/images/placeholder.png"}
+                            alt={title}
+                            fill
+                            className="object-cover"
+                          />
                         </div>
 
-                        {/* qty + subtotal */}
-                        <div className="mt-3 flex items-center justify-between flex-wrap gap-3">
-                          <div className="inline-flex items-center gap-2 rounded-lg border px-1 md:px-2 py-1">
+                        <div className="flex-1">
+                          <div className="flex items-start justify-between gap-3 flex-wrap">
+                            <div>
+                              <p className="font-semibold leading-5 capitalize">{title}</p>
+
+                              {isPkg ? (
+                                <>
+                                  <p className="text-xs text-slate-500 mt-1">
+                                    {it.tier} • {it.billing === "month" ? "Monthly" : "Yearly"}
+                                  </p>
+                                  <p className="text-xs text-slate-500 mt-1">
+                                    {unitPrice.toFixed(2)} {currency}
+                                  </p>
+                                </>
+                              ) : (
+                                <p className="text-xs text-slate-500 mt-1">
+                                  {unitPrice.toFixed(2)} {currency}
+                                </p>
+                              )}
+                            </div>
+
                             <button
                               type="button"
-                              onClick={() => decQty(it.productId)}
-                              className="rounded-md p-1.5 md:p-2 hover:bg-slate-100"
-                              aria-label="Decrease quantity"
-                            >
-                              <Minus className="h-2.5 w-2.5 md:w-4 md:h-4" />
-                            </button>
-
-                            <span className="min-w-8 text-center font-semibold text-sm md:text-base">
-                              {it.qty}
-                            </span>
-
-                            <button
-                              type="button"
-                              onClick={() => incQty(it.productId)}
+                              onClick={() => {
+                                if (isPkg) {
+                                  removePackageFromCart(it.packageId, it.billing);
+                                  toast.success("Package removed from cart");
+                                } else {
+                                  removeFromCart(it.productId);
+                                  toast.success("Product removed from cart");
+                                }
+                              }}
                               className="rounded-md p-2 hover:bg-slate-100"
-                              aria-label="Increase quantity"
+                              aria-label="Remove item"
                             >
-                              <Plus className="h-2.5 w-2.5 md:w-4 md:h-4" />
+                              <Trash2 className="h-4 w-4 text-slate-600" />
                             </button>
                           </div>
 
-                          <p className="font-bold">
-                            {(it.price * it.qty).toFixed(2)} {it.currency}
-                          </p>
+                          <div className="mt-3 flex items-center justify-between flex-wrap gap-3">
+                            <div className="inline-flex items-center gap-2 rounded-lg border px-1 md:px-2 py-1">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (isPkg) decPackageQty(it.packageId, it.billing);
+                                  else decQty(it.productId);
+                                }}
+                                className="rounded-md p-1.5 md:p-2 hover:bg-slate-100"
+                                aria-label="Decrease quantity"
+                              >
+                                <Minus className="h-2.5 w-2.5 md:w-4 md:h-4" />
+                              </button>
+
+                              <span className="min-w-8 text-center font-semibold text-sm md:text-base">
+                                {it.qty}
+                              </span>
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (isPkg) incPackageQty(it.packageId, it.billing);
+                                  else incQty(it.productId);
+                                }}
+                                className="rounded-md p-2 hover:bg-slate-100"
+                                aria-label="Increase quantity"
+                              >
+                                <Plus className="h-2.5 w-2.5 md:w-4 md:h-4" />
+                              </button>
+                            </div>
+
+                            <p className="font-bold">
+                              {(unitPrice * it.qty).toFixed(2)} {currency}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* Footer summary */}

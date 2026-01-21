@@ -21,7 +21,7 @@ const page = async ({ params }: PageProps) => {
       title: true,
       image: true,
       description: true,
-      packages: { select: { id: true, tier: true, name: true, description: true, priceByMonth: true, priceByYear: true, image: true, points: true } },
+      packages: { select: { id: true, tier: true, name: true, description: true, priceByMonth: true, priceByYear: true, image: true, points: true, currency: true, } },
       service: {
         select: { id: true, slug: true, title: true },
       },

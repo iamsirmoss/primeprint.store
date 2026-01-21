@@ -15,7 +15,8 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
   slug
 }) => {
   return (
-        <div className="border border-blue-200 p-3 rounded-2xl">
+        <div className="border p-3 rounded-2xl group hover:border-gray-500 transition-all duration-500">
+          <Link href={`/service/sub-service/${slug}`}>
           <div className="overflow-hidden pb-3">
             {icon ?
             (<Image
@@ -32,25 +33,25 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
             </div>)
             }
           </div>
-          <Link href={`/service/sub-service/${slug}`}>
-            <div className="relative group overflow-hidden rounded-2xl shadow-lg">
+          
+            <div className="relative overflow-hidden rounded-2xl shadow-lg">
               <div className="h-32">
                 
               </div>
     
               <div
-                className="absolute inset-0 bg-transparent group-hover:bg-blue-400 transition-colors duration-500"
+                className="absolute inset-0 bg-transparent group-hover:bg-gray-500 transition-colors duration-500"
               ></div>
     
-              <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4 text-white">
+              <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4">
                 <h3 className="text-lg font-bold text-black group-hover:text-white transition-colors duration-500 capitalize">{title}</h3>
     
                 <button
-                  className="mt-4 px-4 py-2 bg-transparent border border-white text-white rounded opacity-0 translate-y-10 group
-                  group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer"
+                  className="mt-4 px-4 py-2 bg-transparent border rounded group
+                  group-hover:text-white transition-all duration-500 flex items-center gap-2 capitalize cursor-pointer"
                 >
                   more
-                  <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
+                  <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />
                 </button>
               </div>
             </div>

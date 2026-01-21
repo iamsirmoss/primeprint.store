@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import { toast } from "sonner";
+import { addPackageToCart } from "@/lib/cart";
 
 type Tier = "STARTER" | "GROWTH" | "ULTIMATE";
 
@@ -13,9 +15,11 @@ type PackageItem = {
   priceByYear: number | null;
   image: string | null;
   points: string[];
+  currency?: string | null;
 };
 
 type SubServiceForBody = {
+  id: string;
   title: string;
   description: string | null;
   packages: PackageItem[];
@@ -277,9 +281,30 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                     type="button"
                     className="w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer"
                     onClick={() => {
-                      // TODO: ici tu ajoutes au localStorage cart (type=PACKAGE + packageId + billing)
-                      // Exemple payload:
-                      // { type: "PACKAGE", packageId: p.id, billing: effectiveBilling, quantity: 1 }
+                      const unitPrice =
+                        effectiveBilling === "month" ? p.priceByMonth : p.priceByYear;
+
+                      if (unitPrice === null || unitPrice === undefined) {
+                        toast.error("This plan has no price for the selected billing.");
+                        return;
+                      }
+
+                      addPackageToCart({
+                        packageId: p.id,
+                        subServiceId: service.id,
+                        serviceSlug: service.service.slug,
+                        subServiceTitle: service.title,
+                        tier: p.tier,
+                        name: p.name,
+                        billing: effectiveBilling,
+                        unitPrice,
+                        currency: p.currency ?? "USD",
+                        image: p.image,
+                      });
+
+                      toast.success(
+                        `${p.name} added (${effectiveBilling === "month" ? "Monthly" : "Yearly"}) ✅`
+                      );
                     }}
                   >
                     Add to cart

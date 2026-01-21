@@ -56,7 +56,7 @@ const Navbar = () => {
                         <NavNormal />
                   </div>
                   <div className='flex items-center gap-3 md:gap-5'>
-                        <Search />
+                        {/* <Search /> */}
                         <OrderButton />
                         <SessionOrNot />
                         <CartItem />
