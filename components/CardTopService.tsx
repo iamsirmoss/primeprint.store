@@ -35,7 +35,7 @@ const TopServiceCard: React.FC<ServiceCardProps> = ({
           </div>
           
             <div className="relative  overflow-hidden rounded-sm shadow-lg">
-              <div className="h-32">
+              <div className="h-36 w-full overflow-hidden">
                 
               </div>
     

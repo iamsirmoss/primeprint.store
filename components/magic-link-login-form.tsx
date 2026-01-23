@@ -45,10 +45,10 @@ export const MagicLinkLoginForm = () => {
   return (
     <details
       ref={ref}
-      className="w-full rounded border border-blue-400 overflow-hidden"
+      className="w-full rounded border overflow-hidden"
     >
-      <summary className="flex gap-2 items-center justify-center px-2 py-4 bg-black text-white hover:bg-black/80 transition duration-300 cursor-pointer">
-        Try magic link <StarIcon size={16} />
+      <summary className="flex gap-2 items-center justify-center px-2 py-4 bg-black text-white hover:bg-black/80 transition duration-300 cursor-pointer text-sm font-semibold">
+        Continue with email link
       </summary>
 
       <form onSubmit={handleSubmit} className="px-2 py-1">
@@ -57,13 +57,13 @@ export const MagicLinkLoginForm = () => {
         </Label>
         <div className="flex gap-2 items-center">
             <div className="relative w-full">
-                  <Mail className="absolute top-2.5 text-blue-300" />
+                  <Mail className="absolute top-2.5" />
                   <input type="email" id="email" name="email" className="peer w-full bg-transparent pl-9 py-2 focus:outline-none" placeholder="Email" />
                   {/* base line */}
-                  <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+                  <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
 
                   {/* focus line */}
-                  <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+                  <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
             </div>
           <Button disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400">Send</Button>
         </div>

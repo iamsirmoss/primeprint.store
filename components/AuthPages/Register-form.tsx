@@ -44,7 +44,7 @@ const RegisterForm = () => {
 
                         {/* Full Name */}
                         <div className="relative">
-                              <User className="absolute top-1.5 text-blue-300" />
+                              <User className="absolute top-1.5" />
                               <input
                               name='name'
                               type="text"
@@ -54,15 +54,15 @@ const RegisterForm = () => {
                               />
 
                               {/* base line */}
-                              <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+                              <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
 
                               {/* focus line */}
-                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
                         </div>
 
                         {/* Email */}
                         <div className="relative mt-8">
-                              <Mail className="absolute top-2 text-blue-300" />
+                              <Mail className="absolute top-2" />
 
                               <input
                               name="email"
@@ -73,28 +73,28 @@ const RegisterForm = () => {
                               />
 
                               {/* base line */}
-                              <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+                              <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
 
                               {/* focus line */}
-                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
                         </div>
 
                         {/* Password */}
                         <div className="relative mt-8">
-                              <KeySquare className="absolute top-2 text-blue-300" />
+                              <KeySquare className="absolute top-2" />
                               <input
                               name="password"
                               type={showPassword ? "text" : "password"}
                               id="password"
                               className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none"
-                              placeholder="********"
+                              placeholder="Password"
                               />
 
                               {/* base line */}
-                              <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+                              <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
 
                               {/* focus line */}
-                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
 
                               {/* Toggle icon */}
                               <button
@@ -114,20 +114,11 @@ const RegisterForm = () => {
                         <Button
                         disabled={isPending}
                         type="submit"
-                        className="bg-red-500 text-white font-semibold px-16 py-7
-                        rounded shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-400 cursor-pointer"
+                        className="bg-blue-400 text-white font-semibold px-16 py-7 w-full
+                        rounded shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-500 cursor-pointer"
                         >
                               <h5 className='text-center'>{isPending ? "Loading..." : "Sign up"}</h5>
                         </Button>
-                        <div className="mt-5 sm:mt-0 flex items-center gap-1">
-                              <p className="text-gray-400">
-                                    If you already have an account.
-                              </p>
-                              <Link href={'/login'} className='font-semibold hover:underline text-blue-400 
-                              transition-all duration-500'>
-                                    Login
-                              </Link>
-                        </div>
                   </div>
             </form>
       </>

@@ -43,6 +43,11 @@ const CartView = ({
 
   const currencyKeys = Object.keys(totals);
 
+  const badgeClass = (isPkg: boolean) =>
+    isPkg
+      ? "bg-black text-white"
+      : "bg-gray-100 text-gray-800 border border-gray-200";
+
   return (
     <AnimatePresence mode="wait">
       {open && (
@@ -131,8 +136,21 @@ const CartView = ({
                         <div className="flex-1">
                           <div className="flex items-start justify-between gap-3 flex-wrap">
                             <div>
-                              <p className="font-semibold leading-5 capitalize">{title}</p>
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <div className="font-semibold capitalize">{title}</div>
 
+                                <span
+                                  className={`text-[10px] px-2 py-1 rounded-full font-semibold ${badgeClass(isPkg)}`}
+                                >
+                                  {isPkg ? "PACKAGE" : "PRODUCT"}
+                                </span>
+
+                                {isPkg && (
+                                  <span className="text-[10px] px-2 py-1 rounded-full font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+                                    {it.billing === "month" ? "MONTHLY" : "YEARLY"}
+                                  </span>
+                                )}
+                              </div>
                               {isPkg ? (
                                 <>
                                   <p className="text-xs text-slate-500 mt-1">

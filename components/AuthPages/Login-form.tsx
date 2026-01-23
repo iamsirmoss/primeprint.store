@@ -45,7 +45,7 @@ const LoginForm = () => {
 
                         {/* Email */}
                         <div className="relative mt-8">
-                              <Mail className="absolute top-2 text-blue-300" />
+                              <Mail className="absolute top-2" />
                               <input
                               name='email'
                               type="email"
@@ -55,15 +55,15 @@ const LoginForm = () => {
                               />
 
                               {/* base line */}
-                              <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+                              <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
 
                               {/* focus line */}
-                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
                         </div>
 
                         {/* Password */}
                         <div className="relative mt-8">
-                              <KeySquare className="absolute top-2 text-blue-300" />
+                              <KeySquare className="absolute top-2" />
                               <input
                                     name="password"
                                     type={showPassword ? "text" : "password"}
@@ -73,10 +73,10 @@ const LoginForm = () => {
                               />
                         
                               {/* base line */}
-                              <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+                              <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
                         
                               {/* focus line */}
-                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+                              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
                         
                               {/* Toggle icon */}
                               <button
@@ -101,20 +101,11 @@ const LoginForm = () => {
                         <Button
                         disabled={isPending}
                         type="submit"
-                        className="bg-red-500 text-white font-semibold px-16 py-7
-                        rounded shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-400 cursor-pointer"
+                        className="bg-blue-400 text-white font-semibold px-16 py-7 w-full
+                        rounded shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-500 cursor-pointer"
                         >
                               <h5 className='text-center'>{isPending ? "Loading..." : "Login"}</h5>
                         </Button>
-                        <div className="mt-5 sm:mt-0 flex items-center gap-1">
-                              <p className="text-gray-400">
-                                    You don&apos;t have an account ?
-                              </p>
-                              <Link href={'/register'} className='font-semibold hover:underline text-blue-400 
-                              transition-all duration-500'>
-                                    Sign up
-                              </Link>
-                        </div>
                   </div>
             </form>
       </>

@@ -15,18 +15,23 @@ import {
 } from "@/lib/cart";
 
 
-export default function CartClient() {
-  const { items, totals } = useCart();
+  export default function CartClient() {
+    const { items, totals } = useCart();
 
-  const currencyKeys = Object.keys(totals);
+    const currencyKeys = Object.keys(totals);
 
-  if (items.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center py-32">
-            <p className="text-gray-500">Your cart is empty.</p>
-      </div>
-);
+    if (items.length === 0) {
+      return (
+        <div className="flex flex-col items-center justify-center py-32">
+              <p className="text-gray-500">Your cart is empty.</p>
+        </div>
+    );
   }
+
+  const badgeClass = (isPkg: boolean) =>
+    isPkg
+      ? "bg-black text-white"
+      : "bg-white text-gray-800 border border-gray-200";
 
   return (
     <div className="py-20 grid gap-6 md:grid-cols-[1fr_580px]">
@@ -57,8 +62,21 @@ export default function CartClient() {
               <div className="flex-1">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
-                    <div className="font-semibold capitalize">{title}</div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                                <div className="font-semibold capitalize">{title}</div>
 
+                                <span
+                                  className={`text-[10px] px-2 py-1 rounded-full font-semibold ${badgeClass(isPkg)}`}
+                                >
+                                  {isPkg ? "PACKAGE" : "PRODUCT"}
+                                </span>
+
+                                {isPkg && (
+                                  <span className="text-[10px] px-2 py-1 rounded-full font-semibold bg-white text-gray-700 border border-gray-200">
+                                    {it.billing === "month" ? "MONTHLY" : "YEARLY"}
+                                  </span>
+                                )}
+                              </div>
                     {isPkg ? (
                       <>
                         <div className="text-sm text-gray-500">
@@ -148,7 +166,7 @@ export default function CartClient() {
 
         <button
           type="button"
-          className="mt-5 w-full rounded-lg bg-black py-3 text-sm font-semibold text-white hover:bg-black/80"
+          className="mt-5 w-full rounded bg-black py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-500 cursor-pointer"
           onClick={() => toast.info("Checkout flow coming next ✅")}
         >
           Checkout

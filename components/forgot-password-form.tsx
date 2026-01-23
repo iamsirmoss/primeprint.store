@@ -44,7 +44,7 @@ export const ForgotPasswordForm = () => {
   return (
     <form className="w-full space-y-4 mt-10" onClick={handleSubmit}>
       <div className="relative mt-8">
-            <Mail className="absolute top-2 text-blue-300" />
+            <Mail className="absolute top-2" />
             <input
                   name='email'
                   type="email"
@@ -52,10 +52,10 @@ export const ForgotPasswordForm = () => {
                   className="peer w-full bg-transparent pl-9 py-2 focus:outline-none" placeholder="Email"
             />
             {/* base line */}
-            <span className="absolute left-0 bottom-0 h-px w-full bg-blue-300 transition-all duration-300" />
+            <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
 
             {/* focus line */}
-            <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-red-500 transition-all duration-300 peer-focus:w-full" />
+            <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
       </div>
 
       <Button size="lg" type="submit" disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400">
