@@ -226,3 +226,13 @@ export function cartAnyCount(items?: AnyCartItem[]) {
   const cart = items ?? getAnyCart();
   return cart.reduce((acc, x) => acc + x.qty, 0);
 }
+
+export function clearCart() {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(CART_KEY);
+  window.dispatchEvent(new Event("cart:updated"));
+}
+
+export function isProductItem(it: AnyCartItem): it is CartItem {
+  return !isPackageItem(it);
+}

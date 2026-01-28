@@ -69,7 +69,7 @@ const LoginForm = () => {
                                     type={showPassword ? "text" : "password"}
                                     id="password"
                                     className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none"
-                                    placeholder="********"
+                                    placeholder="Password"
                               />
                         
                               {/* base line */}

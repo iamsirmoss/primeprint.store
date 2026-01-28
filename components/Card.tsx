@@ -17,9 +17,10 @@ interface CardProps {
   currency: string;
   stockQty?: number | null;
   sku?: string | null;
+  isActive?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, price, currency = "USD", stockQty, sku }) => {
+const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, price, currency = "USD", stockQty, sku, isActive = true }) => {
 
       const [added, setAdded] = useState(false);
       
@@ -49,6 +50,9 @@ const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, pri
                   window.setTimeout(() => setAdded(false), 900);
             };
 
+            const safeStockQty = stockQty ?? 0;
+            const isOutOfStock = !isActive || safeStockQty <= 0;
+
   return (
       <div className="relative">
             <Link href={`/product/${slug}`}>
@@ -73,6 +77,11 @@ const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, pri
                                           {stockQty > 0 ? `${stockQty} in stock` : "Out of stock"}
                                     </p>
                               )}
+                              {isOutOfStock && (
+                                    <span className="mt-2 inline-block text-xs font-semibold text-red-600">
+                                          Out of stock
+                                    </span>
+                              )}
                         </div>
 
                         {/* <div className="absolute bottom-3 right-5">
@@ -84,15 +93,17 @@ const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, pri
                               <button
                                     type="button"
                                     onClick={handleAddToCart}
-                                    disabled={typeof stockQty === "number" && stockQty <= 0}
-                                    className={`border rounded py-3 px-10 text-white transition-all duration-300 cursor-pointer
+                                    disabled={isOutOfStock}
+                                    className={`border rounded py-3 px-10 text-white transition-all duration-300
                                     ${
-                                    typeof stockQty === "number" && stockQty <= 0
+                                          isOutOfStock
                                           ? "bg-gray-400 cursor-not-allowed"
-                                          : "bg-black hover:bg-black/75"
+                                          : "bg-black hover:bg-black/75 cursor-pointer"
                                     }`}
                               >
-                                    <h5 className="text-xs">{added ? "Added ✓" : "Add to cart"}</h5>
+                                          <h5 className="text-xs">
+                                                {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
+                                          </h5>
                               </button>
                         </div>
                   </div>

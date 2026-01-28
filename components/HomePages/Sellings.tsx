@@ -11,6 +11,7 @@ interface ProductProps {
   currency?: string;
   stockQty?: number | null;
   sku?: string | null;
+  isActive?: boolean;
 }
 
 const Sellings = ({products}: {products: ProductProps[]}) => {
@@ -31,6 +32,7 @@ const Sellings = ({products}: {products: ProductProps[]}) => {
                                     currency={product.currency ?? "USD"}
                                     stockQty={product.stockQty}
                                     sku={product.sku}
+                                    isActive={product.isActive}
                                />
                         ))
                   }

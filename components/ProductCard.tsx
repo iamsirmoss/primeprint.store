@@ -17,9 +17,10 @@ interface ProductProps {
   currency: string;
   stockQty?: number | null;
   sku?: string | null;
+  isActive?: boolean;
 }
 
-const ProductCard = ({id, slug, title, description, price, images, currency = "USD", stockQty, sku}: ProductProps) => {
+const ProductCard = ({id, slug, title, description, price, images, currency = "USD", stockQty, sku, isActive = true}: ProductProps) => {
 
       const [added, setAdded] = useState(false);
 
@@ -49,8 +50,12 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
             window.setTimeout(() => setAdded(false), 900);
       };
 
+      const safeStockQty = stockQty ?? 0;
+      const isOutOfStock = !isActive || safeStockQty <= 0;
+
+
   return (
-      <div className='group transition-all duration-500 border-y p-1 relative group'>
+      <div className='group transition-all duration-500 border-b p-1.5 relative group hover:border-black bg-white transition-all duration-300'>
             <Link href={`/product/${slug}`}>
                   <div className='w-full overflow-hidden flex flex-col items-center justify-center bg-blue-100 h-32 md:h-44'>
                         <Image src={images?.[0] ? `/images/${images[0]}` : "/images/placeholder.png"} alt='product images' 
@@ -82,15 +87,17 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
                               <button
                                     type="button"
                                     onClick={handleAddToCart}
-                                    disabled={typeof stockQty === "number" && stockQty <= 0}
-                                    className={`border rounded py-3 px-8 text-white transition-all duration-300 cursor-pointer
+                                    disabled={isOutOfStock}
+                                    className={`border rounded py-3 px-8 text-white transition-all duration-300
                                     ${
-                                    typeof stockQty === "number" && stockQty <= 0
+                                          isOutOfStock
                                           ? "bg-gray-400 cursor-not-allowed"
-                                          : "bg-black hover:bg-black/75"
+                                          : "bg-black hover:bg-black/75 cursor-pointer"
                                     }`}
                               >
-                                    <h5 className="text-xs">{added ? "Added ✓" : "Add to cart"}</h5>
+                                          <h5 className="text-xs">
+                                                {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
+                                          </h5>
                               </button>
                         </div>
                   </div>

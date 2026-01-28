@@ -1,4 +1,3 @@
-import React from 'react'
 import ProductCard from '../ProductCard'
 
 interface ProductProps {
@@ -11,6 +10,7 @@ interface ProductProps {
   currency?: string;
   stockQty?: number | null;
   sku?: string | null;
+  isActive?: boolean;
 }
 
 const Products = ({products}: {products: ProductProps[]}) => {
@@ -31,6 +31,7 @@ const Products = ({products}: {products: ProductProps[]}) => {
                                     currency={product.currency ?? "USD"}
                                     stockQty={product.stockQty}
                                     sku={product.sku}
+                                    isActive={product.isActive}
                               />
                         ))
                   }

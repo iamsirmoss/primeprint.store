@@ -55,11 +55,11 @@ const page = () => {
                               <p>and</p>
                               <Link href={'/privacy-policy'} className='font-semibold hover:underline hover:text-black text-blue-400
                               transition-all duration-500'>
-                                    Privacy Policy
+                                    Privacy policy
                               </Link>
                         </div>
                         <div className="mt-8 flex items-center gap-3 flex-wrap text-sm font-medium">
-                              <Link href={'/help'} className='hover:underline hover:text-blue-40
+                              <Link href={'/help'} className='hover:underline hover:text-blue-400
                               transition-all duration-500'>
                                     Need Help?
                               </Link>

@@ -25,6 +25,7 @@ interface ProductProps {
   currency?: string;
   stockQty?: number | null;
   sku?: string | null;
+  isActive?: boolean;
 }
 
 const Test = ({products}: {products: ProductProps[]}) => {
@@ -62,16 +63,17 @@ const Test = ({products}: {products: ProductProps[]}) => {
                   <CarouselItem key={index} className="pt-0 w-full">
                         <div className="px-4 pt-2 w-full">
                         <Card
-                        key={product.id}
-                        id={product.id}
-                        slug={product.slug}
-                        title={product.title}
-                        description={product.description ?? ""}
-                        imageUrl={product.images}
-                        price={product.price}
-                        currency={product.currency ?? "USD"}
-                        stockQty={product.stockQty ?? null}
-                        sku={product.sku ?? null}
+                              key={product.id}
+                              id={product.id}
+                              slug={product.slug}
+                              title={product.title}
+                              description={product.description ?? ""}
+                              imageUrl={product.images}
+                              price={product.price}
+                              currency={product.currency ?? "USD"}
+                              stockQty={product.stockQty ?? null}
+                              sku={product.sku ?? null}
+                              isActive={product.isActive}
                         />
                         </div>
                   </CarouselItem>

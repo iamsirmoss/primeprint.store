@@ -13,10 +13,15 @@ import {
   incPackageQty,
   decPackageQty,
 } from "@/lib/cart";
+import { createOrderDraftAction } from "@/actions/create-order-draft-action";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
   export default function CartClient() {
+
     const { items, totals } = useCart();
+    const router = useRouter();
 
     const currencyKeys = Object.keys(totals);
 
@@ -24,6 +29,13 @@ import {
       return (
         <div className="flex flex-col items-center justify-center py-32">
               <p className="text-gray-500">Your cart is empty.</p>
+              <Link href="/shop">
+                  <button
+                    className="bg-red-500 text-white rounded px-10 py-5 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium mt-4"
+                  >
+                    Go to shop
+                  </button>
+              </Link>
         </div>
     );
   }
@@ -48,7 +60,7 @@ import {
           return (
             <div
               key={key}
-              className="flex gap-4 rounded-md bg-slate-100 p-4"
+              className="flex gap-4 rounded-lg bg-slate-100 p-4 hover:shadow-md transition-all duration-500 cursor-pointer"
             >
               <div className="relative h-20 w-20 overflow-hidden rounded-lg bg-gray-100">
                 <Image
@@ -107,7 +119,7 @@ import {
                     aria-label="Remove"
                     type="button"
                   >
-                    <Trash2 className="h-5 w-5 text-red-500 hover:text-black" />
+                    <Trash2 className="h-4 w-4 text-red-500 hover:text-black transition-all duration-300" />
                   </button>
                 </div>
 
@@ -152,7 +164,7 @@ import {
       </div>
 
       {/* Summary */}
-      <div className="h-fit rounded-md border bg-white p-5">
+      <div className="h-fit rounded-lg border bg-white p-5">
         <h2 className="text-lg font-bold">Summary</h2>
 
         <div className="mt-4 space-y-2 text-sm">
@@ -164,13 +176,38 @@ import {
           ))}
         </div>
 
-        <button
+        {/* <button
           type="button"
           className="mt-5 w-full rounded bg-black py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-500 cursor-pointer"
-          onClick={() => toast.info("Checkout flow coming next ✅")}
+          onClick={async () => {
+            try {
+              const payload = {
+                items: items.map((it) =>
+                  isPackageItem(it)
+                    ? { type: "PACKAGE" as const, packageId: it.packageId, qty: it.qty, billing: it.billing }
+                    : { type: "PRODUCT" as const, productId: it.productId, qty: it.qty }
+                ),
+              };
+
+              const { orderId } = await createOrderDraftAction(payload);
+
+              // ✅ redirige vers une page review avant Stripe
+              router.push(`/order/${orderId}`);
+              toast.success("Order created ✅");
+            } catch (e: any) {
+              toast.error(e?.message ?? "Failed to create order");
+            }
+          }}
         >
           Checkout
-        </button>
+        </button> */}
+        <Link href="/checkout">
+            <button
+              className="mt-5 w-full rounded-md bg-black py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-500 cursor-pointer"
+            >
+              Checkout
+            </button>
+        </Link>
       </div>
     </div>
   );

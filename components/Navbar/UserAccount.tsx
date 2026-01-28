@@ -1,4 +1,4 @@
-import { User as Use, LayoutDashboardIcon } from "lucide-react";
+import { User as Use, LayoutDashboardIcon, LayoutList, LayoutPanelLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -37,7 +37,7 @@ const UserAccount = ({user}: UserAccountProps) => {
             />) 
             : 
             (
-              <div className="size-6 md:size-8 border border-primary rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+              <div className="size-6 md:size-8 border border-white rounded-full bg-primary text-primary-foreground flex items-center justify-center">
                 <span className="uppercase text-sm font-semibold">
                   {user.name?.slice(0, 2)}
                 </span>
@@ -54,7 +54,7 @@ const UserAccount = ({user}: UserAccountProps) => {
           <>
           <DropdownMenuItem asChild>
             <Link href="/admin/dashboard" className="cursor-pointer">
-              <LayoutDashboardIcon className="mr-2 h-4 w-4 text-black" />
+              <LayoutPanelLeft className="mr-2 h-4 w-4 text-black" />
               <span className="text-sm">Admin Dashboard</span>
             </Link>
           </DropdownMenuItem>
@@ -63,8 +63,15 @@ const UserAccount = ({user}: UserAccountProps) => {
           )}
           <DropdownMenuItem asChild>
             <Link href="/profile" className="cursor-pointer">
-              <Use className="mr-2 h-4 w-4 text-black" />
+              <Use className="mr-2 h-5 w-5 text-black" />
               <span className="text-sm">Profile</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem asChild>
+            <Link href="/orders" className="cursor-pointer">
+              <LayoutList className="mr-2 h-4 w-4 text-black" />
+              <span className="text-sm">My orders</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />

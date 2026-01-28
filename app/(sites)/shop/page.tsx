@@ -35,6 +35,7 @@ const page = async () => {
         stockQty: true,
         sku: true,
         images: true,
+        isActive: true
       },
     }),
   ]);

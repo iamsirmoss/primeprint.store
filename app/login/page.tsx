@@ -46,7 +46,7 @@ const page = () => {
                               </Link>
                         </div>
                         <div className="mt-8 flex items-center gap-3 flex-wrap text-sm font-medium">
-                              <Link href={'/help'} className='hover:underline hover:text-blue-40
+                              <Link href={'/help'} className='hover:underline hover:text-blue-400
                               transition-all duration-500'>
                                     Need Help?
                               </Link>

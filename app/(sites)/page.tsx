@@ -51,7 +51,9 @@ export default async function Home() {
       title: true,
       description: true,
       price: true,
-      images: true
+      images: true,
+      stockQty: true,
+      isActive: true
     } 
   })
 
@@ -63,7 +65,9 @@ export default async function Home() {
       title: true,
       description: true,
       price: true,
-      images: true
+      images: true,
+      stockQty: true,
+      isActive: true
     } 
   })
 

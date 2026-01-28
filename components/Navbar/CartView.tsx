@@ -101,7 +101,7 @@ const CartView = ({
                   No item(s) found.
                 </h5>
 
-                <Link href="/order" onClick={openCart}>
+                <Link href="/shop" onClick={openCart}>
                   <motion.button
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className="bg-red-500 text-white rounded px-10 py-5 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium"
@@ -123,7 +123,7 @@ const CartView = ({
                     const unitPrice = isPkg ? it.unitPrice : it.price;
 
                     return (
-                      <div key={key} className="flex gap-3 rounded-xl border p-3">
+                      <div key={key} className="flex gap-3 rounded-xl border p-3 cursor-pointer hover:border-gray-500 transition-all duration-500">
                         <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-100">
                           <Image
                             src={it.image || "/images/placeholder.png"}
@@ -178,10 +178,10 @@ const CartView = ({
                                   toast.success("Product removed from cart");
                                 }
                               }}
-                              className="rounded-md p-2 hover:bg-slate-100"
+                              className="rounded-md p-2 hover:bg-slate-100 transition-all duration-300"
                               aria-label="Remove item"
                             >
-                              <Trash2 className="h-4 w-4 text-slate-600" />
+                              <Trash2 className="h-5 w-5 text-slate-600" />
                             </button>
                           </div>
 
@@ -193,7 +193,7 @@ const CartView = ({
                                   if (isPkg) decPackageQty(it.packageId, it.billing);
                                   else decQty(it.productId);
                                 }}
-                                className="rounded-md p-1.5 md:p-2 hover:bg-slate-100"
+                                className="rounded-md p-1.5 md:p-2 hover:bg-slate-100 transition-all duration-300"
                                 aria-label="Decrease quantity"
                               >
                                 <Minus className="h-2.5 w-2.5 md:w-4 md:h-4" />
@@ -209,7 +209,7 @@ const CartView = ({
                                   if (isPkg) incPackageQty(it.packageId, it.billing);
                                   else incQty(it.productId);
                                 }}
-                                className="rounded-md p-2 hover:bg-slate-100"
+                                className="rounded-md p-2 hover:bg-slate-100 transition-all duration-300"
                                 aria-label="Increase quantity"
                               >
                                 <Plus className="h-2.5 w-2.5 md:w-4 md:h-4" />
@@ -250,20 +250,20 @@ const CartView = ({
                     >
                       <button
                         type="button"
-                        className="w-full rounded-lg border py-3 font-semibold hover:bg-slate-50 cursor-pointer text-sm md:text-base"
+                        className="w-full rounded-lg border py-3 font-semibold hover:bg-slate-200 cursor-pointer text-sm md:text-base transition-all duration-300"
                       >
                         View cart
                       </button>
                     </Link>
 
                     <Link
-                      href="/order"
+                      href="/checkout"
                       onClick={openCart}
                       className="w-1/2"
                     >
                       <button
                         type="button"
-                        className="w-full rounded-lg bg-black py-3 font-semibold text-white hover:bg-black/80 cursor-pointer text-sm md:text-base"
+                        className="w-full rounded-lg bg-black py-3 font-semibold text-white hover:bg-black/75 cursor-pointer text-sm md:text-base transition-all duration-300"
                       >
                         Checkout
                       </button>
