@@ -1,39 +1,59 @@
 "use client"
 
-import { signUp } from '@/lib/auth-client'
 import { Eye, EyeOff, Mail, User, KeySquare } from 'lucide-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { BsGoogle } from 'react-icons/bs'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { signUpEmailAction } from '@/actions/sign-up-email-action'
 
-const RegisterForm = () => {
+function safeCallback(cb?: string | null) {
+  if (!cb) return "/profile";
+  if (!cb.startsWith("/")) return "/profile";
+  if (cb.startsWith("//")) return "/profile";
+  return cb;
+}
+
+type Props = {
+  callbackURL?: string;
+};
+
+const RegisterForm = ({ callbackURL }: Props) => {
 
       const [isPending, setPending] = useState(false);
-      const router = useRouter();
       const [showPassword, setShowPassword] = useState(false);
+
+      const router = useRouter();
+      const searchParams = useSearchParams();
+
+      const cb = useMemo(() => safeCallback(callbackURL), [callbackURL]);
 
       const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
             evt.preventDefault();
-
             setPending(true);
 
-            const formData = new FormData(evt.target as HTMLFormElement);
+            try {
+                  const formData = new FormData(evt.currentTarget as HTMLFormElement);
 
-            const {error} = await signUpEmailAction(formData);
+                  // ✅ keep callbackURL through the flow
+                  formData.set("callbackURL", cb);
 
-            if (error) {
+                  const { error } = await signUpEmailAction(formData);
+
+                  if (error) {
                   toast.error(error);
-                  setPending(false);
-            } else {
-                  toast.success('Registration complete. Please verify your email.');
-                  router.push('/register/success');
-            }
+                  return;
+                  }
 
-            setPending(false);
+                  toast.success("Registration complete. Please verify your email.");
+
+                  // ✅ keep callbackURL in success page too
+                  router.push(`/register/success?callbackURL=${encodeURIComponent(cb)}`);
+            } catch (e: any) {
+                  toast.error(e?.message ?? "Registration failed");
+            } finally {
+                  setPending(false);
+            }
 
       }
 

@@ -8,7 +8,7 @@ export default async function CheckoutPage() {
   const session = await auth.api.getSession({ headers: await headers() });
 
   if (!session?.user?.id) {
-    redirect("/auth/sign-in?callbackURL=/checkout");
+    redirect("/login?callbackURL=/checkout");
   }
 
   return (
@@ -24,7 +24,7 @@ export default async function CheckoutPage() {
           <div>
             <Link href="/cart">
               <button className="bg-gray-100 text-gray-800 rounded-md px-4 py-3 shadow hover:bg-gray-300 transition-all duration-300 font-medium cursor-pointer">
-                &larr; Back to Cart
+                &larr; Back to cart
               </button>
             </Link>
           </div>

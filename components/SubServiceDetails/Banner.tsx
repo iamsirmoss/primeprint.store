@@ -16,15 +16,15 @@ const Banner = ({service}: {service: ServiceProps}) => {
   return (
     <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10'>
       <div className="mt-10 flex items-center gap-5 flex-wrap border-b border-slate-200 py-3 px-5">
-        <Link href="/" className="text-blue-400 hover:underline transition-all duration-500">
+        <Link href="/" className="text-gray-400 hover:underline transition-all duration-500">
           Home
         </Link>
         <ChevronsRight size={20} className="text-black" />
-        <Link href="/services" className="text-blue-400 hover:underline transition-all duration-500 capitalize">
+        <Link href="/services" className="text-gray-400 hover:underline transition-all duration-500 capitalize">
           Services
         </Link>
         <ChevronsRight size={20} className="text-black" />
-        <Link href={`/service/${service.service.slug}`} className="text-blue-400 hover:underline transition-all duration-500 capitalize">
+        <Link href={`/service/${service.service.slug}`} className="text-gray-400 hover:underline transition-all duration-500 capitalize">
             {service.service.title}
         </Link>
         <ChevronsRight size={20} className="text-black" />

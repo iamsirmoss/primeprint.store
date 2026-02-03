@@ -4,7 +4,25 @@ import ReturnButton from '@/components/return-button'
 import SignInOAuthButton from '@/components/sign-in-oauth-button'
 import Link from 'next/link'
 
-const page = () => {
+type Props = {
+  searchParams?: { callbackURL?: string };
+};
+
+function safeCallback(cb?: string) {
+  if (!cb) return null;
+  if (!cb.startsWith("/")) return null;
+  if (cb.startsWith("//")) return null;
+  return cb;
+}
+
+const page = async ({
+  searchParams,
+}: {
+  searchParams: { callbackURL?: string };
+}) => {
+      const sp = await searchParams;
+      const callbackURL = safeCallback(sp?.callbackURL);
+
   return (
       <div className='min-h-screen bg-slate-100'>
             <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] pt-16 mb-40'>
@@ -22,7 +40,7 @@ const page = () => {
                                     Sign in to access your orders, saved designs, and checkout faster.
                               </h5>
                         </div>
-                        <LoginForm />
+                        <LoginForm callbackURL={callbackURL ?? undefined} />
                         <div className="flex items-center gap-4 w-full my-6">
                               <div className="flex-1 h-px bg-gray-300"></div>
 
@@ -33,14 +51,14 @@ const page = () => {
                               <div className="flex-1 h-px bg-gray-300"></div>
                         </div>
                         <div className='my-8 w-full flex flex-col justify-center items-center gap-4'>
-                              <SignInOAuthButton provider="google" />
+                              <SignInOAuthButton provider="google" callbackURL={callbackURL ?? undefined} />
                         </div>
-                        <MagicLinkLoginForm />
+                        <MagicLinkLoginForm callbackURL={callbackURL ?? undefined} />
                         <div className="mt-8 flex items-center gap-1 text-base">
                               <p className="text-gray-400">
                                     You don&apos;t have an account ?
                               </p>
-                              <Link href={'/register'} className='font-semibold hover:underline hover:text-black text-blue-400 
+                              <Link href={callbackURL ? `/register?callbackURL=${encodeURIComponent(callbackURL)}` : "/register"} className='font-semibold hover:underline hover:text-black text-blue-400 
                               transition-all duration-500'>
                                     Sign up
                               </Link>

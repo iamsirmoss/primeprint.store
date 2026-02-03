@@ -136,6 +136,11 @@ const CartView = ({
                         <div className="flex-1">
                           <div className="flex items-start justify-between gap-3 flex-wrap">
                             <div>
+                              {isPkg && (
+                                  <p className="text-xs text-slate-500 mb-1 capitalize">
+                                    {it.serviceSlug} • {it.subServiceTitle}
+                                  </p>
+                              )}
                               <div className="flex items-center gap-2 flex-wrap">
                                 <div className="font-semibold capitalize">{title}</div>
 

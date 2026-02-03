@@ -115,10 +115,10 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                 <button
                   type="button"
                   onClick={() => setBilling("month")}
-                  className={`flex-1 md:flex-none rounded-xl px-4 py-2 text-sm font-medium transition ${
+                  className={`flex-1 md:flex-none rounded-xl px-4 py-2 text-sm font-medium transition cursor-pointer ${
                     effectiveBilling === "month"
                       ? "bg-white shadow-sm text-gray-900"
-                      : "text-gray-600 hover:text-gray-900"
+                      : "text-gray-400 hover:text-gray-900"
                   }`}
                 >
                   Monthly
@@ -126,10 +126,10 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                 <button
                   type="button"
                   onClick={() => setBilling("year")}
-                  className={`flex-1 md:flex-none rounded-xl px-4 py-2 text-sm font-medium transition ${
+                  className={`flex-1 md:flex-none rounded-xl px-4 py-2 text-sm font-medium transition cursor-pointer ${
                     effectiveBilling === "year"
                       ? "bg-white shadow-sm text-gray-900"
-                      : "text-gray-600 hover:text-gray-900"
+                      : "text-gray-400 hover:text-gray-900"
                   }`}
                 >
                   Yearly
@@ -310,9 +310,9 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                     Add to cart
                   </button>
 
-                  <p className="mt-2 text-xs text-gray-500">
+                  {/* <p className="mt-2 text-xs text-gray-500">
                     You must be signed in to checkout.
-                  </p>
+                  </p> */}
                 </div>
               </div>
             );

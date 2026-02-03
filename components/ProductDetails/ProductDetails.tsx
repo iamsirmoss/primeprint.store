@@ -25,6 +25,7 @@ type ProductDetailsProps = {
     sku?: string | null;
     currency: string;
     stockQty?: number | null;
+    isActive?: boolean;
   };
   reviews: Review[];
 };
@@ -64,6 +65,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
     sku,
     stockQty,
     currency = "USD",
+    isActive = true
   } = product;
   const [activeImage, setActiveImage] = useState(0);
   const [tab, setTab] = useState<"details" | "reviews" | "discussion">("reviews");
@@ -119,6 +121,9 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
   const totalReviews = reviews.length || 1;
 
   const mainImage = images?.[activeImage] || images?.[0];
+
+  const safeStockQty = stockQty ?? 0;
+  const isOutOfStock = !isActive || safeStockQty <= 0;
 
   return (
     <main className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-6 md:py-10">
@@ -260,15 +265,15 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
               <button
                 type="button"
                 onClick={handleAddToCart}
-                disabled={typeof stockQty === "number" && stockQty <= 0}
-                className={`flex-1 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-black/70 transition-all duration-300 cursor-pointer
+                disabled={isOutOfStock}
+                className={`flex-1 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-white transition-all duration-300
                   ${
-                    typeof stockQty === "number" && stockQty <= 0
+                      isOutOfStock
                       ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-black hover:bg-black/75"
+                      : "bg-black hover:bg-black/75 cursor-pointer"
                   }`}
               >
-                {added ? "Added ✓" : "Add to cart"}
+                {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
               </button>
 
               <button
@@ -284,6 +289,12 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
               <span>🚚</span>
               <span>Free delivery on orders over $30</span>
             </div> */}
+
+            {typeof stockQty === "number" && (
+              <p className="mt-3 text-sm text-gray-500">
+                {stockQty > 0 ? `${stockQty} in stock` : "Out of stock"}
+              </p>
+            )}
 
             {/* Short description */}
             {description ? (

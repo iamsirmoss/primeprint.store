@@ -9,20 +9,61 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export const SendVerificationEmailForm = () => {
+export const SendVerificationEmailForm = ({ callbackURL }: { callbackURL?: string }) => {
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
+
+  // async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+  //   evt.preventDefault();
+  //   const formData = new FormData(evt.currentTarget);
+  //   const email = String(formData.get("email"));
+
+  //   if (!email) return toast.error("Please enter your email.");
+
+  //   await sendVerificationEmail({
+  //     email,
+  //     callbackURL: "/auth/verify",
+  //     fetchOptions: {
+  //       onRequest: () => {
+  //         setIsPending(true);
+  //       },
+  //       onResponse: () => {
+  //         setIsPending(false);
+  //       },
+  //       onError: (ctx) => {
+  //         toast.error(ctx.error.message);
+  //       },
+  //       onSuccess: () => {
+  //         toast.success("Verification email sent successfully.");
+  //         router.push("/auth/verify/success");
+  //       },
+  //     },
+  //   });
+  // }
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     const formData = new FormData(evt.currentTarget);
-    const email = String(formData.get("email"));
+    const email = String(formData.get("email") || "");
 
     if (!email) return toast.error("Please enter your email.");
 
+    const cb = callbackURL && callbackURL.startsWith("/") ? callbackURL : "/profile";
+
     await sendVerificationEmail({
       email,
-      callbackURL: "/auth/verify",
+      // ✅ after clicking verification link, BetterAuth will come back here
+      // your auth/verify page will redirect to callbackURL if no error
+      callbackURL: `/auth/verify?callbackURL=${encodeURIComponent(cb)}`,
+      // fetchOptions: {
+      //   onRequest: () => setIsPending(true),
+      //   onResponse: () => setIsPending(false),
+      //   onError: (ctx) => toast.error(ctx.error.message),
+      //   onSuccess: () => {
+      //     toast.success("Verification email sent successfully.");
+      //     router.push(`/auth/verify/success?callbackURL=${encodeURIComponent(cb)}`);
+      //   },
+      // },
       fetchOptions: {
         onRequest: () => {
           setIsPending(true);
@@ -35,7 +76,7 @@ export const SendVerificationEmailForm = () => {
         },
         onSuccess: () => {
           toast.success("Verification email sent successfully.");
-          router.push("/auth/verify/success");
+          router.push(`/auth/verify/success?callbackURL=${encodeURIComponent(cb)}`);
         },
       },
     });
@@ -59,7 +100,7 @@ export const SendVerificationEmailForm = () => {
       </div>
 
       <Button size="lg" type="submit" disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400">
-        Resend verification email
+        {isPending ? "Sending..." : "Resend verification email"}
       </Button>
     </form>
   );

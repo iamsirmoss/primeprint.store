@@ -1,42 +1,76 @@
 "use client"
 
-import { signIn } from '@/lib/auth-client'
 import { Eye, EyeOff, KeySquare, Mail } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { BsGoogle } from 'react-icons/bs'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { signInEmailAction } from '@/actions/sign-in-email-action'
 
-const LoginForm = () => {
+function safeCallback(cb: string | null, fallback = "/profile") {
+  if (!cb) return fallback;
+  if (!cb.startsWith("/")) return fallback; // ✅ avoid open redirect
+  return cb;
+}
+
+const LoginForm = ({ callbackURL: callbackFromProps }: { callbackURL?: string }) => {
 
       const [isPending, setPending] = useState(false);
-      const router = useRouter();
       const [showPassword, setShowPassword] = useState(false);
+
+      const router = useRouter();
+      const searchParams = useSearchParams();
+
+      // ✅ priority: prop > query > default
+      const callbackURL = useMemo(() => {
+            const fromQuery = searchParams.get("callbackURL");
+            return safeCallback(callbackFromProps ?? fromQuery, "/profile");
+      }, [callbackFromProps, searchParams]);
 
       const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
                   evt.preventDefault();
-      
                   setPending(true);
       
-                  const formData = new FormData(evt.target as HTMLFormElement);
+                  // const formData = new FormData(evt.target as HTMLFormElement);
       
-                  const {error} = await signInEmailAction(formData);
+                  // const {error} = await signInEmailAction(formData);
       
-                  if (error) {
+                  // if (error) {
+                  //       toast.error(error);
+                  //       setPending(false);
+                  // } else {
+                  //       toast.success('Logged in successfully.');
+                  //       router.push('/profile');
+                  //       window.location.href = "/profile";
+                  // }
+      
+                  // setPending(false);
+
+                  try {
+                        const formData = new FormData(evt.target as HTMLFormElement);
+                        formData.set("callbackURL", callbackURL);
+
+                        const { error } = await signInEmailAction(formData);
+
+                        if (error) {
                         toast.error(error);
+                        return;
+                        }
+
+                        toast.success("Logged in successfully.");
+
+                        // ✅ redirect back to where the user came from (checkout, etc.)
+                        router.replace(callbackURL);
+                        // window.location.href = callbackURL;
+                        router.refresh();
+                  } catch (e: any) {
+                        toast.error(e?.message ?? "Login failed");
+                  } finally {
                         setPending(false);
-                  } else {
-                        toast.success('Logged in successfully.');
-                        router.push('/profile');
-                        window.location.href = "/profile";
                   }
       
-                  setPending(false);
-      
-            }
+      }
 
   return (
       <>

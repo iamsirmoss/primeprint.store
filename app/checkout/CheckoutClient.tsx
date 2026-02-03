@@ -67,7 +67,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_420px]">
+    <div className="grid gap-6 lg:grid-cols-[1fr_540px]">
       {/* Left: Items */}
       <div className="rounded-xl border bg-white p-5">
         <h2 className="text-lg font-bold">Your items</h2>
@@ -87,7 +87,11 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
               >
                 <div>
                   <div className="font-semibold capitalize">{title}</div>
-
+                  {pkg && (
+                      <p className="text-xs text-slate-500 mb-2 capitalize">
+                        {it.serviceSlug} • {it.subServiceTitle}
+                      </p>
+                  )}
                   <div className="mt-1 text-xs text-gray-500 flex flex-wrap gap-2">
                     <span className="rounded-full border px-2 py-1">
                       {pkg ? "PACKAGE" : "PRODUCT"}
@@ -132,7 +136,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
         </div>
 
         <div className="mt-4 rounded-lg bg-gray-50 p-3 text-sm text-gray-600">
-          Email (from session): <span className="font-semibold">{userEmail || "—"}</span>
+          Email : <span className="font-semibold">{userEmail || "—"}</span>
         </div>
 
         <button

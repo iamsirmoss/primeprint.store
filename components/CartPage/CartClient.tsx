@@ -31,7 +31,7 @@ import Link from "next/link";
               <p className="text-gray-500">Your cart is empty.</p>
               <Link href="/shop">
                   <button
-                    className="bg-red-500 text-white rounded px-10 py-5 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium mt-4"
+                    className="bg-red-500 text-white rounded px-10 py-4 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium mt-4"
                   >
                     Go to shop
                   </button>
@@ -74,6 +74,11 @@ import Link from "next/link";
               <div className="flex-1">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
+                    {isPkg && (
+                      <p className="text-xs text-slate-500 mb-1 capitalize">
+                        {it.serviceSlug} • {it.subServiceTitle}
+                      </p>
+                    )}
                     <div className="flex items-center gap-2 flex-wrap">
                                 <div className="font-semibold capitalize">{title}</div>
 
