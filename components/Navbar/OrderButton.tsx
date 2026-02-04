@@ -9,14 +9,14 @@ const OrderButton = () => {
       const link = [
             {
                   name: 'Order now',
-                  path: '/order'
+                  path: '/shop'
             }
       ]
 
       const pathName = usePathname()
 
   return (
-      <Link href='/order' className='hidden sm:block'>
+      <Link href='/shop' className='hidden sm:block'>
             {link.map((item, index) => (
                         <button key={index} className={`${item.path === pathName && "bg-red-700"}
                         font-medium bg-red-500 py-2 px-4 md:py-3 md:px-8 rounded 

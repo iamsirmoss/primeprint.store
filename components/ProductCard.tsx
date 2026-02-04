@@ -55,7 +55,7 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
 
 
   return (
-      <div className='group transition-all duration-500 border-b p-1.5 relative group hover:border-black bg-white transition-all duration-300'>
+      <div className='group border-b p-1.5 relative group hover:border-black bg-white transition-all duration-300'>
             <Link href={`/product/${slug}`}>
                   <div className='w-full overflow-hidden flex flex-col items-center justify-center bg-blue-100 h-32 md:h-44'>
                         <Image src={images?.[0] ? `/images/${images[0]}` : "/images/placeholder.png"} alt='product images' 

@@ -51,7 +51,7 @@ const Body = ({service}: {service: ServiceProps}) => {
                         <Link
                               key={ss.id}
                               href={`/service/sub-service/${ss.slug}`}
-                              className="group rounded-md border border-gray-200 bg-white px-5 py-8 transition-all hover:shadow-lg duration-500"
+                              className="group rounded-lg border border-gray-200 bg-white px-5 py-8 transition-all hover:shadow-lg duration-500"
                         >
                               <div className="flex items-start gap-4">
                                     {/* vignette */}
@@ -74,21 +74,21 @@ const Body = ({service}: {service: ServiceProps}) => {
                                     </div>
 
                                     <div className="min-w-0">
-                                          <h3 className="font-semibold text-lg text-gray-900 capitalize group-hover:text-blue-400 transition-all duration-500">
+                                          <h3 className="font-bold text-lg text-gray-900 capitalize group-hover:text-blue-400 transition-all duration-500">
                                                 {ss.title}
                                           </h3>
-                                          <p className="mt-1 line-clamp-2 text-sm text-gray-600">
+                                          <p className="mt-1 line-clamp-3 text-sm text-gray-600">
                                                 {ss.description ?? "See details and options."}
                                           </p>
-                                          <button
-                                                className="mt-5 px-4 py-2 bg-transparent border rounded group
-                                                transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer"
-                                                >
-                                                more
-                                                <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />
-                                          </button>
                                     </div>
                               </div>
+                              <button
+                                    className="mt-10 px-4 py-2 bg-transparent border rounded group
+                                    transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer"
+                                    >
+                                          more
+                                          <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />
+                              </button>
                         </Link>
                         ))}
                   </div>

@@ -77,7 +77,7 @@ const NavNormal = () => {
               
               after:content-['']
               after:absolute after:left-1/2 after:-bottom-1
-              after:h-[2px] after:w-0 after:bg-gray-400
+              after:h-0.5 after:w-0 after:bg-gray-400
               after:-translate-x-1/2 after:transition-all after:duration-300
 
               hover:after:w-1/2

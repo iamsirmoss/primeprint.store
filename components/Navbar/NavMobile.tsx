@@ -15,7 +15,7 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
     { name: "shop", path: "/shop" },
     { name: "about us", path: "/about-us" },
     { name: "contact", path: "/contact" },
-    { name: "order", path: "/order" },
+    { name: "order", path: "/shop" },
   ];
 
   const toggle = () => setOpen((v) => !v);
@@ -56,7 +56,7 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
         <div className="flex flex-col items-start justify-start overflow-y-auto h-[calc(100vh-44px)] pb-4">
           {links.map((link) => (
             <Link
-              key={link.path}
+              key={link.name}
               href={link.path}
               onClick={() => setOpen(false)}
               className={`w-full px-4 py-3 text-[16px] capitalize transition-all duration-200

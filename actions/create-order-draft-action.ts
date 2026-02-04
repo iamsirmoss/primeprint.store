@@ -88,6 +88,41 @@ export async function createOrderDraftAction(payload: Payload) {
       });
     }
 
+    // if (it.type === "PACKAGE") {
+    //   const pkg = await prisma.package.findUnique({
+    //     where: { id: it.packageId },
+    //     select: {
+    //       id: true,
+    //       name: true,
+    //       currency: true,
+    //       priceByMonth: true,
+    //       priceByYear: true,
+    //       isActive: true,
+    //     },
+    //   });
+    //   if (!pkg || !pkg.isActive) throw new Error("A package is not available.");
+
+    //   currency = pkg.currency ?? "USD";
+
+    //   const price =
+    //     it.billing === "month" ? pkg.priceByMonth : pkg.priceByYear;
+
+    //   if (!price || price <= 0) throw new Error("Package price invalid.");
+
+    //   const unitPriceCents = toCents(price);
+    //   subtotalCents += unitPriceCents * qty;
+
+    //   orderItems.push({
+    //     type: SellableType.PACKAGE,
+    //     quantity: qty,
+    //     unitPriceCents,
+    //     currency,
+    //     titleSnapshot: `${pkg.name} (${it.billing === "month" ? "Monthly" : "Yearly"})`,
+    //     productId: null,
+    //     packageId: pkg.id,
+    //     customization: { billing: it.billing },
+    //   });
+    // }
     if (it.type === "PACKAGE") {
       const pkg = await prisma.package.findUnique({
         where: { id: it.packageId },
@@ -98,29 +133,68 @@ export async function createOrderDraftAction(payload: Payload) {
           priceByMonth: true,
           priceByYear: true,
           isActive: true,
+          tier: true,
+
+          // ✅ get subService + service titles
+          subService: {
+            select: {
+              id: true,
+              title: true,
+              service: {
+                select: {
+                  id: true,
+                  title: true,
+                },
+              },
+            },
+          },
+
+          // (optionnel) si tu veux fallback sur Package.service
+          service: { select: { id: true, title: true } },
         },
       });
+
       if (!pkg || !pkg.isActive) throw new Error("A package is not available.");
 
       currency = pkg.currency ?? "USD";
 
-      const price =
-        it.billing === "month" ? pkg.priceByMonth : pkg.priceByYear;
-
+      const price = it.billing === "month" ? pkg.priceByMonth : pkg.priceByYear;
       if (!price || price <= 0) throw new Error("Package price invalid.");
 
       const unitPriceCents = toCents(price);
       subtotalCents += unitPriceCents * qty;
+
+      const billingLabel = it.billing === "month" ? "Monthly" : "Yearly";
+
+      // ✅ titles
+      const serviceTitle =
+        pkg.subService?.service?.title ?? pkg.service?.title ?? null;
+
+      const subServiceTitle = pkg.subService?.title ?? null;
+
+      // ✅ Stripe name display (what you want in the checkout list)
+      // Example: "Premium Print • Flyers — ULTIMATE (Monthly)"
+      const titleSnapshot =
+        serviceTitle && subServiceTitle
+          ? `${serviceTitle} • ${subServiceTitle} — ${pkg.tier} (${billingLabel})`
+          : `${pkg.name} — ${pkg.tier} (${billingLabel})`;
 
       orderItems.push({
         type: SellableType.PACKAGE,
         quantity: qty,
         unitPriceCents,
         currency,
-        titleSnapshot: `${pkg.name} (${it.billing === "month" ? "Monthly" : "Yearly"})`,
+        titleSnapshot,
         productId: null,
         packageId: pkg.id,
-        customization: { billing: it.billing },
+        customization: {
+          billing: it.billing,
+          tier: pkg.tier,
+          serviceTitle,
+          subServiceTitle,
+          subServiceId: pkg.subService?.id ?? null,
+          serviceId: pkg.subService?.service?.id ?? pkg.service?.id ?? null,
+        },
       });
     }
   }

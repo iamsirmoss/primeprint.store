@@ -48,7 +48,7 @@ export default async function OrderReviewPage({
   if (!order) return notFound();
 
   return (
-    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 h-screen">
+    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 min-h-screen">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">Order review</h1>
         <p className="text-sm text-gray-500">
@@ -113,10 +113,10 @@ export default async function OrderReviewPage({
 
           <div className="mt-6 flex gap-3">
             <Link
-              href="/cart"
+              href="/orders"
               className="w-1/2 rounded-lg border py-3 text-center font-semibold hover:bg-gray-100 transition-all duration-300"
             >
-              Back to cart
+              My orders
             </Link>
 
             {order.status === "PAID" ? (
