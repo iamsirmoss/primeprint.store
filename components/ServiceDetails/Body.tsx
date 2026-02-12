@@ -32,7 +32,7 @@ const Body = ({service}: {service: ServiceProps}) => {
                   <div className="flex items-end justify-between flex-wrap gap-4">
                         <div className='max-w-3xl'>
                               <h2 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
-                                    Sub-services
+                                    Specialized services
                               </h2>
                         </div>
 
@@ -53,7 +53,7 @@ const Body = ({service}: {service: ServiceProps}) => {
                               href={`/service/sub-service/${ss.slug}`}
                               className="group rounded-lg border border-gray-200 bg-white px-5 py-8 transition-all hover:shadow-lg duration-500"
                         >
-                              <div className="flex items-start gap-4">
+                              <div className="flex items-start flex-col gap-4">
                                     {/* vignette */}
                                     <div className="relative h-14 w-14 p-4 shrink-0 overflow-hidden rounded-xl bg-gray-100 border border-gray-200">
                                           {ss.image ? (
@@ -74,10 +74,10 @@ const Body = ({service}: {service: ServiceProps}) => {
                                     </div>
 
                                     <div className="min-w-0">
-                                          <h3 className="font-bold text-lg text-gray-900 capitalize group-hover:text-blue-400 transition-all duration-500">
+                                          <h3 className="font-bold text-xl text-gray-900 capitalize group-hover:text-blue-400 transition-all duration-500">
                                                 {ss.title}
                                           </h3>
-                                          <p className="mt-1 line-clamp-3 text-sm text-gray-600">
+                                          <p className="mt-1 line-clamp-3 text-sm text-gray-500">
                                                 {ss.description ?? "See details and options."}
                                           </p>
                                     </div>

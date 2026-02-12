@@ -2,7 +2,6 @@
 
 import { User } from 'lucide-react'
 import Link from 'next/link'
-import { RiCloseFill } from 'react-icons/ri'
 
 import {
   DropdownMenu,
@@ -20,7 +19,7 @@ const Accompte = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <User className='text-2xl md:text-3xl text-black hover:text-blue-400 transition-all duration-300 cursor-pointer relative' />
+        <User className='text-black hover:text-blue-400 transition-all duration-300 cursor-pointer relative' />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-36" align="start">
         {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}

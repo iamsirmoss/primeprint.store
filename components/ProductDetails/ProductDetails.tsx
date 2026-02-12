@@ -131,7 +131,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
       <section className="grid gap-6 lg:grid-cols-12">
         {/* LEFT: Gallery */}
         <div className="lg:col-span-7">
-          <div className="rounded-3xl border border-gray-200 bg-white p-3 md:p-4">
+          <div className="rounded-md border border-gray-200 bg-white p-3 md:p-4">
             {/* Main image */}
             <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-gray-50">
               {mainImage ? (
@@ -179,32 +179,31 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
 
         {/* RIGHT: Product info */}
         <div className="lg:col-span-5">
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 md:p-7">
+          <div className=" bg-white p-6 md:p-7">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-wider text-gray-500">PrimePrint</p>
                 <h1 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900 capitalize">
                   {title}
                 </h1>
 
-                <div className="mt-2 flex items-center gap-3">
+                {/* <div className="mt-2 flex items-center gap-3">
                   <Stars value={avgRating} />
                   <span className="text-sm text-gray-600">{reviews.length} reviews</span>
-                </div>
+                </div> */}
               </div>
 
-              {product.sku ? (
+              {/* {product.sku ? (
                 <div className="text-right">
                   <p className="text-[11px] text-gray-500">SKU</p>
                   <p className="text-xs font-semibold text-gray-900">{sku}</p>
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
 
             {/* <p className="mt-5 text-3xl font-bold text-gray-900">{formatMoney(product.price)}</p> */}
             <h5 className='mt-5 text-3xl max-w-fit'>
               {price.toFixed(2)}{" "}
-              <span className="text-gray-900 font-bold">{currency}</span>
+              <span className="text-gray-900">{currency}</span>
             </h5>
 
             {/* Color */}

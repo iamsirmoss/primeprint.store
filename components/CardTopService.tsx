@@ -34,24 +34,24 @@ const TopServiceCard: React.FC<ServiceCardProps> = ({
             }
           </div>
           
-            <div className="relative  overflow-hidden rounded-sm shadow-lg">
+            <div className="relative overflow-hidden rounded-sm shadow-lg">
               <div className="h-36 w-full overflow-hidden">
                 
               </div>
     
               <div
-                className="absolute inset-0 bg-gray-500 group-hover:bg-gray-600 transition-colors duration-500"
+                className="absolute inset-0 bg-white group-hover:bg-gray-600 transition-colors duration-500"
               ></div>
     
-              <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4 text-white group">
-                <h3 className="text-lg font-bold text-white capitalize">{title}</h3>
+              <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4 group-hover:text-white group">
+                <h3 className="text-lg font-bold capitalize">{title}</h3>
     
                 <button
-                  className="mt-4 px-4 py-2 bg-transparent border border-white text-white rounded
+                  className="mt-4 px-4 py-2 bg-transparent border group-hover:border-white rounded
                    flex items-center gap-2 capitalize cursor-pointer"
                 >
                   more
-                  <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
+                  <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />
                 </button>
               </div>
             </div>

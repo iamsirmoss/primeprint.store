@@ -18,9 +18,9 @@ const OrderButton = () => {
   return (
       <Link href='/shop' className='hidden sm:block'>
             {link.map((item, index) => (
-                        <button key={index} className={`${item.path === pathName && "bg-red-700"}
-                        font-medium bg-red-500 py-2 px-4 md:py-3 md:px-8 rounded 
-                        hover:bg-blue-400 transition-all duration-300 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] cursor-pointer
+                        <button key={index} className={`${item.path === pathName && "bg-blue-400"}
+                        font-medium bg-blue-400 py-2 px-4 md:py-3 md:px-8 rounded 
+                        hover:bg-blue-300 transition-all duration-300 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] cursor-pointer
                         `}>
                               <h5 className='text-white'>{item.name}</h5>
                         </button>

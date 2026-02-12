@@ -4,7 +4,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-      <div className="py-12 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] bg-gray-100 min-h-screen">
+      <div className="py-12 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] bg-gray-50 min-h-screen">
             <hr />
             <div className="flex items-center gap-4 flex-col py-10">
                   {/* Contact Info Section */}

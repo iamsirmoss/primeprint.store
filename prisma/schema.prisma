@@ -225,6 +225,10 @@ model Order {
   paymentRef      String?
   paidAt          DateTime?
 
+  invoiceNumber String?
+  invoiceSentAt DateTime?
+  invoicePdfUrl String?
+
   notes     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

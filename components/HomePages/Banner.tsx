@@ -36,7 +36,7 @@ const Banner = () => {
                         </Link>
                         <Link href={'/shop'} className='group'>
                               <button
-                              className='bg-white text-red-500 rounded px-4 py-4 md:px-5 md:py-5 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] border border-transparent
+                              className='bg-white rounded px-4 py-4 md:px-5 md:py-5 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] border border-transparent
                               group-hover:bg-transparent group-hover:text-white group-hover:border-color group-hover:border-white transition-all duration-500 cursor-pointer'>
                                     
                                     <h5 className='font-semibold text-sm md:text-[16px]'>Shop now</h5>
