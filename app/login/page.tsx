@@ -28,7 +28,7 @@ const page = async ({
             <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] pt-16 mb-40'>
                   <ReturnButton href='/' label='Back to Home' />
                   <hr />
-                  <div className="py-10 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto bg-white rounded-md shadow-md px-6 mt-8">
+                  <div className="py-10 w-full sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto bg-white rounded-md shadow-md px-6 mt-8">
                         <div className='mb-8 border-b py-3 rounded w-full'>
                               <h5 className='text-center text-2xl font-semibold'>Sign in</h5>
                         </div>
