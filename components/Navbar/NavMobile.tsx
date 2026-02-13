@@ -15,7 +15,7 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
     { name: "shop", path: "/shop" },
     { name: "about us", path: "/about-us" },
     { name: "contact", path: "/contact" },
-    { name: "order", path: "/shop" },
+    // { name: "order", path: "/shop" },
   ];
 
   const toggle = () => setOpen((v) => !v);

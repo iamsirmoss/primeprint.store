@@ -19,11 +19,12 @@ const Search = () => {
      <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button variant="outline" className="cursor-pointer rounded-full px-1 py-3">
+          <div className="flex flex-col items-center cursor-pointer text-xs group">
             <SearchIcon
-              className="cursor-pointer hover:text-blue-500 transition-all duration-300"
+              className="cursor-pointer group-hover:text-black/45 transition-all duration-500"
             />
-          </Button>
+            <h5 className="text-xs md:text-sm group-hover:text-black/45 transition-all duration-500 font-semibold">Search</h5>
+          </div>
         </DialogTrigger>
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>

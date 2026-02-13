@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${kumbhSans.variable} min-h-screen w-full overflow-x-hidden`}
+        className={`${kumbhSans.variable} min-h-screen w-full overflow-x-hidden font-mono`}
       >
         {children}
         <BackToTop />

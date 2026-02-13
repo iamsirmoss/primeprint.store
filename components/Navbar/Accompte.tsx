@@ -19,7 +19,10 @@ const Accompte = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <User className='text-black hover:text-blue-400 transition-all duration-300 cursor-pointer relative' />
+        <div className='flex flex-col items-center cursor-pointer text-xs group'>
+          <User className='text-black group-hover:text-black/45 transition-all duration-500 cursor-pointer relative' />
+          <h5 className="text-xs md:text-sm group-hover:text-black/45 transition-all duration-500 font-semibold">Account</h5>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-36" align="start">
         {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
