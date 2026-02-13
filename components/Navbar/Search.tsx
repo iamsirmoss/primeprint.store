@@ -33,10 +33,10 @@ const Search = () => {
               Type in the product name you are looking for.
             </DialogDescription>
           </DialogHeader>
-              <div className="mt-2 w-full mx-auto flex items-center gap-3 bg-black/55 p-3 border-b border-gray-600 rounded-md shadow-lg">
-                <SearchIcon className="text-2xl md:text-3xl" color="white" />
+              <div className="mt-2 w-full mx-auto flex items-center gap-3 bg-transparent p-3 border-b-2 border-black">
+                <SearchIcon className="text-2xl md:text-3xl" color="black" />
                 <input
-                  className="w-full outline-none border-none bg-transparent py-1 text-white text-sm placeholder-gray-400"
+                  className="w-full outline-none border-none bg-transparent py-1 text-xs placeholder-gray-500"
                   placeholder="Search for products, services, and more..."
                 />
               </div>
