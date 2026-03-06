@@ -116,7 +116,7 @@ export default async function OrderReviewPage({
               href="/orders"
               className="w-1/2 rounded-lg border py-3 text-center font-semibold hover:bg-gray-100 transition-all duration-300"
             >
-              My orders
+              View all my orders
             </Link>
 
             {order.status === "PAID" ? (

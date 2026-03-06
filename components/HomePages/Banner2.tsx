@@ -16,14 +16,14 @@ const Banner2 = () => {
                         <h2 className='text-3xl lg:text-5xl font-extrabold'>
                               UltraPrint 5000 large format printer
                         </h2>
-                        <p className='text-sm lg:text-base mt-5 font-normal leading-relaxed'>
+                        <p className='text-sm lg:text-lg mt-5 leading-relaxed'>
                               The UltraPrint 5000 is a high-performance large-format 
                               printer designed for professional-quality prints across 
                               various materials.
                         </p>
-                        <h5 className='text-sm lg:text-base mt-5 font-semibold'>High-resolution printing</h5>
+                        <h5 className='text-sm lg:text-lg mt-5 font-semibold'>High-resolution printing</h5>
                         <ul className='list-disc list-inside mt-4 mb-8'>
-                              <li className='text-xs lg:text-sm'>
+                              <li className='text-sm lg:text-base'>
                                     Achieve stunning image clarity with up to 2400 x 1200 dpi resolution, 
                                     ensuring sharp details and vibrant colors.
                               </li>

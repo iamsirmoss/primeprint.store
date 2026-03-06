@@ -44,10 +44,10 @@ export default async function OrdersPage() {
         </div>
 
         <Link
-          href="/cart"
+          href="/shop"
           className="rounded-lg border px-5 py-3 font-semibold hover:bg-gray-100 transition-all duration-300"
         >
-          Go to cart
+          Go to shop
         </Link>
       </div>
 

@@ -123,7 +123,7 @@ const CartView = ({
                     const unitPrice = isPkg ? it.unitPrice : it.price;
 
                     return (
-                      <div key={key} className="flex gap-3 rounded-xl border p-3 cursor-pointer hover:border-gray-500 transition-all duration-500">
+                      <div key={key} className="flex gap-3 rounded-xl border p-3 hover:border-gray-500 transition-all duration-500">
                         <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-100">
                           <Image
                             src={it.image || "/images/placeholder.png"}

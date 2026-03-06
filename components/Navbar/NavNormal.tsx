@@ -62,7 +62,7 @@ const NavNormal = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden xl:flex items-center gap-10 text-[15px]">
+    <div className="hidden xl:flex items-center gap-10 text-base">
       {links.map((link) => {
         const isActive = pathname === link.path;
 
@@ -71,13 +71,12 @@ const NavNormal = () => {
             key={link.path}
             href={link.path}
             className={`
-              relative font-semibold transition-colors duration-300
-              hover:text-black/45 
-              ${isActive ? "text-black/45" : "text-black"}
+              relative font-medium transition-all duration-300
+              ${isActive ? "font-semibold" : "font-medium"}
               
               after:content-['']
               after:absolute after:left-1/2 after:-bottom-1
-              after:h-0.5 after:w-0 after:bg-black/45
+              after:h-0.5 after:w-0 after:bg-black
               after:-translate-x-1/2 after:transition-all after:duration-300
 
               hover:after:w-1/2

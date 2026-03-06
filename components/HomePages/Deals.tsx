@@ -36,7 +36,7 @@ const Test = ({products}: {products: ProductProps[]}) => {
             <h2 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
                   Exclusive promotions : Offers you can't miss
             </h2>
-            <p className="my-10 text-base md:text-lg text-gray-600">
+            <p className="my-10 text-base md:text-lg/relaxed text-gray-600">
                   Take advantage of our exclusive promotions and explore our showcase of limited-time offers today!
             </p>
             
