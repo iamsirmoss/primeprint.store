@@ -12,7 +12,7 @@ export function Cart({openCart}: {openCart: () => void}) {
     <div className="group" onClick={openCart}>
       <div className='relative cursor-pointer transition-all duration-300'>
               <div className='flex flex-col items-center text-xs group gap-1'>
-                <i><RiShoppingCartFill className='text-black/90 text-lg md:text-[24px] mt-1 group-hover:text-black transition-all duration-500' /></i>
+                <i><RiShoppingCartFill className='text-black/90 text-lg md:text-[24px] mt-0.5 md:mt-1 group-hover:text-black transition-all duration-500' /></i>
                 <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium">Cart</h5>
               </div>
               {count > 0 && (
