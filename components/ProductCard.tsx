@@ -64,10 +64,10 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
                   </div>
                   <div className='py-6 px-5'>
                         <div className='flex justify-between items-center mt-2'>
-                              <h5 className='text-lg capitalize'>{title}</h5>
+                              <h5 className='text-base md:text-lg capitalize font-semibold'>{title}</h5>
                               <Heart size={18} />
                         </div>
-                        <p className='text-gray-500 mt-3 text-sm line-clamp-1'>{description}</p>
+                        <p className='text-gray-500 mt-3 text-xs md:text-sm line-clamp-1'>{description}</p>
                   </div>
             
                   <div className='flex justify-between gap-2 items-center px-5 pb-4'>
@@ -78,8 +78,8 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
                               </h5>
 
                               {typeof stockQty === "number" && (
-                                    <p className="mt-1 text-xs text-gray-500">
-                                          {stockQty > 0 ? `${stockQty} in stock` : "Out of stock"}
+                                    <p className="mt-1 text-xs text-gray-400">
+                                          {stockQty > 0 ? `In stock` : "Out of stock"}
                                     </p>
                               )}
                         </div>

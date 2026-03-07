@@ -24,8 +24,8 @@ interface ServiceProps {
 
 const Banner = ({service}: {service: ServiceProps}) => {
   return (
-    <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10'>
-      <div className="mt-10 flex items-end gap-5 flex-wrap bg-slate-50 py-2 px-5 text-sm rounded">
+    <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-2 md:py-10'>
+      <div className="mt-10 flex items-end gap-5 flex-wrap bg-slate-50 py-2 px-5 text-xs rounded md:text-sm">
         <Link href="/" className="text-gray-400 hover:underline transition-all duration-500">
           Home
         </Link>
@@ -37,7 +37,7 @@ const Banner = ({service}: {service: ServiceProps}) => {
         <span className="font-semibold capitalize">{service.title}</span>
       </div>
 
-            <section className="pt-20 pb-6">
+            <section className="pt-12 md:pt-20 pb-6">
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-2xl">
       
@@ -46,7 +46,7 @@ const Banner = ({service}: {service: ServiceProps}) => {
                   </h1>
       
                   {service.description ? (
-                    <p className="mt-4 text-gray-600 leading-relaxed text-sm md:text-base">
+                    <p className="mt-4 text-gray-400 leading-relaxed text-sm md:text-base">
                       {service.description}
                     </p>
                   ) : (
@@ -58,7 +58,7 @@ const Banner = ({service}: {service: ServiceProps}) => {
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
                       href="/services"
-                      className="inline-flex items-center rounded border border-transparent bg-black px-6 py-4 text-base font-medium text-white hover:bg-white 
+                      className="inline-flex items-center rounded border border-transparent bg-black px-4 py-3 md:px-6 md:py-4 text-sm md:text-base font-medium text-white hover:bg-white 
                       hover:text-black hover:border-black transition-all duration-500"
                     >
                       ← All services

@@ -123,7 +123,7 @@ const CartView = ({
                     const unitPrice = isPkg ? it.unitPrice : it.price;
 
                     return (
-                      <div key={key} className="flex gap-3 rounded-xl border p-3 hover:border-gray-500 transition-all duration-500">
+                      <div key={key} className="block sm:flex gap-3 rounded-xl border p-3 hover:border-gray-500 transition-all duration-500">
                         <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-100">
                           <Image
                             src={it.image || "/images/placeholder.png"}
@@ -237,7 +237,7 @@ const CartView = ({
                     {currencyKeys.map((cur) => (
                       <div
                         key={cur}
-                        className="flex items-center justify-between"
+                        className="flex items-center justify-between text-sm md:text-base"
                       >
                         <span className="text-slate-600">Subtotal ({cur})</span>
                         <span className="font-bold">
@@ -255,7 +255,7 @@ const CartView = ({
                     >
                       <button
                         type="button"
-                        className="w-full rounded-lg border py-3 font-semibold hover:bg-slate-200 cursor-pointer text-sm md:text-base transition-all duration-300"
+                        className="w-full rounded-lg border py-3 font-semibold hover:bg-slate-200 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300"
                       >
                         View cart
                       </button>
@@ -268,7 +268,7 @@ const CartView = ({
                     >
                       <button
                         type="button"
-                        className="w-full rounded-lg bg-black py-3 font-semibold text-white hover:bg-black/75 cursor-pointer text-sm md:text-base transition-all duration-300"
+                        className="w-full rounded-lg bg-black py-3 font-semibold text-white hover:bg-black/75 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300"
                       >
                         Checkout
                       </button>

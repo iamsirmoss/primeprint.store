@@ -10,8 +10,9 @@ const SessionOrNot = () => {
 
   if (isPending) {
   return (
-    <div className="flex justify-center items-center">
-      <Skeleton className="h-8 w-8 rounded-full bg-slate-200" />
+    <div className="flex flex-col justify-center items-center gap-2">
+      <Skeleton className="h-5 w-5 md:h-7 md:w-7 rounded-full bg-slate-200" />
+      <Skeleton className="w-9 h-2 md:w-14 rounded bg-slate-200" />
     </div>
   );
 }

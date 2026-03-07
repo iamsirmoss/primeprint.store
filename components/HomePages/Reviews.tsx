@@ -44,7 +44,7 @@ const Reviews = () => {
                                           </div>
                                           <div className='py-2 p-4'>
                                                 <hr />
-                                                <p className='text-sm py-4'>{item.content}</p>
+                                                <p className='text-xs md:text-sm py-4 text-gray-400'>{item.content}</p>
                                                 <hr />
                                           </div>
                                           <div className='flex items-center gap-4 p-4'>
@@ -61,7 +61,7 @@ const Reviews = () => {
                   </Carousel>
             </div>
             <div className='mt-10 text-xl border-b text-blue-400 w-fit border-b-blue-400'>
-                  <Link href={''} className='flex items-center gap-2 group'>
+                  <Link href={''} className='flex items-center gap-2 group text-sm md:text-base'>
                         View all
                         <BsArrowRight className='text-xl group-hover:translate-x-2 transition-all duration-500' />
                   </Link>

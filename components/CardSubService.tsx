@@ -26,9 +26,9 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
                 width={0}
                 height={0}
                 sizes="100vw"
-                className="w-16 h-16 object-fit transition-transform duration-500 group-hover:scale-110"
+                className="w-12 h-12 md:w-16 md:h-16 object-fit transition-transform duration-500 group-hover:scale-110"
             />) :
-            (<div className="p-2 w-16 h-16 rounded-2xl border border-gray-300 bg-gray-50 flex items-center justify-center text-gray-400 text-xs">
+            (<div className="p-2 w-12 h-12 md:w-16 md:h-16 rounded-2xl border border-gray-300 bg-gray-50 flex items-center justify-center text-gray-400 text-xs">
               IMG
             </div>)
             }
@@ -39,8 +39,8 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
                 <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-500 capitalize">{title}</h3>
     
                 <button
-                  className="mt-4 px-4 py-2 bg-transparent border rounded group
-                  transition-all duration-500 flex items-center gap-2 capitalize cursor-pointer text-sm"
+                  className="mt-4 px-4 py-1.5 md:py-2 bg-transparent border rounded group
+                  transition-all duration-500 flex items-center gap-2 capitalize cursor-pointer text-xs md:text-sm"
                 >
                   more
                   <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />

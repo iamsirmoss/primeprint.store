@@ -66,17 +66,17 @@ const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, pri
                         {/* Content Section */}
                         <div className="mt-2">
                               <div className="flex items-end justify-between">
-                                    <h3 className="text-xl font-bold text-gray-800 capitalize">{title}</h3>
-                                    <h5 className='mt-2 text-base max-w-fit'>
+                                    <h3 className="text-base md:text-xl font-bold text-gray-800 capitalize">{title}</h3>
+                                    <h5 className='mt-2 text-sm md:text-base max-w-fit'>
                                           {price.toFixed(2)}{" "}
                                           <span className="text-black font-bold text-base">{currency}</span>
                                     </h5>
                               </div>
-                              {typeof stockQty === "number" && (
-                                    <p className="mt-2 text-xs text-gray-500">
-                                          {stockQty > 0 ? `${stockQty} in stock` : "Out of stock"}
+                              {/* {typeof stockQty === "number" && (
+                                    <p className="mt-2 text-xs text-gray-400">
+                                          {stockQty > 0 ? `In stock` : "Out of stock"}
                                     </p>
-                              )}
+                              )} */}
                               {isOutOfStock && (
                                     <span className="mt-2 inline-block text-xs font-semibold text-red-600">
                                           Out of stock
@@ -84,11 +84,6 @@ const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, pri
                               )}
                         </div>
 
-                        {/* <div className="absolute bottom-3 right-5">
-                              <button className="mt-3 border border-black rounded-md py-2 px-5 md:py-3 md:px-8 bg-black text-white hover:bg-black/75 transition-all duration-300 cursor-pointer">
-                                    <h5 className="text-sm">Add to cart</h5>
-                              </button>
-                        </div> */}
                         <div className="mt-5">
                               <button
                                     type="button"

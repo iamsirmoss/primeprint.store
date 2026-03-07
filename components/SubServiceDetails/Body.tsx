@@ -87,7 +87,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
   return (
     <section className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] pb-14">
       {/* Intro */}
-      <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 md:p-8">
+      <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-4 md:p-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div className="max-w-3xl">
             <p className="text-xs uppercase tracking-wider text-gray-500">
@@ -98,7 +98,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
             </h2>
 
             {service.description ? (
-              <p className="mt-3 text-gray-600 leading-relaxed">
+              <p className="mt-3 text-gray-400 text-xs md:text-sm leading-relaxed">
                 {service.description}
               </p>
             ) : (
@@ -154,9 +154,9 @@ export default function Body({ service }: { service: SubServiceForBody }) {
           </p>
         </div>
 
-        <span className="text-sm text-gray-500">
+        {/* <span className="text-sm text-gray-500">
           {packagesSorted.length} plan(s)
-        </span>
+        </span> */}
       </div>
 
       {packagesSorted.length === 0 ? (
@@ -196,16 +196,16 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                       {tierLabel(p.tier)}
                     </span>
 
-                    <h4 className="mt-3 text-lg font-bold text-gray-900">
+                    <h4 className="mt-3 text-base md:text-lg font-bold text-gray-900">
                       {p.name}
                     </h4>
 
                     {p.description ? (
-                      <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+                      <p className="mt-2 text-xs md:text-sm text-gray-600 line-clamp-2">
                         {p.description}
                       </p>
                     ) : (
-                      <p className="mt-2 text-sm text-gray-500">
+                      <p className="mt-2 text-xs md:text-sm text-gray-500">
                         Plan details included below.
                       </p>
                     )}
@@ -265,7 +265,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                     {p.points.slice(0, 8).map((pt, idx) => (
                       <li key={idx} className="flex gap-3">
                         <span className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-900 shrink-0" />
-                        <span className="leading-relaxed">{pt}</span>
+                        <span className="leading-relaxed text-sm md:text-base">{pt}</span>
                       </li>
                     ))}
                   </ul>
@@ -279,7 +279,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                 <div className="mt-6">
                   <button
                     type="button"
-                    className="w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer"
+                    className="w-full rounded-lg bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer"
                     onClick={() => {
                       const unitPrice =
                         effectiveBilling === "month" ? p.priceByMonth : p.priceByYear;

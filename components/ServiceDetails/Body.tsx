@@ -36,9 +36,9 @@ const Body = ({service}: {service: ServiceProps}) => {
                               </h2>
                         </div>
 
-                        <span className="text-sm text-gray-500">
+                        {/* <span className="text-sm text-gray-500">
                               {service.subServices.length} item(s)
-                        </span>
+                        </span> */}
                   </div>
 
                   {service.subServices.length === 0 ? (
@@ -83,8 +83,8 @@ const Body = ({service}: {service: ServiceProps}) => {
                                     </div>
                               </div>
                               <button
-                                    className="mt-10 px-4 py-2 bg-transparent border rounded group
-                                    transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer"
+                                    className="mt-10 py-1.5 px-4 md:py-2 bg-transparent border rounded group
+                                    transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer text-sm md:text-base"
                                     >
                                           more
                                           <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />

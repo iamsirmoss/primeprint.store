@@ -32,7 +32,7 @@ const TopService = ({services}: {services: ServiceProps[]}) => {
               ))}
             </div>
             <div className='mt-10 text-xl border-b text-blue-400 w-fit border-b-blue-400'>
-                  <Link href={'/services'} className='flex items-center gap-2 group'>
+                  <Link href={'/services'} className='flex items-center gap-2 group text-sm mdtext-base'>
                         View all
                         <BsArrowRight className='text-xl group-hover:translate-x-2 transition-all duration-500' />
                   </Link>

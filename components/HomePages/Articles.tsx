@@ -74,7 +74,7 @@ const Articles = () => {
                   </div>
             </div>
             <div className='mt-20 text-xl border-b text-blue-400 w-fit border-b-blue-400'>
-                  <Link href={''} className='flex items-center gap-2 group'>
+                  <Link href={''} className='flex items-center gap-2 group text-sm md:text-base'>
                         See more
                         <BsArrowRight className='text-xl group-hover:translate-x-2 transition-all duration-500' />
                   </Link>
