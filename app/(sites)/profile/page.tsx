@@ -29,7 +29,7 @@ const page = async () => {
       <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] mt-16 mb-40'>
             <hr />
             <div className="py-10 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto flex flex-col justify-center items-center">
-                  <div className='mb-8 border-b rounded py-3 w-full text-center'>
+                  <div className='border-b rounded py-3 w-full text-center'>
                         <h5 className='font-semibold text-2xl md:text-3xl'>Profile</h5>
                   </div>
             </div>
@@ -64,7 +64,7 @@ const page = async () => {
             </div>
 
             <div className="mt-10 space-y-4 p-4 rounded-b-md  border border-t-8 border-blue-400">
-                  <h2 className="text-2xl font-bold">Update user</h2>
+                  <h2 className="text-lg md:text-2xl font-bold">Update user</h2>
 
                   <UpdateUserForm
                         name={session.user.name}
@@ -72,7 +72,7 @@ const page = async () => {
             </div>
 
             <div className="mt-10 space-y-4 p-4 rounded-b-md  border border-t-8 border-red-400">
-                  <h2 className="text-2xl font-bold">Change password</h2>
+                  <h2 className="text-lg md:text-2xl font-bold">Change password</h2>
 
                   <ChangePasswordForm />
             </div>

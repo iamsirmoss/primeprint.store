@@ -50,16 +50,16 @@ export default async function OrderReviewPage({
   return (
     <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 min-h-screen">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">Order review</h1>
-        <p className="text-sm text-gray-500">
+        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold">Order review</h1>
+        <p className="text-xs md:text-sm text-gray-500">
           Order ID: <span className="font-mono">{order.id}</span> • Status:{" "}
           <span className="font-semibold">{order.status}</span>
         </p>
       </div>
 
       {order.status === "PAID" && (
-        <div className="mt-4 rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
-          ✅ Payment confirmed. Thank you!
+        <div className="mt-4 text-sm md:text-base rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
+          Payment confirmed. Thank you!
         </div>
       )}
 
@@ -72,7 +72,7 @@ export default async function OrderReviewPage({
       <div className="mt-8 grid gap-6 md:grid-cols-[1fr_420px]">
         {/* Items */}
         <div className="rounded-xl border bg-white p-5">
-          <h2 className="text-lg font-bold">Items</h2>
+          <h2 className="text-base md:text-lg font-bold">Items</h2>
 
           <div className="mt-4 space-y-3">
             {order.items.map((it) => {
@@ -111,7 +111,7 @@ export default async function OrderReviewPage({
             })}
           </div>
 
-          <div className="mt-6 flex gap-3">
+          <div className="mt-6 flex gap-3 text-sm md:text-base">
             <Link
               href="/orders"
               className="w-1/2 rounded-lg border py-3 text-center font-semibold hover:bg-gray-100 transition-all duration-300"

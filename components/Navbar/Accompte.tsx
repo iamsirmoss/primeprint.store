@@ -19,8 +19,8 @@ const Accompte = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className='flex flex-col items-center cursor-pointer text-xs group gap-1'>
-          <FaUserCircle className='text-lg md:text-[24px] mt-0.5 md:mt-1 text-black/90 group-hover:text-black transition-all duration-500 cursor-pointer relative' />
-          <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium">Account</h5>
+          <FaUserCircle className='text-lg md:text-[24px] mt-1 text-black/90 group-hover:text-black transition-all duration-500 cursor-pointer relative' />
+          <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium">Login</h5>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-36" align="start">

@@ -16,21 +16,21 @@ const Why = () => {
                         sizes="100vw"
                         className="w-full h-full object-cover"
                         />
-                        <div className='flex items-center gap-6 absolute bottom-0 lg:bottom-6 left-0 xl:left-6'>
-                              <div className='py-4 md:py-7 px-2 sm:px-8 md:px-12 bg-gray-800 rounded'>
-                                    <h3 className='text-xl xl:text-2xl font-semibold text-white'>Lorem ipsum</h3>
-                                    <h4 className='text-4xl xl:text-6xl text-white my-4'>12</h4>
-                                    <p className='text-slate-100 text-base xl:text-xl'>Vontura isman</p>
+                        <div className='flex items-center gap-2 absolute bottom-0 lg:bottom-6 left-2 xl:left-6'>
+                              <div className='py-4 md:py-7 px-6 md:px-8 lg:px-12 bg-gray-800 rounded'>
+                                    <h3 className='text-base md:text-xl xl:text-2xl font-semibold text-white'>Lorem ipsum</h3>
+                                    <h4 className='text-2xl md:text-4xl xl:text-6xl text-white my-4'>12</h4>
+                                    <p className='text-slate-100 text-sm md:text-base xl:text-xl'>Vontura isman</p>
                               </div>
-                              <div className='py-4 md:py-7 px-2 sm:px-8 md:px-12 bg-gray-800 rounded'>
-                                    <h3 className='text-xl xl:text-2xl font-semibold text-white'>Lorem ipsum</h3>
-                                    <h4 className='text-4xl xl:text-6xl text-white my-4'>121+</h4>
-                                    <p className='text-slate-100 text-base xl:text-xl'>Vontura isman</p>
+                              <div className='py-4 md:py-7 px-6 md:px-8 lg:px-12 bg-gray-800 rounded'>
+                                    <h3 className='text-base md:text-xl xl:text-2xl font-semibold text-white'>Lorem ipsum</h3>
+                                    <h4 className='text-2xl md:text-4xl xl:text-6xl text-white my-4'>121+</h4>
+                                    <p className='text-slate-100 text-sm md:text-base xl:text-xl'>Vontura isman</p>
                               </div>
                         </div>
                   </div>
                   <div className='lg:w-[50%] mt-10 lg:mt-0'>
-                        <h1 className='text-[45px] xl:text-7xl font-semibold'>
+                        <h1 className='text-3xl md:text-5xl lg:text-7xl font-semibold'>
                               Why work with Primeprint.store ?
                         </h1>
                         <p className='text-gray-400 mt-10 text-sm md:text-base lg:text-[17px]'>

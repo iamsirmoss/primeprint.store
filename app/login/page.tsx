@@ -30,13 +30,13 @@ const page = async ({
                   <hr />
                   <div className="py-10 w-full sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto bg-white rounded-md shadow-md px-6 mt-8">
                         <div className='mb-8 border-b py-3 rounded w-full'>
-                              <h5 className='text-center text-2xl font-semibold'>Sign in</h5>
+                              <h5 className='text-center text-xl md:text-2xl font-semibold'>Sign in</h5>
                         </div>
                         <div className="mb-8">
-                              <h5 className="text-md font-medium leading-snug max-w-full md:max-w-md">
+                              <h5 className="text-sm md:text-base font-medium leading-snug max-w-full md:max-w-md">
                                     Welcome back 👋
                               </h5>
-                              <h5 className="mt-2 text-md font-medium leading-snug max-w-full md:max-w-md">
+                              <h5 className="mt-2 text-sm md:text-base font-medium leading-snug max-w-full md:max-w-md">
                                     Sign in to access your orders, saved designs, and checkout faster.
                               </h5>
                         </div>
@@ -54,7 +54,7 @@ const page = async ({
                               <SignInOAuthButton provider="google" callbackURL={callbackURL ?? undefined} />
                         </div>
                         <MagicLinkLoginForm callbackURL={callbackURL ?? undefined} />
-                        <div className="mt-8 flex items-center gap-1 text-base">
+                        <div className="mt-8 flex items-center gap-1 text-sm md:text-base">
                               <p className="text-gray-400">
                                     You don&apos;t have an account ?
                               </p>
@@ -63,7 +63,7 @@ const page = async ({
                                     Sign up
                               </Link>
                         </div>
-                        <div className="mt-8 flex items-center gap-3 flex-wrap text-sm font-medium">
+                        <div className="mt-8 flex items-center gap-3 flex-wrap text-xs md:text-sm font-medium">
                               <Link href={'/help'} className='hover:underline hover:text-blue-400
                               transition-all duration-500'>
                                     Need Help?

@@ -35,7 +35,7 @@ export default function BackToTop() {
         ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       aria-label="Back to top"
     >
-      <FaArrowUp size={18} />
+      <FaArrowUp className="text-sm md:text-lg" />
     </button>
   );
 }

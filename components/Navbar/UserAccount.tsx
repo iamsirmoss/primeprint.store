@@ -17,7 +17,7 @@ interface UserAccountProps {
   user: {
     name?: string | null;
     email?: string | null;
-    image?: string | null;
+    // image?: string | null;
     role: "USER" | "ADMIN";
   };
 }
@@ -26,8 +26,8 @@ const UserAccount = ({user}: UserAccountProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" className="flex-none rounded-full border border-white cursor-pointer">
-          {
+        <div className="flex flex-col justify-center items-center gap-1 cursor-pointer mt-0.5 md:mt-1 group">
+          {/* {
             user.image ? 
             (<Image
               src={user.image || ''}
@@ -43,8 +43,16 @@ const UserAccount = ({user}: UserAccountProps) => {
                 </span>
               </div>
             )
-          }
-        </Button>
+          } */}
+          <div className="flex items-center justify-center aspect-square size-5 md:size-6 rounded-full bg-gray-400 text-white">
+            <span className="uppercase text-xs md:text-base font-semibold font-sans">
+              {user.name?.slice(0, 1)}
+            </span>
+          </div>
+          <div>
+            <h5 className="text-xs md:text-sm group-hover:underline">Account</h5>
+          </div>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>{user.name || "User"}</DropdownMenuLabel>

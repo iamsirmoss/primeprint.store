@@ -70,8 +70,8 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
     <div className="grid gap-6 lg:grid-cols-[1fr_540px]">
       {/* Left: Items */}
       <div className="rounded-xl border bg-white p-5">
-        <h2 className="text-lg font-bold">Your items</h2>
-        <p className="text-sm text-gray-500 mt-1">{count} item(s)</p>
+        <h2 className="text-base md:text-lg font-bold">Your items</h2>
+        <p className="text-xs md:text-sm text-gray-500 mt-1">{count} item(s)</p>
 
         <div className="mt-4 space-y-3">
           {items.map((it) => {
@@ -86,13 +86,13 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
                 className="flex items-start justify-between gap-3 rounded-lg border p-4"
               >
                 <div>
-                  <div className="font-semibold capitalize">{title}</div>
+                  <div className="text-sm md:text-base font-semibold capitalize">{title}</div>
                   {pkg && (
-                      <p className="text-xs text-slate-500 mb-2 capitalize">
+                      <p className="text-xs md:text-sm text-slate-500 mb-2 capitalize">
                         {it.serviceSlug} • {it.subServiceTitle}
                       </p>
                   )}
-                  <div className="mt-1 text-xs text-gray-500 flex flex-wrap gap-2">
+                  <div className="mt-1 text-xs md:text-sm text-gray-500 flex flex-wrap gap-2">
                     <span className="rounded-full border px-2 py-1">
                       {pkg ? "PACKAGE" : "PRODUCT"}
                     </span>
@@ -111,7 +111,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
                   </div>
                 </div>
 
-                <div className="font-bold whitespace-nowrap">
+                <div className="font-bold whitespace-nowrap text-sm md:text-base">
                   {(unit * it.qty).toFixed(2)} {cur}
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
 
       {/* Right: Summary */}
       <div className="h-fit rounded-xl border bg-white p-5">
-        <h2 className="text-lg font-bold">Summary</h2>
+        <h2 className="text-base md:text-lg font-bold">Summary</h2>
 
         <div className="mt-4 space-y-2 text-sm">
           {currencyKeys.map((cur) => (

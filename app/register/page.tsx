@@ -29,10 +29,10 @@ const page = async ({
                   <hr />
                   <div className="py-10 px-6 mt-8 w-full sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto bg-white rounded-md shadow-md">
                         <div className='mb-8 border-b rounded py-3 w-full text-center'>
-                              <h5 className='font-semibold text-2xl md:text-3xl'>Create a account</h5>
+                              <h5 className='font-semibold text-xl md:text-2xl'>Create a account</h5>
                         </div>
                         <div className="mb-8">
-                              <h5 className="text-md font-medium leading-snug max-w-full md:max-w-md">
+                              <h5 className="text-sm md:text-base font-medium leading-snug max-w-full md:max-w-md">
                                     Order printing services, manage projects, and save time on future orders.
                               </h5>
                         </div>
@@ -49,7 +49,7 @@ const page = async ({
                         <div className='my-8 w-full flex flex-col justify-center items-center gap-4'>
                               <SignInOAuthButton signUp provider="google" callbackURL={callbackURL ?? undefined} />
                         </div>
-                        <div className="mt-8 flex items-center gap-1 text-base">
+                        <div className="mt-8 flex items-center gap-1 text-sm md:text-base">
                               <p className="text-gray-400 font-medium">
                                     Do you already have an account ?
                               </p>
@@ -58,7 +58,7 @@ const page = async ({
                                     Login
                               </Link>
                         </div>
-                        <div className="mt-8 flex items-center gap-1 flex-wrap text-sm text-gray-400 font-medium">
+                        <div className="mt-8 flex items-center gap-1 flex-wrap text-gray-400 font-medium text-xs md:text-sm">
                               <p>By continuing, you agree to the</p>
                               <Link href={'/terms'} className='font-semibold hover:underline hover:text-black text-blue-400 
                               transition-all duration-500'>
@@ -75,7 +75,7 @@ const page = async ({
                                     Privacy policy
                               </Link>
                         </div>
-                        <div className="mt-8 flex items-center gap-3 flex-wrap text-sm font-medium">
+                        <div className="mt-8 flex items-center gap-3 flex-wrap text-xs md:text-sm font-medium">
                               <Link href={'/help'} className='hover:underline hover:text-blue-400
                               transition-all duration-500'>
                                     Need Help?

@@ -7,7 +7,7 @@ const About = () => {
       <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] pb-4 lg:pb-16 pt-16'>
             <div className='block lg:flex items-start gap-20'>
                   <div className='lg:w-[55%]'>
-                        <h1 className='text-[45px] md:text-6xl lg:text-7xl font-semibold'>Primeprint<span>.store</span></h1>
+                        <h1 className='text-3xl md:text-5xl lg:text-7xl font-semibold'>Primeprint<span>.store</span></h1>
                         <p className='text-gray-400 mt-10 text-sm md:text-base lg:text-[17px]'>
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                               Perspiciatis, incidunt harum. Enim aliquid nulla debitis 

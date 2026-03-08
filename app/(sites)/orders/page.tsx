@@ -35,7 +35,7 @@ export default async function OrdersPage() {
 
   return (
     <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 min-h-screen">
-      <div className="flex items-end justify-between gap-4">
+      <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
           <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">My orders</h1>
           <p className="mt-2 text-sm text-gray-500">
@@ -45,7 +45,7 @@ export default async function OrdersPage() {
 
         <Link
           href="/shop"
-          className="rounded-lg border px-5 py-3 font-semibold hover:bg-gray-100 transition-all duration-300"
+          className="text-sm md:text-base rounded-lg border px-5 py-3 font-semibold hover:bg-gray-100 transition-all duration-300"
         >
           Go to shop
         </Link>
@@ -65,10 +65,10 @@ export default async function OrdersPage() {
             >
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div>
-                  <div className="font-semibold">
+                  <div className="font-semibold text-sm md:text-base">
                     Order <span className="font-mono text-sm">{o.id}</span>
                   </div>
-                  <div className="mt-1 text-sm text-gray-500">
+                  <div className="mt-1 text-xs md:text-sm text-gray-500">
                     {new Date(o.createdAt).toLocaleString()}
                     {" • "}
                     {o._count.items} item(s)
@@ -76,10 +76,10 @@ export default async function OrdersPage() {
                 </div>
 
                 <div className="text-right">
-                  <div className="font-bold">
+                  <div className="font-bold text-sm md:text-base">
                     {formatMoney(o.totalCents, o.currency)}
                   </div>
-                  <div className="mt-1 text-sm">
+                  <div className="mt-1 text-xs md:text-sm">
                     <span
                       className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
                         o.status === "PAID"
