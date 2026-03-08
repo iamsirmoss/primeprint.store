@@ -61,22 +61,22 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         <h4 className='font-medium text-sm md:text-base'>About us</h4>
                         <div className='mt-5 text-xs md:text-sm'>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/about-us'}>
                                           About
                                     </Link>
                               </h5>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/#'}>
                                           News & blog
                                     </Link>
                               </h5>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/#'}>
                                           Press center
                                     </Link>
                               </h5>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/#'}>
                                           Careers
                                     </Link>
                               </h5>
@@ -98,22 +98,22 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         <h4 className='font-medium text-sm md:text-base'>Help</h4>
                         <div className='mt-5 text-xs md:text-sm'>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/#'}>
                                           Shopcart help
                                     </Link>
                               </h5>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/contact'}>
                                           Contact us
                                     </Link>
                               </h5>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/#'}>
                                           Feedback
                                     </Link>
                               </h5>
                               <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
-                                    <Link href={'/'}>
+                                    <Link href={'/#'}>
                                           Track orders
                                     </Link>
                               </h5>

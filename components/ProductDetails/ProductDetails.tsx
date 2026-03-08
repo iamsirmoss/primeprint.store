@@ -291,7 +291,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
 
             {typeof stockQty === "number" && (
               <p className="mt-3 text-sm text-gray-500">
-                {stockQty > 0 ? `${stockQty} in stock` : "Out of stock"}
+                {stockQty > 0 ? `In stock` : "Out of stock"}
               </p>
             )}
 
