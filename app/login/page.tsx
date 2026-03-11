@@ -33,10 +33,10 @@ const page = async ({
                               <h5 className='text-center text-xl md:text-2xl font-semibold'>Sign in</h5>
                         </div>
                         <div className="mb-8">
-                              <h5 className="text-sm md:text-base font-medium leading-snug max-w-full md:max-w-md">
+                              <h5 className="text-xs md:text-sm font-medium leading-snug max-w-full md:max-w-md">
                                     Welcome back 👋
                               </h5>
-                              <h5 className="mt-2 text-sm md:text-base font-medium leading-snug max-w-full md:max-w-md">
+                              <h5 className="mt-2 text-xs md:text-sm font-medium leading-snug max-w-full md:max-w-md">
                                     Sign in to access your orders, saved designs, and checkout faster.
                               </h5>
                         </div>
@@ -54,16 +54,16 @@ const page = async ({
                               <SignInOAuthButton provider="google" callbackURL={callbackURL ?? undefined} />
                         </div>
                         <MagicLinkLoginForm callbackURL={callbackURL ?? undefined} />
-                        <div className="mt-8 flex items-center gap-1 text-sm md:text-base">
-                              <p className="text-gray-400">
+                        <div className="mt-8 flex items-center gap-1 text-xs md:text-sm">
+                              <p className="">
                                     You don&apos;t have an account ?
                               </p>
-                              <Link href={callbackURL ? `/register?callbackURL=${encodeURIComponent(callbackURL)}` : "/register"} className='font-semibold hover:underline hover:text-black text-blue-400 
+                              <Link href={callbackURL ? `/register?callbackURL=${encodeURIComponent(callbackURL)}` : "/register"} className='underline hover:text-blue-400 
                               transition-all duration-500'>
                                     Sign up
                               </Link>
                         </div>
-                        <div className="mt-8 flex items-center gap-3 flex-wrap text-xs md:text-sm font-medium">
+                        <div className="mt-8 flex items-center gap-3 flex-wrap text-ss md:text-xs font-medium">
                               <Link href={'/help'} className='hover:underline hover:text-blue-400
                               transition-all duration-500'>
                                     Need Help?

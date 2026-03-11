@@ -17,7 +17,7 @@ const Contact = () => {
                               <p className="text-gray-500 text-sm md:text-base">
                                     <strong>Email :</strong> contact@primeprintstore.com
                               </p>
-                              <p className="text-gray-500c text-sm md:text-base">
+                              <p className="text-gray-500 text-sm md:text-base">
                                     <strong>Phone number :</strong> +1 6 12 34 56 78
                               </p>
                         </div>
@@ -51,7 +51,7 @@ const Contact = () => {
 
                                     {/* focus line */}
                                     <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
-                                    </div>
+                              </div>
 
                               {/* Email */}
                               <div className="relative">
@@ -109,7 +109,7 @@ const Contact = () => {
                               <textarea
                               id="message"
                               rows={2}
-                              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base"
+                              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base text-gray-500"
                               placeholder="How we can help you ?"
                               ></textarea>
                               {/* base line */}
@@ -123,11 +123,11 @@ const Contact = () => {
                         <div className="mt-10 block sm:flex items-center gap-5">
                               <button
                               type="submit"
-                              className="bg-red-500 text-white font-semibold px-8 py-3 md:px-12 md:py-4
+                              className="bg-red-500 font-semibold px-8 py-3 md:px-12 md:py-4
                               rounded shadow-md flex items-center gap-2 transition-all duration-500 hover:bg-blue-400 cursor-pointer"
                               >
                                     <Send className="text-white size-4 md:size-6" />
-                                    <h5>Send</h5>
+                                    <h5 className="text-white">Send</h5>
                               </button>
                               <div className="mt-8 sm:mt-0 flex items-center gap-3">
                                     <input

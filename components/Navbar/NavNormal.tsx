@@ -62,7 +62,7 @@ const NavNormal = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden xl:flex items-center gap-10 text-base">
+    <div className="hidden xl:flex items-center gap-10 text-sm text-black">
       {links.map((link) => {
         const isActive = pathname === link.path;
 

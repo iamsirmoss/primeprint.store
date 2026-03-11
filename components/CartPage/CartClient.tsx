@@ -80,7 +80,7 @@ import Link from "next/link";
                       </p>
                     )}
                     <div className="flex items-center gap-2 flex-wrap">
-                                <div className="font-semibold capitalize">{title}</div>
+                                <div className="font-semibold capitalize text-black">{title}</div>
 
                                 <span
                                   className={`text-[10px] px-2 py-1 rounded-full font-semibold ${badgeClass(isPkg)}`}
@@ -158,7 +158,7 @@ import Link from "next/link";
                     </button>
                   </div>
 
-                  <div className="font-bold">
+                  <div className="font-bold text-black">
                     {(unitPrice * it.qty).toFixed(2)} {currency}
                   </div>
                 </div>
@@ -175,8 +175,8 @@ import Link from "next/link";
         <div className="mt-4 space-y-2 text-sm">
           {currencyKeys.map((cur) => (
             <div key={cur} className="flex items-center justify-between">
-              <span>Subtotal ({cur})</span>
-              <span className="font-semibold">{totals[cur].toFixed(2)} {cur}</span>
+              <span>Subtotal</span>
+              <span className="font-semibold text-black">{totals[cur].toFixed(2)} {cur}</span>
             </div>
           ))}
         </div>

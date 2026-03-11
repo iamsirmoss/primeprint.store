@@ -43,12 +43,12 @@ const TopServiceCard: React.FC<ServiceCardProps> = ({
                 className="absolute inset-0 bg-white group-hover:bg-gray-600 transition-colors duration-500"
               ></div>
     
-              <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4 group-hover:text-white group">
-                <h3 className="text-lg font-bold capitalize">{title}</h3>
+              <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4 group">
+                <h3 className="text-lg font-bold capitalize text-black group-hover:text-white">{title}</h3>
     
                 <button
                   className="mt-2 py-1.5 md:mt-4 px-4 md:py-2 bg-transparent border group-hover:border-white rounded
-                   flex items-center gap-2 capitalize cursor-pointer text-sm md:text-base"
+                   flex items-center gap-2 capitalize cursor-pointer text-ss md:text-sm text-black group-hover:text-white"
                 >
                   more
                   <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />

@@ -33,7 +33,7 @@ const Service = ({services}: {services: ServiceProps[]}) => {
                 sizes="100vw"
                 className="w-[25%] sm:w-[30%] md:w-[40%] lg:w-[45%]"
               />
-              <h5 className="uppercase text-xs md:text-sm mt-5 text-center group-hover:text-black transition-all duration-300 font-medium">
+              <h5 className="uppercase text-ss md:text-xs mt-5 text-center group-hover:text-black transition-all duration-300 font-medium text-black">
                 {service.title}
               </h5>
             </Link>

@@ -89,14 +89,14 @@ const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, pri
                                     type="button"
                                     onClick={handleAddToCart}
                                     disabled={isOutOfStock}
-                                    className={`border rounded py-3 px-10 text-white transition-all duration-300
+                                    className={`border rounded-3xl py-3 px-10 transition-all duration-300
                                     ${
                                           isOutOfStock
                                           ? "bg-gray-400 cursor-not-allowed"
                                           : "bg-black hover:bg-black/75 cursor-pointer"
                                     }`}
                               >
-                                          <h5 className="text-xs">
+                                          <h5 className="text-xs text-white">
                                                 {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
                                           </h5>
                               </button>

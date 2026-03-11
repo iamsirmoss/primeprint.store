@@ -49,7 +49,7 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
 
       {/* drawer */}
       <div
-        className={`fixed inset-x-0 top-8 z-50 bg-white shadow-sm transform transition-transform duration-300
+        className={`fixed inset-x-0 top-6 z-50 bg-white shadow-sm transform transition-transform duration-300
         ${open ? "translate-x-0" : "-translate-x-full"}`}
         style={{ willChange: "transform" }}
       >
@@ -59,8 +59,8 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
               key={link.name}
               href={link.path}
               onClick={() => setOpen(false)}
-              className={`w-full px-4 py-3 text-[16px] capitalize transition-all duration-200
-              ${link.path === pathName ? "bg-gray-200" : "text-black hover:bg-gray-200"}`}
+              className={`w-full px-4 py-3 text-sm capitalize transition-all duration-200
+              ${link.path === pathName ? "bg-gray-100 text-black" : "text-black hover:bg-gray-100"}`}
             >
               {link.name}
             </Link>

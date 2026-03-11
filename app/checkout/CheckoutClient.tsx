@@ -86,7 +86,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
                 className="flex items-start justify-between gap-3 rounded-lg border p-4"
               >
                 <div>
-                  <div className="text-sm md:text-base font-semibold capitalize">{title}</div>
+                  <div className="text-sm md:text-base font-semibold capitalize text-black">{title}</div>
                   {pkg && (
                       <p className="text-xs md:text-sm text-slate-500 mb-2 capitalize">
                         {it.serviceSlug} • {it.subServiceTitle}
@@ -127,8 +127,8 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
         <div className="mt-4 space-y-2 text-sm">
           {currencyKeys.map((cur) => (
             <div key={cur} className="flex items-center justify-between">
-              <span className="text-gray-600">Subtotal ({cur})</span>
-              <span className="font-semibold">
+              <span className="text-gray-600">Subtotal</span>
+              <span className="font-semibold text-black">
                 {totals[cur].toFixed(2)} {cur}
               </span>
             </div>

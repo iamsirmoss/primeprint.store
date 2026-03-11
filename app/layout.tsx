@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Kumbh_Sans } from "next/font/google";
+import { Manrope } from "next/font/google";
 import BackToTop from "@/components/BackToTop";
-import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import "./css/globals.css";
 
-const kumbhSans = Kumbh_Sans({
-  variable: "--font-kumbh-sans",
+const manrope = Manrope({
   subsets: ["latin"],
-   weight: ["100" , "200" , "300" , "400" , "500" , "600" , "700" , "800" , "900"]
+  display: "swap",
+  variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
-  title: "Primeprint",
+  title: "Prime Print Store",
   description: "Your one stop shop for printing, notary and more.",
 };
 
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${kumbhSans.variable} min-h-screen w-full overflow-x-hidden font-mono`}
+        className={`${manrope.className} min-h-screen w-full overflow-x-hidden`}
       >
         {children}
         <BackToTop />

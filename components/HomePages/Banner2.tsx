@@ -13,7 +13,7 @@ const Banner2 = () => {
                               className='object-cover w-1/2 md:w-[70%]' />
                   </div>
                   <div className='w-full md:w-1/2 rounded text-white'>
-                        <h2 className='text-3xl lg:text-5xl font-extrabold'>
+                        <h2 className='text-3xl lg:text-5xl font-extrabold text-white'>
                               UltraPrint 5000 large format printer
                         </h2>
                         <p className='text-sm lg:text-lg mt-5 leading-relaxed'>
@@ -21,7 +21,7 @@ const Banner2 = () => {
                               printer designed for professional-quality prints across 
                               various materials.
                         </p>
-                        <h5 className='text-sm lg:text-lg mt-5 font-semibold'>High-resolution printing</h5>
+                        <h5 className='text-sm lg:text-lg mt-5 font-semibold text-white'>High-resolution printing</h5>
                         <ul className='list-disc list-inside mt-4 mb-8'>
                               <li className='text-sm lg:text-base'>
                                     Achieve stunning image clarity with up to 2400 x 1200 dpi resolution, 
@@ -32,7 +32,7 @@ const Banner2 = () => {
                               <Link href={'/learn-more'} className=''>
                                     <button className='bg-red-500 text-white rounded px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
                                     hover:bg-blue-400 transition-all duration-500 flex items-center gap-2 cursor-pointer group'>
-                                          <h5 className='font-semibold text-sm md:text-base'>Learn more</h5>
+                                          <h5 className='font-semibold text-sm md:text-base text-white'>Learn more</h5>
                                           <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />
                                     </button>
                               </Link>

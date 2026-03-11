@@ -69,7 +69,7 @@ const RegisterForm = ({ callbackURL }: Props) => {
                               name='name'
                               type="text"
                               id="name"
-                              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base"
+                              className="peer w-full bg-transparent pl-8 md:pl-9 py-2 focus:outline-none text-sm md:text-base"
                               placeholder="Full name"
                               />
 
@@ -88,7 +88,7 @@ const RegisterForm = ({ callbackURL }: Props) => {
                               name="email"
                               type="email"
                               id="email"
-                              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base"
+                              className="peer w-full bg-transparent pl-8 md:pl-9 py-2 focus:outline-none text-sm md:text-base"
                               placeholder="Email"
                               />
 
@@ -106,7 +106,7 @@ const RegisterForm = ({ callbackURL }: Props) => {
                               name="password"
                               type={showPassword ? "text" : "password"}
                               id="password"
-                              className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-sm md:text-base"
+                              className="peer w-full bg-transparent pl-8 md:pl-9 py-2 pr-10 focus:outline-none text-sm md:text-base"
                               placeholder="Password"
                               />
 

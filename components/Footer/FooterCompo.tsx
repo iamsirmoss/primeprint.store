@@ -30,7 +30,7 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                               Donec convallis ipsum massa, vitae accumsan orci fringilla a.
                         </p> */}
                         <div className='mt-10'>
-                              <h4 className='font-medium text-sm md:text-base'>Accepted payments</h4>
+                              <h4 className='font-medium text-sm md:text-base text-white'>Accepted payments</h4>
                               <div className='mt-5 grid grid-cols-3 gap-2'>
                                     <div className='border border-white px-2 py-2 md:py-4 flex flex-col items-center justify-center rounded-lg'>
                                           <FaStripe className='text-white text-4xl md:text-5xl' />
@@ -46,10 +46,10 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                   </div>
                   <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 mt-10 lg:mt-0 w-[70%]'>
                   <div className=''>
-                        <h4 className='font-medium text-sm md:text-base'>Department</h4>
+                        <h4 className='font-medium text-sm md:text-base text-white'>Department</h4>
                         <div className='mt-5 text-xs md:text-sm'>
                               {products && products.map((product) => (
-                                    <h5 key={product.id} className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500 capitalize'>
+                                    <h5 key={product.id} className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400 capitalize'>
                                           <Link href={`/product/${product.slug}`}>
                                                 {product.title}
                                           </Link>
@@ -58,24 +58,24 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         </div>
                   </div>
                   <div>
-                        <h4 className='font-medium text-sm md:text-base'>About us</h4>
+                        <h4 className='font-medium text-sm md:text-base text-white'>About us</h4>
                         <div className='mt-5 text-xs md:text-sm'>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/about-us'}>
                                           About
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/#'}>
                                           News & blog
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/#'}>
                                           Press center
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/#'}>
                                           Careers
                                     </Link>
@@ -83,10 +83,10 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         </div>
                   </div>
                   <div>
-                        <h4 className='font-medium text-sm md:text-base'>Services</h4>
+                        <h4 className='font-medium text-sm md:text-base text-white'>Services</h4>
                         <div className='mt-5 text-xs md:text-sm'>
                               {services && services.map((service) => (
-                                    <h5 key={service.id} className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500 capitalize'>
+                                    <h5 key={service.id} className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400 capitalize'>
                                           <Link href={`/service/${service.slug}`}>
                                                 {service.title}
                                           </Link>
@@ -95,24 +95,24 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
                         </div>
                   </div>
                   <div>
-                        <h4 className='font-medium text-sm md:text-base'>Help</h4>
+                        <h4 className='font-medium text-sm md:text-base text-white'>Help</h4>
                         <div className='mt-5 text-xs md:text-sm'>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/#'}>
                                           Shopcart help
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/contact'}>
                                           Contact us
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/#'}>
                                           Feedback
                                     </Link>
                               </h5>
-                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-500'>
+                              <h5 className='font-normal mt-2 max-w-fit hover:text-white transition-all duration-300 text-gray-400'>
                                     <Link href={'/#'}>
                                           Track orders
                                     </Link>
@@ -123,7 +123,7 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
             </div>
             <hr className='border-t border-gray-500 my-0.5' />
             <div className='py-2'>
-                  <p className='text-xs md:text-sm'>Copyright ©2026 <span className='text-white underline'>primeprint.store</span></p>
+                  <p className='text-xs md:text-sm'>Copyright ©2026 <span className='text-white underline'>PrimePrint Store Inc.</span></p>
             </div>
       </footer>
   )

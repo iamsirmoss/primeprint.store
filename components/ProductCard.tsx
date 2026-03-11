@@ -64,7 +64,7 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
                   </div>
                   <div className='py-6 px-5'>
                         <div className='flex justify-between items-center mt-2'>
-                              <h5 className='text-base md:text-lg capitalize font-semibold'>{title}</h5>
+                              <h5 className='text-sm md:text-base capitalize font-semibold text-black'>{title}</h5>
                               <Heart size={18} />
                         </div>
                         <p className='text-gray-500 mt-3 text-xs md:text-sm line-clamp-1'>{description}</p>
@@ -88,14 +88,14 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
                                     type="button"
                                     onClick={handleAddToCart}
                                     disabled={isOutOfStock}
-                                    className={`border rounded py-3 px-8 text-white transition-all duration-300
+                                    className={`border rounded-3xl py-3 px-8 text-white transition-all duration-300
                                     ${
                                           isOutOfStock
                                           ? "bg-gray-400 cursor-not-allowed"
                                           : "bg-black hover:bg-black/75 cursor-pointer"
                                     }`}
                               >
-                                          <h5 className="text-xs">
+                                          <h5 className="text-xs text-white">
                                                 {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
                                           </h5>
                               </button>

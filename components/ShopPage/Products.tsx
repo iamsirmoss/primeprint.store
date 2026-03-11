@@ -59,6 +59,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ProductCard from "../ProductCard";
+import { AiOutlineProduct } from "react-icons/ai";
 
 interface ProductProps {
   id: string;
@@ -181,20 +182,28 @@ const Products = ({
           </p>
         </div>
 
-        <div className="text-right">
+        {/* <div className="text-right">
           <p className="text-sm text-gray-500">{filteredProducts.length} item(s)</p>
-        </div>
+        </div> */}
       </div>
 
       {/* Search */}
       <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-        <div className="w-full sm:max-w-lg">
-          <input
-            value={q}
-            onChange={(e) => onSearch(e.target.value)}
-            placeholder="Search products..."
-            className="w-full rounded border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-gray-400"
-          />
+        <div className="w-full sm:max-w-lg relative">
+          
+          <AiOutlineProduct className="absolute top-1.5 size-5 md:size-6" />
+            <input
+              type="text"
+              value={q}
+              onChange={(e) => onSearch(e.target.value)}
+              placeholder="Search products..."
+              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base text-black"
+            />
+              {/* base line */}
+              <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
+          
+              {/* focus line */}
+              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
         </div>
 
         <button
@@ -218,10 +227,10 @@ const Products = ({
           className={`rounded py-2 px-4 transition-all duration-300 border ${
             selectedService === "all"
               ? "bg-red-500 border-red-500 text-white"
-              : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500 "
+              : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500 text-black"
           }`}
         >
-          <h5 className="text-sm">All</h5>
+          <p className="text-sm">All</p>
         </button>
 
         {/* Others (serviceId null) */}
@@ -230,10 +239,10 @@ const Products = ({
           className={`rounded py-2 px-4 transition-all duration-300 border ${
             selectedService === "other"
               ? "bg-red-500 border-red-500 text-white"
-              : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500"
+              : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500 text-black"
           }`}
         >
-          <h5 className="text-sm">Others ({otherCount})</h5>
+          <p className="text-sm">Others ({otherCount})</p>
         </button>
 
         {/* Services by slug (shareable) */}
@@ -246,11 +255,11 @@ const Products = ({
               className={`rounded py-2 px-4 transition-all duration-300 border ${
                 active
                   ? "bg-red-500 border-red-500 text-white"
-                  : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500"
+                  : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500 text-black"
               }`}
               title={s.title}
             >
-              <h5 className="text-sm truncate capitalize">{s.title}</h5>
+              <p className="text-sm truncate capitalize">{s.title}</p>
             </button>
           );
         })}

@@ -142,7 +142,7 @@ const CartView = ({
                                   </p>
                               )}
                               <div className="flex items-center gap-2 flex-wrap">
-                                <div className="font-semibold capitalize">{title}</div>
+                                <div className="font-semibold capitalize text-black">{title}</div>
 
                                 <span
                                   className={`text-[10px] px-2 py-1 rounded-full font-semibold ${badgeClass(isPkg)}`}
@@ -198,7 +198,7 @@ const CartView = ({
                                   if (isPkg) decPackageQty(it.packageId, it.billing);
                                   else decQty(it.productId);
                                 }}
-                                className="rounded-md p-1.5 md:p-2 hover:bg-slate-100 transition-all duration-300"
+                                className="rounded-md p-1.5 md:p-2 hover:bg-slate-200 transition-all duration-300"
                                 aria-label="Decrease quantity"
                               >
                                 <Minus className="h-2.5 w-2.5 md:w-4 md:h-4" />
@@ -214,14 +214,14 @@ const CartView = ({
                                   if (isPkg) incPackageQty(it.packageId, it.billing);
                                   else incQty(it.productId);
                                 }}
-                                className="rounded-md p-2 hover:bg-slate-100 transition-all duration-300"
+                                className="rounded-md p-2 hover:bg-slate-200 transition-all duration-300"
                                 aria-label="Increase quantity"
                               >
                                 <Plus className="h-2.5 w-2.5 md:w-4 md:h-4" />
                               </button>
                             </div>
 
-                            <p className="font-bold">
+                            <p className="font-bold text-black">
                               {(unitPrice * it.qty).toFixed(2)} {currency}
                             </p>
                           </div>
@@ -239,8 +239,8 @@ const CartView = ({
                         key={cur}
                         className="flex items-center justify-between text-sm md:text-base"
                       >
-                        <span className="text-slate-600">Subtotal ({cur})</span>
-                        <span className="font-bold">
+                        <span className="text-slate-600">Subtotal :</span>
+                        <span className="font-bold text-black">
                           {totals[cur].toFixed(2)} {cur}
                         </span>
                       </div>
@@ -255,7 +255,7 @@ const CartView = ({
                     >
                       <button
                         type="button"
-                        className="w-full rounded-lg border py-3 font-semibold hover:bg-slate-200 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300"
+                        className="w-full rounded-lg border py-3 font-semibold hover:bg-slate-200 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300 text-black"
                       >
                         View cart
                       </button>

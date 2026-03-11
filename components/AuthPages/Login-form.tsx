@@ -84,7 +84,7 @@ const LoginForm = ({ callbackURL: callbackFromProps }: { callbackURL?: string })
                               name='email'
                               type="email"
                               id="email"
-                              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base"
+                              className="peer w-full bg-transparent pl-8 md:pl-9 py-2 focus:outline-none text-sm md:text-base"
                               placeholder="Email"
                               />
 
@@ -102,7 +102,7 @@ const LoginForm = ({ callbackURL: callbackFromProps }: { callbackURL?: string })
                                     name="password"
                                     type={showPassword ? "text" : "password"}
                                     id="password"
-                                    className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-sm md:text-base"
+                                    className="peer w-full bg-transparent pl-8 md:pl-9 py-2 pr-10 focus:outline-none text-sm md:text-base"
                                     placeholder="Password"
                               />
                         

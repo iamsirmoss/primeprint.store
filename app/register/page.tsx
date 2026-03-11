@@ -50,27 +50,27 @@ const page = async ({
                               <SignInOAuthButton signUp provider="google" callbackURL={callbackURL ?? undefined} />
                         </div>
                         <div className="mt-8 flex items-center gap-1 text-sm md:text-base">
-                              <p className="text-gray-400 font-medium">
+                              <p className="">
                                     Do you already have an account ?
                               </p>
-                              <Link href={callbackURL ? `/login?callbackURL=${encodeURIComponent(callbackURL)}` : "/login"} className='font-semibold hover:underline hover:text-black text-blue-400 
+                              <Link href={callbackURL ? `/login?callbackURL=${encodeURIComponent(callbackURL)}` : "/login"} className='hover:text-blue-400 underline
                               transition-all duration-500'>
                                     Login
                               </Link>
                         </div>
-                        <div className="mt-8 flex items-center gap-1 flex-wrap text-gray-400 font-medium text-xs md:text-sm">
+                        <div className="mt-8 flex items-center gap-1 flex-wrap text-gray-400 font-medium text-xs">
                               <p>By continuing, you agree to the</p>
-                              <Link href={'/terms'} className='font-semibold hover:underline hover:text-black text-blue-400 
+                              <Link href={'/terms'} className='hover:underline hover:text-blue-400 text-black
                               transition-all duration-500'>
                                     Terms
                               </Link>
                               <p>and</p>
-                              <Link href={'/conditions'} className='font-semibold hover:underline hover:text-black text-blue-400
+                              <Link href={'/conditions'} className='hover:underline hover:text-blue-400 text-black
                               transition-all duration-500'>
                                     Conditions
                               </Link>
                               <p>and</p>
-                              <Link href={'/privacy-policy'} className='font-semibold hover:underline hover:text-black text-blue-400
+                              <Link href={'/privacy-policy'} className='hover:underline hover:text-blue-400 text-black
                               transition-all duration-500'>
                                     Privacy policy
                               </Link>

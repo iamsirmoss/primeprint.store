@@ -135,19 +135,19 @@ export const MagicLinkLoginForm = ({
         Continue with email link
       </summary>
 
-      <form onSubmit={handleSubmit} className="px-2 py-1">
+      <form onSubmit={handleSubmit} className="px-2 py-3">
         <Label htmlFor="email" className="sr-only">
           Email
         </Label>
 
         <div className="flex gap-2 items-center">
           <div className="relative w-full">
-            <Mail className="absolute top-2.5" />
+            <Mail className="absolute top-2 size-5 md:size-6" />
             <input
               type="email"
               id="email"
               name="email"
-              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none"
+              className="peer w-full bg-transparent pl-7 md:pl-9 py-2 focus:outline-none text-sm md:text-base"
               placeholder="Email"
               autoComplete="email"
             />
@@ -163,12 +163,6 @@ export const MagicLinkLoginForm = ({
             {isPending ? "Sending..." : "Send"}
           </Button>
         </div>
-
-        {/* petit helper optionnel */}
-        <p className="mt-2 text-xs text-gray-500">
-          After sign-in, you’ll be redirected to:{" "}
-          <span className="font-mono">{cb}</span>
-        </p>
       </form>
     </details>
   );
