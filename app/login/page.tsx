@@ -58,7 +58,7 @@ const page = async ({
                               <p className="">
                                     You don&apos;t have an account ?
                               </p>
-                              <Link href={callbackURL ? `/register?callbackURL=${encodeURIComponent(callbackURL)}` : "/register"} className='underline hover:text-blue-400 
+                              <Link href={callbackURL ? `/register?callbackURL=${encodeURIComponent(callbackURL)}` : "/register"} className='underline text-black hover:text-blue-400 
                               transition-all duration-500'>
                                     Sign up
                               </Link>

@@ -131,7 +131,7 @@ export const MagicLinkLoginForm = ({
 
   return (
     <details ref={ref} className="w-full rounded border overflow-hidden">
-      <summary className="flex gap-2 items-center justify-center px-2 py-4 bg-black text-white hover:bg-black/80 transition duration-300 cursor-pointer text-sm">
+      <summary className="flex gap-2 items-center justify-center px-2 py-4 bg-black text-white hover:bg-black/80 transition duration-300 cursor-pointer text-sm font-medium">
         Continue with email link
       </summary>
 

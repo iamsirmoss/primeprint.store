@@ -169,9 +169,9 @@ const SignInOAuthButton = ({
         className="object-contain"
       />
 
-      <span>
+      <h5 className="text-sm text-white">
         {isPending ? "Redirecting..." : `Sign ${action} with ${providerName}`}
-      </span>
+      </h5>
     </Button>
   );
 };

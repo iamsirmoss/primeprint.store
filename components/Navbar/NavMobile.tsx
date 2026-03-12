@@ -32,9 +32,9 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
 
         <button onClick={toggle} className="text-white cursor-pointer">
           {open ? (
-            <RiCloseFill className="text-lg" />
+            <RiCloseFill className="size-6" />
           ) : (
-            <RiMenu3Fill className="text-lg" />
+            <RiMenu3Fill className="size-6" />
           )}
         </button>
       </div>

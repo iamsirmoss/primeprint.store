@@ -138,7 +138,7 @@ const LoginForm = ({ callbackURL: callbackFromProps }: { callbackURL?: string })
                         className="bg-blue-400 text-white font-semibold px-16 py-7 w-full
                         rounded shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-500 cursor-pointer"
                         >
-                              <h5 className='text-center text-sm md:text-base'>{isPending ? "Loading..." : "Login"}</h5>
+                              <h5 className='text-center text-white'>{isPending ? "Loading..." : "Login"}</h5>
                         </Button>
                   </div>
             </form>

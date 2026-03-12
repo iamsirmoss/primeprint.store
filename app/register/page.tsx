@@ -32,7 +32,7 @@ const page = async ({
                               <h5 className='font-semibold text-xl md:text-2xl'>Create a account</h5>
                         </div>
                         <div className="mb-8">
-                              <h5 className="text-sm md:text-base font-medium leading-snug max-w-full md:max-w-md">
+                              <h5 className="text-xs md:text-sm font-medium leading-tight max-w-full md:max-w-lg">
                                     Order printing services, manage projects, and save time on future orders.
                               </h5>
                         </div>
@@ -49,11 +49,11 @@ const page = async ({
                         <div className='my-8 w-full flex flex-col justify-center items-center gap-4'>
                               <SignInOAuthButton signUp provider="google" callbackURL={callbackURL ?? undefined} />
                         </div>
-                        <div className="mt-8 flex items-center gap-1 text-sm md:text-base">
+                        <div className="mt-8 flex items-center gap-1 text-xs md:text-sm">
                               <p className="">
                                     Do you already have an account ?
                               </p>
-                              <Link href={callbackURL ? `/login?callbackURL=${encodeURIComponent(callbackURL)}` : "/login"} className='hover:text-blue-400 underline
+                              <Link href={callbackURL ? `/login?callbackURL=${encodeURIComponent(callbackURL)}` : "/login"} className='hover:text-blue-400 text-black underline
                               transition-all duration-500'>
                                     Login
                               </Link>
@@ -75,7 +75,7 @@ const page = async ({
                                     Privacy policy
                               </Link>
                         </div>
-                        <div className="mt-8 flex items-center gap-3 flex-wrap text-xs md:text-sm font-medium">
+                        <div className="mt-8 flex items-center gap-3 flex-wrap text-ss md:text-xs font-medium">
                               <Link href={'/help'} className='hover:underline hover:text-blue-400
                               transition-all duration-500'>
                                     Need Help?
