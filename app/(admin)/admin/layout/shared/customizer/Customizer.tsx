@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useTheme } from "next-themes";
+import { useCustomizer } from "@/hooks/use-customizer";
 
 export const Customizer = () => {
 
@@ -60,7 +61,7 @@ export const Customizer = () => {
     setIsLayout,
     isBorderRadius,
     setIsBorderRadius,
-  } = useContext(CustomizerContext);
+  } = useCustomizer();
 
   const themeColors = [
     {
@@ -158,14 +159,23 @@ export const Customizer = () => {
 
   // Keep activeMode synced with the real applied theme
   const { theme, systemTheme } = useTheme();
+  // useEffect(() => {
+  //   // If theme = "system", reflect the *actual* system theme
+  //   if (theme === "system") {
+  //     setActiveMode(systemTheme || "light");
+  //   } else {
+  //     setActiveMode(theme);
+  //   }
+  // }, [theme, systemTheme]);
+
   useEffect(() => {
-    // If theme = "system", reflect the *actual* system theme
-    if (theme === "system") {
-      setActiveMode(systemTheme || "light");
-    } else {
-      setActiveMode(theme);
+    const resolvedTheme =
+      theme === "system" ? (systemTheme ?? "light") : theme;
+
+    if (resolvedTheme === "light" || resolvedTheme === "dark") {
+      setActiveMode(resolvedTheme);
     }
-  }, [theme, systemTheme]);
+  }, [theme, systemTheme, setActiveMode]);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
