@@ -65,7 +65,7 @@ const Card: React.FC<CardProps> = ({ id, slug, title, description, imageUrl, pri
 
                         {/* Content Section */}
                         <div className="mt-2">
-                              <div className="flex items-end justify-between">
+                              <div className="sm:flex items-end justify-between block">
                                     <h3 className="text-base md:text-xl font-bold text-gray-800 capitalize">{title}</h3>
                                     <h5 className='mt-2 text-sm md:text-base max-w-fit'>
                                           {price.toFixed(2)}{" "}
