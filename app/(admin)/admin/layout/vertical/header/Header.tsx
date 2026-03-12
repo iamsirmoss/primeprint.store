@@ -23,6 +23,7 @@ import { useSidebar } from "@/components/Admin/ui/sidebar";
 import Notifications from "./Notifications";
 import MobileSidebar from "../sidebar/MobileSidebar";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { useCustomizer } from "@/hooks/use-customizer";
 
 interface HeaderPropsType {
   layoutType: string;
@@ -34,7 +35,7 @@ const Header = ({ layoutType }: HeaderPropsType) => {
   const { toggleSidebar, setOpenMobile, openMobile } = useSidebar();
 
   const { setIsCollapse, isCollapse, isLayout, setActiveMode, activeMode, activeDir } =
-    useContext(CustomizerContext);
+    useCustomizer();
 
   const [mobileMenu, setMobileMenu] = useState("");
 

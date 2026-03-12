@@ -14,9 +14,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { CustomizerContext } from "@/components/CustomizerContext";
+import { useCustomizer } from "@/hooks/use-customizer";
 
 const Messages = () => {
-  const { activeDir } = useContext(CustomizerContext);
+  const { activeDir } = useCustomizer();
 
   return (
     <div className="relative group/menu px-4">

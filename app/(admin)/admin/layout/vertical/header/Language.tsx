@@ -11,6 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { useCustomizer } from "@/hooks/use-customizer";
 
 const Languages = [
   {
@@ -36,7 +37,7 @@ const Languages = [
 ];
 
 export const Language = () => {
-  const { isLanguage, setIsLanguage } = useContext(CustomizerContext);
+  const { isLanguage, setIsLanguage } = useCustomizer();
 
   const currentLang =
     Languages.find((_lang) => _lang.value === isLanguage) || Languages[1];

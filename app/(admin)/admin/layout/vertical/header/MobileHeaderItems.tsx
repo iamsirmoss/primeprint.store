@@ -5,17 +5,16 @@ import Profile from "./Profile";
 import { Language } from "./Language";
 
 import AppLinks from "./AppLinks";
-import { CustomizerContext } from "@/components/CustomizerContext";
-import { useContext } from "react";
 import Notifications from "./Notifications";
+import { useCustomizer } from "@/hooks/use-customizer";
+
 
 const MobileHeaderItems = () => {
-  const { setActiveMode, activeMode } = useContext(CustomizerContext);
+  const { setActiveMode, activeMode } = useCustomizer();
   const toggleMode = () => {
-    setActiveMode((prevMode: string) =>
-      prevMode === "light" ? "dark" : "light"
-    );
+    setActiveMode(activeMode === "light" ? "dark" : "light");
   };
+  
   return (
     <nav className="rounded-none bg-white dark:bg-darkgray flex-1 px-9 ">
       {/* Toggle Icon   */}

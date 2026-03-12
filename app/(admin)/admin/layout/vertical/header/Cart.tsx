@@ -4,10 +4,11 @@ import { Icon } from "@iconify/react";
 import { CustomizerContext } from "@/components/CustomizerContext";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { useCustomizer } from "@/hooks/use-customizer";
 
 export const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { activeDir } = useContext(CustomizerContext);
+  const { activeDir } = useCustomizer();
 
   return (
     <div>
