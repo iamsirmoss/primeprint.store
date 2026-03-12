@@ -49,7 +49,7 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
 
       {/* drawer */}
       <div
-        className={`fixed inset-x-0 top-6 z-50 bg-white shadow-sm transform transition-transform duration-300
+        className={`fixed inset-x-0 top-8 z-50 bg-white shadow-sm transform transition-transform duration-300
         ${open ? "translate-x-0" : "-translate-x-full"}`}
         style={{ willChange: "transform" }}
       >
