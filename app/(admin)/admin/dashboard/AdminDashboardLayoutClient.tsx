@@ -1,6 +1,5 @@
 "use client";
 
-import BackToTop from "@/components/BackToTop";
 import { Toaster } from "@/components/ui/sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import Sidebar from "../layout/vertical/sidebar/Sidebar";
@@ -45,7 +44,6 @@ export default function AdminDashboardLayoutClient({
               >
                 <ScrollToTop />
                 {children}
-                <BackToTop />
                 <Toaster position="top-center" richColors />
               </div>
 

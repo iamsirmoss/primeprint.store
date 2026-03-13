@@ -35,26 +35,26 @@ const SidebarContent: MenuItem[] = [
     name: "Dashboard",
     items: [
       {
-        heading: "Dashboards",
+        heading: "",
         children: [
+          // {
+          //   name: "Dashboard1",
+          //   icon: "solar:atom-line-duotone",
+          //   id: uniqueId(),
+          //   url: "/",
+          // },
           {
-            name: "Dashboard1",
-            icon: "solar:atom-line-duotone",
-            id: uniqueId(),
-            url: "/",
-          },
-          {
-            name: "Dashboard2",
+            name: "Dashboard",
             icon: "solar:chart-line-duotone",
             id: uniqueId(),
-            url: "/dashboards/dashboard2",
+            url: "/admin/dashboard",
           },
-          {
-            name: "Dashboard3",
-            icon: "solar:screencast-2-line-duotone",
-            id: uniqueId(),
-            url: "/dashboards/dashboard3",
-          },
+          // {
+          //   name: "Dashboard3",
+          //   icon: "solar:screencast-2-line-duotone",
+          //   id: uniqueId(),
+          //   url: "/dashboards/dashboard3",
+          // },
         ],
       },
       {

@@ -13,15 +13,19 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { useSession } from "@/lib/auth-client";
 
 const Profile = () => {
+
+  const { data: session, isPending } = useSession();
+
   return (
     <div className="relative">
       <DropdownMenu>
         {/* === Trigger === */}
         <DropdownMenuTrigger asChild>
           <div className="flex items-center gap-1 cursor-pointer">
-            <span className="h-10 w-10 hover:text-primary rounded-full flex justify-center items-center group-hover/menu:bg-lightprimary group-hover/menu:text-primary">
+            {/* <span className="h-10 w-10 hover:text-primary rounded-full flex justify-center items-center group-hover/menu:bg-lightprimary group-hover/menu:text-primary">
               <Image
                 src="/images/profile/user-1.jpg"
                 alt="User"
@@ -29,7 +33,12 @@ const Profile = () => {
                 width={35}
                 className="rounded-full"
               />
-            </span>
+            </span> */}
+            <div className="flex items-center justify-center aspect-square size-10 rounded-full bg-gray-400 text-white">
+              <span className="uppercase text-xs md:text-base font-semibold font-sans">
+                {session?.user.name?.slice(0, 1)}
+              </span>
+            </div>
             <Icon
               icon="solar:alt-arrow-down-bold"
               className="hover:text-primary dark:text-primary group-hover/menu:text-primary"
@@ -47,18 +56,16 @@ const Profile = () => {
           {/* === Header Section === */}
           <div className="px-6">
             <div className="flex items-center gap-6 pb-5 border-b border-border dark:border-darkborder mt-5 mb-3">
-              <Image
-                src="/images/profile/user-1.jpg"
-                alt="User Avatar"
-                height={56}
-                width={56}
-                className="rounded-full"
-              />
+              <div className="flex items-center justify-center aspect-square size-14 rounded-full bg-gray-400 text-white">
+                <span className="uppercase text-xs md:text-base font-semibold font-sans">
+                  {session?.user.name?.slice(0, 1)}
+                </span>
+              </div>
               <div>
                 <h5 className="text-base font-semibold">
-                  David McMichael <span className="text-success">Pro</span>
+                  {session?.user.name} 
                 </h5>
-                <p className="text-sm text-ld font-medium opacity-60">info@MatDash.com</p>
+                <p className="text-sm text-ld font-medium opacity-60">{session?.user.email}</p>
               </div>
             </div>
           </div>

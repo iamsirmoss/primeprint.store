@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import BackToTop from "@/components/BackToTop";
 import { Toaster } from "@/components/ui/sonner";
 import "./css/globals.css";
 
@@ -26,7 +25,6 @@ export default function RootLayout({
         className={`${manrope.className} min-h-screen w-full overflow-x-hidden`}
       >
         {children}
-        <BackToTop />
         <Toaster position="top-center" richColors />
       </body>
     </html>

@@ -13,6 +13,7 @@ export default function SiteLayout({
       <Navbar />
       <ScrollToTop />
       {children}
+      <BackToTop />
       <Footer />
       <BackToTop />
     </>
