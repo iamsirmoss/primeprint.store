@@ -14,18 +14,18 @@ const Why = () => {
                         width={0}
                         height={0}
                         sizes="100vw"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover rounded-2xl"
                         />
                         <div className='flex items-center gap-2 absolute bottom-0 lg:bottom-6 left-2 xl:left-6'>
-                              <div className='py-4 md:py-7 px-6 md:px-8 lg:px-12 bg-gray-800 rounded'>
+                              <div className='py-4 md:py-7 px-6 md:px-8 lg:px-12 bg-blue-400 rounded-2xl'>
                                     <h3 className='text-base md:text-xl xl:text-2xl font-semibold text-white'>Lorem ipsum</h3>
                                     <h4 className='text-2xl md:text-4xl xl:text-6xl text-white my-4'>12</h4>
-                                    <p className='text-slate-100 text-sm md:text-base xl:text-xl'>Vontura isman</p>
+                                    <p className='text-slate-100 text-sm md:text-base xl:text-lg'>Vontura isman</p>
                               </div>
-                              <div className='py-4 md:py-7 px-6 md:px-8 lg:px-12 bg-gray-800 rounded'>
+                              <div className='py-4 md:py-7 px-6 md:px-8 lg:px-12 bg-gray-800 rounded-2xl'>
                                     <h3 className='text-base md:text-xl xl:text-2xl font-semibold text-white'>Lorem ipsum</h3>
                                     <h4 className='text-2xl md:text-4xl xl:text-6xl text-white my-4'>121+</h4>
-                                    <p className='text-slate-100 text-sm md:text-base xl:text-xl'>Vontura isman</p>
+                                    <p className='text-slate-100 text-sm md:text-base xl:text-lg'>Vontura isman</p>
                               </div>
                         </div>
                   </div>

@@ -23,7 +23,7 @@ export default async function CheckoutPage() {
           </div>
           <div>
             <Link href="/cart">
-              <button className="bg-gray-100 text-black rounded-md px-4 py-3 shadow hover:bg-gray-300 transition-all duration-300 font-medium cursor-pointer text-xs md:text-sm">
+              <button className="bg-gray-100 text-black rounded-2xl px-4 py-3 shadow hover:bg-gray-300 transition-all duration-300 font-medium cursor-pointer text-xs md:text-sm">
                 &larr; Back to cart
               </button>
             </Link>

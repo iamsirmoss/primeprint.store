@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { addToCart } from "@/lib/cart";
+import { RiShoppingCartFill } from 'react-icons/ri';
 
 type Review = {
   id: string;
@@ -265,13 +266,14 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
                 type="button"
                 onClick={handleAddToCart}
                 disabled={isOutOfStock}
-                className={`flex-1 rounded-lg bg-black px-5 py-3 text-sm font-semibold text-white transition-all duration-300
+                className={`flex-1 rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white transition-all duration-300 flex items-center gap-2 justify-center
                   ${
                       isOutOfStock
                       ? "bg-gray-400 cursor-not-allowed"
                       : "bg-black hover:bg-black/75 cursor-pointer"
                   }`}
               >
+                <i><RiShoppingCartFill className='text-white text-sm' /></i>
                 {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
               </button>
 

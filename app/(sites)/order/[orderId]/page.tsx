@@ -58,20 +58,20 @@ export default async function OrderReviewPage({
       </div>
 
       {order.status === "PAID" && (
-        <div className="mt-4 text-sm md:text-base rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
+        <div className="mt-4 text-sm md:text-base rounded-2xl border border-green-200 bg-green-50 p-4 text-green-800">
           Payment confirmed. Thank you!
         </div>
       )}
 
       {order.status !== "PAID" && (
-        <div className="mt-4 rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-yellow-800">
+        <div className="mt-4 rounded-2xl border border-yellow-200 bg-yellow-50 p-4 text-yellow-800">
           ⏳ Payment pending. If you just paid, refresh in a few seconds.
         </div>
       )}
 
       <div className="mt-8 grid gap-6 md:grid-cols-[1fr_420px]">
         {/* Items */}
-        <div className="rounded-xl border bg-white p-5">
+        <div className="rounded-2xl border bg-white p-5">
           <h2 className="text-base md:text-lg font-bold">Items</h2>
 
           <div className="mt-4 space-y-3">
@@ -80,7 +80,7 @@ export default async function OrderReviewPage({
               return (
                 <div
                   key={it.id}
-                  className="flex items-start justify-between gap-4 rounded-lg border p-4"
+                  className="flex items-start justify-between gap-4 rounded-2xl border p-4"
                 >
                   <div>
                     <p className="font-semibold capitalize">{it.titleSnapshot}</p>
@@ -114,7 +114,7 @@ export default async function OrderReviewPage({
           <div className="mt-6 flex gap-3 text-sm md:text-base">
             <Link
               href="/orders"
-              className="w-1/2 rounded-lg border py-3 text-center font-semibold hover:bg-gray-100 transition-all duration-300"
+              className="w-1/2 rounded-2xl border py-3 text-center font-semibold hover:bg-gray-100 transition-all duration-300"
             >
               View all my orders
             </Link>
@@ -122,7 +122,7 @@ export default async function OrderReviewPage({
             {order.status === "PAID" ? (
               <button
                 type="button"
-                className="w-1/2 rounded-lg bg-gray-200 py-3 font-semibold text-gray-600 cursor-not-allowed"
+                className="w-1/2 rounded-2xl bg-gray-200 py-3 font-semibold text-gray-600 cursor-not-allowed"
                 disabled
               >
                 Already paid
@@ -130,7 +130,7 @@ export default async function OrderReviewPage({
             ) : order.status === "CANCELED" ? (
               <button
                 type="button"
-                className="w-1/2 rounded-lg bg-gray-200 py-3 font-semibold text-gray-600 cursor-not-allowed"
+                className="w-1/2 rounded-2xl bg-gray-200 py-3 font-semibold text-gray-600 cursor-not-allowed"
                 disabled
               >
                 Canceled
@@ -142,7 +142,7 @@ export default async function OrderReviewPage({
                   <input type="hidden" name="orderId" value={order.id} />
                   <button
                     type="submit"
-                    className="w-full rounded-lg border py-3 font-semibold hover:bg-red-50 border-red-300 transition-all duration-300 cursor-pointer text-red-600"
+                    className="w-full rounded-2xl border py-3 font-semibold hover:bg-red-50 border-red-300 transition-all duration-300 cursor-pointer text-red-600"
                   >
                     Cancel
                   </button>
@@ -153,7 +153,7 @@ export default async function OrderReviewPage({
                   <input type="hidden" name="orderId" value={order.id} />
                   <button
                     type="submit"
-                    className="w-full rounded-lg bg-black py-3 font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer"
+                    className="w-full rounded-2xl bg-black py-3 font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer"
                   >
                     Pay with Stripe
                   </button>
@@ -164,7 +164,7 @@ export default async function OrderReviewPage({
         </div>
 
         {/* Summary */}
-        <div className="h-fit rounded-xl border bg-white p-5">
+        <div className="h-fit rounded-2xl border bg-white p-5">
           <h2 className="text-lg font-bold">Summary</h2>
 
           <div className="mt-4 space-y-2 text-sm">

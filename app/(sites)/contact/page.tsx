@@ -252,7 +252,7 @@ const Contact = () => {
         </div>
 
         {/* Form Section */}
-        <div className="mt-2 py-8 md:py-12 px-4 md:px-8 w-full lg:w-[60%] mx-auto order-1 bg-white shadow-lg rounded-md">
+        <div className="mt-2 py-8 md:py-12 px-4 md:px-8 w-full lg:w-[60%] mx-auto order-1 bg-white shadow-lg rounded-2xl">
           <form ref={formRef} action={formAction}>
             {/* Honeypot */}
             <div className="hidden" aria-hidden="true">
@@ -408,7 +408,8 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isPending}
-                className="bg-red-500 font-semibold px-8 py-3 md:px-12 md:py-4 rounded shadow-md flex items-center gap-2 transition-all duration-500 hover:bg-blue-400 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                className="bg-red-500 font-semibold px-8 py-3 md:px-12 md:py-4 rounded-2xl shadow-md flex items-center gap-2 transition-all duration-500 hover:bg-blue-400 cursor-pointer 
+                disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <Send className="text-white size-4 md:size-6" />
                 <span className="text-white">

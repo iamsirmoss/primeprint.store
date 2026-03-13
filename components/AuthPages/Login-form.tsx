@@ -225,7 +225,7 @@ const LoginForm = ({
             autoComplete="email"
             inputMode="email"
             maxLength={200}
-            className="peer w-full bg-transparent pl-8 md:pl-9 py-2 focus:outline-none text-sm md:text-base"
+            className="peer w-full bg-transparent pl-8 md:pl-9 py-2 focus:outline-none text-xs md:text-sm placeholder-gray-400"
             placeholder="Email"
           />
           <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
@@ -241,7 +241,7 @@ const LoginForm = ({
             required
             autoComplete="current-password"
             maxLength={200}
-            className="peer w-full bg-transparent pl-8 md:pl-9 py-2 pr-10 focus:outline-none text-sm md:text-base"
+            className="peer w-full bg-transparent pl-8 md:pl-9 py-2 pr-10 focus:outline-none text-xs md:text-sm placeholder-gray-400"
             placeholder="Password"
           />
 
@@ -265,7 +265,7 @@ const LoginForm = ({
         <div className="mt-6 flex flex-col items-end">
           <Link
             href="/auth/forgot-password"
-            className="text-sm italic text-muted-foreground hover:text-foreground"
+            className="text-sm italic text-black hover:text-blue-400 transition-all duration-300"
           >
             Forgot password?
           </Link>
@@ -276,7 +276,8 @@ const LoginForm = ({
         <Button
           disabled={isPending}
           type="submit"
-          className="bg-blue-400 text-white font-semibold px-16 py-7 w-full rounded shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-500 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+          className="bg-blue-400 text-white font-semibold px-16 py-7 w-full rounded-2xl shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-500 cursor-pointer 
+          disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <h5 className="text-center text-white">
             {isPending ? "Loading..." : "Login"}

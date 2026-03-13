@@ -60,7 +60,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
 
   if (items.length === 0) {
     return (
-      <div className="rounded-xl border bg-white p-8 text-center text-gray-500">
+      <div className="rounded-2xl border bg-white p-8 text-center text-gray-500">
         Your cart is empty.
       </div>
     );
@@ -69,7 +69,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_540px]">
       {/* Left: Items */}
-      <div className="rounded-xl border bg-white p-5">
+      <div className="rounded-2xl border bg-white p-5">
         <h2 className="text-base md:text-lg font-bold">Your items</h2>
         <p className="text-xs md:text-sm text-gray-500 mt-1">{count} item(s)</p>
 
@@ -83,7 +83,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
             return (
               <div
                 key={pkg ? `${it.packageId}-${it.billing}` : `${it.productId}-${it.slug}`}
-                className="flex items-start justify-between gap-3 rounded-lg border p-4"
+                className="flex items-start justify-between gap-3 rounded-2xl border p-4"
               >
                 <div>
                   <div className="text-xs md:text-sm font-semibold capitalize text-black">{title}</div>
@@ -121,7 +121,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
       </div>
 
       {/* Right: Summary */}
-      <div className="h-fit rounded-xl border bg-white p-5">
+      <div className="h-fit rounded-2xl border bg-white p-5">
         <h2 className="text-base md:text-lg font-bold">Summary</h2>
 
         <div className="mt-4 space-y-2 text-sm">
@@ -135,7 +135,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
           ))}
         </div>
 
-        <div className="mt-4 rounded-lg bg-gray-50 p-3 text-sm text-gray-500 font-semibold">
+        <div className="mt-4 rounded-2xl bg-gray-50 p-3 text-sm text-gray-500 font-semibold">
           Email : <span className="font-normal">{userEmail || "—"}</span>
         </div>
 
@@ -143,7 +143,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
           type="button"
           onClick={handleCheckout}
           disabled={loading}
-          className={`mt-5 w-full rounded-md py-3 text-sm font-semibold text-white transition-all duration-300 cursor-pointer ${
+          className={`mt-5 w-full rounded-2xl py-3 text-sm font-semibold text-white transition-all duration-300 cursor-pointer ${
             loading ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-black/75"
           }`}
         >

@@ -31,7 +31,7 @@ import Link from "next/link";
               <p className="text-gray-500">Your cart is empty.</p>
               <Link href="/shop">
                   <button
-                    className="bg-red-500 text-white rounded px-10 py-4 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium mt-4"
+                    className="bg-red-500 text-white rounded-2xl px-10 py-3 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium mt-4"
                   >
                     Go to shop
                   </button>
@@ -60,7 +60,7 @@ import Link from "next/link";
           return (
             <div
               key={key}
-              className="flex gap-4 rounded-lg bg-slate-100 p-4 hover:shadow-md transition-all duration-500 cursor-pointer"
+              className="flex gap-4 rounded-2xl bg-slate-100 p-4 hover:shadow-md transition-all duration-500 cursor-pointer"
             >
               <div className="relative h-20 w-20 overflow-hidden rounded-lg bg-gray-100">
                 <Image
@@ -130,7 +130,7 @@ import Link from "next/link";
 
                 <div className="mt-3 flex items-center justify-between flex-wrap gap-4">
                   {/* Qty controls */}
-                  <div className="inline-flex items-center gap-2 rounded-lg border bg-white px-2 py-1">
+                  <div className="inline-flex items-center gap-2 rounded-2xl border bg-white px-2 py-1">
                     <button
                       type="button"
                       onClick={() => {
@@ -169,7 +169,7 @@ import Link from "next/link";
       </div>
 
       {/* Summary */}
-      <div className="h-fit rounded-lg border bg-white p-5">
+      <div className="h-fit rounded-2xl border bg-white p-5">
         <h2 className="text-lg font-bold">Summary</h2>
 
         <div className="mt-4 space-y-2 text-sm">
@@ -208,7 +208,7 @@ import Link from "next/link";
         </button> */}
         <Link href="/checkout">
             <button
-              className="mt-5 w-full rounded-md bg-black py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-500 cursor-pointer"
+              className="mt-5 w-full rounded-2xl bg-black py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-500 cursor-pointer"
             >
               Checkout
             </button>

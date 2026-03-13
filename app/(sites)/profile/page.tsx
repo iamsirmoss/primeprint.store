@@ -55,7 +55,7 @@ const page = async () => {
                         className="size-16 border border-primary rounded-full object-cover"
                   />
                   ) : (
-                  <div className="size-24 border border-primary rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+                  <div className="size-24 border border-primary rounded-full bg-blue-400 text-primary-foreground flex items-center justify-center">
                         <span className="uppercase text-lg font-bold">
                               {session.user.name.slice(0, 2)}
                         </span>

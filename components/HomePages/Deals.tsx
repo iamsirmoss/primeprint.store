@@ -42,7 +42,7 @@ const Test = ({products}: {products: ProductProps[]}) => {
             
             <div className="w-fit">
                   <Link href={'/services'} className="group">
-                        <button className='bg-red-500 text-white rounded px-6 py-3 xs:px-10 xs:py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
+                        <button className='bg-red-500 text-white rounded-2xl px-6 py-3 xs:px-10 xs:py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
                         group-hover:bg-blue-400 transition-all duration-500 flex items-center gap-2 cursor-pointer'>
                               <h5 className='font-semibold text-sm xs:text-base text-white'>Learn more</h5>
                               <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' /> 

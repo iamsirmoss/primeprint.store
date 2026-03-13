@@ -33,7 +33,7 @@ const SignOutButton = () => {
       }
 
   return (
-      <button onClick={handleSignOut} disabled={isPending} className='flex items-center gap-2 w-full px-2 py-1 hover:bg-gray-100 rounded-md cursor-pointer'>
+      <button onClick={handleSignOut} disabled={isPending} className='flex items-center gap-2 w-full px-2 py-1 hover:bg-gray-100 rounded-2xl cursor-pointer'>
             <LogOut className="mr-2 h-4 w-4 cursor-pointer" />
             <span className='text-sm'>Sign Out</span>
       </button>

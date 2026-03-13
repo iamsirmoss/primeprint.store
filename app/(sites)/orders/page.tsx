@@ -45,14 +45,14 @@ export default async function OrdersPage() {
 
         <Link
           href="/shop"
-          className="text-sm md:text-base rounded-lg border px-5 py-3 font-semibold hover:bg-gray-100 transition-all duration-300"
+          className="text-sm md:text-base rounded-2xl border px-5 py-3 text-black font-semibold hover:bg-gray-100 transition-all duration-300"
         >
           Go to shop
         </Link>
       </div>
 
       {orders.length === 0 ? (
-        <div className="mt-10 rounded-xl border bg-white p-10 text-center text-gray-600">
+        <div className="mt-10 rounded-2xl border bg-white p-10 text-center text-gray-600">
           No orders yet.
         </div>
       ) : (
@@ -61,7 +61,7 @@ export default async function OrdersPage() {
             <Link
               key={o.id}
               href={`/order/${o.id}`}
-              className="block rounded-xl border bg-white p-5 hover:shadow-sm hover:border-gray-400 transition-all duration-300"
+              className="block rounded-2xl border bg-white p-5 hover:shadow-sm hover:border-gray-400 transition-all duration-300"
             >
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div>

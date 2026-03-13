@@ -21,7 +21,7 @@ const About = () => {
                               est quaerat quia! Libero, ratione
                         </p>
                   </div>
-                  <div className='lg:w-[45%] h-[300px] lg:h-[500px] mt-10 lg:mt-0'>
+                  <div className='lg:w-[45%] h-[300px] lg:h-[500px] mt-10 lg:mt-0 rounded-2xl'>
                         <Image
                         src={image}
                         alt='image about'
@@ -29,7 +29,7 @@ const About = () => {
                         width={0}
                         height={0}
                         sizes="100vw"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover rounded-2xl"
                         />
                   </div>
             </div>

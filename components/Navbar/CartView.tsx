@@ -104,7 +104,7 @@ const CartView = ({
                 <Link href="/shop" onClick={openCart}>
                   <motion.button
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="bg-red-500 text-white rounded px-10 py-5 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium"
+                    className="bg-red-500 text-white rounded-2xl px-10 py-5 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium"
                   >
                     Go to order
                   </motion.button>
@@ -124,7 +124,7 @@ const CartView = ({
 
                     return (
                       <div key={key} className="block sm:flex gap-3 rounded-xl border p-3 hover:border-gray-500 transition-all duration-500">
-                        <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-slate-100">
+                        <div className="relative h-16 w-16 overflow-hidden rounded-2xl bg-slate-100">
                           <Image
                             src={it.image || "/images/placeholder.png"}
                             alt={title}
@@ -191,7 +191,7 @@ const CartView = ({
                           </div>
 
                           <div className="mt-3 flex items-center justify-between flex-wrap gap-3">
-                            <div className="inline-flex items-center gap-2 rounded-lg border px-1 md:px-2 py-1">
+                            <div className="inline-flex items-center gap-2 rounded-2xl border px-1 md:px-2 py-1">
                               <button
                                 type="button"
                                 onClick={() => {
@@ -255,7 +255,7 @@ const CartView = ({
                     >
                       <button
                         type="button"
-                        className="w-full rounded-lg border py-3 font-semibold hover:bg-slate-200 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300 text-black"
+                        className="w-full rounded-2xl border py-3 font-semibold hover:bg-slate-200 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300 text-black"
                       >
                         View cart
                       </button>
@@ -268,7 +268,7 @@ const CartView = ({
                     >
                       <button
                         type="button"
-                        className="w-full rounded-lg bg-black py-3 font-semibold text-white hover:bg-black/75 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300"
+                        className="w-full rounded-2xl bg-black py-3 font-semibold text-white hover:bg-black/75 cursor-pointer text-xs sm:text-sm md:text-base transition-all duration-300"
                       >
                         Checkout
                       </button>

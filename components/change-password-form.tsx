@@ -34,12 +34,12 @@ export const ChangePasswordForm = () => {
   return (
     <form onSubmit={handleSubmit} className="max-w-md w-full space-y-4 mt-10">
       <div className="relative mt-8">
-        <KeySquare className="absolute top-2 size-5 md:size-6" />
+        <KeySquare className="absolute top-2 size-4 md:size-5" />
         <input 
         type={showPassword ? "text" : "password"} 
         id="currentPassword" name="currentPassword" 
         placeholder="Current password ****" 
-        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-sm md:text-base" />
+        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-xs md:text-sm placeholder-gray-400" />
         {/* base line */}
         <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
                         
@@ -53,17 +53,17 @@ export const ChangePasswordForm = () => {
               className="absolute right-0 top-2 text-gray-400 hover:text-blue-400 transition"
               aria-label={showPassword ? "Hide password" : "Show password"}
         >
-              {showPassword ? <EyeOff /> : <Eye />}
+              {showPassword ? <EyeOff className="size-4 md:size-5" /> : <Eye className="size-4 md:size-5" />}
         </button>
       </div>
 
       <div className="relative mt-8">
-        <KeySquare className="absolute top-2" />
+        <KeySquare className="absolute top-2 size-4 md:size-5" />
         <input 
         type={showPassword2 ? "text" : "password"} 
         id="newPassword" name="newPassword" 
         placeholder="New password ****" 
-        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none" />
+        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-xs md:text-sm placeholder-gray-400" />
         {/* base line */}
         <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
                         
@@ -77,11 +77,11 @@ export const ChangePasswordForm = () => {
               className="absolute right-0 top-2 text-gray-400 hover:text-blue-400 transition"
               aria-label={showPassword2 ? "Hide password" : "Show password"}
         >
-              {showPassword2 ? <EyeOff /> : <Eye />}
+              {showPassword2 ? <EyeOff className="size-4 md:size-5" /> : <Eye className="size-4 md:size-5" />}
         </button>
       </div>
 
-      <Button size="lg" type="submit" disabled={isPending} className="rounded bg-black cursor-pointer transition-all duration-300 hover:bg-blue-400">
+      <Button size="lg" type="submit" disabled={isPending} className="rounded-2xl bg-black cursor-pointer transition-all duration-300 hover:bg-blue-400 text-xs md:text-sm">
         Change password
       </Button>
     </form>

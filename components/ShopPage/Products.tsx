@@ -213,7 +213,7 @@ const Products = ({
             setSelectedService("all");
             updateUrl("all", "");
           }}
-          className="rounded text-white bg-black px-4 py-3 text-sm font-medium hover:bg-black/75 cursor-pointer transition-all duration-300"
+          className="rounded-2xl text-white bg-black px-4 py-3 text-sm font-medium hover:bg-black/75 cursor-pointer transition-all duration-300"
         >
           Reset filters
         </button>
@@ -224,7 +224,7 @@ const Products = ({
         {/* All */}
         <button
           onClick={() => onSelectService("all")}
-          className={`rounded py-2 px-4 transition-all duration-300 border ${
+          className={`rounded-2xl py-2 px-4 transition-all duration-300 border ${
             selectedService === "all"
               ? "bg-red-500 border-red-500 text-white"
               : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500 text-black"
@@ -236,7 +236,7 @@ const Products = ({
         {/* Others (serviceId null) */}
         <button
           onClick={() => onSelectService("other")}
-          className={`rounded py-2 px-4 transition-all duration-300 border ${
+          className={`rounded-2xl py-2 px-4 transition-all duration-300 border ${
             selectedService === "other"
               ? "bg-red-500 border-red-500 text-white"
               : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500 text-black"
@@ -252,7 +252,7 @@ const Products = ({
             <button
               key={s.id}
               onClick={() => onSelectService(s.slug)}
-              className={`rounded py-2 px-4 transition-all duration-300 border ${
+              className={`rounded-2xl py-2 px-4 transition-all duration-300 border ${
                 active
                   ? "bg-red-500 border-red-500 text-white"
                   : "bg-white border-gray-200 hover:bg-red-500 hover:text-white hover:border-red-500 text-black"

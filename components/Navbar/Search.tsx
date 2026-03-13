@@ -158,11 +158,11 @@ const Search = () => {
 
           <div className="mt-4 max-h-[420px] overflow-y-auto">
             {trimmedQuery.length < 2 ? (
-              <div className="rounded-md border bg-gray-50 p-4 text-xs text-gray-500">
+              <div className="rounded-2xl border bg-gray-50 p-4 text-xs text-gray-500">
                 Type at least 2 characters to start searching.
               </div>
             ) : totalResults === 0 && !loading ? (
-              <div className="rounded-md border bg-gray-50 p-4 text-sm text-gray-500">
+              <div className="rounded-2xl border bg-gray-50 p-4 text-sm text-gray-500">
                 No results found.
               </div>
             ) : (
@@ -170,7 +170,7 @@ const Search = () => {
                 {/* Products */}
                 {results.products.length > 0 && (
                   <div>
-                    <h4 className="mb-2 text-sm font-semibold uppercase underline">
+                    <h4 className="mb-2 text-xs font-semibold uppercase underline">
                       Products
                     </h4>
                     <div className="space-y-2">
@@ -179,16 +179,16 @@ const Search = () => {
                           key={item.id}
                           type="button"
                           onClick={() => goTo(`/product/${item.slug}`)}
-                          className="w-full rounded-md border p-3 text-left hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+                          className="w-full rounded-2xl border p-3 text-left hover:bg-gray-100 transition-all duration-300 cursor-pointer"
                         >
                           <div className="flex items-start justify-between gap-3 flex-wrap">
                             <div>
-                              <p className="text-sm md:text-base font-bold capitalize text-red-400">{item.title}</p>
-                              <p className="mt-1 text-xs underline text-gray-400">
+                              <p className="text-xs md:text-sm font-bold capitalize text-red-400">{item.title}</p>
+                              <p className="mt-1 text-ss underline text-gray-400">
                                 Product
                               </p>
                             </div>
-                            <p className="text-xs md:text-sm font-semibold">
+                            <p className="text-ss md:text-xs font-semibold text-black">
                               {item.price.toFixed(2)} {item.currency}
                             </p>
                           </div>
@@ -201,7 +201,7 @@ const Search = () => {
                 {/* Services */}
                 {results.services.length > 0 && (
                   <div>
-                    <h4 className="mb-2 text-sm font-semibold uppercase underline">
+                    <h4 className="mb-2 text-xs font-semibold uppercase underline">
                       Services
                     </h4>
                     <div className="space-y-2">
@@ -210,10 +210,10 @@ const Search = () => {
                           key={item.id}
                           type="button"
                           onClick={() => goTo(`/service/${item.slug}`)}
-                          className="w-full rounded-md border p-3 text-left hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+                          className="w-full rounded-2xl border p-3 text-left hover:bg-gray-100 transition-all duration-300 cursor-pointer"
                         >
-                          <p className="text-sm md:text-base font-bold capitalize text-blue-400">{item.title}</p>
-                          <p className="mt-1 text-xs underline text-gray-400">Service</p>
+                          <p className="text-xs md:text-sm font-bold capitalize text-blue-400">{item.title}</p>
+                          <p className="mt-1 text-ss underline text-gray-400">Service</p>
                         </button>
                       ))}
                     </div>
@@ -223,7 +223,7 @@ const Search = () => {
                 {/* Sub-services */}
                 {results.subServices.length > 0 && (
                   <div>
-                    <h4 className="mb-2 text-sm font-semibold uppercase underline">
+                    <h4 className="mb-2 text-xs font-semibold uppercase underline">
                       Sub-services
                     </h4>
                     <div className="space-y-2">
@@ -234,10 +234,10 @@ const Search = () => {
                           onClick={() =>
                             goTo(`/service/sub-service/${item.slug}`)
                           }
-                          className="w-full rounded-md border p-3 text-left hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+                          className="w-full rounded-2xl border p-3 text-left hover:bg-gray-100 transition-all duration-300 cursor-pointer"
                         >
-                          <p className="text-sm md:text-base font-bold capitalize">{item.title}</p>
-                          <p className="mt-1 text-xs underline text-gray-400">
+                          <p className="text-xs md:text-sm font-bold capitalize">{item.title}</p>
+                          <p className="mt-1 text-ss underline text-gray-400">
                             Under: {item.service.title}
                           </p>
                         </button>
@@ -250,8 +250,8 @@ const Search = () => {
           </div>
 
           {trimmedQuery.length >= 2 && (
-            <div className="mt-4 flex justify-end text-sm md:text-base">
-              <Button type="submit" className="cursor-pointer">
+            <div className="mt-4 flex justify-end text-xs md:text-sm">
+              <Button type="submit" className="cursor-pointer bg-black hover:bg-black/90 transition-all duration-300">
                 View all results
               </Button>
             </div>

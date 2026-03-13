@@ -30,7 +30,7 @@ const Banner2 = () => {
                         </ul>
                         <div className='w-fit'>
                               <Link href={'/learn-more'} className=''>
-                                    <button className='bg-red-500 text-white rounded px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
+                                    <button className='bg-red-500 text-white rounded-2xl px-10 py-4 shadow-[rgba(13,38,76,0.19)_0px_9px_20px] 
                                     hover:bg-blue-400 transition-all duration-500 flex items-center gap-2 cursor-pointer group'>
                                           <h5 className='font-semibold text-sm md:text-base text-white'>Learn more</h5>
                                           <BsArrowRight className='text-white group-hover:translate-x-2 transition-all duration-500' />

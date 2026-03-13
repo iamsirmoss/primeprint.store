@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { addPackageToCart } from "@/lib/cart";
+import { RiShoppingCartFill } from 'react-icons/ri';
 
 type Tier = "STARTER" | "GROWTH" | "ULTIMATE";
 
@@ -279,7 +280,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                 <div className="mt-6">
                   <button
                     type="button"
-                    className="w-full rounded-lg bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer"
+                    className="w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer flex items-center gap-2 justify-center"
                     onClick={() => {
                       const unitPrice =
                         effectiveBilling === "month" ? p.priceByMonth : p.priceByYear;
@@ -307,6 +308,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                       );
                     }}
                   >
+                    <i><RiShoppingCartFill className='text-white text-sm' /></i>
                     Add to cart
                   </button>
 
@@ -326,23 +328,23 @@ export default function Body({ service }: { service: SubServiceForBody }) {
           What happens after ordering?
         </h4>
         <ol className="mt-3 space-y-2 text-sm text-gray-700">
-          <li className="flex gap-3">
+          <li className="flex gap-3 items-center">
             <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-white text-xs">
               1
             </span>
             <span>We confirm your request and collect any missing details.</span>
           </li>
-          <li className="flex gap-3">
+          <li className="flex gap-3 items-center">
             <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-white text-xs">
               2
             </span>
             <span>Production starts based on the selected package.</span>
           </li>
-          <li className="flex gap-3">
+          <li className="flex gap-3 items-center">
             <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-white text-xs">
               3
             </span>
-            <span>You receive updates until completion/delivery.</span>
+            <span>You receive updates until completion / delivery.</span>
           </li>
         </ol>
       </div>

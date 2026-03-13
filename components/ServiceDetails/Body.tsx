@@ -83,8 +83,8 @@ const Body = ({service}: {service: ServiceProps}) => {
                                     </div>
                               </div>
                               <button
-                                    className="mt-10 py-1.5 px-4 md:py-2 bg-transparent border rounded group
-                                    transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer text-sm md:text-base"
+                                    className="mt-10 py-1.5 px-4 md:py-2 bg-transparent border rounded-2xl group
+                                    transition-all duration-500 ease-in-out flex items-center gap-2 capitalize cursor-pointer text-xs md:text-sm text-black"
                                     >
                                           more
                                           <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />

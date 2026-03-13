@@ -15,7 +15,7 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
   slug
 }) => {
   return (
-        <div className="border p-3 rounded-sm group hover:shadow-lg transition-all duration-500">
+        <div className="border p-3 rounded-2xl group hover:shadow-lg transition-all duration-500">
           <Link href={`/service/sub-service/${slug}`}>
           <div className="overflow-hidden pb-3">
             {icon ?
@@ -39,8 +39,8 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
                 <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-500 capitalize">{title}</h3>
     
                 <button
-                  className="mt-4 px-4 py-1.5 md:py-2 bg-transparent border rounded group
-                  transition-all duration-500 flex items-center gap-2 capitalize cursor-pointer text-xs md:text-sm"
+                  className="mt-4 px-4 py-1.5 md:py-2 bg-transparent border rounded-2xl group
+                  transition-all duration-500 flex items-center gap-2 capitalize cursor-pointer text-xs md:text-sm text-black"
                 >
                   more
                   <BsArrowRight className='group-hover:translate-x-2 transition-all duration-500' />

@@ -6,6 +6,7 @@ import { Heart } from 'lucide-react'
 import { toast } from "sonner";
 import { addToCart } from "@/lib/cart";
 import { useState } from "react";
+import { RiShoppingCartFill } from 'react-icons/ri';
 
 interface ProductProps {
   id: string;
@@ -88,16 +89,17 @@ const ProductCard = ({id, slug, title, description, price, images, currency = "U
                                     type="button"
                                     onClick={handleAddToCart}
                                     disabled={isOutOfStock}
-                                    className={`border rounded-3xl py-3 px-8 text-white transition-all duration-300
+                                    className={`border rounded-2xl py-3 px-8 text-white transition-all duration-300 flex items-center gap-2 justify-center
                                     ${
                                           isOutOfStock
                                           ? "bg-gray-400 cursor-not-allowed"
                                           : "bg-black hover:bg-black/75 cursor-pointer"
                                     }`}
                               >
-                                          <h5 className="text-xs text-white">
-                                                {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
-                                          </h5>
+                                    <i><RiShoppingCartFill className='text-white text-sm' /></i>
+                                    <h5 className="text-xs text-white">
+                                          {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
+                                    </h5>
                               </button>
                         </div>
                   </div>
