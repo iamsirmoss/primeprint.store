@@ -53,7 +53,7 @@ const NavMobile = ({ isHome }: { isHome: boolean }) => {
         ${open ? "translate-x-0" : "-translate-x-full"}`}
         style={{ willChange: "transform" }}
       >
-        <div className="flex flex-col items-start justify-start overflow-y-auto h-[calc(100vh-44px)] pb-4">
+        <div className="flex flex-col items-start justify-start overflow-y-auto h-[calc(100vh-0px)] pb-4">
           {links.map((link) => (
             <Link
               key={link.name}
