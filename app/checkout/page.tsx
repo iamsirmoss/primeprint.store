@@ -16,14 +16,14 @@ export default async function CheckoutPage() {
       <div className="">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <div className="order-2 md:order-1">
-            <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">Checkout</h1>
-            <p className="text-gray-500 mt-2 text-sm md:text-base">
+            <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold text-black">Checkout</h1>
+            <p className="text-gray-500 mt-2 text-xs md:text-sm">
               Review your items and proceed to secure payment.
             </p>
           </div>
           <div>
             <Link href="/cart">
-              <button className="bg-gray-100 text-gray-800 rounded-md px-4 py-3 shadow hover:bg-gray-300 transition-all duration-300 font-medium cursor-pointer text-sm md:text-base">
+              <button className="bg-gray-100 text-black rounded-md px-4 py-3 shadow hover:bg-gray-300 transition-all duration-300 font-medium cursor-pointer text-xs md:text-sm">
                 &larr; Back to cart
               </button>
             </Link>

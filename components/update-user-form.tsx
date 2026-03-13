@@ -66,7 +66,7 @@ export const UpdateUserForm = ({ name }: UpdateUserFormProps) => {
       hover:border-b-red-500 transition-all duration-300 bg-transparent" />
       </div> */}
 
-      <Button size="lg" type="submit" disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400 text-sm md:text-base">
+      <Button size="lg" type="submit" disabled={isPending} className="rounded bg-black cursor-pointer transition-all duration-300 hover:bg-blue-400 text-sm md:text-base">
         Update user
       </Button>
     </form>

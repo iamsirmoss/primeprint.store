@@ -81,7 +81,7 @@ export const ChangePasswordForm = () => {
         </button>
       </div>
 
-      <Button size="lg" type="submit" disabled={isPending} className="rounded cursor-pointer transition-all duration-300 hover:bg-blue-400">
+      <Button size="lg" type="submit" disabled={isPending} className="rounded bg-black cursor-pointer transition-all duration-300 hover:bg-blue-400">
         Change password
       </Button>
     </form>

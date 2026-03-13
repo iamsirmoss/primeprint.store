@@ -4,21 +4,20 @@ import SignInOAuthButton from "@/components/sign-in-oauth-button"
 import Link from "next/link"
 
 type Props = {
-  searchParams?: { callbackURL?: string };
+  searchParams: Promise<{
+    callbackURL?: string;
+  }>;
 };
 
 function safeCallback(cb?: string) {
-  if (!cb) return null;
-  if (!cb.startsWith("/")) return null;
-  if (cb.startsWith("//")) return null;
-  return cb;
+  const value = cb?.trim();
+  if (!value) return null;
+  if (!value.startsWith("/")) return null;
+  if (value.startsWith("//")) return null;
+  return value;
 }
 
-const page = async ({
-  searchParams,
-}: {
-  searchParams: { callbackURL?: string };
-}) => {
+const page = async ({ searchParams }: Props) => {
       const sp = await searchParams;
       const callbackURL = safeCallback(sp?.callbackURL);
       

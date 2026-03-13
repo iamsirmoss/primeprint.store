@@ -86,13 +86,13 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
                 className="flex items-start justify-between gap-3 rounded-lg border p-4"
               >
                 <div>
-                  <div className="text-sm md:text-base font-semibold capitalize text-black">{title}</div>
+                  <div className="text-xs md:text-sm font-semibold capitalize text-black">{title}</div>
                   {pkg && (
-                      <p className="text-xs md:text-sm text-slate-500 mb-2 capitalize">
+                      <p className="text-ss md:text-xs text-slate-500 mb-2 capitalize">
                         {it.serviceSlug} • {it.subServiceTitle}
                       </p>
                   )}
-                  <div className="mt-1 text-xs md:text-sm text-gray-500 flex flex-wrap gap-2">
+                  <div className="mt-1 text-ss md:text-xs text-gray-500 flex flex-wrap gap-2">
                     <span className="rounded-full border px-2 py-1">
                       {pkg ? "PACKAGE" : "PRODUCT"}
                     </span>
@@ -106,12 +106,12 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
                     </span>
                   </div>
 
-                  <div className="mt-2 text-sm text-gray-600">
+                  <div className="mt-2 text-xs text-gray-600">
                     {unit.toFixed(2)} {cur} / unit
                   </div>
                 </div>
 
-                <div className="font-bold whitespace-nowrap text-sm md:text-base">
+                <div className="font-bold whitespace-nowrap text-ss md:text-xs text-black">
                   {(unit * it.qty).toFixed(2)} {cur}
                 </div>
               </div>
@@ -135,8 +135,8 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
           ))}
         </div>
 
-        <div className="mt-4 rounded-lg bg-gray-50 p-3 text-sm text-gray-600">
-          Email : <span className="font-semibold">{userEmail || "—"}</span>
+        <div className="mt-4 rounded-lg bg-gray-50 p-3 text-sm text-gray-500 font-semibold">
+          Email : <span className="font-normal">{userEmail || "—"}</span>
         </div>
 
         <button

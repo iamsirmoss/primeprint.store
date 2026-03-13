@@ -270,13 +270,14 @@ model OrderItem {
 }
 
 model Contact {
-  id          String  @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   email       String
   phoneNumber String
   company     String?
   service     String
   description String?
+  createdAt   DateTime @default(now())
 
   @@map("contacts")
 }
