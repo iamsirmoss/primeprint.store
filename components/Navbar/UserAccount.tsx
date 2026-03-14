@@ -18,7 +18,7 @@ interface UserAccountProps {
     name?: string | null;
     email?: string | null;
     // image?: string | null;
-    role: "USER" | "ADMIN";
+    role: "USER" | "ADMIN" | "MANAGER" | "STAFF";
   };
 }
 
