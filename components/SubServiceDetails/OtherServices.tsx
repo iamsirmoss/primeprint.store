@@ -22,7 +22,7 @@ const OtherSubServices = ({
                         <SubServiceCard
                               key={index}
                               title={service.title}
-                              icon={service.image ?? ""}
+                              image={service.image ?? ""}
                               slug={service.slug}
                         />
                   ))}
