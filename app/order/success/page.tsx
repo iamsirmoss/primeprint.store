@@ -25,7 +25,7 @@ export default async function OrderSuccessPage({
       <div className="mt-8 flex justify-center gap-3">
         <Link
           href={orderId ? `/order/${orderId}` : "/"}
-          className="rounded-lg border px-6 py-3 font-semibold hover:bg-gray-100 transition-all duration-300"
+          className="rounded-lg border px-6 py-3 font-semibold hover:bg-gray-100 transition-all duration-300 text-black"
         >
           View order
         </Link>

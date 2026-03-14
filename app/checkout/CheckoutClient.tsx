@@ -107,12 +107,12 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
                   </div>
 
                   <div className="mt-2 text-xs text-gray-600">
-                    {unit.toFixed(2)} {cur} / unit
+                    {(unit/100).toFixed(2)} {cur} / unit
                   </div>
                 </div>
 
                 <div className="font-bold whitespace-nowrap text-ss md:text-xs text-black">
-                  {(unit * it.qty).toFixed(2)} {cur}
+                  {((unit/100) * it.qty).toFixed(2)} {cur}
                 </div>
               </div>
             );
@@ -129,7 +129,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
             <div key={cur} className="flex items-center justify-between">
               <span className="text-gray-600">Subtotal</span>
               <span className="font-semibold text-black">
-                {totals[cur].toFixed(2)} {cur}
+                {(totals[cur]/100).toFixed(2)} {cur}
               </span>
             </div>
           ))}

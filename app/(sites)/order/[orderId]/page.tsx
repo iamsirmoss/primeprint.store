@@ -114,7 +114,7 @@ export default async function OrderReviewPage({
           <div className="mt-6 flex gap-3 text-sm md:text-base">
             <Link
               href="/orders"
-              className="w-1/2 rounded-2xl border py-3 text-center font-semibold hover:bg-gray-100 transition-all duration-300"
+              className="w-1/2 rounded-2xl border py-3 text-center font-semibold hover:bg-gray-100 transition-all duration-300 text-black"
             >
               View all my orders
             </Link>

@@ -533,153 +533,186 @@ export async function POST(req: Request) {
     // 1) PAID + stock decrement
     // =========================================================
     if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session;
+  console.log("=== checkout.session.completed received ===");
 
-      let orderId = session.metadata?.orderId;
-      const paymentRef = session.id;
+  const session = event.data.object as Stripe.Checkout.Session;
 
-      // fallback payment_intent metadata
-      if (!orderId && session.payment_intent) {
-        const pi = await stripe.paymentIntents.retrieve(String(session.payment_intent));
-        orderId = pi.metadata?.orderId;
-      }
+  let orderId = session.metadata?.orderId;
+  const paymentRef = session.id;
 
-      if (!orderId) {
-        return NextResponse.json({ received: true, warning: "No orderId metadata" });
-      }
+  console.log("Session ID:", session.id);
+  console.log("Session metadata:", session.metadata);
 
-      // transaction: PAID + decrement stock
-      await prisma.$transaction(async (tx) => {
-        const order = await tx.order.findUnique({
-          where: { id: orderId! },
-          select: {
-            id: true,
-            status: true,
-            paymentRef: true,
-          },
-        });
+  if (!orderId && session.payment_intent) {
+    const pi = await stripe.paymentIntents.retrieve(String(session.payment_intent));
+    orderId = pi.metadata?.orderId;
+    console.log("Fallback PI metadata:", pi.metadata);
+  }
 
-        if (!order) return;
-        if (order.status === "PAID") return; // idempotent
+  console.log("Resolved orderId:", orderId);
 
-        await tx.order.update({
-          where: { id: orderId! },
-          data: {
-            status: "PAID",
-            paidAt: new Date(),
-            paymentProvider: "stripe",
-            paymentRef,
-          },
-        });
+  if (!orderId) {
+    console.log("No orderId found in metadata");
+    return NextResponse.json({ received: true, warning: "No orderId metadata" });
+  }
 
-        const items = await tx.orderItem.findMany({
-          where: { orderId: orderId! },
-          select: { type: true, quantity: true, productId: true },
-        });
+  console.log("Starting PAID transaction...");
 
-        for (const it of items) {
-          if (it.type !== "PRODUCT") continue;
-          if (!it.productId) continue;
+  await prisma.$transaction(async (tx) => {
+    const order = await tx.order.findUnique({
+      where: { id: orderId! },
+      select: {
+        id: true,
+        status: true,
+        paymentRef: true,
+      },
+    });
 
-          const updated = await tx.product.updateMany({
-            where: { id: it.productId, isActive: true, stockQty: { gte: it.quantity } },
-            data: { stockQty: { decrement: it.quantity } },
-          });
+    console.log("Order before update:", order);
 
-          if (updated.count === 0) continue;
+    if (!order) return;
+    if (order.status === "PAID") {
+      console.log("Order already PAID, skipping");
+      return;
+    }
 
-          const p = await tx.product.findUnique({
-            where: { id: it.productId },
-            select: { stockQty: true },
-          });
+    await tx.order.update({
+      where: { id: orderId! },
+      data: {
+        status: "PAID",
+        paidAt: new Date(),
+        paymentProvider: "stripe",
+        paymentRef,
+      },
+    });
 
-          if (typeof p?.stockQty === "number" && p.stockQty <= 0) {
-            await tx.product.update({
-              where: { id: it.productId },
-              data: { isActive: false },
-            });
-          }
-        }
+    console.log("Order updated to PAID");
+
+    const items = await tx.orderItem.findMany({
+      where: { orderId: orderId! },
+      select: { type: true, quantity: true, productId: true },
+    });
+
+    console.log("Order items:", items);
+
+    for (const it of items) {
+      if (it.type !== "PRODUCT") continue;
+      if (!it.productId) continue;
+
+      const updated = await tx.product.updateMany({
+        where: { id: it.productId, isActive: true, stockQty: { gte: it.quantity } },
+        data: { stockQty: { decrement: it.quantity } },
       });
 
-      // =========================================================
-      // 2) EMAIL + PDF invoice (after transaction)
-      // =========================================================
-      const orderFull = await prisma.order.findUnique({
-        where: { id: orderId },
-        select: {
-          id: true,
-          status: true,
-          createdAt: true,
-          currency: true,
-          subtotalCents: true,
-          taxCents: true,
-          discountCents: true,
-          totalCents: true,
-          invoiceSentAt: true,
-          invoiceNumber: true,
-          user: { select: { email: true, name: true } },
-          items: {
-            select: {
-              quantity: true,
-              unitPriceCents: true,
-              titleSnapshot: true,
-              currency: true,
-            },
-            orderBy: { createdAt: "asc" },
-          },
-        },
+      console.log("Stock decrement result:", updated);
+
+      if (updated.count === 0) continue;
+
+      const p = await tx.product.findUnique({
+        where: { id: it.productId },
+        select: { stockQty: true },
       });
 
-      // only if PAID and not already sent
-      if (orderFull?.status === "PAID" && !orderFull.invoiceSentAt) {
-        const invoiceNumber = orderFull.invoiceNumber ?? makeInvoiceNumber(orderFull.id);
+      console.log("Product after decrement:", p);
 
-        const pdf = await generateInvoicePdf({
-          customerName: "PrimePrint",
-          invoiceNumber,
-          orderId: orderFull.id,
-          createdAt: orderFull.createdAt,
-          customerEmail: orderFull.user.email,
-          currency: orderFull.currency,
-          items: orderFull.items.map((it) => ({
-            title: it.titleSnapshot,
-            qty: it.quantity,
-            unitPriceCents: it.unitPriceCents,
-            lineTotalCents: it.unitPriceCents * it.quantity,
-          })),
-          subtotalCents: orderFull.subtotalCents,
-          taxCents: orderFull.taxCents,
-          discountCents: orderFull.discountCents,
-          totalCents: orderFull.totalCents,
+      if (typeof p?.stockQty === "number" && p.stockQty <= 0) {
+        await tx.product.update({
+          where: { id: it.productId },
+          data: { isActive: false },
         });
-
-        // Mark as sent first (avoid double send if webhook retries)
-        await prisma.order.update({
-          where: { id: orderFull.id },
-          data: {
-            invoiceNumber,
-            invoiceSentAt: new Date(),
-          },
-        });
-
-        await sendEmailAction({
-          to: orderFull.user.email,
-          subject: "Payment confirmed ✅",
-          meta: {
-            description: `Hi ${orderFull.user.name ?? ""}, your payment has been confirmed. Your invoice is attached.`,
-            link: `${process.env.NEXT_PUBLIC_APP_URL}/order/success?orderId=${orderFull.id}`,
-          },
-          attachments: [
-            {
-              filename: `invoice-${invoiceNumber}.pdf`,
-              content: pdf,
-              contentType: "application/pdf",
-            },
-          ],
-        });
+        console.log("Product disabled because stock <= 0");
       }
     }
+  });
+
+  console.log("PAID transaction complete");
+
+  const orderFull = await prisma.order.findUnique({
+    where: { id: orderId },
+    select: {
+      id: true,
+      status: true,
+      createdAt: true,
+      currency: true,
+      subtotalCents: true,
+      taxCents: true,
+      discountCents: true,
+      totalCents: true,
+      invoiceSentAt: true,
+      invoiceNumber: true,
+      user: { select: { email: true, name: true } },
+      items: {
+        select: {
+          quantity: true,
+          unitPriceCents: true,
+          titleSnapshot: true,
+          currency: true,
+        },
+        orderBy: { createdAt: "asc" },
+      },
+    },
+  });
+
+  console.log("orderFull:", orderFull);
+
+  if (orderFull?.status === "PAID" && !orderFull.invoiceSentAt && orderFull.user?.email) {
+    const invoiceNumber = orderFull.invoiceNumber ?? makeInvoiceNumber(orderFull.id);
+
+    const customerEmail = orderFull.user.email;
+    const customerName = orderFull.user.name ?? "Customer";
+
+    console.log("Generating PDF...");
+    const pdf = await generateInvoicePdf({
+      customerName,
+      invoiceNumber,
+      orderId: orderFull.id,
+      createdAt: orderFull.createdAt,
+      customerEmail,
+      currency: orderFull.currency,
+      items: orderFull.items.map((it) => ({
+        title: it.titleSnapshot,
+        qty: it.quantity,
+        unitPriceCents: it.unitPriceCents,
+        lineTotalCents: it.unitPriceCents * it.quantity,
+      })),
+      subtotalCents: orderFull.subtotalCents,
+      taxCents: orderFull.taxCents,
+      discountCents: orderFull.discountCents,
+      totalCents: orderFull.totalCents,
+    });
+    console.log("PDF generated");
+
+    await prisma.order.update({
+      where: { id: orderFull.id },
+      data: {
+        invoiceNumber,
+        invoiceSentAt: new Date(),
+      },
+    });
+
+    console.log("Order invoice fields updated");
+
+    console.log("Sending email...");
+    await sendEmailAction({
+      to: customerEmail,
+      subject: "Payment confirmed ✅",
+      meta: {
+        description: `Hi ${customerName}, your payment has been confirmed. Your invoice is attached.`,
+        link: `${process.env.NEXT_PUBLIC_APP_URL}/order/success?orderId=${orderFull.id}`,
+      },
+      attachments: [
+        {
+          filename: `invoice-${invoiceNumber}.pdf`,
+          content: pdf,
+          contentType: "application/pdf",
+        },
+      ],
+    });
+    console.log("Email sent");
+  } else {
+    console.log("Skipping invoice/email block");
+  }
+}
 
     // =========================================================
     // 3) SESSION EXPIRED => CANCELED (if still pending)
@@ -703,9 +736,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ received: true });
   } catch (e: any) {
-    return NextResponse.json(
-      { error: e?.message ?? "Webhook handler failed" },
-      { status: 500 }
-    );
+  console.error("STRIPE WEBHOOK ERROR:", e);
+  return NextResponse.json(
+    { error: e?.message ?? "Webhook handler failed" },
+    { status: 500 }
+  );
   }
 }
