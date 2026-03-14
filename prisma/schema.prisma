@@ -13,9 +13,280 @@ datasource db {
   provider = "postgresql"
 }
 
+// enum UserRole {
+//   USER
+//   ADMIN
+// }
+
+// enum PackageTier {
+//   STARTER
+//   GROWTH
+//   ULTIMATE
+// }
+
+// enum SellableType {
+//   PRODUCT
+//   PACKAGE
+// }
+
+// enum OrderStatus {
+//   PENDING
+//   PAID
+//   PROCESSING
+//   COMPLETED
+//   CANCELED
+//   REFUNDED
+// }
+
+// enum FulfillmentStatus {
+//   NOT_STARTED
+//   IN_PROGRESS
+//   READY
+//   DELIVERED
+// }
+
+// model Post {
+//   id        String   @id @default(cuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   title   String
+//   content String?
+
+//   userId String
+//   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   @@map("posts")
+// }
+
+// model User {
+//   id            String    @id @default(cuid())
+//   name          String
+//   email         String    @unique
+//   emailVerified Boolean   @default(false)
+//   image         String?
+//   role          UserRole  @default(USER)
+//   banned        Boolean?
+//   banReason     String?
+//   banExpiresAt  DateTime?
+//   createdAt     DateTime  @default(now())
+//   updatedAt     DateTime  @updatedAt
+//   sessions      Session[]
+//   accounts      Account[]
+//   posts         Post[]
+//   orders        Order[]
+
+//   @@map("users")
+// }
+
+// model Session {
+//   id             String   @id @default(cuid())
+//   expiresAt      DateTime
+//   token          String   @unique
+//   createdAt      DateTime @default(now())
+//   updatedAt      DateTime @updatedAt
+//   ipAddress      String?
+//   userAgent      String?
+//   userId         String
+//   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   impersonatedBy String?
+
+//   @@index([userId])
+//   @@map("sessions")
+// }
+
+// model Account {
+//   id                    String    @id @default(cuid())
+//   accountId             String
+//   providerId            String
+//   userId                String
+//   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   accessToken           String?
+//   refreshToken          String?
+//   idToken               String?
+//   accessTokenExpiresAt  DateTime?
+//   refreshTokenExpiresAt DateTime?
+//   scope                 String?
+//   password              String?
+//   createdAt             DateTime  @default(now())
+//   updatedAt             DateTime  @updatedAt
+
+//   @@index([userId])
+//   @@map("accounts")
+// }
+
+// model Verification {
+//   id         String   @id @default(cuid())
+//   identifier String
+//   value      String
+//   expiresAt  DateTime
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
+
+//   @@index([identifier])
+//   @@map("verifications")
+// }
+
+// model Service {
+//   id          String   @id @default(cuid())
+//   slug        String   @unique
+//   title       String
+//   description String?
+//   icon        String?
+//   isActive    Boolean  @default(true)
+//   position    Int      @default(0)
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   subServices SubService[]
+//   products    Product[]
+//   packages    Package[]
+
+//   @@map("services")
+// }
+
+// model SubService {
+//   id          String   @id @default(cuid())
+//   serviceId   String
+//   slug        String
+//   title       String
+//   description String?
+//   image       String?
+//   isActive    Boolean  @default(true)
+//   position    Int      @default(0)
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   service  Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+//   packages Package[]
+
+//   @@unique([serviceId, slug])
+//   @@map("sub_services")
+// }
+
+// model Package {
+//   id           String      @id @default(cuid())
+//   serviceId    String?
+//   subServiceId String?
+//   tier         PackageTier
+//   name         String
+//   description  String?
+//   priceByYear  Float
+//   priceByMonth Float
+//   image        String?
+//   currency     String      @default("USD")
+//   deliveryDays Int?
+//   points       String[]
+//   isActive     Boolean     @default(true)
+//   createdAt    DateTime    @default(now())
+//   updatedAt    DateTime    @updatedAt
+
+//   service    Service?    @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+//   subService SubService? @relation(fields: [subServiceId], references: [id], onDelete: Cascade)
+//   orderItems OrderItem[]
+
+//   @@unique([subServiceId, tier])
+//   @@map("packages")
+// }
+
+// model Product {
+//   id          String   @id @default(cuid())
+//   serviceId   String?
+//   slug        String   @unique
+//   sku         String?  @unique
+//   title       String
+//   description String?
+//   price       Float
+//   currency    String   @default("USD")
+//   stockQty    Int?     @default(0)
+//   images      String[]
+//   isActive    Boolean  @default(true)
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   service    Service?    @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+//   orderItems OrderItem[]
+
+//   @@map("products")
+// }
+
+// model Order {
+//   id     String      @id @default(cuid())
+//   userId String
+//   status OrderStatus @default(PENDING)
+
+//   currency      String @default("USD")
+//   subtotalCents Int
+//   taxCents      Int    @default(0)
+//   discountCents Int    @default(0)
+//   totalCents    Int
+
+//   paymentProvider String?
+//   paymentRef      String?
+//   paidAt          DateTime?
+
+//   invoiceNumber String?
+//   invoiceSentAt DateTime?
+//   invoicePdfUrl String?
+
+//   notes     String?
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   items OrderItem[]
+
+//   @@index([userId])
+//   @@map("orders")
+// }
+
+// model OrderItem {
+//   id       String       @id @default(cuid())
+//   orderId  String
+//   type     SellableType
+//   quantity Int          @default(1)
+
+//   unitPriceCents Int
+//   currency       String @default("USD")
+
+//   productId String?
+//   packageId String?
+
+//   // snapshot + brief client (design, fichiers, instructions…)
+//   titleSnapshot String
+//   customization Json?
+
+//   fulfillmentStatus FulfillmentStatus @default(NOT_STARTED)
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+//   product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+//   package Package? @relation(fields: [packageId], references: [id], onDelete: SetNull)
+
+//   @@index([orderId])
+//   @@map("orders_item")
+// }
+
+// model Contact {
+//   id          String   @id @default(cuid())
+//   name        String
+//   email       String
+//   phoneNumber String
+//   company     String?
+//   service     String
+//   description String?
+//   createdAt   DateTime @default(now())
+
+//   @@map("contacts")
+// }
+
 enum UserRole {
   USER
   ADMIN
+  MANAGER
+  STAFF
 }
 
 enum PackageTier {
@@ -27,6 +298,19 @@ enum PackageTier {
 enum SellableType {
   PRODUCT
   PACKAGE
+}
+
+enum ProductType {
+  PHYSICAL
+  DIGITAL
+  SERVICE
+  PRINT_PRODUCT
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }
 
 enum OrderStatus {
@@ -43,6 +327,50 @@ enum FulfillmentStatus {
   IN_PROGRESS
   READY
   DELIVERED
+  CANCELED
+}
+
+enum SalesChannel {
+  ONLINE
+  IN_STORE
+  BOTH
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+enum CouponStatus {
+  ACTIVE
+  INACTIVE
+  EXPIRED
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AddressType {
+  BILLING
+  SHIPPING
+}
+
+enum InventoryMovementType {
+  IN
+  OUT
+  ADJUSTMENT
+  RETURN
+}
+
+enum ProofStatus {
+  NOT_SENT
+  SENT
+  APPROVED
+  REVISION_REQUESTED
+  REJECTED
 }
 
 model Post {
@@ -66,16 +394,21 @@ model User {
   emailVerified Boolean   @default(false)
   image         String?
   role          UserRole  @default(USER)
-  banned        Boolean?
+  banned        Boolean   @default(false)
   banReason     String?
   banExpiresAt  DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  posts         Post[]
-  orders        Order[]
 
+  sessions     Session[]
+  accounts     Account[]
+  posts        Post[]
+  orders       Order[]
+  reviews      Review[]
+  couponUsages CouponUsage[]
+  addresses    Address[]
+
+  @@index([role])
   @@map("users")
 }
 
@@ -88,8 +421,9 @@ model Session {
   ipAddress      String?
   userAgent      String?
   userId         String
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   impersonatedBy String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("sessions")
@@ -100,7 +434,6 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -111,6 +444,9 @@ model Account {
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
   @@index([userId])
   @@map("accounts")
 }
@@ -133,6 +469,7 @@ model Service {
   title       String
   description String?
   icon        String?
+  image       String?
   isActive    Boolean  @default(true)
   position    Int      @default(0)
   createdAt   DateTime @default(now())
@@ -141,7 +478,9 @@ model Service {
   subServices SubService[]
   products    Product[]
   packages    Package[]
+  categories  Category[]
 
+  @@index([isActive, position])
   @@map("services")
 }
 
@@ -161,71 +500,171 @@ model SubService {
   packages Package[]
 
   @@unique([serviceId, slug])
+  @@index([serviceId, isActive, position])
   @@map("sub_services")
 }
 
-model Package {
-  id           String      @id @default(cuid())
-  serviceId    String?
-  subServiceId String?
-  tier         PackageTier
-  name         String
-  description  String?
-  priceByYear  Float
-  priceByMonth Float
-  image        String?
-  currency     String      @default("USD")
-  deliveryDays Int?
-  points       String[]
-  isActive     Boolean     @default(true)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+model Category {
+  id          String   @id @default(cuid())
+  serviceId   String?
+  parentId    String?
+  slug        String
+  name        String
+  description String?
+  image       String?
+  icon        String?
+  isActive    Boolean  @default(true)
+  position    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  service    Service?    @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-  subService SubService? @relation(fields: [subServiceId], references: [id], onDelete: Cascade)
+  service  Service?   @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  parent   Category?  @relation("CategoryToCategory", fields: [parentId], references: [id], onDelete: SetNull)
+  children Category[] @relation("CategoryToCategory")
+  products Product[]
+
+  @@unique([parentId, slug])
+  @@index([serviceId])
+  @@index([parentId])
+  @@index([isActive, position])
+  @@map("categories")
+}
+
+model Package {
+  id              String      @id @default(cuid())
+  serviceId       String?
+  subServiceId    String?
+  tier            PackageTier
+  slug            String      @unique
+  name            String
+  description     String?
+  image           String?
+  currency        String      @default("USD")
+  priceYearCents  Int
+  priceMonthCents Int
+  deliveryDays    Int?
+  points          String[]
+  isActive        Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  service    Service?    @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  subService SubService? @relation(fields: [subServiceId], references: [id], onDelete: SetNull)
   orderItems OrderItem[]
 
   @@unique([subServiceId, tier])
+  @@index([serviceId])
+  @@index([subServiceId])
+  @@index([isActive])
   @@map("packages")
 }
 
 model Product {
-  id          String   @id @default(cuid())
-  serviceId   String?
-  slug        String   @unique
-  sku         String?  @unique
-  title       String
-  description String?
-  price       Float
-  currency    String   @default("USD")
-  stockQty    Int?     @default(0)
-  images      String[]
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                  String        @id @default(cuid())
+  serviceId           String?
+  categoryId          String?
+  slug                String        @unique
+  sku                 String?       @unique
+  title               String
+  shortDescription    String?
+  description         String?
+  type                ProductType   @default(PHYSICAL)
+  status              ProductStatus @default(DRAFT)
+  currency            String        @default("USD")
+  basePriceCents      Int
+  compareAtPriceCents Int?
+  stockQty            Int?
+  lowStockThreshold   Int?
+  trackInventory      Boolean       @default(false)
+  requiresUpload      Boolean       @default(false)
+  requiresApproval    Boolean       @default(false)
+  requiresAppointment Boolean       @default(false)
+  salesChannel        SalesChannel  @default(BOTH)
+  instructions        String?
+  isFeatured          Boolean       @default(false)
+  isActive            Boolean       @default(true)
+  seoTitle            String?
+  seoDescription      String?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
 
-  service    Service?    @relation(fields: [serviceId], references: [id], onDelete: SetNull)
-  orderItems OrderItem[]
+  service            Service?            @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  category           Category?           @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images             ProductImage[]
+  variants           ProductVariant[]
+  orderItems         OrderItem[]
+  reviews            Review[]
+  inventoryMovements InventoryMovement[]
 
+  @@index([serviceId])
+  @@index([categoryId])
+  @@index([status])
+  @@index([isActive, isFeatured])
+  @@index([type])
   @@map("products")
 }
 
-model Order {
-  id     String      @id @default(cuid())
-  userId String
-  status OrderStatus @default(PENDING)
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  alt       String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
 
-  currency      String @default("USD")
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, position])
+  @@map("product_images")
+}
+
+model ProductVariant {
+  id         String   @id @default(cuid())
+  productId  String
+  sku        String?  @unique
+  name       String
+  options    Json?
+  priceCents Int?
+  stockQty   Int?
+  isDefault  Boolean  @default(false)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  product            Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  orderItems         OrderItem[]
+  inventoryMovements InventoryMovement[]
+  proofApprovals     ProofApproval[]
+
+  @@index([productId])
+  @@index([isActive])
+  @@map("product_variants")
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  userId        String?
+  status        OrderStatus @default(PENDING)
+  currency      String      @default("USD")
   subtotalCents Int
-  taxCents      Int    @default(0)
-  discountCents Int    @default(0)
+  taxCents      Int         @default(0)
+  discountCents Int         @default(0)
+  shippingCents Int         @default(0)
   totalCents    Int
+
+  customerName  String?
+  customerEmail String?
+  customerPhone String?
+
+  billingAddressId  String?
+  shippingAddressId String?
 
   paymentProvider String?
   paymentRef      String?
   paidAt          DateTime?
 
-  invoiceNumber String?
+  invoiceNumber String?   @unique
   invoiceSentAt DateTime?
   invoicePdfUrl String?
 
@@ -233,51 +672,205 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items OrderItem[]
+  user            User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  items           OrderItem[]
+  billingAddress  Address?      @relation("OrderBillingAddress", fields: [billingAddressId], references: [id], onDelete: SetNull)
+  shippingAddress Address?      @relation("OrderShippingAddress", fields: [shippingAddressId], references: [id], onDelete: SetNull)
+  couponUsages    CouponUsage[]
 
   @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([billingAddressId])
+  @@index([shippingAddressId])
   @@map("orders")
 }
 
 model OrderItem {
-  id       String       @id @default(cuid())
-  orderId  String
-  type     SellableType
-  quantity Int          @default(1)
+  id              String       @id @default(cuid())
+  orderId         String
+  type            SellableType
+  quantity        Int          @default(1)
+  unitPriceCents  Int
+  totalPriceCents Int
+  currency        String       @default("USD")
 
-  unitPriceCents Int
-  currency       String @default("USD")
+  productId        String?
+  productVariantId String?
+  packageId        String?
 
-  productId String?
-  packageId String?
-
-  // snapshot + brief client (design, fichiers, instructions…)
-  titleSnapshot String
-  customization Json?
-
+  titleSnapshot     String
+  skuSnapshot       String?
+  customization     Json?
+  uploadedFiles     String[]
   fulfillmentStatus FulfillmentStatus @default(NOT_STARTED)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
-  package Package? @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  order          Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product        Product?        @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productVariant ProductVariant? @relation(fields: [productVariantId], references: [id], onDelete: SetNull)
+  package        Package?        @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  proofApprovals ProofApproval[]
 
   @@index([orderId])
-  @@map("orders_item")
+  @@index([productId])
+  @@index([productVariantId])
+  @@index([packageId])
+  @@index([fulfillmentStatus])
+  @@map("order_items")
+}
+
+model Coupon {
+  id                   String       @id @default(cuid())
+  code                 String       @unique
+  name                 String
+  description          String?
+  discountType         DiscountType
+  discountValue        Int
+  currency             String       @default("USD")
+  minimumOrderCents    Int?
+  maximumDiscountCents Int?
+  usageLimit           Int?
+  usedCount            Int          @default(0)
+  startsAt             DateTime?
+  endsAt               DateTime?
+  status               CouponStatus @default(ACTIVE)
+  isActive             Boolean      @default(true)
+  appliesToProducts    Boolean      @default(true)
+  appliesToPackages    Boolean      @default(true)
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  usages CouponUsage[]
+
+  @@index([code])
+  @@index([status])
+  @@index([isActive])
+  @@map("coupons")
+}
+
+model CouponUsage {
+  id            String   @id @default(cuid())
+  couponId      String
+  orderId       String
+  userId        String?
+  discountCents Int
+  createdAt     DateTime @default(now())
+
+  coupon Coupon @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  order  Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  user   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@unique([couponId, orderId])
+  @@index([couponId])
+  @@index([orderId])
+  @@index([userId])
+  @@map("coupon_usages")
+}
+
+model Review {
+  id         String       @id @default(cuid())
+  userId     String?
+  productId  String
+  rating     Int
+  title      String?
+  comment    String?
+  status     ReviewStatus @default(PENDING)
+  isVerified Boolean      @default(false)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([productId])
+  @@index([status])
+  @@map("reviews")
+}
+
+model Address {
+  id          String       @id @default(cuid())
+  userId      String?
+  type        AddressType?
+  fullName    String?
+  company     String?
+  line1       String
+  line2       String?
+  city        String
+  state       String?
+  postalCode  String?
+  country     String
+  phoneNumber String?
+  isDefault   Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  user           User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  billingOrders  Order[] @relation("OrderBillingAddress")
+  shippingOrders Order[] @relation("OrderShippingAddress")
+
+  @@index([userId])
+  @@index([type])
+  @@map("addresses")
+}
+
+model InventoryMovement {
+  id               String                @id @default(cuid())
+  productId        String
+  productVariantId String?
+  type             InventoryMovementType
+  quantity         Int
+  note             String?
+  reference        String?
+  createdAt        DateTime              @default(now())
+
+  product        Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productVariant ProductVariant? @relation(fields: [productVariantId], references: [id], onDelete: SetNull)
+
+  @@index([productId])
+  @@index([productVariantId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("inventory_movements")
+}
+
+model ProofApproval {
+  id               String      @id @default(cuid())
+  orderItemId      String
+  productVariantId String?
+  fileUrl          String
+  message          String?
+  status           ProofStatus @default(NOT_SENT)
+  sentAt           DateTime?
+  respondedAt      DateTime?
+  customerNote     String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  orderItem      OrderItem       @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+  productVariant ProductVariant? @relation(fields: [productVariantId], references: [id], onDelete: SetNull)
+
+  @@index([orderItemId])
+  @@index([productVariantId])
+  @@index([status])
+  @@map("proof_approvals")
 }
 
 model Contact {
   id          String   @id @default(cuid())
   name        String
   email       String
-  phoneNumber String
+  phoneNumber String?
   company     String?
-  service     String
+  service     String?
+  subject     String?
   description String?
   createdAt   DateTime @default(now())
 
+  @@index([email])
+  @@index([createdAt])
   @@map("contacts")
 }

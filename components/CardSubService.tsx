@@ -5,22 +5,22 @@ import { BsArrowRight } from "react-icons/bs";
 
 interface ServiceCardProps {
   title: string;
-  icon: string;
+  image: string;
   slug: string;
 }
 
 const SubServiceCard: React.FC<ServiceCardProps> = ({
   title,
-  icon,
+  image,
   slug
 }) => {
   return (
         <div className="border p-3 rounded-2xl group hover:shadow-lg transition-all duration-500">
           <Link href={`/service/sub-service/${slug}`}>
           <div className="overflow-hidden pb-3">
-            {icon ?
+            {image ?
             (<Image
-                src={`/images/${icon}`}
+                src={`/images/${image}`}
                 alt={title}
                 priority
                 width={0}

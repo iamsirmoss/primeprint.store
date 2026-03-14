@@ -7,13 +7,13 @@ interface ServiceCardProps {
   title: string;
   slug: string;
   description: string;
-  icon: string;
+  image: string | null;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
   title,
   description,
-  icon,
+  image,
   slug,
 }) => {
   return (
@@ -21,7 +21,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       <Link href={`/service/${slug}`}>
       <div className="overflow-hidden pb-3">
         <Image
-            src={`/images/${icon}`}
+            src={`/images/${image || "/images/placeholder.png"}`}
             alt={title}
             priority
             width={0}
@@ -41,7 +41,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           ></div>
 
           <div className="absolute inset-0 flex flex-col items-start justify-end pt-2 md:pt-4 pb-4 md:pb-8 px-4">
-            <h3 className="text-lg md:text-2xl font-bold text-black group-hover:text-white transition-colors duration-500 capitalize">{title}</h3>
+            <h3 className="text-base md:text-lg lg:text-2xl font-bold text-black group-hover:text-white transition-colors duration-500 capitalize">{title}</h3>
             <p className="mt-1 md:mt-4 text-xs md:text-sm line-clamp-2 text-gray-500 group-hover:text-white transition-colors duration-500 max-w-full md:max-w-xs">{description}</p>
 
             <button

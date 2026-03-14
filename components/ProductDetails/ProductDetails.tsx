@@ -6,6 +6,7 @@ import React, { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { addToCart } from "@/lib/cart";
 import { RiShoppingCartFill } from 'react-icons/ri';
+import { resolve } from "path";
 
 type Review = {
   id: string;
@@ -21,7 +22,7 @@ type ProductDetailsProps = {
     slug: string;
     title: string;
     description: string | null;
-    price: number;
+    basePriceCents: number;
     images: string[];
     sku?: string | null;
     currency: string;
@@ -61,7 +62,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
     slug,
     title,
     description,
-    price,
+    basePriceCents,
     images,
     sku,
     stockQty,
@@ -81,15 +82,22 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
                           toast.error("Out of stock");
                           return;
                     }
+
+                    const resolvedImage =
+                    images?.[0] && images[0].startsWith("http")
+                      ? images[0]
+                      : images?.[0]
+                      ? `/images/${images[0]}`
+                      : "/images/placeholder.png";
         
                     addToCart({
                         productId: id,
                         slug,
                         sku: sku ?? null,
                         title,
-                        price,
+                        price: basePriceCents,
                         currency,
-                        image: images?.[0] ? `/images/${images[0]}` : "/images/placeholder.png",
+                        image: resolvedImage,
                     });
         
                     toast.success("Product added to cart ✅");
@@ -123,6 +131,13 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
 
   const mainImage = images?.[activeImage] || images?.[0];
 
+  const resolvedImage =
+  mainImage && mainImage.startsWith("http")
+    ? mainImage
+    : mainImage
+    ? `/images/${mainImage}`
+    : "/images/placeholder.png";
+
   const safeStockQty = stockQty ?? 0;
   const isOutOfStock = !isActive || safeStockQty <= 0;
 
@@ -137,7 +152,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
             <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-gray-50">
               {mainImage ? (
                 <Image
-                  src={`/images/${mainImage}`}
+                  src={resolvedImage}
                   alt={title}
                   fill
                   className="object-contain"
@@ -165,7 +180,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
                     } bg-gray-50`}
                     aria-label={`View image ${i + 1}`}
                   >
-                    <Image src={`/images/${img}`} alt="" fill className="object-contain" sizes="64px" />
+                    <Image src={resolvedImage} alt="" fill className="object-contain" sizes="64px" />
                   </button>
                 );
               })}
@@ -203,7 +218,7 @@ export default function ProductDetails({ product, reviews }: ProductDetailsProps
 
             {/* <p className="mt-5 text-3xl font-bold text-gray-900">{formatMoney(product.price)}</p> */}
             <h5 className='mt-5 text-3xl max-w-fit'>
-              {price.toFixed(2)}{" "}
+              {(basePriceCents/100).toFixed(2)}{" "}
               <span className="text-gray-900">{currency}</span>
             </h5>
 

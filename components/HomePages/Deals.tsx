@@ -20,7 +20,7 @@ interface ProductProps {
   slug: string;
   title: string;
   description: string | null;
-  price: number;
+  basePriceCents: number;
   images: string[];
   currency?: string;
   stockQty?: number | null;
@@ -69,7 +69,7 @@ const Test = ({products}: {products: ProductProps[]}) => {
                               title={product.title}
                               description={product.description ?? ""}
                               imageUrl={product.images}
-                              price={product.price}
+                              price={product.basePriceCents}
                               currency={product.currency ?? "USD"}
                               stockQty={product.stockQty ?? null}
                               sku={product.sku ?? null}

@@ -14,7 +14,7 @@ const page = async () => {
       id: true,
       slug: true,
       title: true,
-      icon: true,
+      image: true,
       description: true,
     }
   })

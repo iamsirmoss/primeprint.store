@@ -5,7 +5,7 @@ interface OtherService {
   slug: string;
   title: string;
   description: string | null;
-  icon: string | null;
+  image: string | null;
 };
 
 const OtherServices = ({ services }: { currentSlug: string; services: OtherService[] }) => {
@@ -17,7 +17,7 @@ const OtherServices = ({ services }: { currentSlug: string; services: OtherServi
                         <TopServiceCard
                               key={index}
                               title={service.title}
-                              icon={service.icon ?? ""}
+                              image={service.image ?? ""}
                               slug={service.slug}
                         />
                   ))}

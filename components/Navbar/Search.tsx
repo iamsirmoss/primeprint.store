@@ -19,9 +19,8 @@ type SearchProduct = {
   id: string;
   slug: string;
   title: string;
-  price: number;
+  basePriceCents: number;
   currency: string;
-  images: string[];
 };
 
 type SearchService = {
@@ -189,7 +188,7 @@ const Search = () => {
                               </p>
                             </div>
                             <p className="text-ss md:text-xs font-semibold text-black">
-                              {item.price.toFixed(2)} {item.currency}
+                              {(item.basePriceCents / 100).toFixed(2)} {item.currency}
                             </p>
                           </div>
                         </button>

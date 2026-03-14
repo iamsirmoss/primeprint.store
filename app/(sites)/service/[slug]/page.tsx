@@ -47,7 +47,7 @@ const page = async ({ params }: ServicePageProps) => {
           slug: true,
           title: true,
           description: true,
-          icon: true,
+          image: true,
         },
         take: 4,
       });

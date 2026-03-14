@@ -47,20 +47,11 @@ const page = async () => {
             </div> */}
 
             <div className="mt-10">
-                  {session.user.image ? (
-                  <Image
-                        src={session.user.image}
-                        alt="User profile picture"
-                        priority width={0} height={0} sizes='100vw'
-                        className="size-16 border border-primary rounded-full object-cover"
-                  />
-                  ) : (
-                  <div className="size-24 border border-primary rounded-full bg-blue-400 text-primary-foreground flex items-center justify-center">
+                  <div className="size-16 md:size-24 rounded-full bg-gray-400 text-primary-foreground flex items-center justify-center">
                         <span className="uppercase text-lg font-bold">
                               {session.user.name.slice(0, 2)}
                         </span>
                   </div>
-                  )}
             </div>
 
             <div className="mt-10 space-y-4 p-4 rounded-b-md  border border-t-8 border-blue-400">

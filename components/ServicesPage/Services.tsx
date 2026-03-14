@@ -6,7 +6,7 @@ interface ServiceProps {
   id: string;
   slug: string;
   title: string;
-  icon: string | null;
+  image: string | null;
   description: string | null;
 }
 
@@ -21,7 +21,7 @@ const Services = ({services}: {services: ServiceProps[]}) => {
                   slug={service.slug}
                   title={service.title}
                   description={service.description || ''}
-                  icon={service.icon || ''}
+                  image={service.image || ''}
                 />
               ))}
             </div>

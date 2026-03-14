@@ -13,63 +13,93 @@ import Articles from "@/components/HomePages/Articles";
 import Reviews from "@/components/HomePages/Reviews";
 import { prisma } from "@/lib/prisma";
 
-
 export default async function Home() {
-
   const services = await prisma.service.findMany({
     take: 8,
     orderBy: {
-      position: "asc"
+      position: "asc",
     },
     select: {
       id: true,
       slug: true,
       title: true,
-      icon: true,
+      image: true,
       products: {
         select: {
           id: true,
           slug: true,
-          title: true
-        }
+          title: true,
+        },
       },
       subServices: {
         select: {
           id: true,
           slug: true,
-          title: true
-        }
-      }
+          title: true,
+        },
+      },
     },
-  })
+  });
 
-  const products = await prisma.product.findMany({
+  const productsRaw = await prisma.product.findMany({
     take: 3,
+    orderBy: {
+      createdAt: "asc",
+    },
     select: {
       id: true,
       slug: true,
       title: true,
       description: true,
-      price: true,
-      images: true,
+      basePriceCents: true,
       stockQty: true,
-      isActive: true
-    } 
-  })
+      isActive: true,
+      images: {
+        orderBy: {
+          position: "asc",
+        },
+        select: {
+          url: true,
+        },
+      },
+    },
+  });
 
-  const productsHome = await prisma.product.findMany({
+  const productsHomeRaw = await prisma.product.findMany({
     take: 8,
+    orderBy: {
+      createdAt: "asc",
+    },
     select: {
       id: true,
       slug: true,
       title: true,
       description: true,
-      price: true,
-      images: true,
+      basePriceCents: true,
       stockQty: true,
-      isActive: true
-    } 
-  })
+      isActive: true,
+      images: {
+        orderBy: {
+          position: "asc",
+        },
+        select: {
+          url: true,
+        },
+      },
+    },
+  });
+
+  const products = productsRaw.map((product) => ({
+    ...product,
+    description: product.description ?? "",
+    images: product.images.map((image) => image.url),
+  }));
+
+  const productsHome = productsHomeRaw.map((product) => ({
+    ...product,
+    description: product.description ?? "",
+    images: product.images.map((image) => image.url),
+  }));
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden">

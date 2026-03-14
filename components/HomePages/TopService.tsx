@@ -12,7 +12,7 @@ interface ServiceProps {
   id: string;
   slug: string;
   title: string;
-  icon: string | null;
+  image: string | null;
   products: { id: string; slug: string; title: string }[];
   subServices: { id: string; slug: string; title: string }[];
 }
@@ -26,7 +26,7 @@ const TopService = ({services}: {services: ServiceProps[]}) => {
                 <TopServiceCard
                   key={index}
                   title={service.title}
-                  icon={service.icon ?? ""}
+                  image={service.image ?? ""}
                   slug={service.slug}
                 />
               ))}

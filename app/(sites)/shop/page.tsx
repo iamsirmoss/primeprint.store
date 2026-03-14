@@ -1,21 +1,9 @@
-import Banner from '@/components/ShopPage/Banner'
-import Products from '@/components/ShopPage/Products'
-import { prisma } from '@/lib/prisma'
+import Banner from "@/components/ShopPage/Banner";
+import Products from "@/components/ShopPage/Products";
+import { prisma } from "@/lib/prisma";
 
 const page = async () => {
-
-  // const products = await prisma.product.findMany({
-  //   select: {
-  //     id: true,
-  //     slug: true,
-  //     title: true,
-  //     description: true,
-  //     price: true,
-  //     images: true
-  //   } 
-  // })
-
-  const [services, products] = await Promise.all([
+  const [services, productsRaw] = await Promise.all([
     prisma.service.findMany({
       where: { isActive: true },
       orderBy: { position: "asc" },
@@ -23,29 +11,42 @@ const page = async () => {
     }),
     prisma.product.findMany({
       where: { isActive: true },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
       select: {
         id: true,
         serviceId: true,
         slug: true,
         title: true,
         description: true,
-        price: true,
+        basePriceCents: true,
         currency: true,
         stockQty: true,
         sku: true,
-        images: true,
-        isActive: true
+        images: {
+          orderBy: {
+            position: "asc",
+          },
+          select: {
+            url: true,
+          },
+        },
+        isActive: true,
       },
     }),
   ]);
 
-  return (
-      <div>
-            <Banner />
-            <Products title="Products" services={services} products={products}  />
-      </div>
-  )
-}
+  const products = productsRaw.map((product) => ({
+    ...product,
+    description: product.description ?? "",
+    images: product.images.map((image) => image.url),
+  }));
 
-export default page
+  return (
+    <div>
+      <Banner />
+      <Products title="Products" services={services} products={products} />
+    </div>
+  );
+};
+
+export default page;

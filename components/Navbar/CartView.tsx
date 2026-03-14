@@ -162,12 +162,12 @@ const CartView = ({
                                     {it.tier} • {it.billing === "month" ? "Monthly" : "Yearly"}
                                   </p>
                                   <p className="text-xs text-slate-500 mt-1">
-                                    {unitPrice.toFixed(2)} {currency}
+                                    {(unitPrice/100).toFixed(2)} {currency}
                                   </p>
                                 </>
                               ) : (
                                 <p className="text-xs text-slate-500 mt-1">
-                                  {unitPrice.toFixed(2)} {currency}
+                                  {(unitPrice/100).toFixed(2)} {currency}
                                 </p>
                               )}
                             </div>
@@ -222,7 +222,7 @@ const CartView = ({
                             </div>
 
                             <p className="font-bold text-black">
-                              {(unitPrice * it.qty).toFixed(2)} {currency}
+                              {((unitPrice/100) * it.qty).toFixed(2)} {currency}
                             </p>
                           </div>
                         </div>
@@ -241,7 +241,7 @@ const CartView = ({
                       >
                         <span className="text-slate-600">Subtotal :</span>
                         <span className="font-bold text-black">
-                          {totals[cur].toFixed(2)} {cur}
+                          {(totals[cur]/100).toFixed(2)} {cur}
                         </span>
                       </div>
                     ))}

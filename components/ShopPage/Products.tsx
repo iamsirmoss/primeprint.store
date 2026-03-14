@@ -1,59 +1,3 @@
-// import React from 'react'
-// import ProductCard from '../ProductCard'
-
-// interface ProductProps {
-//   id: string;
-//   slug: string;
-//   title: string;
-//   description: string | null;
-//   price: number;
-//   images: string[];
-//   currency?: string;
-//   stockQty?: number | null;
-//   sku?: string | null;
-// }
-
-// const Products = ({products}: {products: ProductProps[]}) => {
-//   return (
-//       <div className='py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]'>
-//             <h1 className='text-5xl font-bold'></h1>
-//             <div className='mt-12 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4'>
-//                   <button className='bg-red-500 rounded py-2 px-4'>
-//                         <h5 className='text-white text-sm'>All</h5>
-//                   </button>
-//                   {
-//                        Array.from({ length: 5 }).map((_, index) => (
-//                               <button className='border rounded py-2 px-4 hover:bg-red-500 hover:text-white transition-all duration-500' 
-//                               key={index}>
-//                                     <h5 className='text-sm'>Lorem</h5>
-//                               </button>
-//                        )) 
-//                   }
-//             </div>
-//             <div className='mt-16 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-8'>
-//                   {
-//                         products.map((product) => (
-//                               <ProductCard 
-//                                     key={product.id} 
-//                                     id={product.id}
-//                                     slug={product.slug}
-//                                     title={product.title}
-//                                     description={product.description ?? ""}
-//                                     price={product.price}
-//                                     images={product.images}
-//                                     currency={product.currency ?? "USD"}
-//                                     stockQty={product.stockQty ?? null}
-//                                     sku={product.sku ?? null}
-//                                />
-//                         ))
-//                   }
-//             </div>
-//       </div>
-//   )
-// }
-
-// export default Products
-
 "use client";
 
 import React, { useMemo, useState, useEffect } from "react";
@@ -67,7 +11,7 @@ interface ProductProps {
   slug: string;
   title: string;
   description: string | null;
-  price: number;
+  basePriceCents: number;
   images: string[];
   currency?: string;
   stockQty?: number | null;
@@ -279,7 +223,7 @@ const Products = ({
               slug={product.slug}
               title={product.title}
               description={product.description ?? ""}
-              price={product.price}
+              price={product.basePriceCents}
               images={product.images}
               currency={product.currency ?? "USD"}
               stockQty={product.stockQty ?? null}

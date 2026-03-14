@@ -7,7 +7,7 @@ interface ServiceProps {
   id: string;
   slug: string;
   title: string;
-  icon: string | null;
+  image: string | null;
   products: { id: string; slug: string; title: string }[];
   subServices: { id: string; slug: string; title: string }[];
 }
@@ -25,7 +25,7 @@ const Service = ({services}: {services: ServiceProps[]}) => {
               className="flex flex-col items-center justify-center px-2 py-9"
             >
               <Image
-                src={`/images/${service.icon}`}
+                src={`/images/${service.image || "placeholder.png"}`}
                 alt={service.title}
                 priority
                 width={0}
@@ -47,10 +47,10 @@ const Service = ({services}: {services: ServiceProps[]}) => {
                 {
                   service.products?.length > 0 && (
                   <div className="text-black capitalize">
-                    <h6 className="font-semibold mb-4 text-lg border-b">Products</h6>
+                    <h6 className="font-semibold mb-4 text-base md:text-lg border-b">Products</h6>
                     <ul className="mb-4">
                       {service.products.map((product) => (
-                        <li key={product.id} className="mb-1 hover:text-blue-400 transition-all duration-500">
+                        <li key={product.id} className="mb-1 text-sm md:text-base hover:text-blue-400 transition-all duration-500">
                           <Link href={`/product/${product.slug}`}>
                             - {product.title}
                           </Link>
@@ -63,10 +63,10 @@ const Service = ({services}: {services: ServiceProps[]}) => {
                 {
                   service.subServices?.length > 0 && (
                   <div className="text-black capitalize">
-                    <h6 className="font-semibold mb-4 text-lg border-b">Sub-services</h6>
+                    <h6 className="font-semibold mb-4 text-base md:text-lg border-b">Sub-services</h6>
                     <ul className="">
                       {service.subServices.map((subService) => (
-                        <li key={subService.id} className="mb-1 hover:text-blue-400 transition-all duration-500">
+                        <li key={subService.id} className="mb-1 text-sm md:text-base hover:text-blue-400 transition-all duration-500">
                           <Link href={`/service/sub-service/${subService.slug}`}>
                             - {subService.title}
                           </Link>

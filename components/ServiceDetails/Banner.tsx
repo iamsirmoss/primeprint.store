@@ -7,7 +7,7 @@ interface ServiceProps {
       slug: string;
       id: string;
       title: string;
-      icon: string | null;
+      image: string | null;
       isActive: boolean;
       position: number;
       createdAt: Date;
@@ -73,10 +73,10 @@ const Banner = ({service}: {service: ServiceProps}) => {
                   </div>
                 </div>
       
-                {service.icon ? (
+                {service.image ? (
                   <div className="w-[220px] md:w-[300px] lg:w-[420px] rounded-xl border border-gray-200 bg-gray-50 p-4">
                     <Image
-                      src={`/images/${service.icon}`}
+                      src={`/images/${service.image}`}
                       alt={service.title}
                       width={0}
                       height={0}

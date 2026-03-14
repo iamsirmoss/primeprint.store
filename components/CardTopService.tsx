@@ -5,22 +5,22 @@ import { BsArrowRight } from "react-icons/bs";
 
 interface ServiceCardProps {
   title: string;
-  icon: string;
+  image: string;
   slug: string;
 }
 
 const TopServiceCard: React.FC<ServiceCardProps> = ({
   title,
-  icon,
+  image,
   slug
 }) => {
   return (
         <div className="border p-3 rounded-2xl group hover:border-gray-600 transition-all duration-500">
           <Link href={`/service/${slug}`}>
           <div className="overflow-hidden pb-3">
-            {icon ?
+            {image ?
             (<Image
-                src={`/images/${icon}`}
+                src={`/images/${image}`}
                 alt={title}
                 priority
                 width={0}
@@ -44,7 +44,7 @@ const TopServiceCard: React.FC<ServiceCardProps> = ({
               ></div>
     
               <div className="absolute inset-0 flex flex-col items-start justify-end py-5 px-4 group">
-                <h3 className="text-lg font-bold capitalize text-black group-hover:text-white">{title}</h3>
+                <h3 className="text-base md:text-lg font-bold capitalize text-black group-hover:text-white">{title}</h3>
     
                 <button
                   className="mt-2 py-1.5 md:mt-4 px-4 md:py-2 bg-transparent border group-hover:border-white rounded-2xl

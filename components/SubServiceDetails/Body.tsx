@@ -12,8 +12,8 @@ type PackageItem = {
   tier: Tier;
   name: string;
   description: string | null;
-  priceByMonth: number | null;
-  priceByYear: number | null;
+  priceMonthCents: number | null;
+  priceYearCents: number | null;
   image: string | null;
   points: string[];
   currency?: string | null;
@@ -72,8 +72,8 @@ export default function Body({ service }: { service: SubServiceForBody }) {
     );
   }, [service.packages]);
 
-  const hasMonthly = packagesSorted.some((p) => p.priceByMonth !== null);
-  const hasYearly = packagesSorted.some((p) => p.priceByYear !== null);
+  const hasMonthly = packagesSorted.some((p) => p.priceMonthCents !== null);
+  const hasYearly = packagesSorted.some((p) => p.priceYearCents !== null);
 
   const showToggle = (hasMonthly && hasYearly) || (hasMonthly && !hasYearly) || (!hasMonthly && hasYearly);
 
@@ -169,13 +169,13 @@ export default function Body({ service }: { service: SubServiceForBody }) {
           {packagesSorted.map((p) => {
             const price =
               effectiveBilling === "month"
-                ? formatPrice(p.priceByMonth)
-                : formatPrice(p.priceByYear);
+                ? formatPrice(p.priceMonthCents)
+                : formatPrice(p.priceYearCents);
 
             const hasThisBillingPrice =
               effectiveBilling === "month"
-                ? p.priceByMonth !== null
-                : p.priceByYear !== null;
+                ? p.priceMonthCents !== null
+                : p.priceYearCents !== null;
 
             const displayPrice = hasThisBillingPrice ? price : null;
 
@@ -241,10 +241,10 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                         </p>
                       </div>
 
-                      {p.priceByMonth !== null &&
-                        p.priceByYear !== null &&
-                        p.priceByYear > 0 &&
-                        p.priceByMonth > 0 && (
+                      {p.priceMonthCents !== null &&
+                        p.priceYearCents !== null &&
+                        p.priceYearCents > 0 &&
+                        p.priceMonthCents > 0 && (
                           <p className="text-xs text-gray-500">
                             Save vs monthly
                           </p>
@@ -283,7 +283,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                     className="w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer flex items-center gap-2 justify-center"
                     onClick={() => {
                       const unitPrice =
-                        effectiveBilling === "month" ? p.priceByMonth : p.priceByYear;
+                        effectiveBilling === "month" ? p.priceMonthCents : p.priceYearCents;
 
                       if (unitPrice === null || unitPrice === undefined) {
                         toast.error("This plan has no price for the selected billing.");

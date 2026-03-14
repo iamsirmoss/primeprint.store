@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.stockcake.com',
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   }, 
 };

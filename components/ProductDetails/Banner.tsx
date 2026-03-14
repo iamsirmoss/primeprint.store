@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 interface ProductProps {
       title: string;
-      images: string[];
 }
 
 const Banner = ({product}: {product: ProductProps}) => {

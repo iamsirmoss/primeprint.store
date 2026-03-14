@@ -38,9 +38,8 @@ export default async function SearchPage({ searchParams }: PageProps) {
         slug: true,
         title: true,
         description: true,
-        price: true,
+        basePriceCents: true,
         currency: true,
-        images: true,
       },
       orderBy: { createdAt: "desc" },
       take: 30,
@@ -143,7 +142,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
                       <div className="shrink-0">
                         <p className="font-bold">
-                          {item.price.toFixed(2)} {item.currency}
+                          {(item.basePriceCents / 100).toFixed(2)} {item.currency}
                         </p>
                       </div>
                     </div>

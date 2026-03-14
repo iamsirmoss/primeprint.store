@@ -105,7 +105,7 @@ import Link from "next/link";
                       </>
                     ) : (
                       <div className="text-sm text-gray-500">
-                        {unitPrice.toFixed(2)} {currency}
+                        {(unitPrice/100).toFixed(2)} {currency}
                       </div>
                     )}
                   </div>
@@ -159,7 +159,7 @@ import Link from "next/link";
                   </div>
 
                   <div className="font-bold text-black">
-                    {(unitPrice * it.qty).toFixed(2)} {currency}
+                    {((unitPrice/100) * it.qty).toFixed(2)} {currency}
                   </div>
                 </div>
               </div>
@@ -176,7 +176,7 @@ import Link from "next/link";
           {currencyKeys.map((cur) => (
             <div key={cur} className="flex items-center justify-between">
               <span>Subtotal</span>
-              <span className="font-semibold text-black">{totals[cur].toFixed(2)} {cur}</span>
+              <span className="font-semibold text-black">{(totals[cur]/100).toFixed(2)} {cur}</span>
             </div>
           ))}
         </div>
