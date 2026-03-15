@@ -208,7 +208,7 @@ const ProductCard = ({
           </p>
         </div>
 
-        <div className="flex justify-between gap-2 items-center px-5 pb-4 flex-wrap">
+        <div className="flex justify-between gap-2 items-center px-5 pb-4 flex-wrap md:flex-nowrap">
           <div>
             <h5 className="mt-2 text-base max-w-fit">
               {(price / 100).toFixed(2)}{" "}

@@ -29,11 +29,15 @@ type SubServiceForBody = {
 
 function formatPrice(value: number | null) {
   if (value === null || value === undefined) return null;
+
+  const dollars = value / 100;
+
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(value);
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(dollars);
 }
 
 function tierLabel(tier: Tier) {

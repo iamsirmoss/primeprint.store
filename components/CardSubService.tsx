@@ -20,7 +20,7 @@ const SubServiceCard: React.FC<ServiceCardProps> = ({
           <div className="overflow-hidden pb-3">
             {image ?
             (<Image
-                src={`/images/${image}`}
+                src={image.startsWith("http") ? image : `/images/${image}`}
                 alt={title}
                 priority
                 width={0}

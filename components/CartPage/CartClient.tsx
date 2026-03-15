@@ -13,30 +13,32 @@ import {
   incPackageQty,
   decPackageQty,
 } from "@/lib/cart";
-import { createOrderDraftAction } from "@/actions/create-order-draft-action";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+function formatMoney(value: number, currency = "USD") {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value / 100);
+}
 
-  export default function CartClient() {
+export default function CartClient() {
+  const { items, totals } = useCart();
 
-    const { items, totals } = useCart();
-    const router = useRouter();
+  const currencyKeys = Object.keys(totals);
 
-    const currencyKeys = Object.keys(totals);
-
-    if (items.length === 0) {
-      return (
-        <div className="flex flex-col items-center justify-center py-32">
-              <p className="text-gray-500">Your cart is empty.</p>
-              <Link href="/shop">
-                  <button
-                    className="bg-red-500 text-white rounded-2xl px-10 py-3 shadow transition-all duration-300 hover:bg-blue-400 cursor-pointer text-lg font-medium mt-4"
-                  >
-                    Go to shop
-                  </button>
-              </Link>
-        </div>
+  if (items.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-32">
+        <p className="text-gray-500">Your cart is empty.</p>
+        <Link href="/shop">
+          <button className="mt-4 cursor-pointer rounded-2xl bg-red-500 px-10 py-3 text-lg font-medium text-white shadow transition-all duration-300 hover:bg-blue-400">
+            Go to shop
+          </button>
+        </Link>
+      </div>
     );
   }
 
@@ -46,7 +48,7 @@ import Link from "next/link";
       : "bg-white text-gray-800 border border-gray-200";
 
   return (
-    <div className="py-20 grid gap-6 md:grid-cols-[1fr_580px]">
+    <div className="grid gap-6 py-20 md:grid-cols-[1fr_580px]">
       {/* Items */}
       <div className="space-y-4">
         {items.map((it) => {
@@ -60,53 +62,91 @@ import Link from "next/link";
           return (
             <div
               key={key}
-              className="flex gap-4 rounded-2xl bg-slate-100 p-4 hover:shadow-md transition-all duration-500 cursor-pointer"
+              className="flex gap-4 rounded-2xl bg-slate-100 p-4 transition-all duration-500 hover:shadow-md"
             >
-              <div className="relative h-20 w-20 overflow-hidden rounded-lg bg-gray-100">
+              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-gray-100">
                 <Image
                   src={it.image || "/images/placeholder.png"}
                   alt={title}
                   fill
                   className="object-cover"
+                  sizes="80px"
                 />
               </div>
 
               <div className="flex-1">
-                <div className="flex items-start justify-between gap-4 flex-wrap">
-                  <div>
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1">
                     {isPkg && (
-                      <p className="text-xs text-slate-500 mb-1 capitalize">
+                      <p className="mb-1 text-xs capitalize text-slate-500">
                         {it.serviceSlug} • {it.subServiceTitle}
                       </p>
                     )}
-                    <div className="flex items-center gap-2 flex-wrap">
-                                <div className="font-semibold capitalize text-black">{title}</div>
 
-                                <span
-                                  className={`text-[10px] px-2 py-1 rounded-full font-semibold ${badgeClass(isPkg)}`}
-                                >
-                                  {isPkg ? "PACKAGE" : "PRODUCT"}
-                                </span>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <div className="font-semibold capitalize text-black">
+                        {title}
+                      </div>
 
-                                {isPkg && (
-                                  <span className="text-[10px] px-2 py-1 rounded-full font-semibold bg-white text-gray-700 border border-gray-200">
-                                    {it.billing === "month" ? "MONTHLY" : "YEARLY"}
-                                  </span>
-                                )}
-                              </div>
+                      <span
+                        className={`rounded-full px-2 py-1 text-[10px] font-semibold ${badgeClass(
+                          isPkg
+                        )}`}
+                      >
+                        {isPkg ? "PACKAGE" : "PRODUCT"}
+                      </span>
+
+                      {isPkg && (
+                        <span className="rounded-full border border-gray-200 bg-white px-2 py-1 text-[10px] font-semibold text-gray-700">
+                          {it.billing === "month" ? "MONTHLY" : "YEARLY"}
+                        </span>
+                      )}
+                    </div>
+
                     {isPkg ? (
                       <>
-                        <div className="text-sm text-gray-500">
-                          {it.tier} • {it.billing === "month" ? "Monthly" : "Yearly"}
+                        <div className="mt-1 text-sm text-gray-500">
+                          {it.tier} •{" "}
+                          {it.billing === "month" ? "Monthly" : "Yearly"}
                         </div>
-                        <div className="text-sm text-gray-500">
-                          {unitPrice.toFixed(2)} {currency}
+
+                        <div className="mt-1 text-sm text-gray-500">
+                          {formatMoney(unitPrice, currency)}
                         </div>
+                        {/* {it.serviceSlug && (
+                          <div className="mt-2">
+                            <Link
+                              href={`/service/sub-service/${it.serviceSlug}`}
+                              className="text-xs font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800"
+                            >
+                              View package
+                            </Link>
+                          </div>
+                        )} */}
                       </>
                     ) : (
-                      <div className="text-sm text-gray-500">
-                        {(unitPrice/100).toFixed(2)} {currency}
-                      </div>
+                      <>
+                        <div className="mt-1 text-sm text-gray-500">
+                          {formatMoney(unitPrice, currency)}
+                        </div>
+
+                        {it.sku ? (
+                          <div className="mt-1 text-xs text-gray-500">
+                            SKU: <span className="font-medium">{it.sku}</span>
+                          </div>
+                        ) : null}
+
+                        {/* {"slug" in it && it.slug ? (
+                          <div className="mt-2">
+                            <Link
+                              href={`/product/${it.slug}`}
+                              className="text-xs font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800"
+                            >
+                              View product
+                            </Link>
+                          </div>
+                        ) : null} */}
+                      </>
                     )}
                   </div>
 
@@ -120,16 +160,15 @@ import Link from "next/link";
                         toast.success("Product removed from cart");
                       }
                     }}
-                    className="rounded-md p-2 bg-white"
+                    className="rounded-md bg-white p-2"
                     aria-label="Remove"
                     type="button"
                   >
-                    <Trash2 className="h-4 w-4 text-red-500 hover:text-black transition-all duration-300" />
+                    <Trash2 className="h-4 w-4 text-red-500 transition-all duration-300 hover:text-black" />
                   </button>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between flex-wrap gap-4">
-                  {/* Qty controls */}
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
                   <div className="inline-flex items-center gap-2 rounded-2xl border bg-white px-2 py-1">
                     <button
                       type="button"
@@ -143,7 +182,9 @@ import Link from "next/link";
                       <Minus className="h-4 w-4" />
                     </button>
 
-                    <span className="min-w-8 text-center font-semibold">{it.qty}</span>
+                    <span className="min-w-8 text-center font-semibold">
+                      {it.qty}
+                    </span>
 
                     <button
                       type="button"
@@ -159,7 +200,7 @@ import Link from "next/link";
                   </div>
 
                   <div className="font-bold text-black">
-                    {((unitPrice/100) * it.qty).toFixed(2)} {currency}
+                    {formatMoney(unitPrice * it.qty, currency)}
                   </div>
                 </div>
               </div>
@@ -176,42 +217,17 @@ import Link from "next/link";
           {currencyKeys.map((cur) => (
             <div key={cur} className="flex items-center justify-between">
               <span>Subtotal</span>
-              <span className="font-semibold text-black">{(totals[cur]/100).toFixed(2)} {cur}</span>
+              <span className="font-semibold text-black">
+                {formatMoney(totals[cur], cur)}
+              </span>
             </div>
           ))}
         </div>
 
-        {/* <button
-          type="button"
-          className="mt-5 w-full rounded bg-black py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-500 cursor-pointer"
-          onClick={async () => {
-            try {
-              const payload = {
-                items: items.map((it) =>
-                  isPackageItem(it)
-                    ? { type: "PACKAGE" as const, packageId: it.packageId, qty: it.qty, billing: it.billing }
-                    : { type: "PRODUCT" as const, productId: it.productId, qty: it.qty }
-                ),
-              };
-
-              const { orderId } = await createOrderDraftAction(payload);
-
-              // ✅ redirige vers une page review avant Stripe
-              router.push(`/order/${orderId}`);
-              toast.success("Order created ✅");
-            } catch (e: any) {
-              toast.error(e?.message ?? "Failed to create order");
-            }
-          }}
-        >
-          Checkout
-        </button> */}
         <Link href="/checkout">
-            <button
-              className="mt-5 w-full rounded-2xl bg-black py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-500 cursor-pointer"
-            >
-              Checkout
-            </button>
+          <button className="mt-5 w-full cursor-pointer rounded-2xl bg-black py-3 text-sm font-semibold text-white transition-all duration-500 hover:bg-black/75">
+            Checkout
+          </button>
         </Link>
       </div>
     </div>

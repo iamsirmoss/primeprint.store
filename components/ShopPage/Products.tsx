@@ -24,7 +24,9 @@ interface ServiceFilter {
   title: string;
 }
 
-type ServiceFilterValue = "all" | "other" | string; // string = serviceSlug
+type ServiceFilterValue = "all" | "other" | string;
+
+const ITEMS_PER_PAGE = 8;
 
 const Products = ({
   products,
@@ -46,13 +48,18 @@ const Products = ({
     useState<ServiceFilterValue>(initialService);
 
   const [q, setQ] = useState(searchParams.get("q") ?? "");
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get("page") ?? "1")
+  );
 
-  // keep state in sync if user uses back/forward
   useEffect(() => {
     const spService = (searchParams.get("service") ?? "all").toLowerCase();
+    const spQ = searchParams.get("q") ?? "";
+    const spPage = Number(searchParams.get("page") ?? "1");
+
     setSelectedService(spService || "all");
-    setQ(searchParams.get("q") ?? "");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setQ(spQ);
+    setCurrentPage(spPage > 0 ? spPage : 1);
   }, [searchParams]);
 
   const serviceSlugToId = useMemo(() => {
@@ -61,16 +68,21 @@ const Products = ({
     return map;
   }, [services]);
 
-  const updateUrl = (nextService: ServiceFilterValue, nextQ: string) => {
+  const updateUrl = (
+    nextService: ServiceFilterValue,
+    nextQ: string,
+    nextPage: number
+  ) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    // service
     if (!nextService || nextService === "all") params.delete("service");
     else params.set("service", nextService);
 
-    // query
-    if (!nextQ?.trim()) params.delete("q");
+    if (!nextQ.trim()) params.delete("q");
     else params.set("q", nextQ.trim());
+
+    if (nextPage <= 1) params.delete("page");
+    else params.set("page", String(nextPage));
 
     const qs = params.toString();
     router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
@@ -78,27 +90,32 @@ const Products = ({
 
   const onSelectService = (value: ServiceFilterValue) => {
     setSelectedService(value);
-    updateUrl(value, q);
+    setCurrentPage(1);
+    updateUrl(value, q, 1);
   };
 
   const onSearch = (value: string) => {
     setQ(value);
-    updateUrl(selectedService, value);
+    setCurrentPage(1);
+    updateUrl(selectedService, value, 1);
+  };
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+    updateUrl(selectedService, q, page);
   };
 
   const filteredProducts = useMemo(() => {
     let list = products;
 
-    // 1) service filter
     if (selectedService === "other") {
       list = list.filter((p) => !p.serviceId);
     } else if (selectedService !== "all") {
       const serviceId = serviceSlugToId.get(selectedService.toLowerCase());
       if (serviceId) list = list.filter((p) => p.serviceId === serviceId);
-      else list = []; // slug inconnu
+      else list = [];
     }
 
-    // 2) text search
     const query = q.trim().toLowerCase();
     if (query) {
       list = list.filter((p) => {
@@ -111,10 +128,25 @@ const Products = ({
     return list;
   }, [products, q, selectedService, serviceSlugToId]);
 
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    return filteredProducts.slice(start, end);
+  }, [filteredProducts, currentPage]);
+
   const otherCount = useMemo(
     () => products.filter((p) => !p.serviceId).length,
     [products]
   );
+
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1);
+      updateUrl(selectedService, q, 1);
+    }
+  }, [currentPage, totalPages, selectedService, q]);
 
   return (
     <div className="py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
@@ -125,29 +157,20 @@ const Products = ({
             Browse products and filter by service.
           </p>
         </div>
-
-        {/* <div className="text-right">
-          <p className="text-sm text-gray-500">{filteredProducts.length} item(s)</p>
-        </div> */}
       </div>
 
-      {/* Search */}
       <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
         <div className="w-full sm:max-w-lg relative">
-          
           <AiOutlineProduct className="absolute top-1.5 size-5 md:size-6" />
-            <input
-              type="text"
-              value={q}
-              onChange={(e) => onSearch(e.target.value)}
-              placeholder="Search products..."
-              className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base text-black"
-            />
-              {/* base line */}
-              <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
-          
-              {/* focus line */}
-              <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
+          <input
+            type="text"
+            value={q}
+            onChange={(e) => onSearch(e.target.value)}
+            placeholder="Search products..."
+            className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-sm md:text-base text-black"
+          />
+          <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
+          <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 peer-focus:w-full" />
         </div>
 
         <button
@@ -155,7 +178,8 @@ const Products = ({
           onClick={() => {
             setQ("");
             setSelectedService("all");
-            updateUrl("all", "");
+            setCurrentPage(1);
+            updateUrl("all", "", 1);
           }}
           className="rounded-2xl text-white bg-black px-4 py-3 text-sm font-medium hover:bg-black/75 cursor-pointer transition-all duration-300"
         >
@@ -163,9 +187,7 @@ const Products = ({
         </button>
       </div>
 
-      {/* FILTERS */}
       <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-        {/* All */}
         <button
           onClick={() => onSelectService("all")}
           className={`rounded-2xl py-2 px-4 transition-all duration-300 border ${
@@ -177,7 +199,6 @@ const Products = ({
           <p className="text-sm">All</p>
         </button>
 
-        {/* Others (serviceId null) */}
         <button
           onClick={() => onSelectService("other")}
           className={`rounded-2xl py-2 px-4 transition-all duration-300 border ${
@@ -189,7 +210,6 @@ const Products = ({
           <p className="text-sm">Others ({otherCount})</p>
         </button>
 
-        {/* Services by slug (shareable) */}
         {services.map((s) => {
           const active = selectedService === s.slug.toLowerCase();
           return (
@@ -209,28 +229,64 @@ const Products = ({
         })}
       </div>
 
-      {/* PRODUCTS GRID */}
       {filteredProducts.length === 0 ? (
         <div className="mt-16 rounded-2xl border border-gray-200 bg-white p-6 text-gray-600">
           No products found for this filter.
         </div>
       ) : (
-        <div className="mt-16 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-8">
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              slug={product.slug}
-              title={product.title}
-              description={product.description ?? ""}
-              price={product.basePriceCents}
-              images={product.images}
-              currency={product.currency ?? "USD"}
-              stockQty={product.stockQty ?? null}
-              sku={product.sku ?? null}
-            />
-          ))}
-        </div>
+        <>
+          <div className="mt-16 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+            {paginatedProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                slug={product.slug}
+                title={product.title}
+                description={product.description ?? ""}
+                price={product.basePriceCents}
+                images={product.images}
+                currency={product.currency ?? "USD"}
+                stockQty={product.stockQty ?? null}
+                sku={product.sku ?? null}
+              />
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="rounded-2xl border px-4 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-all duration-300"
+            >
+              Previous
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                type="button"
+                onClick={() => goToPage(page)}
+                className={`rounded-2xl border px-4 py-2 text-sm transition-all duration-300 ${
+                  currentPage === page
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-black hover:bg-gray-100 border-gray-200"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            <button
+              type="button"
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="rounded-2xl border px-4 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-all duration-300"
+            >
+              Next
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
