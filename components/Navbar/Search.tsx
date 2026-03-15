@@ -143,7 +143,7 @@ const Search = () => {
             <RiSearch2Line className="text-2xl md:text-3xl shrink-0" />
 
             <input
-              className="w-full outline-none border-none bg-transparent py-1 text-xs placeholder-gray-500"
+              className="w-full outline-none border-none bg-transparent py-1 text-base placeholder-gray-500"
               placeholder="Search for products or services..."
               name="q"
               value={query}
