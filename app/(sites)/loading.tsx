@@ -2,12 +2,12 @@ import ServiceSkeleton from "@/components/Skeletons/ServiceSkeleton";
 import Banner2 from "@/components/HomePages/Banner2";
 import Banner3 from "@/components/HomePages/Banner3";
 import Articles from "@/components/HomePages/Articles";
-import Reviews from "@/components/HomePages/Reviews";
 import TestSkeleton from "@/components/Skeletons/DealsSkeleton";
 import TopServiceSkeleton from "@/components/Skeletons/TopServiceSkeleton";
 import ProductsSkeleton from "@/components/Skeletons/ProductsSkeleton";
 import SellingsSkeleton from "@/components/Skeletons/SellingsSkeleton";
 import BannerSkeleton from "@/components/Skeletons/BannerSkeleton";
+import ReviewsPageSkeleton from "@/components/Skeletons/reviewsPage/ReviewsPageSkeleton";
 
 export default function Loading() {
 
@@ -22,13 +22,13 @@ export default function Loading() {
                         <ServiceSkeleton key={i} />
                   ))}
             </div>
-            <TestSkeleton />
+            <TestSkeleton /> 
             <TopServiceSkeleton />
             <Banner2 />
             <ProductsSkeleton />
             <Banner3 />
             <SellingsSkeleton />
-            <Reviews />
+            <ReviewsPageSkeleton />
             <Articles />
     </div>
   );
