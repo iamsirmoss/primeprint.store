@@ -1,110 +1,3 @@
-// import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-
-// function money(cents: number, currency: string) {
-//   return new Intl.NumberFormat("en-US", {
-//     style: "currency",
-//     currency: currency || "USD",
-//     maximumFractionDigits: 2,
-//   }).format((cents || 0) / 100);
-// }
-
-// export async function generateInvoicePdf(params: {
-//   invoiceNumber: string;
-//   orderId: string;
-//   createdAt: Date;
-//   customerEmail: string;
-//   currency: string;
-//   items: Array<{ title: string; qty: number; unitPriceCents: number; lineTotalCents: number }>;
-//   subtotalCents: number;
-//   taxCents: number;
-//   discountCents: number;
-//   totalCents: number;
-//   brandName?: string; // ex: PrimePrint
-// }) {
-//   const brand = params.brandName ?? "PrimePrint";
-
-//   const pdfDoc = await PDFDocument.create();
-//   const page = pdfDoc.addPage([595.28, 841.89]); // A4
-//   const { width, height } = page.getSize();
-
-//   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-//   const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-
-//   let y = height - 60;
-
-//   // Header
-//   page.drawText(brand, { x: 50, y, size: 20, font: fontBold, color: rgb(0, 0, 0) });
-//   y -= 30;
-
-//   page.drawText(`INVOICE #${params.invoiceNumber}`, { x: 50, y, size: 14, font: fontBold });
-//   y -= 18;
-
-//   page.drawText(`Order: ${params.orderId}`, { x: 50, y, size: 10, font });
-//   y -= 14;
-
-//   page.drawText(`Date: ${params.createdAt.toISOString().slice(0, 10)}`, { x: 50, y, size: 10, font });
-//   y -= 14;
-
-//   page.drawText(`Customer: ${params.customerEmail}`, { x: 50, y, size: 10, font });
-//   y -= 25;
-
-//   // Table header
-//   page.drawText("Item", { x: 50, y, size: 10, font: fontBold });
-//   page.drawText("Qty", { x: 340, y, size: 10, font: fontBold });
-//   page.drawText("Unit", { x: 390, y, size: 10, font: fontBold });
-//   page.drawText("Total", { x: 480, y, size: 10, font: fontBold });
-//   y -= 12;
-
-//   page.drawLine({ start: { x: 50, y }, end: { x: width - 50, y }, thickness: 1, color: rgb(0.85, 0.85, 0.85) });
-//   y -= 16;
-
-//   // Items
-//   for (const it of params.items) {
-//     const title = it.title.length > 55 ? it.title.slice(0, 52) + "..." : it.title;
-
-//     page.drawText(title, { x: 50, y, size: 10, font });
-//     page.drawText(String(it.qty), { x: 345, y, size: 10, font });
-//     page.drawText(money(it.unitPriceCents, params.currency), { x: 390, y, size: 10, font });
-//     page.drawText(money(it.lineTotalCents, params.currency), { x: 480, y, size: 10, font });
-
-//     y -= 16;
-
-//     // simple page break
-//     if (y < 180) {
-//       y = 180; // (si tu veux multi-page, je te le fais après)
-//       break;
-//     }
-//   }
-
-//   // Totals block
-//   y -= 10;
-//   page.drawLine({ start: { x: 50, y }, end: { x: width - 50, y }, thickness: 1, color: rgb(0.85, 0.85, 0.85) });
-//   y -= 18;
-
-//   const rightX = 390;
-
-//   page.drawText(`Subtotal:`, { x: rightX, y, size: 10, font });
-//   page.drawText(money(params.subtotalCents, params.currency), { x: 480, y, size: 10, font });
-//   y -= 14;
-
-//   page.drawText(`Tax:`, { x: rightX, y, size: 10, font });
-//   page.drawText(money(params.taxCents, params.currency), { x: 480, y, size: 10, font });
-//   y -= 14;
-
-//   page.drawText(`Discount:`, { x: rightX, y, size: 10, font });
-//   page.drawText(`-${money(params.discountCents, params.currency)}`, { x: 480, y, size: 10, font });
-//   y -= 16;
-
-//   page.drawText(`Total:`, { x: rightX, y, size: 12, font: fontBold });
-//   page.drawText(money(params.totalCents, params.currency), { x: 480, y, size: 12, font: fontBold });
-
-//   // Footer
-//   page.drawText("Thank you for your order!", { x: 50, y: 60, size: 10, font, color: rgb(0.2, 0.2, 0.2) });
-
-//   const pdfBytes = await pdfDoc.save();
-//   return Buffer.from(pdfBytes);
-// }
-
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 function money(cents: number, currency: string) {
@@ -162,7 +55,7 @@ export async function generateInvoicePdf(params: {
   // COMPANY HEADER
   // ======================
 
-  drawText("PrimePrint", 50, 20, true);
+  drawText("Prime Print Store", 50, 20, true);
   y -= 20;
 
   drawText("123 Business Street", 50);
@@ -174,7 +67,7 @@ export async function generateInvoicePdf(params: {
 
   drawText("Phone: +1 (206) 000-0000", 50);
   y -= 14;
-  drawText("Email: support@primeprint.store", 50);
+  drawText("Email: contact@primeprint.store", 50);
   y -= 14;
   drawText("Website: www.primeprint.store", 50);
 
@@ -293,7 +186,7 @@ export async function generateInvoicePdf(params: {
     color: rgb(0.3, 0.3, 0.3),
   });
 
-  page.drawText("If you have any questions, contact support@primeprint.store", {
+  page.drawText("If you have any questions, contact contact@primeprint.store", {
     x: 50,
     y: 45,
     size: 9,

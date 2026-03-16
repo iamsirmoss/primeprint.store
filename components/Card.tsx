@@ -70,9 +70,9 @@ const Card: React.FC<CardProps> = ({
   const isOutOfStock = !isActive || safeStockQty <= 0;
 
   return (
-    <div className="relative">
+    <div className="relative w-full h-full">
       <Link href={`/product/${slug}`}>
-        <div className="group relative w-full rounded-lg bg-white p-5 border border-transparent hover:border-gray-200 hover:shadow-xl transition-all duration-500">
+        <div className="group relative w-full h-[260px] rounded-lg bg-white p-5 border border-transparent hover:border-gray-200 hover:shadow-xl transition-all duration-500">
           <div className="relative w-full h-[90px] sm:w-[80%] md:w-1/2 lg:w-full overflow-hidden">
             <Image
               src={resolvedImage}

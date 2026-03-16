@@ -44,13 +44,13 @@ const UserAccount = ({user}: UserAccountProps) => {
               </div>
             )
           } */}
-          <div className="flex items-center justify-center aspect-square size-5 md:size-6 rounded-full bg-gray-400 text-white">
+          <div className="flex items-center justify-center aspect-square size-[22px] md:size-[24.8px] rounded-full bg-gray-400 text-white">
             <span className="uppercase text-xs md:text-base font-semibold font-sans">
               {user.name?.slice(0, 1)}
             </span>
           </div>
           <div>
-            <h5 className="text-xs md:text-sm group-hover:underline">Account</h5>
+            <h5 className="text-xs md:text-sm group-hover:underline mt-0.5 md:mt-0">Account</h5>
           </div>
         </div>
       </DropdownMenuTrigger>

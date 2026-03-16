@@ -43,10 +43,10 @@ const Navbar = () => {
                   isSticky 
                   ? `fixed top-0 left-0 right-0 bg-white shadow-lg mt-6 xl:mt-0 py-1.5 md:py-0.5`
                   : `mt-1 xl:mt-0 py-1.5 md:py-0.5`}`}>
-                  <div className='w-[170px] md:w-[200px] xl:w-[220px]'>
+                  <div className='w-[180px] md:w-[200px] xl:w-[220px]'>
                         <Link href='/'>
                               <Image src={image1} alt='image1' priority width={0} height={0} sizes='100vw' 
-                              className={`transition-all duration-300 w-[45%] md:w-[50%] ${
+                              className={`transition-all duration-300 w-[50%] mt-2 ${
                                     isSticky ? "scale-90" : "scale-100"
                                   }`} 
                               />

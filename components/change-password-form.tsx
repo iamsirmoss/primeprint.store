@@ -39,7 +39,7 @@ export const ChangePasswordForm = () => {
         type={showPassword ? "text" : "password"} 
         id="currentPassword" name="currentPassword" 
         placeholder="Current password ****" 
-        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-xs md:text-sm placeholder-gray-400" />
+        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-base placeholder-gray-400" />
         {/* base line */}
         <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
                         
@@ -63,7 +63,7 @@ export const ChangePasswordForm = () => {
         type={showPassword2 ? "text" : "password"} 
         id="newPassword" name="newPassword" 
         placeholder="New password ****" 
-        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-xs md:text-sm placeholder-gray-400" />
+        className="peer w-full bg-transparent pl-9 py-2 pr-10 focus:outline-none text-base placeholder-gray-400" />
         {/* base line */}
         <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
                         

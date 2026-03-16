@@ -13,34 +13,6 @@ export const SendVerificationEmailForm = ({ callbackURL }: { callbackURL?: strin
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
 
-  // async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
-  //   evt.preventDefault();
-  //   const formData = new FormData(evt.currentTarget);
-  //   const email = String(formData.get("email"));
-
-  //   if (!email) return toast.error("Please enter your email.");
-
-  //   await sendVerificationEmail({
-  //     email,
-  //     callbackURL: "/auth/verify",
-  //     fetchOptions: {
-  //       onRequest: () => {
-  //         setIsPending(true);
-  //       },
-  //       onResponse: () => {
-  //         setIsPending(false);
-  //       },
-  //       onError: (ctx) => {
-  //         toast.error(ctx.error.message);
-  //       },
-  //       onSuccess: () => {
-  //         toast.success("Verification email sent successfully.");
-  //         router.push("/auth/verify/success");
-  //       },
-  //     },
-  //   });
-  // }
-
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     const formData = new FormData(evt.currentTarget);
@@ -90,7 +62,7 @@ export const SendVerificationEmailForm = ({ callbackURL }: { callbackURL?: strin
             name='email'
             type="email" 
             id="email"
-            className="peer w-full bg-transparent pl-9 py-2 focus:outline-none" placeholder="Email"
+            className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-base placeholder-gray-400" placeholder="Email"
             />
             {/* base line */}
             <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />

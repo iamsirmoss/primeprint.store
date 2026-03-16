@@ -159,7 +159,7 @@ const SignInOAuthButton = ({
       type="button"
       onClick={handleClick}
       disabled={isPending}
-      className="flex items-center justify-center gap-3 py-7 rounded-2xl bg-black hover:bg-black/80 w-full transition-all duration-300 cursor-pointer"
+      className="flex items-center justify-center gap-3 py-6 rounded-2xl bg-black hover:bg-black/80 w-full transition-all duration-300 cursor-pointer"
     >
       <Image
         src={logo}

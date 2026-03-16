@@ -128,8 +128,8 @@ const Search = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="flex flex-col items-center cursor-pointer group">
-          <IoSearchCircleSharp className="text-[25px] md:text-[31px] mt-0.5 cursor-pointer text-black/90 group-hover:text-black transition-all duration-500" />
+        <button className="flex flex-col items-center cursor-pointer group gap-0.5">
+          <IoSearchCircleSharp className="text-[29px] md:text-[31px] mt-0 cursor-pointer text-black/90 group-hover:text-black transition-all duration-500" />
           <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium text-black">
             Search
           </h5>

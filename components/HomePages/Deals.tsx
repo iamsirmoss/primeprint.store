@@ -56,12 +56,12 @@ const Test = ({products}: {products: ProductProps[]}) => {
                   align: "start",
                   }}
                   orientation="vertical"
-                  className="w-full max-w-full py-7"
+                  className="w-full max-w-full py-2"
             >
                   <CarouselContent className="-mt-1 h-80 w-full">
                   {products.map((product, index) => (
                   <CarouselItem key={index} className="pt-0 w-full">
-                        <div className="px-4 pt-2 w-full">
+                        <div className="px-4 py-8 max-h-full">
                         <Card
                               key={product.id}
                               id={product.id}

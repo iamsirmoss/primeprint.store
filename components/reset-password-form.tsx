@@ -57,7 +57,7 @@ export const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
     <form className="w-full space-y-4 mt-10" onSubmit={handleSubmit}>
       <div className="relative mt-8">
         <KeySquare className="absolute top-1.5" />
-        <input type={showPassword ? "text" : "password"} id="password" name="password" placeholder="New password" className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-xs md:text-sm placeholder-gray-400" />
+        <input type={showPassword ? "text" : "password"} id="password" name="password" placeholder="New password" className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-base placeholder-gray-400" />
         {/* base line */}
         <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
                                 
@@ -77,7 +77,7 @@ export const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
 
       <div className="relative mt-8">
         <KeySquare className="absolute top-1.5" />
-        <input type={showPassword2 ? "text" : "password"} id="confirmPassword" name="confirmPassword" placeholder="Confirm password" className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-xs md:text-sm placeholder-gray-400" />
+        <input type={showPassword2 ? "text" : "password"} id="confirmPassword" name="confirmPassword" placeholder="Confirm password" className="peer w-full bg-transparent pl-9 py-2 focus:outline-none text-base placeholder-gray-400" />
         {/* base line */}
         <span className="absolute left-0 bottom-0 h-px w-full bg-gray-300 transition-all duration-300" />
                                 
