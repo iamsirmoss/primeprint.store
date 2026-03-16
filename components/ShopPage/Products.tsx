@@ -10,12 +10,32 @@ interface ProductProps {
   serviceId?: string | null;
   slug: string;
   title: string;
-  description: string | null;
-  basePriceCents: number;
+  description: string;
+  price: number;
+  basePriceCents?: number;
+  compareAtPriceCents?: number | null;
   images: string[];
-  currency?: string;
+  currency: string;
   stockQty?: number | null;
+  lowStockThreshold?: number | null;
   sku?: string | null;
+  isActive?: boolean;
+  isFeatured?: boolean;
+  requiresUpload?: boolean;
+  requiresApproval?: boolean;
+  requiresAppointment?: boolean;
+  type?: string;
+  salesChannel?: string;
+  category?: {
+    name: string;
+    slug: string;
+  } | null;
+  service?: {
+    title: string;
+    slug: string;
+  } | null;
+  ratingAverage?: number | null;
+  reviewCount?: number;
 }
 
 interface ServiceFilter {
@@ -235,7 +255,7 @@ const Products = ({
         </div>
       ) : (
         <>
-          <div className="mt-16 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+          <div className="mt-16 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {paginatedProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -243,11 +263,25 @@ const Products = ({
                 slug={product.slug}
                 title={product.title}
                 description={product.description ?? ""}
-                price={product.basePriceCents}
+                price={product.price}
+                basePriceCents={product.basePriceCents}
+                compareAtPriceCents={product.compareAtPriceCents}
                 images={product.images}
                 currency={product.currency ?? "USD"}
-                stockQty={product.stockQty ?? null}
-                sku={product.sku ?? null}
+                stockQty={product.stockQty}
+                lowStockThreshold={product.lowStockThreshold}
+                sku={product.sku}
+                isActive={product.isActive}
+                isFeatured={product.isFeatured}
+                requiresUpload={product.requiresUpload}
+                requiresApproval={product.requiresApproval}
+                requiresAppointment={product.requiresAppointment}
+                type={product.type}
+                salesChannel={product.salesChannel}
+                category={product.category}
+                service={product.service}
+                ratingAverage={product.ratingAverage}
+                reviewCount={product.reviewCount}
               />
             ))}
           </div>
