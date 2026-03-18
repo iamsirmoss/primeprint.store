@@ -1,9 +1,3 @@
-import React from 'react'
-import image1 from '@/public/images/PASSPORT PHOTO ID.png'
-import image2 from '@/public/images/NOTARY PUBLIC.png'
-import image3 from '@/public/images/USPS MAILLING SERVICES.png'
-import image4 from '@/public/images/MONEY ORDER.png'
-import image5 from '@/public/images/PRINT SERVICE.png'
 import TopServiceCard from '../CardTopService'
 import Link from 'next/link'
 import { BsArrowRight } from 'react-icons/bs'
@@ -20,7 +14,7 @@ interface ServiceProps {
 const TopService = ({services}: {services: ServiceProps[]}) => {
   return (
       <div className='py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]'>
-            <h1 className='text-2xl xs:text-3xl lg:text-5xl font-bold'>Discover our top services </h1>
+            <h2 className='text-2xl xs:text-3xl lg:text-5xl font-bold'>Discover our top services </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 mt-20">
               {services.slice(0, 4).map((service, index) => (
                 <TopServiceCard

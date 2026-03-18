@@ -24,6 +24,7 @@ const OtherSubServices = ({
                               title={service.title}
                               image={service.image ?? ""}
                               slug={service.slug}
+                              serviceSlug={serviceSlug}
                         />
                   ))}
             </div>

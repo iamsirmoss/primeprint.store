@@ -9,8 +9,6 @@ interface ServiceProps {
       title: string;
       image: string | null;
       isActive: boolean;
-      position: number;
-      createdAt: Date;
       updatedAt: Date;
       subServices: {
         image: string | null;

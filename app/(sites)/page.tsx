@@ -1,21 +1,49 @@
+import type { Metadata } from "next";
 import Banner from "@/components/HomePages/Banner";
 import Service from "@/components/HomePages/Service";
 import Test from "@/components/HomePages/Deals";
-import GetUp from "@/components/HomePages/GetUp";
 import Products from "@/components/HomePages/Products";
 import Banner2 from "@/components/HomePages/Banner2";
 import Banner3 from "@/components/HomePages/Banner3";
 import Sellings from "@/components/HomePages/Sellings";
-import Trendings from "@/components/HomePages/Trendings";
-import Help from "@/components/HomePages/Help";
-import TopService from "@/components/HomePages/TopService";
 import Articles from "@/components/HomePages/Articles";
 import Reviews from "@/components/HomePages/Reviews";
+import TopService from "@/components/HomePages/TopService";
 import { prisma } from "@/lib/prisma";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://primeprint-store.vercel.app";
+
+export const metadata: Metadata = {
+  title: "Online Printing, Design & Business Services",
+  description:
+    "Prime Print Store offers online printing services including business cards, flyers, banners, graphic design, passport photos, notary services, and more.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Prime Print Store | Online Printing & Business Services",
+    description:
+      "Order business cards, flyers, banners, design services, passport photos, and more from Prime Print Store.",
+    url: siteUrl,
+    siteName: "Prime Print Store",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prime Print Store | Online Printing & Business Services",
+    description:
+      "Order business cards, flyers, banners, design services, passport photos, and more from Prime Print Store.",
+  },
+};
 
 export default async function Home() {
   const services = await prisma.service.findMany({
     take: 8,
+    where: {
+      isActive: true,
+    },
     orderBy: {
       position: "asc",
     },
@@ -25,6 +53,10 @@ export default async function Home() {
       title: true,
       image: true,
       products: {
+        where: {
+          isActive: true,
+          status: "PUBLISHED",
+        },
         select: {
           id: true,
           slug: true,
@@ -32,6 +64,9 @@ export default async function Home() {
         },
       },
       subServices: {
+        where: {
+          isActive: true,
+        },
         select: {
           id: true,
           slug: true,
@@ -43,6 +78,10 @@ export default async function Home() {
 
   const productsRaw = await prisma.product.findMany({
     take: 3,
+    where: {
+      isActive: true,
+      status: "PUBLISHED",
+    },
     orderBy: {
       createdAt: "asc",
     },
@@ -54,6 +93,8 @@ export default async function Home() {
       basePriceCents: true,
       stockQty: true,
       isActive: true,
+      isFeatured: true,
+      compareAtPriceCents: true,
       images: {
         orderBy: {
           position: "asc",
@@ -106,6 +147,9 @@ export default async function Home() {
         },
       },
       reviews: {
+        where: {
+          status: "APPROVED",
+        },
         select: {
           rating: true,
         },
@@ -142,6 +186,9 @@ export default async function Home() {
 
   const reviews = await prisma.review.findMany({
     take: 6,
+    where: {
+      status: "APPROVED",
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -209,19 +256,34 @@ export default async function Home() {
     };
   });
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    name: "Prime Print Store",
+    url: siteUrl,
+    description:
+      "Prime Print Store offers online printing services including business cards, flyers, banners, graphic design, passport photos, notary services, and more.",
+  };
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <h1 className="sr-only">
+        Prime Print Store Online Printing, Design and Business Services
+      </h1>
+
       <Banner />
       <Service services={services} />
       <Test products={products} />
       <TopService services={services} />
-      {/* <GetUp /> */}
       <Banner2 />
       <Products products={productsHome} />
       <Banner3 />
       <Sellings products={productsHome} />
-      {/* <Trendings /> */}
-      {/* <Help /> */}
       <Reviews reviews={reviews} />
       <Articles />
     </div>

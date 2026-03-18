@@ -49,13 +49,13 @@ const Banner = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut" }}
             className='md:text-center'>
-                  <h1 className='text-[55px] md:text-[75px] lg:text-[90px] xl:text-[100px] font-extrabold
+                  <h2 className='text-[55px] md:text-[75px] lg:text-[90px] xl:text-[100px] font-extrabold
                   leading-tight uppercase text-white'>
                         prime print{" "}<span className='font-light text-[45px] md:text-[60px] lg:text-[80px] xl:text-[90px]'>store</span>
-                  </h1>
-                  <p className='text-base lg:text-2xl font-semibold text-white'>
+                  </h2>
+                  <h1 className='text-base lg:text-2xl font-semibold text-white'>
                         Your one stop shop for printing, notary and more.
-                  </p>
+                  </h1>
             </motion.div>
             <div className='relative'>
                   <motion.div

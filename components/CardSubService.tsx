@@ -7,16 +7,18 @@ interface ServiceCardProps {
   title: string;
   image: string;
   slug: string;
+  serviceSlug?: string;
 }
 
 const SubServiceCard: React.FC<ServiceCardProps> = ({
   title,
   image,
-  slug
+  slug,
+  serviceSlug = "",
 }) => {
   return (
         <div className="border p-3 rounded-2xl group hover:shadow-lg transition-all duration-500">
-          <Link href={`/service/sub-service/${slug}`}>
+          <Link href={`/service/${serviceSlug}/${slug}`}>
           <div className="overflow-hidden pb-3">
             {image ?
             (<Image

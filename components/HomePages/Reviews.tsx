@@ -47,11 +47,11 @@ const Reviews = ({ reviews }: { reviews: ReviewProps[] }) => {
   if (!reviews || reviews.length === 0) {
     return (
       <div className="py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] bg-slate-50">
-        <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
+        <h2 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
           Your opinions matter :
           <br />
           Read our latest reviews
-        </h1>
+        </h2>
 
         <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-6 text-gray-500">
           No reviews available yet.
@@ -62,11 +62,11 @@ const Reviews = ({ reviews }: { reviews: ReviewProps[] }) => {
 
   return (
     <div className="py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] bg-slate-50">
-      <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
+      <h2 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
         Your opinions matter :
         <br />
         Read our latest reviews
-      </h1>
+      </h2>
 
       <div className="w-full xl:w-[95%] rounded-lg flex flex-col items-center justify-center py-5 mx-auto">
         <Carousel

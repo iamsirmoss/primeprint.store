@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { addPackageToCart } from "@/lib/cart";
 import { RiShoppingCartFill } from 'react-icons/ri';
+import Link from "next/link";
 
 type Tier = "STARTER" | "GROWTH" | "ULTIMATE";
 
@@ -17,6 +18,7 @@ type PackageItem = {
   image: string | null;
   points: string[];
   currency?: string | null;
+  slug: string;
 };
 
 type SubServiceForBody = {
@@ -189,7 +191,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                 className={`rounded-3xl bg-white p-6 ${tierCardRing(
                   p.tier
                 )} shadow-sm`}
-              >
+              > 
                 {/* Header */}
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -280,8 +282,17 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                   </p>
                 )}
 
+                <Link href={`/package/${p.slug}`}>
+                    <button
+                      type="button"
+                      className="mt-6 w-full rounded-2xl border border-gray-400 px-4 py-2.5 text-sm font-semibold text-gray-500 hover:bg-gray-100 transition-all duration-300"
+                    >
+                      View details
+                    </button>
+                </Link>
+
                 {/* CTA */}
-                <div className="mt-6">
+                <div className="mt-2">
                   <button
                     type="button"
                     className="w-full rounded-2xl bg-black px-4 py-3 text-sm font-semibold text-white hover:bg-black/75 transition-all duration-300 cursor-pointer flex items-center gap-2 justify-center"
@@ -316,9 +327,9 @@ export default function Body({ service }: { service: SubServiceForBody }) {
                     Add to cart
                   </button>
 
-                  {/* <p className="mt-2 text-xs text-gray-500">
+                  <p className="mt-2 text-xs text-gray-500">
                     You must be signed in to checkout.
-                  </p> */}
+                  </p>
                 </div>
               </div>
             );

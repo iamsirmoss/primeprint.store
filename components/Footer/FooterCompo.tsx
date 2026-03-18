@@ -123,7 +123,7 @@ const FooterCompo = ({ services, products }: FooterCompoProps) => {
             </div>
             <hr className='border-t border-gray-500 my-0.5' />
             <div className='py-2'>
-                  <p className='text-xs md:text-sm'>Copyright ©2026 <span className='text-white underline'>PrimePrint Store Inc.</span></p>
+                  <p className='text-xs md:text-sm'>Copyright ©2026 <span className='text-white underline'>Prime Print Store Inc.</span></p>
             </div>
       </footer>
   )

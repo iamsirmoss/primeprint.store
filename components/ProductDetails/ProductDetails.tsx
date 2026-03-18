@@ -6,6 +6,7 @@ import React, { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { addToCart } from "@/lib/cart";
 import { RiShoppingCartFill } from "react-icons/ri";
+import Link from "next/link";
 
 type Review = {
   id: string;
@@ -247,9 +248,9 @@ export default function ProductDetails({
               <div>
                 <div className="flex flex-wrap gap-2">
                   {service && (
-                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600">
+                    <h1 className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600">
                       {service.title}
-                    </span>
+                    </h1>
                   )}
                   {category && (
                     <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600">
@@ -432,12 +433,14 @@ export default function ProductDetails({
                   </div>
 
                   <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                    <Link href={`/category/${category?.slug}`} className="block">
                     <p className="text-xs uppercase tracking-wide text-gray-500">
                       Category
                     </p>
                     <p className="mt-1 text-sm font-semibold text-gray-900">
                       {category?.name || "N/A"}
                     </p>
+                    </Link>
                   </div>
                 </div>
 

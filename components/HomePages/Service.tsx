@@ -67,7 +67,7 @@ const Service = ({services}: {services: ServiceProps[]}) => {
                     <ul className="">
                       {service.subServices.map((subService) => (
                         <li key={subService.id} className="mb-1 text-sm md:text-base hover:text-blue-400 transition-all duration-500">
-                          <Link href={`/service/sub-service/${subService.slug}`}>
+                          <Link href={`/service/${service.slug}/${subService.slug}`}>
                             - {subService.title}
                           </Link>
                         </li>

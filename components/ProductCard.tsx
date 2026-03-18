@@ -1,161 +1,3 @@
-// "use client";
-
-// import Image from "next/image";
-// import Link from "next/link";
-// import { Heart } from "lucide-react";
-// import { toast } from "sonner";
-// import { addToCart } from "@/lib/cart";
-// import { useState } from "react";
-// import { RiShoppingCartFill } from "react-icons/ri";
-
-// interface ProductProps {
-//   id: string;
-//   slug: string;
-//   title: string;
-//   description: string;
-//   price: number;
-//   basePriceCents?: number;
-//   compareAtPriceCents?: number | null;
-//   images: string[];
-//   currency: string;
-//   stockQty?: number | null;
-//   lowStockThreshold?: number | null;
-//   sku?: string | null;
-//   isActive?: boolean;
-//   isFeatured?: boolean;
-//   requiresUpload?: boolean;
-//   requiresApproval?: boolean;
-//   requiresAppointment?: boolean;
-//   type?: string;
-//   salesChannel?: string;
-//   category?: {
-//     name: string;
-//     slug: string;
-//   } | null;
-//   service?: {
-//     title: string;
-//     slug: string;
-//   } | null;
-//   ratingAverage?: number | null;
-//   reviewCount?: number;
-// }
-
-// const ProductCard = ({
-//   id,
-//   slug,
-//   title,
-//   description,
-//   price,
-//   images,
-//   currency = "USD",
-//   stockQty,
-//   sku,
-//   isActive = true,
-// }: ProductProps) => {
-//   const [added, setAdded] = useState(false);
-
-//   const resolvedImage =
-//     images?.[0] && images[0].startsWith("http")
-//       ? images[0]
-//       : images?.[0]
-//       ? `/images/${images[0]}`
-//       : "/images/placeholder.png";
-
-//   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-
-//     if (typeof stockQty === "number" && stockQty <= 0) {
-//       toast.error("Out of stock");
-//       return;
-//     }
-
-//     addToCart({
-//       productId: id,
-//       slug,
-//       sku: sku ?? null,
-//       title,
-//       price,
-//       currency,
-//       image: resolvedImage,
-//     });
-
-//     toast.success("Product added to cart ✅");
-
-//     setAdded(true);
-//     window.setTimeout(() => setAdded(false), 900);
-//   };
-
-//   const safeStockQty = stockQty ?? 0;
-//   const isOutOfStock = !isActive || safeStockQty <= 0;
-
-//   return (
-//     <div className="group border-b p-1.5 relative hover:border-black bg-white transition-all duration-300">
-//       <Link href={`/product/${slug}`}>
-//         <div className="w-full overflow-hidden flex flex-col items-center justify-center bg-blue-100 h-32 md:h-44">
-//           <Image
-//             src={resolvedImage}
-//             alt={title || "product image"}
-//             priority
-//             width={500}
-//             height={500}
-//             className="object-cover w-[35%] sm:w-[40%] md:w-[50%] lg:w-[60%] group-hover:scale-110 transition-all duration-500 ease-in-out h-auto"
-//           />
-//         </div>
-
-//         <div className="py-6 px-5">
-//           <div className="flex justify-between items-center mt-2">
-//             <h5 className="text-sm md:text-base capitalize font-semibold text-black">
-//               {title}
-//             </h5>
-//             <Heart size={18} />
-//           </div>
-//           <p className="text-gray-500 mt-3 text-xs md:text-sm line-clamp-1">
-//             {description ?? ""}
-//           </p>
-//         </div>
-
-//         <div className="flex justify-between gap-2 items-center px-5 pb-4 flex-wrap md:flex-nowrap">
-//           <div>
-//             <h5 className="mt-2 text-base max-w-fit">
-//               {(price / 100).toFixed(2)}{" "}
-//               <span className="text-black font-bold text-base">{currency}</span>
-//             </h5>
-
-//             {/* {typeof stockQty === "number" && (
-//               <p className="mt-1 text-xs text-gray-400">
-//                 {stockQty > 0 ? "In stock" : "Out of stock"}
-//               </p>
-//             )} */}
-//           </div>
-
-//           <div>
-//             <button
-//               type="button"
-//               onClick={handleAddToCart}
-//               disabled={isOutOfStock}
-//               className={`border rounded-2xl py-3 px-6 text-white transition-all duration-300 flex items-center gap-2 justify-center ${
-//                 isOutOfStock
-//                   ? "bg-gray-400 cursor-not-allowed"
-//                   : "bg-black hover:bg-black/75 cursor-pointer"
-//               }`}
-//             >
-//               <i>
-//                 <RiShoppingCartFill className="text-white text-sm" />
-//               </i>
-//               <h5 className="text-xs text-white">
-//                 {isOutOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
-//               </h5>
-//             </button>
-//           </div>
-//         </div>
-//       </Link>
-//     </div>
-//   );
-// };
-
-// export default ProductCard;
-
 "use client";
 
 import Image from "next/image";
@@ -229,12 +71,19 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const [added, setAdded] = useState(false);
 
+  // const resolvedImage =
+  //   images?.[0] && images[0].startsWith("http")
+  //     ? images[0]
+  //     : images?.[0]
+  //     ? `/images/${images[0]}`
+  //     : "/images/placeholder.png";
+
   const resolvedImage =
-    images?.[0] && images[0].startsWith("http")
+  images?.[0]
+    ? images[0].startsWith("http") || images[0].startsWith("/")
       ? images[0]
-      : images?.[0]
-      ? `/images/${images[0]}`
-      : "/images/placeholder.png";
+      : `/images/${images[0]}`
+    : "/images/placeholder.png";
 
   const safeStockQty = stockQty ?? 0;
   const isOutOfStock = !isActive || safeStockQty <= 0;
@@ -423,7 +272,7 @@ const ProductCard = ({
             className={`inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-medium text-white transition-all duration-300 ${
               isOutOfStock
                 ? "cursor-not-allowed bg-gray-400"
-                : "bg-black hover:bg-gray-800"
+                : "bg-black hover:bg-black/80"
             }`}
           >
             <RiShoppingCartFill className="text-sm" />

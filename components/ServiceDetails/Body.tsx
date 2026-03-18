@@ -10,8 +10,6 @@ interface ServiceProps {
       title: string;
       icon: string | null;
       isActive: boolean;
-      position: number;
-      createdAt: Date;
       updatedAt: Date;
       subServices: {
         image: string | null;
@@ -50,7 +48,7 @@ const Body = ({service}: {service: ServiceProps}) => {
                         {service.subServices.map((ss) => (
                         <Link
                               key={ss.id}
-                              href={`/service/sub-service/${ss.slug}`}
+                              href={`/service/${service.slug}/${ss.slug}`}
                               className="group rounded-lg border border-gray-200 bg-white px-5 py-8 transition-all hover:shadow-lg duration-500"
                         >
                               <div className="flex items-start flex-col gap-4">
@@ -74,9 +72,9 @@ const Body = ({service}: {service: ServiceProps}) => {
                                     </div>
 
                                     <div className="min-w-0">
-                                          <h3 className="font-bold text-xl text-gray-900 capitalize group-hover:text-blue-400 transition-all duration-500">
+                                          <h1 className="font-bold text-xl text-gray-900 capitalize group-hover:text-blue-400 transition-all duration-500">
                                                 {ss.title}
-                                          </h3>
+                                          </h1>
                                           <p className="mt-1 line-clamp-3 text-sm text-gray-500">
                                                 {ss.description ?? "See details and options."}
                                           </p>

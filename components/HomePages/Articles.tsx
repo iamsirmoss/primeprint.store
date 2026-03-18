@@ -7,7 +7,7 @@ const Articles = () => {
   return (
       <div
       className='py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]'>
-            <h3 className='text-2xl xs:text-3xl lg:text-5xl font-bold'>Latest articles</h3>
+            <h2 className='text-2xl xs:text-3xl lg:text-5xl font-bold'>Latest articles</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-20">
                   <div className="w-full">
                   <div className="w-full h-48 rounded-xl overflow-hidden">
@@ -17,11 +17,11 @@ const Articles = () => {
                         </Link>
                   </div>
                   <div className="mt-5">
-                        <h5 className='mb-2 font-bold text-[15px] underline'>
+                        <h3 className='mb-2 font-bold text-[15px] underline'>
                               <Link href='/'>
                                     Customizable post card widget : personalize your messages with style
                               </Link>
-                        </h5>
+                        </h3>
                         <p className='text-sm font-medium'>
                               <Link href='/'>
                                     Our customizable post card widget lets you design beautiful and unique 
@@ -38,11 +38,11 @@ const Articles = () => {
                         </Link>
                   </div>
                   <div className="mt-5">
-                        <h5 className='mb-2 font-bold text-[15px] underline'>
+                        <h3 className='mb-2 font-bold text-[15px] underline'>
                               <Link href='/'>
                                     Create unique post cards with our customizable widget
                               </Link>
-                        </h5>
+                        </h3>
                         <p className='text-sm font-medium'>
                               <Link href='/'>
                                     Easily create stunning post cards with our flexible design options, 
@@ -59,11 +59,11 @@ const Articles = () => {
                         </Link>
                   </div>
                   <div className="mt-5">
-                        <h5 className='mb-2 font-bold text-[15px] underline'>
+                        <h3 className='mb-2 font-bold text-[15px] underline'>
                               <Link href='/'>
                                     Post card widget : tailor-made designs to fit your needs
                               </Link>
-                        </h5>
+                        </h3>
                         <p className='text-sm font-medium'>
                               <Link href='/'>
                                     With our post card widget, you have full control over colors, fonts, and 
