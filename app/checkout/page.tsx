@@ -12,11 +12,11 @@ export default async function CheckoutPage() {
   }
 
   return (
-    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 min-h-screen">
+    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10 md:py-20 min-h-screen">
       <div className="">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <div className="order-2 md:order-1">
-            <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold text-black">Checkout</h1>
+            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-black">Checkout</h1>
             <p className="text-gray-500 mt-2 text-xs md:text-sm">
               Review your items and proceed to secure payment.
             </p>

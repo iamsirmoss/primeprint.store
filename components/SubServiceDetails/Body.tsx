@@ -100,7 +100,7 @@ export default function Body({ service }: { service: SubServiceForBody }) {
             <p className="text-xs uppercase tracking-wider text-gray-500">
               {service.service.title}
             </p>
-            <h2 className="mt-2 text-2xl xs:text-3xl lg:text-5xl font-bold capitalize">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-5xl font-bold capitalize">
               {service.title}
             </h2>
 

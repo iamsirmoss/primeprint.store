@@ -23,7 +23,7 @@ const page = async ({ searchParams }: Props) => {
       
   return (
       <div className='min-h-screen bg-slate-100'>
-            <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] pt-16 mb-40'>
+            <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10 md:py-20'>
                   <ReturnButton href='/' label='Back to Home' />
                   <hr />
                   <div className="py-10 px-6 mt-8 w-full sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto bg-white rounded-md shadow-md">

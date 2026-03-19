@@ -29,7 +29,7 @@ const Body = ({service}: {service: ServiceProps}) => {
             <section className="pb-14">
                   <div className="flex items-end justify-between flex-wrap gap-4">
                         <div className='max-w-3xl'>
-                              <h2 className="text-2xl xs:text-3xl lg:text-5xl font-bold">
+                              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold">
                                     Specialized services
                               </h2>
                         </div>

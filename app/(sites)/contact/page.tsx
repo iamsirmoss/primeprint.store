@@ -49,7 +49,7 @@ const Contact = () => {
   }, [state]);
 
   return (
-    <div className="py-8 md:py-12 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] bg-gray-50 min-h-screen">
+    <div className="py-10 md:py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] bg-gray-50 min-h-screen">
       <hr />
 
       <div className="flex items-center gap-4 flex-col py-7 md:py-10">
@@ -103,7 +103,7 @@ const Contact = () => {
         </div>
 
         {/* Form Section */}
-        <div className="mt-2 py-8 md:py-12 px-4 md:px-8 w-full lg:w-[60%] mx-auto order-1 bg-white shadow-lg rounded-2xl">
+        <div className="mt-2 py-10 md:py-20 px-4 md:px-8 w-full lg:w-[60%] mx-auto order-1 bg-white shadow-lg rounded-2xl">
           <form ref={formRef} action={formAction}>
             {/* Honeypot */}
             <div className="hidden" aria-hidden="true">

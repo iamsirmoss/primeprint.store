@@ -64,8 +64,8 @@ export default function CategoryDetailsClient({
   category,
 }: CategoryDetailsClientProps) {
   return (
-    <main className="min-h-screen w-full ">
-      <section className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-2 md:py-10">
+    <main className="min-h-screen w-full my-10 md:my-20">
+      <section className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
         <div>
           <div className="flex items-center gap-5 flex-wrap bg-slate-50 py-2 px-5 text-sm rounded mb-10">
                   <Link href="/" className="text-gray-400 hover:underline transition-all duration-500">

@@ -34,10 +34,10 @@ export default async function OrdersPage() {
   });
 
   return (
-    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 min-h-screen">
+    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10 md:py-20 min-h-screen">
       <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">My orders</h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold">My orders</h1>
           <p className="mt-2 text-sm text-gray-500">
             Your recent orders and payment status.
           </p>

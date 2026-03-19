@@ -13,8 +13,8 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
   if (!query) {
     return (
-      <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 min-h-screen">
-        <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">Search</h1>
+      <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10 md:py-20 min-h-screen">
+        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold">Search</h1>
         <p className="mt-4 text-gray-400">
           Please enter a search term.
         </p>
@@ -99,9 +99,9 @@ export default async function SearchPage({ searchParams }: PageProps) {
   const total = products.length + services.length + subServices.length;
 
   return (
-    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-20 min-h-screen">
+    <div className="px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] py-10 md:py-20 min-h-screen">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl md:text-5xl font-bold">
+        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold">
           Search results
         </h1>
         <p className="text-gray-400">
@@ -120,14 +120,14 @@ export default async function SearchPage({ searchParams }: PageProps) {
           {/* Products */}
           {products.length > 0 && (
             <section>
-              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold">Products</h2>
+              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold underline">Products</h2>
 
               <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                 {products.map((item) => (
                   <Link
                     key={item.id}
                     href={`/product/${item.slug}`}
-                    className="rounded-lg border bg-white p-4 hover:shadow-md transition-all duration-300"
+                    className="rounded-lg border bg-white p-4 hover:shadow-xl transition-all duration-300"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
@@ -162,7 +162,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
                   <Link
                     key={item.id}
                     href={`/service/${item.slug}`}
-                    className="rounded-lg border bg-white p-4 hover:shadow-md transition-all duration-300"
+                    className="rounded-lg border bg-white p-4 hover:shadow-xl transition-all duration-300"
                   >
                     <h3 className="font-semibold text-sm md:text-lg capitalize">{item.title}</h3>
 
@@ -187,7 +187,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
                   <Link
                     key={item.id}
                     href={`/service/sub-service/${item.slug}`}
-                    className="rounded-lg border bg-white p-4 hover:shadow-md transition-all duration-300"
+                    className="rounded-lg border bg-white p-4 hover:shadow-xl transition-all duration-300"
                   >
                     <h3 className="font-semibold text-sm md:text-lg capitalize">{item.title}</h3>
 

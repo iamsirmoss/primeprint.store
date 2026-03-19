@@ -26,7 +26,7 @@ const page = async () => {
       })
 
   return (
-      <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] my-6 md:my-16 min-h-screen'>
+      <div className='px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%] my-10 md:my-20 min-h-screen'>
             <hr />
             <div className="py-4 md:py-10 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[45%] mx-auto flex flex-col justify-center items-center">
                   <div className='border-b rounded py-3 w-full text-center'>

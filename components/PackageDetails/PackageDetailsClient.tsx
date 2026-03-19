@@ -117,7 +117,7 @@ export default function PackageDetailsClient({
   };
 
   return (
-    <div className="min-h-screen max-w-5xl mx-auto p-6 mt-4 md:mt-12">
+    <div className="min-h-screen max-w-5xl mx-auto px-6 my-10 md:my-20">
       <div className="rounded-3xl border border-gray-200 bg-white p-6 md:p-8 shadow-sm">
         <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_420px]">
           <div>

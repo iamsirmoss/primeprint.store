@@ -169,10 +169,10 @@ const Products = ({
   }, [currentPage, totalPages, selectedService, q]);
 
   return (
-    <div className="py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
+    <div className="py-10 md:py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
       <div className="flex items-end justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl xs:text-3xl lg:text-5xl font-bold">{title}</h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold">{title}</h1>
           <p className="mt-2 text-sm text-gray-600">
             Browse products and filter by service.
           </p>

@@ -98,12 +98,12 @@ const ReviewsPageClient = ({ reviews }: { reviews: ReviewProps[] }) => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="bg-slate-50 py-16 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
+      <section className="bg-slate-50 py-10 md:py-20 px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]">
         <div className="max-w-4xl">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-500">
             Customer feedback
           </p>
-          <h1 className="mt-3 text-3xl xs:text-4xl lg:text-6xl font-bold text-black">
+          <h1 className="mt-3 text-2xl sm:text-3xl lg:text-5xl font-bold text-black">
             All Reviews
           </h1>
           <p className="mt-4 text-sm md:text-base text-gray-600 max-w-2xl">

@@ -39,7 +39,7 @@ const Banner = ({service}: {service: ServiceProps}) => {
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-2xl">
       
-                  <h1 className="mt-2 text-2xl md:text-3xl lg:text-[64px] font-bold text-gray-900 capitalize">
+                  <h1 className="mt-2 text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-900 capitalize">
                     {service.title}
                   </h1>
       
