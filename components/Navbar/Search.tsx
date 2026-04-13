@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { RiSearch2Line } from "react-icons/ri";
 import { IoSearchCircleSharp } from "react-icons/io5";
+import { Search as IconSearch } from "lucide-react";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -128,11 +129,14 @@ const Search = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="flex flex-col items-center cursor-pointer group gap-0.5">
-          <IoSearchCircleSharp className="text-[29px] md:text-[31px] mt-0 cursor-pointer text-black/90 group-hover:text-black transition-all duration-500" />
-          <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium text-black">
-            Search
-          </h5>
+        <button className="flex flex-col items-center cursor-pointer group gap-1">
+          <div className="border border-black/30 px-1.5 py-2 rounded-md hover:bg-gray-100 transition-all duration-300">
+            <IconSearch className="size-4 md:size-5 text-black/50" />
+          
+          </div>
+          {/* <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium text-black">
+              Search
+          </h5> */}
         </button>
       </DialogTrigger>
 

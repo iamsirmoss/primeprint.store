@@ -1,6 +1,6 @@
 "use client"
 
-import { RiShoppingCartFill } from "react-icons/ri";
+import { ShoppingCart } from 'lucide-react';
 import { useCart } from "@/hooks/use-cart";
 
 export function Cart({openCart}: {openCart: () => void}) {
@@ -10,13 +10,15 @@ export function Cart({openCart}: {openCart: () => void}) {
   return (
     <>
     <div className="group" onClick={openCart}>
-      <div className='relative cursor-pointer transition-all duration-300'>
-              <div className='flex flex-col items-center text-xs group gap-1.5 md:gap-1'>
-                <i><RiShoppingCartFill className='text-black/90 text-[23px] md:text-[25px] mt-0.5 group-hover:text-black transition-all duration-500' /></i>
-                <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium text-black">Cart</h5>
+      <div className='relative cursor-pointer'>
+              <div className='flex flex-col items-center group gap-1'>
+                <div className='border border-black/30 px-1.5 py-2 rounded-md hover:bg-gray-100 transition-all duration-300'>
+                  <i><ShoppingCart className='size-4 md:size-5 text-black/50' /></i>
+                </div>
+                {/* <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium text-black">Cart</h5> */}
               </div>
               {count > 0 && (
-              <h5 className='absolute text-[10px] md:text-xs font-semibold -top-3 md:-top-4 -right-3 bg-blue-400 text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded-full'>
+              <h5 className='absolute text-[10px] md:text-xs font-semibold -top-3 md:-top-4 -right-3 bg-blue-400 text-white px-2 md:px-2.25 py-1 rounded-full'>
                 <span>{count}</span>
               </h5>
               )}

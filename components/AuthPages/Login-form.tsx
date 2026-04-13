@@ -53,6 +53,7 @@ const LoginForm = ({
 
       router.replace(redirectTo || "/profile");
       router.refresh();
+      window.location.reload()
     } catch (e: any) {
       toast.error(e?.message ?? "Login failed.");
     } finally {

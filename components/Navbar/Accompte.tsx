@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { FaUserCircle } from "react-icons/fa";
+import { CircleUser } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,10 +18,12 @@ const Accompte = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className='flex flex-col items-center cursor-pointer text-xs group gap-1.5'>
-          <FaUserCircle className='text-[21px] md:text-[24px] mt-1 md:mt-0 text-black/90 group-hover:text-black transition-all duration-500 cursor-pointer relative' />
-          <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium">Login</h5>
-        </div>
+        <button className='flex flex-col items-center cursor-pointer group gap-1'>
+          <div className='border border-black/30 px-1.5 py-2 rounded-md hover:bg-gray-200 transition-all duration-300'>
+            <CircleUser className='size-4 md:size-5 text-black/50' />
+          </div>
+          {/* <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium">Login</h5> */}
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-36" align="start">
         {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
