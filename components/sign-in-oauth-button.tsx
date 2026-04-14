@@ -159,7 +159,7 @@ const SignInOAuthButton = ({
       type="button"
       onClick={handleClick}
       disabled={isPending}
-      className="flex items-center justify-center gap-3 py-6 rounded-2xl bg-black hover:bg-black/80 w-full transition-all duration-300 cursor-pointer"
+      className="flex items-center justify-center gap-3 py-6 rounded-xl border bg-transparent hover:bg-black/10 w-full transition-all duration-300 cursor-pointer"
     >
       <Image
         src={logo}
@@ -169,7 +169,7 @@ const SignInOAuthButton = ({
         className="object-contain"
       />
 
-      <h5 className="text-sm text-white">
+      <h5 className="text-sm">
         {isPending ? "Redirecting..." : `Sign ${action} with ${providerName}`}
       </h5>
     </Button>

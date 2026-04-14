@@ -9,7 +9,7 @@ interface ReturnButtonProps {
 
 const ReturnButton = ({ href, label }: ReturnButtonProps) => {
   return (
-      <Button size="lg" asChild className="rounded-2xl mb-2.5 transition-all duration-300 bg-black hover:bg-black/75">
+      <Button size="lg" asChild className="rounded-xl mb-2.5 transition-all duration-300 bg-black/55 hover:bg-black">
             <Link href={href}>
                   <ArrowLeftIcon />
                   {label}

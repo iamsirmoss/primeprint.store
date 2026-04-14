@@ -167,7 +167,7 @@ const RegisterForm = ({ callbackURL }: Props) => {
         <Button
           disabled={isPending}
           type="submit"
-          className="bg-blue-400 text-white fontmedium px-16 py-6 w-full rounded-2xl shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-500 cursor-pointer 
+          className="bg-blue-400 text-white fontmedium px-16 py-6 w-full rounded-xl shadow-md flex items-center gap-2 transition-all duration-300 hover:bg-blue-500 cursor-pointer 
           disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <h5 className="text-center text-white">

@@ -125,7 +125,7 @@ const ProductCard = ({
   return (
     <Link
       href={`/product/${slug}`}
-      className="group block overflow-hidden rounded-md border border-b-black bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="group block overflow-hidden rounded-md border border-b bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="relative">
         <div className="relative h-56 w-full overflow-hidden bg-gray-50">
