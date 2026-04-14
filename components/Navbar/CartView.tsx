@@ -62,7 +62,7 @@ const CartView = ({
           <motion.div
             variants={overlayVariants}
             transition={{ duration: 0.35 }}
-            className="bg-black/70 w-[62%] h-full"
+            className="bg-black/70 w-0 md:w-[62%] h-full"
             onClick={openCart}
           />
 

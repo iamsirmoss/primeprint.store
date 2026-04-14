@@ -19,7 +19,7 @@ const Accompte = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className='flex flex-col items-center cursor-pointer group gap-1'>
-          <div className='border border-black/30 px-1.5 py-2 rounded-md hover:bg-gray-200 transition-all duration-300'>
+          <div className='p-3 shadow-xl shadow-blue-500/30 backdrop-blur-md px-1.5 py-2 rounded-md bg-white hover:bg-gray-200 transition-all duration-300'>
             <CircleUser className='size-4 md:size-5 text-black/50' />
           </div>
           {/* <h5 className="text-xs md:text-sm group-hover:underline transition-all duration-500 font-medium">Login</h5> */}

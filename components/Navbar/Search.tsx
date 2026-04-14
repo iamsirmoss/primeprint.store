@@ -130,7 +130,7 @@ const Search = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <button className="flex flex-col items-center cursor-pointer group gap-1">
-          <div className="border border-black/30 px-1.5 py-2 rounded-md hover:bg-gray-100 transition-all duration-300">
+          <div className="p-3 shadow-xl shadow-blue-500/30 backdrop-blur-md px-1.5 py-2 rounded-md bg-white hover:bg-gray-200 transition-all duration-300">
             <IconSearch className="size-4 md:size-5 text-black/50" />
           
           </div>

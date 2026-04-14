@@ -1,50 +1,3 @@
-// "use client"
-
-// import Link from 'next/link'
-// import { usePathname } from 'next/navigation'
-
-// const NavNormal = () => {
-//       const links = [
-//             {
-//                   name: "Home",
-//                   path: "/"
-//             },
-            
-//             {
-//                   name: "Services",
-//                   path: "/services"
-//             },
-//             {
-//                   name: "Shop",
-//                   path: "/shop"
-//             },
-//             {
-//                   name: "About us",
-//                   path: "/about-us"
-//             },
-//             {
-//                   name: "Contact",
-//                   path: "/contact"
-//             },
-//       ]
-//       const pathName = usePathname()
-
-//   return (
-//       <div className='hidden xl:flex items-center gap-10 text-[16px]'>
-//             {links.map((link, index) => (
-//                   <Link key={index} href={link.path} className={`${link.path === pathName && `text-gray-400 
-//                   font-semibold transition-all duration-300`}
-//                   font-semibold hover:text-gray-400 transition-all duration-500
-//                   `}>
-//                         <h5>{link.name}</h5>
-//                   </Link>
-//             ))}
-//       </div>
-//   )
-// }
-
-// export default NavNormal
-
 "use client";
 
 import Link from "next/link";
@@ -72,11 +25,11 @@ const NavNormal = () => {
             href={link.path}
             className={`
               relative font-medium transition-all duration-300
-              ${isActive ? "font-semibold" : "font-medium"}
+              ${isActive ? "font-semibold text-blue-400" : "font-medium text-black/60 hover:text-blue-400"}
               
               after:content-['']
               after:absolute after:left-1/2 after:-bottom-1
-              after:h-0.5 after:w-0 after:bg-black
+              after:h-0.5 after:w-0 after:bg-blue-400
               after:-translate-x-1/2 after:transition-all after:duration-300
 
               hover:after:w-1/2
