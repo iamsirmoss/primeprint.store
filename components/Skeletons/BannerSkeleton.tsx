@@ -5,7 +5,7 @@ import React from "react";
 const BannerSkeleton = () => {
   return (
     <div
-      className="animate-pulse grid-cols-1 gap-5 md:gap-4 lg:gap-10 grid md:grid-cols-3 pt-10 pb-28 md:py-10 lg:py-14 xl:py-20 w-full bg-blue-400
+      className="animate-pulse grid-cols-1 gap-5 md:gap-4 lg:gap-10 grid md:grid-cols-3 pt-10 pb-28 md:py-10 lg:py-14 xl:py-28 w-full bg-blue-400
       px-4 xl:px-14 xxl:px-40 xll:px-80 xxx:px-[22%] lll:px-[25%]"
     >
       {/* LEFT */}

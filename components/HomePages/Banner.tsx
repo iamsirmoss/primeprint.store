@@ -21,7 +21,20 @@ const Banner = () => {
                   transition={{ duration: 1, ease: "easeInOut" }}
                   >
                         <Image src={image1} alt='image1' priority width={0} height={0} sizes='100vw' 
-                        className='w-[18%] sm:w-[15%] md:w-[50%] md:mt-20 lg:mt-28' />
+                        className='w-[18%] sm:w-[15%] md:w-[50%] md:mt-20 lg:mt-28 hidden md:block' />
+                  </motion.div>
+                  <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, ease: "easeInOut" }}
+                  className='md:text-center block md:hidden'>
+                        <h2 className='text-[55px] md:text-[75px] lg:text-[90px] xl:text-[100px] font-extrabold
+                        leading-tight uppercase text-white'>
+                              prime print{" "}<span className='font-light text-[45px] md:text-[60px] lg:text-[80px] xl:text-[90px]'>store</span>
+                        </h2>
+                        <h1 className='text-base lg:text-2xl font-semibold text-white'>
+                              Your one stop shop for printing, notary and more.
+                        </h1>
                   </motion.div>
                   <div className='flex flex-wrap items-center gap-4 mt-10'>
                         
@@ -48,7 +61,7 @@ const Banner = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut" }}
-            className='md:text-center'>
+            className='md:text-center hidden md:block'>
                   <h2 className='text-[55px] md:text-[75px] lg:text-[90px] xl:text-[100px] font-extrabold
                   leading-tight uppercase text-white'>
                         prime print{" "}<span className='font-light text-[45px] md:text-[60px] lg:text-[80px] xl:text-[90px]'>store</span>
@@ -72,7 +85,7 @@ const Banner = () => {
                   transition={{ duration: 1, ease: "easeInOut" }}
                   >
                         <Image src={image2} alt='image1' priority width={0} height={0} sizes='100vw' 
-                        className='w-[35%] sm:w-[25%] md:w-[90%] absolute right-4 md:-bottom-12 lg:-bottom-16 xl:-bottom-20' />
+                        className='w-[50%] xs:w-[35%] sm:w-[25%] md:w-[90%] absolute right-2 md:right-4 -bottom-28 xs:-bottom-28 md:-bottom-12 lg:-bottom-16 xl:-bottom-20' />
                   </motion.div>
             </div>
       </div>
