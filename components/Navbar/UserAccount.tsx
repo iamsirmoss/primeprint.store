@@ -61,25 +61,25 @@ const UserAccount = ({user}: UserAccountProps) => {
           { user.role === "ADMIN" && (
           <>
           <DropdownMenuItem asChild>
-            <Link href="/admin/dashboard" className="cursor-pointer">
-              <LayoutPanelLeft className="mr-2 h-4 w-4 text-black" />
-              <span className="text-sm">Admin Dashboard</span>
+            <Link href="/admin/dashboard" className="cursor-pointer group transition-all duration-300">
+              <LayoutPanelLeft className="mr-2 h-4 w-4 text-black group-hover:text-blue-400" />
+              <span className="text-sm group-hover:text-blue-400">Admin Dashboard</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           </>
           )}
           <DropdownMenuItem asChild>
-            <Link href="/profile" className="cursor-pointer">
-              <Use className="mr-2 h-5 w-5 text-black" />
-              <span className="text-sm">Profile</span>
+            <Link href="/profile" className="cursor-pointer group transition-all duration-300">
+              <Use className="mr-2 h-5 w-5 text-black group-hover:text-blue-400" />
+              <span className="text-sm group-hover:text-blue-400">Profile</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <Link href="/orders" className="cursor-pointer">
-              <LayoutList className="mr-2 h-4 w-4 text-black" />
-              <span className="text-sm">My orders</span>
+            <Link href="/orders" className="cursor-pointer group transition-all duration-300">
+              <LayoutList className="mr-2 h-4 w-4 text-black group-hover:text-blue-400" />
+              <span className="text-sm group-hover:text-blue-400">My orders</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />

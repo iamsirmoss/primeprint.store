@@ -89,7 +89,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
         </p>
 
         <Link href="/shop">
-          <button className="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-gradient-to-r from-red-500 to-red-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-red-500/30">
+          <button className="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-linear-to-r from-red-500 to-red-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-red-500/30">
             Go to shop
             <ArrowRight className="h-4 w-4" />
           </button>
@@ -154,7 +154,7 @@ export default function CheckoutClient({ userEmail }: { userEmail: string }) {
                       </p>
                     )}
 
-                    <div className="mt-3 flex flex-wrap gap-2 text-[11px] md:text-xs">
+                    <div className="mt-3 flex flex-wrap gap-2 text-ss md:text-xs">
                       {pkg && (
                         <span className="rounded-full border border-slate-200 bg-white px-3 py-1 font-medium text-slate-600">
                           {it.tier} • {it.billing === "month" ? "Monthly" : "Yearly"}
