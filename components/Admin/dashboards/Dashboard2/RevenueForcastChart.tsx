@@ -1,177 +1,222 @@
 "use client";
+
 import React from "react";
 import CardBox from "../../shared/CardBox";
 import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
+
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-const ChartData: any = {
-  series: [
+
+interface RevenueForcastChartProps {
+  currentYear: number;
+  previousYear: number;
+  categories: string[];
+  currentYearSeriesCents: number[];
+  previousYearSeriesCents: number[];
+  currentYearRevenueYtdCents: number;
+  previousYearRevenueYtdCents: number;
+  yearOverYearGrowthPercent: number;
+}
+
+function formatCurrency(cents: number, currency = "USD") {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(cents / 100);
+}
+
+function formatPercent(value: number) {
+  const sign = value > 0 ? "+" : "";
+  return `${sign}${value.toFixed(1)}%`;
+}
+
+const RevenueForcastChart = ({
+  currentYear,
+  previousYear,
+  categories,
+  currentYearSeriesCents,
+  previousYearSeriesCents,
+  currentYearRevenueYtdCents,
+  previousYearRevenueYtdCents,
+  yearOverYearGrowthPercent,
+}: RevenueForcastChartProps) => {
+  const chartSeries = [
     {
-      name: "2024",
-      data: [1.2, 2.7, 1, 3.6, 2.1, 2.7, 2.2, 1.3, 2.5],
+      name: `${currentYear}`,
+      data: currentYearSeriesCents.map((value) => Number((value / 100).toFixed(2))),
     },
     {
-      name: "2023",
-      data: [-2.8, -1.1, -2.5, -1.5, -2.3, -1.9, -1, -2.1, -1.3],
+      name: `${previousYear}`,
+      data: previousYearSeriesCents.map((value) => Number((value / 100).toFixed(2))),
     },
-  ],
-  chart: {
-    toolbar: {
+  ];
+
+  const chartOptions: any = {
+    chart: {
+      toolbar: {
+        show: false,
+      },
+      type: "bar",
+      fontFamily: "inherit",
+      foreColor: "#adb0bb",
+      height: 295,
+      stacked: false,
+      offsetX: -15,
+    },
+    colors: ["var(--color-primary)", "var(--color-error)"],
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        barHeight: "60%",
+        columnWidth: "35%",
+        borderRadius: [6],
+        borderRadiusApplication: "end",
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    legend: {
       show: false,
     },
-    type: "bar",
-    fontFamily: "inherit",
-    foreColor: "#adb0bb",
-    height: 295,
-    stacked: true,
-    offsetX: -15,
-  },
-  colors: ["var(--color-primary)", "var(--color-error)"],
-  plotOptions: {
-    bar: {
-      horizontal: false,
-      barHeight: "60%",
-      columnWidth: "15%",
-      borderRadius: [6],
-      borderRadiusApplication: "end",
-      borderRadiusWhenStacked: "all",
+    grid: {
+      show: true,
+      padding: {
+        top: 0,
+        bottom: 0,
+        right: 0,
+      },
+      borderColor: "rgba(0,0,0,0.05)",
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: true,
+        },
+      },
     },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  legend: {
-    show: false,
-  },
-  grid: {
-    show: true,
-    padding: {
-      top: 0,
-      bottom: 0,
-      right: 0,
-    },
-    borderColor: "rgba(0,0,0,0.05)",
     xaxis: {
-      lines: {
-        show: true,
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      categories,
+      labels: {
+        style: {
+          fontSize: "13px",
+          colors: "#adb0bb",
+          fontWeight: "400",
+        },
       },
     },
     yaxis: {
-      lines: {
-        show: true,
+      labels: {
+        formatter: (value: number) => `$${Math.round(value).toLocaleString()}`,
       },
     },
-  },
-  yaxis: {
-    min: -5,
-    max: 5,
-    tickAmount: 4,
-  },
-  xaxis: {
-    axisBorder: {
-      show: false,
+    tooltip: {
+      theme: "dark",
+      y: {
+        formatter: (value: number) => `$${value.toLocaleString()}`,
+      },
     },
-    axisTicks: {
-      show: false,
-    },
-    categories: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "July",
-      "Aug",
-      "Sep",
-    ],
-    labels: {
-      style: { fontSize: "13px", colors: "#adb0bb", fontWeight: "400" },
-    },
-  },
+  };
 
-  tooltip: {
-    theme: "dark",
-  },
-};
-const RevenueForcastChart = () => {
   return (
-    <>
-      <CardBox className="px-6">
-        <div className="md:flex justify-between items-center">
-          <div>
-            <h5 className="card-title">Revenue Forecast</h5>
-            <p className="card-subtitle">Overview of Profit</p>
+    <CardBox className="px-6">
+      <div className="md:flex justify-between items-center">
+        <div>
+          <h5 className="card-title">Revenue Forecast</h5>
+          <p className="card-subtitle">Monthly revenue comparison by year</p>
+        </div>
+
+        <div className="flex gap-5 items-center md:mt-0 mt-4">
+          <div className="flex gap-2 text-sm items-center">
+            <span className="bg-primary rounded-full h-2 w-2"></span>
+            <span className="text-ld opacity-80">{currentYear}</span>
           </div>
-          <div className="flex gap-5 items-center md:mt-0 mt-4">
-            <div className="flex gap-2 text-sm   items-center">
-              <span className="bg-primary rounded-full h-2 w-2"></span>
-              <span className="text-ld opacity-80">2024</span>
-            </div>
-            <div className="flex gap-2 text-sm text-ld items-center">
-              <span className="bg-error rounded-full h-2 w-2"></span>
-              <span className="text-ld opacity-80">2023</span>
+
+          <div className="flex gap-2 text-sm text-ld items-center">
+            <span className="bg-error rounded-full h-2 w-2"></span>
+            <span className="text-ld opacity-80">{previousYear}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-bars">
+        <Chart
+          options={chartOptions}
+          series={chartSeries}
+          type="bar"
+          height="298px"
+          width="100%"
+        />
+      </div>
+
+      <div className="flex md:flex-row flex-col gap-3">
+        <div className="md:basis-1/3 basis-full">
+          <div className="flex gap-3 items-center">
+            <span className="h-12 w-12 shrink-0 flex items-center justify-center bg-muted dark:bg-dark rounded-tw">
+              <Icon
+                icon="solar:pie-chart-2-linear"
+                className="text-ld"
+                height={24}
+              />
+            </span>
+            <div>
+              <p>{currentYear} YTD</p>
+              <h5 className="font-medium text-lg">
+                {formatCurrency(currentYearRevenueYtdCents)}
+              </h5>
             </div>
           </div>
         </div>
-        <div className="rounded-bars">
-          <Chart
-            options={ChartData}
-            series={ChartData.series}
-            type="bar"
-            height="298px"
-            width="100%"
-          />
-        </div>
-        <div className="flex md:flex-row flex-col gap-3">
-          <div className="md:basis-1/3 basis-full">
-            <div className="flex gap-3 items-center">
-              <span className="h-12 w-12 shrink-0 flex items-center justify-center bg-muted dark:bg-dark rounded-tw">
-                <Icon
-                  icon="solar:pie-chart-2-linear"
-                  className="text-ld"
-                  height={24}
-                />
-              </span>
-              <div>
-                <p>Total</p>
-                <h5 className="font-medium text-lg">$96,640</h5>
-              </div>
-            </div>
-          </div>
-          <div className="md:basis-1/3 basis-full">
-            <div className="flex gap-3 items-center">
-              <span className="h-12 w-12 shrink-0 flex items-center justify-center bg-lightprimary rounded-tw">
-                <Icon
-                  icon="solar:dollar-minimalistic-linear"
-                  className="text-primary"
-                  height={24}
-                />
-              </span>
-              <div>
-                <p>Profit</p>
-                <h5 className="font-medium text-lg">$48,820</h5>
-              </div>
-            </div>
-          </div>
-          <div className="md:basis-1/3 basis-full">
-            <div className="flex gap-3 items-center">
-              <span className="h-12 w-12 shrink-0 flex items-center justify-center bg-lighterror rounded-tw">
-                <Icon
-                  icon="solar:database-linear"
-                  className="text-error"
-                  height={24}
-                />
-              </span>
-              <div>
-                <p>Earnings</p>
-                <h5 className="font-medium text-lg">$48,820</h5>
-              </div>
+
+        <div className="md:basis-1/3 basis-full">
+          <div className="flex gap-3 items-center">
+            <span className="h-12 w-12 shrink-0 flex items-center justify-center bg-lightprimary rounded-tw">
+              <Icon
+                icon="solar:dollar-minimalistic-linear"
+                className="text-primary"
+                height={24}
+              />
+            </span>
+            <div>
+              <p>{previousYear} YTD</p>
+              <h5 className="font-medium text-lg">
+                {formatCurrency(previousYearRevenueYtdCents)}
+              </h5>
             </div>
           </div>
         </div>
-      </CardBox>
-    </>
+
+        <div className="md:basis-1/3 basis-full">
+          <div className="flex gap-3 items-center">
+            <span className="h-12 w-12 shrink-0 flex items-center justify-center bg-lighterror rounded-tw">
+              <Icon
+                icon="solar:database-linear"
+                className={
+                  yearOverYearGrowthPercent >= 0 ? "text-success" : "text-error"
+                }
+                height={24}
+              />
+            </span>
+            <div>
+              <p>Growth</p>
+              <h5 className="font-medium text-lg">
+                {formatPercent(yearOverYearGrowthPercent)}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </CardBox>
   );
 };
 

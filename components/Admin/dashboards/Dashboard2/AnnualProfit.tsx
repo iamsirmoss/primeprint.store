@@ -1,119 +1,180 @@
 "use client";
+
 import React from "react";
 import CardBox from "../../shared/CardBox";
-import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
+
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-const ChartData: any = {
-  chart: {
-    id: "annual-profit",
-    type: "area",
-    height: 80,
-    sparkline: {
-      enabled: true,
+
+interface AnnualProfitProps {
+  fulfillmentRate: number;
+  completedOrdersThisYear: number;
+  requiresApprovalProducts: number;
+  requiresUploadProducts: number;
+  productOrderItems: number;
+  packageOrderItems: number;
+  productMixPercent: number;
+  packageMixPercent: number;
+  totalOrderItems: number;
+}
+
+function formatPercent(value: number) {
+  return `${value.toFixed(1)}%`;
+}
+
+const AnnualProfit = ({
+  fulfillmentRate,
+  completedOrdersThisYear,
+  requiresApprovalProducts,
+  requiresUploadProducts,
+  productOrderItems,
+  packageOrderItems,
+  productMixPercent,
+  packageMixPercent,
+  totalOrderItems,
+}: AnnualProfitProps) => {
+  const chartData: any = {
+    chart: {
+      id: "annual-profit",
+      type: "area",
+      height: 80,
+      sparkline: {
+        enabled: true,
+      },
+      group: "sparklines",
+      fontFamily: "inherit",
+      foreColor: "#adb0bb",
     },
-    group: "sparklines",
-    fontFamily: "inherit",
-    foreColor: "#adb0bb",
-  },
-  series: [
-    {
-      name: "Users",
+    series: [
+      {
+        name: "Fulfillment",
+        color: "var(--color-primary)",
+        data: [
+          0,
+          Math.max(fulfillmentRate * 0.45, 1),
+          Math.max(fulfillmentRate * 0.7, 1),
+          Math.max(fulfillmentRate * 0.9, 1),
+          fulfillmentRate,
+        ],
+      },
+    ],
+    stroke: {
+      curve: "smooth",
+      width: 2,
+    },
+    fill: {
+      type: "gradient",
       color: "var(--color-primary)",
-      data: [25, 66, 20, 40, 12, 58, 20],
+      gradient: {
+        shadeIntensity: 0,
+        inverseColors: false,
+        opacityFrom: 0.1,
+        opacityTo: 0.8,
+        stops: [100],
+      },
     },
-  ],
-  stroke: {
-    curve: "smooth",
-    width: 2,
-  },
-  fill: {
-    type: "gradient",
-    color: "var(--color-primary)",
+    markers: {
+      size: 0,
+    },
+    tooltip: {
+      theme: "dark",
+      fixed: {
+        enabled: true,
+        position: "right",
+      },
+      x: {
+        show: false,
+      },
+      y: {
+        formatter: (value: number) => `${value.toFixed(1)}%`,
+      },
+    },
+  };
 
-    gradient: {
-      shadeIntensity: 0,
-      inverseColors: false,
-      opacityFrom: 0.1,
-      opacityTo: 0.8,
-      stops: [100],
-    },
-  },
-
-  markers: {
-    size: 0,
-  },
-  tooltip: {
-    theme: "dark",
-    fixed: {
-      enabled: true,
-      position: "right",
-    },
-    x: {
-      show: false,
-    },
-  },
-};
-
-const AnnualProfit = () => {
   return (
-    <>
-      <CardBox className="h-full px-6">
-        <div>
-          <h5 className="card-title">Annual Profit</h5>
-          <div className="bg-lightprimary mt-4 overflow-hidden rounded-md mb-1">
-            <div className="py-7 px-6 flex justify-between items-center ">
-              <p className="text-ld">Conversion Rate</p>
-              <h4 className="text-3xl">18.4%</h4>
-            </div>
-            <Chart
-              options={ChartData}
-              series={ChartData.series}
-              type="area"
-              height="60px"
-              width="100%"
-              className="mt-4"
-            />
+    <CardBox className="h-full px-6">
+      <div>
+        <h5 className="card-title">Annual Operations</h5>
+
+        <div className="bg-lightprimary mt-4 overflow-hidden rounded-md mb-1">
+          <div className="py-7 px-6 flex justify-between items-center">
+            <p className="text-ld">Fulfillment Rate</p>
+            <h4 className="text-3xl">{formatPercent(fulfillmentRate)}</h4>
           </div>
-          <div className="flex items-center justify-between py-4  border-b  border-ld">
-            <div>
-              <span className="font-medium text-ld opacity-80">
-                Added to Cart
-              </span>
-              <p className="text-13">5 clicks</p>
-            </div>
-            <div className="text-end">
-              <h6 className="text-15 font-bold">$21,120.70</h6>
-              <span className="text-13 text-success font-medium">+13.2%</span>
-            </div>
+
+          <Chart
+            options={chartData}
+            series={chartData.series}
+            type="area"
+            height="60px"
+            width="100%"
+            className="mt-4"
+          />
+        </div>
+
+        <div className="flex items-center justify-between py-4 border-b border-ld">
+          <div>
+            <span className="font-medium text-ld opacity-80">
+              Completed Orders
+            </span>
+            <p className="text-13">This year</p>
           </div>
-          <div className="flex items-center justify-between py-4  border-b  border-ld">
-            <div>
-              <span className="font-medium text-ld opacity-80">
-                Reached to Checkout
-              </span>
-              <p className="text-13">12 clicks</p>
-            </div>
-            <div className="text-end">
-              <h6 className="text-15 font-bold">$16,100.00</h6>
-              <span className="text-13 text-error font-medium">-7.4%</span>
-            </div>
-          </div>
-          <div className="flex items-center justify-between pt-4">
-            <div>
-              <span className="font-medium text-ld opacity-80">
-                Added to Cart
-              </span>
-              <p className="text-13">24 views</p>
-            </div>
-            <div className="text-end">
-              <h6 className="text-15 font-bold">$6,400.50</h6>
-              <span className="text-13 text-success font-medium">+9.3%</span>
-            </div>
+          <div className="text-end">
+            <h6 className="text-15 font-bold">
+              {completedOrdersThisYear.toLocaleString()}
+            </h6>
+            <span className="text-13 text-success font-medium">
+              done successfully
+            </span>
           </div>
         </div>
-      </CardBox>
-    </>
+
+        <div className="flex items-center justify-between py-4 border-b border-ld">
+          <div>
+            <span className="font-medium text-ld opacity-80">
+              Approval Required Products
+            </span>
+            <p className="text-13">{requiresApprovalProducts} products</p>
+          </div>
+          <div className="text-end">
+            <h6 className="text-15 font-bold">{requiresApprovalProducts}</h6>
+            <span className="text-13 text-primary font-medium">
+              review workflow
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between py-4 border-b border-ld">
+          <div>
+            <span className="font-medium text-ld opacity-80">
+              Upload Required Products
+            </span>
+            <p className="text-13">{requiresUploadProducts} products</p>
+          </div>
+          <div className="text-end">
+            <h6 className="text-15 font-bold">{requiresUploadProducts}</h6>
+            <span className="text-13 text-warning font-medium">
+              file-based orders
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between pt-4">
+          <div>
+            <span className="font-medium text-ld opacity-80">Sales Mix</span>
+            <p className="text-13">{totalOrderItems.toLocaleString()} items</p>
+          </div>
+          <div className="text-end">
+            <h6 className="text-15 font-bold">
+              P {formatPercent(productMixPercent)} / K {formatPercent(packageMixPercent)}
+            </h6>
+            <span className="text-13 text-success font-medium">
+              {productOrderItems} products • {packageOrderItems} packages
+            </span>
+          </div>
+        </div>
+      </div>
+    </CardBox>
   );
 };
 
