@@ -76,8 +76,8 @@ const UsersBox = ({
   const internalUsers = adminUsers + managerUsers + staffUsers;
 
   return (
-    <CardBox className="shadow-none px-0 bg-lightsecondary dark:bg-lightsecondary overflow-hidden h-full">
-      <div className="flex justify-between py-7 px-6">
+    <CardBox className="shadow-none px-0 bg-lightsecondary dark:bg-lightsecondary overflow-hidden">
+      <div className="flex justify-between px-6">
         <div>
           <p className="text-ld text-15 font-semibold">Users</p>
           <div className="flex gap-3 items-center mb-4">

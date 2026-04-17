@@ -95,7 +95,7 @@ const Subscriptions = ({
   };
 
   return (
-    <CardBox className="shadow-none px-6 bg-lighterror dark:bg-lighterror h-full">
+    <CardBox className="shadow-none px-6 bg-lighterror dark:bg-lighterror">
       <div className="flex justify-between">
         <div>
           <p className="text-ld text-15 font-semibold">Packages</p>
