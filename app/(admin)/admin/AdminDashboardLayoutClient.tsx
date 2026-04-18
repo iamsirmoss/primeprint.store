@@ -2,10 +2,10 @@
 
 import { Toaster } from "@/components/ui/sonner";
 import ScrollToTop from "@/components/ScrollToTop";
-import Sidebar from "../layout/vertical/sidebar/Sidebar";
-import { Customizer } from "../layout/shared/customizer/Customizer";
+import Sidebar from "./layout/vertical/sidebar/Sidebar";
+import { Customizer } from "./layout/shared/customizer/Customizer";
 import { SidebarProvider } from "@/components/Admin/ui/sidebar";
-import Header from "../layout/vertical/header/Header";
+import Header from "./layout/vertical/header/Header";
 import { useCustomizer } from "@/hooks/use-customizer";
 
 export default function AdminDashboardLayoutClient({

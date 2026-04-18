@@ -36,7 +36,7 @@ const Banner = () => {
                               Your one stop shop for printing, notary and more.
                         </h1>
                   </motion.div>
-                  <div className='flex flex-wrap items-center gap-4 mt-10'>
+                  <div className='flex flex-wrap items-center gap-4 mt-4 sm:mt-10'>
                         
                         <Link href={'/services'} className='group'>
                               <button

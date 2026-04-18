@@ -49,6 +49,12 @@ const SidebarContent: MenuItem[] = [
             id: uniqueId(),
             url: "/admin/dashboard",
           },
+          {
+            name: "Orders",
+            icon: "solar:round-transfer-vertical-broken",
+            id: uniqueId(),
+            url: "/admin/orders",
+          },
           // {
           //   name: "Dashboard3",
           //   icon: "solar:screencast-2-line-duotone",

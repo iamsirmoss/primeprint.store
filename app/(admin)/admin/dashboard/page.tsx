@@ -156,11 +156,11 @@ const Page = async () => {
       </div>
 
       <div className="grid grid-cols-12 gap-7">
-        <div className="xl:col-span-8 col-span-12">
+        <div className="xl:col-span-12 col-span-12">
           <SectionCardsGrid items={executiveCards} />
         </div>
 
-        <div className="xl:col-span-4 col-span-12">
+        {/* <div className="xl:col-span-4 col-span-12">
           <AccessCard
             role={session.user.role}
             email={session.user.email}
@@ -169,7 +169,7 @@ const Page = async () => {
             totalPackages={totals.totalPackages}
             totalContacts={totals.totalContacts}
           />
-        </div>
+        </div> */}
       </div>
 
       <SectionCardsGrid title="Needs Attention" items={attentionCards} />
