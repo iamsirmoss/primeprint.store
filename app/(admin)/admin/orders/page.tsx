@@ -8,6 +8,7 @@ import { getAdminOrders } from "@/server/queries/orders";
 
 import BreadcrumbComp from "@/components/Admin/layout/shared/breadcrumb/BreadcrumbComp/BreadcrumbComp"; 
 import OrderTableTemplate from "@/components/Admin/orders/OrderTableTemplate";
+import { updateOrderStatusAction } from "./actions";
 
 export const metadata: Metadata = {
   title: "Orders",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 const BCrumb = [
   {
-    to: "/admin",
+    to: "/admin/dashboard",
     title: "Home",
   },
   {
@@ -147,6 +148,7 @@ const OrdersPage = async ({ searchParams }: OrdersPageProps) => {
       <OrderTableTemplate
         data={transformedOrders}
         statsCards={statsCards}
+        onStatusChange={updateOrderStatusAction}
       />
     </>
   );

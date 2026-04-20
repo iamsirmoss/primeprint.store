@@ -41,7 +41,7 @@ const OrderDetailPage = async ({ params }: OrderDetailPageProps) => {
 
   const BCrumb = [
     {
-      to: "/admin",
+      to: "/admin/dashboard",
       title: "Home",
     },
     {

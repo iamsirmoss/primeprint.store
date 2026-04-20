@@ -2,20 +2,19 @@
 
 import React, { useMemo, useState, useCallback, useTransition } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Icon } from "@iconify/react";
 import type { SortingState } from "@tanstack/react-table";
 import {
   useReactTable,
   getCoreRowModel,
   getSortedRowModel,
-  getFilteredRowModel,
-  getExpandedRowModel,
   getPaginationRowModel,
   flexRender,
   createColumnHelper,
 } from "@tanstack/react-table";
 
 import CardBox from "@/components/Admin/shared/CardBox";
-import { Icon } from "@iconify/react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -32,37 +31,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { format, parseISO } from "date-fns";
 
-type TemplateOrder = {
+type Product = {
   id: string;
-  orderId: string;
-  customerName: string;
-  customerEmail: string;
+  title: string;
+  slug: string;
   status: string;
-  date: string;
-  time: string;
-  amount: number;
-  amountFormatted: string;
-  address: string;
+  type: string;
+  stockQty: number | null;
+  image: string;
+  priceFormatted: string;
+  createdAt: string;
   href: string;
-  items: {
-    id: string;
-    name: string;
-    sku: string;
-    quantity: number;
-    price: number;
-    totalFormatted: string;
-    fulfillmentStatus: string;
-    uploadedFiles: string[];
-  }[];
 };
 
 type StatsCard = {
@@ -73,25 +53,24 @@ type StatsCard = {
   cardColor: string;
 };
 
-interface OrderTableTemplateProps {
-  data: TemplateOrder[];
+interface Props {
+  data: Product[];
   statsCards: StatsCard[];
   onStatusChange?: (
-    orderId: string,
+    productId: string,
     status: string
   ) => Promise<void | { success: boolean }>;
 }
+
+const columnHelper = createColumnHelper<Product>();
 
 const statusColorMap: Record<
   string,
   "default" | "secondary" | "destructive" | "outline" | "ghost" | "link"
 > = {
-  PENDING: "outline",
-  PAID: "secondary",
-  PROCESSING: "default",
-  COMPLETED: "default",
-  CANCELED: "destructive",
-  REFUNDED: "destructive",
+  PUBLISHED: "secondary",
+  DRAFT: "outline",
+  ARCHIVED: "destructive",
 };
 
 const miniCardBgMap: Record<string, string> = {
@@ -112,95 +91,80 @@ const miniIconTextMap: Record<string, string> = {
   error: "text-red-600",
 };
 
-const columnHelper = createColumnHelper<TemplateOrder>();
-
-export default function OrderTableTemplate({
+export default function ProductsTableTemplate({
   data,
   statsCards,
   onStatusChange,
-}: OrderTableTemplateProps) {
-  const [orderData, setOrderData] = useState<TemplateOrder[]>(data);
+}: Props) {
+  const [productData, setProductData] = useState(data);
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [globalFilter, setGlobalFilter] = useState("");
-  const [expanded, setExpanded] = useState({});
   const [rowSelection, setRowSelection] = useState({});
   const [showSearch, setShowSearch] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const [globalFilter, setGlobalFilter] = useState("");
   const [editingStatusRowId, setEditingStatusRowId] = useState<string | null>(null);
-  const [pendingStatus, setPendingStatus] = useState<string>("");
+  const [pendingStatus, setPendingStatus] = useState("");
   const [statusError, setStatusError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const [columnVisibility, setColumnVisibility] = useState<
     Record<string, boolean>
   >({
-    orderId: true,
-    customerName: true,
+    title: true,
+    type: true,
+    priceFormatted: true,
+    stockQty: true,
     status: true,
-    date: true,
-    amount: true,
-    address: true,
   });
 
-  const [columnFilters, setColumnFilters] = useState({
-    orderId: "",
-    customerName: "",
+  const [filters, setFilters] = useState({
+    title: "",
+    type: "",
     status: "",
-    amount: "",
-    address: "",
-    date: "",
+    stockQty: "",
   });
 
   const handleFilterChange = useCallback(
-    (key: keyof typeof columnFilters, value: string) => {
-      setColumnFilters((prev) => ({ ...prev, [key]: value }));
+    (key: keyof typeof filters, value: string) => {
+      setFilters((prev) => ({ ...prev, [key]: value }));
     },
     []
   );
 
-  const filteredOrderData = useMemo(() => {
-    return orderData.filter((item) => {
-      const idMatch = item.orderId
-        .toLowerCase()
-        .includes(columnFilters.orderId.toLowerCase());
+  const filteredProducts = useMemo(() => {
+    return productData.filter((item) => {
+      const titleMatch =
+        filters.title === "" ||
+        item.title.toLowerCase().includes(filters.title.toLowerCase()) ||
+        item.slug.toLowerCase().includes(filters.title.toLowerCase());
 
-      const customerMatch = item.customerName
-        .toLowerCase()
-        .includes(columnFilters.customerName.toLowerCase());
+      const typeMatch =
+        filters.type === "" ||
+        item.type.toLowerCase() === filters.type.toLowerCase();
 
       const statusMatch =
-        columnFilters.status === "" ||
-        item.status.toLowerCase() === columnFilters.status.toLowerCase();
+        filters.status === "" ||
+        item.status.toLowerCase() === filters.status.toLowerCase();
 
-      const amountMatch =
-        columnFilters.amount === "" ||
-        item.amount.toString().includes(columnFilters.amount);
-
-      const addressMatch = item.address
-        .toLowerCase()
-        .includes(columnFilters.address.toLowerCase());
-
-      const dateMatch =
-        columnFilters.date === "" ||
-        item.date.toLowerCase().includes(columnFilters.date.toLowerCase());
+      const stockMatch =
+        filters.stockQty === "" ||
+        String(item.stockQty ?? "").includes(filters.stockQty);
 
       const searchMatch =
         globalFilter === "" ||
-        item.orderId.toLowerCase().includes(globalFilter.toLowerCase()) ||
-        item.customerName.toLowerCase().includes(globalFilter.toLowerCase()) ||
-        item.customerEmail.toLowerCase().includes(globalFilter.toLowerCase());
+        item.title.toLowerCase().includes(globalFilter.toLowerCase()) ||
+        item.slug.toLowerCase().includes(globalFilter.toLowerCase()) ||
+        item.type.toLowerCase().includes(globalFilter.toLowerCase());
 
       return (
-        idMatch &&
-        customerMatch &&
+        titleMatch &&
+        typeMatch &&
         statusMatch &&
-        amountMatch &&
-        addressMatch &&
-        dateMatch &&
+        stockMatch &&
         searchMatch
       );
     });
-  }, [orderData, columnFilters, globalFilter]);
+  }, [productData, filters, globalFilter]);
 
   const allColumns = useMemo(
     () => [
@@ -224,25 +188,43 @@ export default function OrderTableTemplate({
         ),
       }),
 
-      columnHelper.accessor("orderId", {
-        header: "Order ID",
+      columnHelper.accessor("title", {
+        header: "Product",
         cell: ({ row }) => (
-          <p className="text-sm font-medium text-ld">{row.original.orderId}</p>
+          <div className="flex items-center gap-3 min-w-[260px]">
+            <div className="relative h-12 w-12 overflow-hidden rounded-lg border bg-muted shrink-0">
+              <Image
+                src={row.original.image || "/images/products/s1.jpg"}
+                alt={row.original.title}
+                fill
+                className="object-cover"
+                sizes="48px"
+              />
+            </div>
+
+            <div className="min-w-0">
+              <p className="font-medium line-clamp-1">{row.original.title}</p>
+              <p className="text-xs text-muted-foreground line-clamp-1">
+                {row.original.slug}
+              </p>
+            </div>
+          </div>
         ),
       }),
 
-      columnHelper.accessor("customerName", {
-        header: "Customer",
-        cell: ({ row }) => (
-          <div>
-            <p className="text-sm font-medium text-ld">
-              {row.original.customerName}
-            </p>
-            <p className="text-xs text-black/60 dark:text-white/60">
-              {row.original.customerEmail || "No email"}
-            </p>
-          </div>
-        ),
+      columnHelper.accessor("type", {
+        header: "Type",
+        cell: ({ row }) => <span>{row.original.type}</span>,
+      }),
+
+      columnHelper.accessor("priceFormatted", {
+        header: "Price",
+        cell: ({ row }) => <span>{row.original.priceFormatted}</span>,
+      }),
+
+      columnHelper.accessor("stockQty", {
+        header: "Stock",
+        cell: ({ row }) => <span>{row.original.stockQty ?? "∞"}</span>,
       }),
 
       columnHelper.accessor("status", {
@@ -252,7 +234,7 @@ export default function OrderTableTemplate({
 
           if (isEditing) {
             return (
-              <div className="flex items-center gap-2 min-w-[220px]">
+              <div className="flex items-center gap-2 min-w-[210px]">
                 <Select
                   value={pendingStatus || row.original.status}
                   onValueChange={setPendingStatus}
@@ -263,12 +245,9 @@ export default function OrderTableTemplate({
                   </SelectTrigger>
 
                   <SelectContent>
-                    <SelectItem value="PENDING">Pending</SelectItem>
-                    <SelectItem value="PAID">Paid</SelectItem>
-                    <SelectItem value="PROCESSING">Processing</SelectItem>
-                    <SelectItem value="COMPLETED">Completed</SelectItem>
-                    <SelectItem value="CANCELED">Canceled</SelectItem>
-                    <SelectItem value="REFUNDED">Refunded</SelectItem>
+                    <SelectItem value="DRAFT">Draft</SelectItem>
+                    <SelectItem value="PUBLISHED">Published</SelectItem>
+                    <SelectItem value="ARCHIVED">Archived</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -283,7 +262,7 @@ export default function OrderTableTemplate({
                       try {
                         setStatusError(null);
 
-                        setOrderData((prev) =>
+                        setProductData((prev) =>
                           prev.map((item) =>
                             item.id === row.original.id
                               ? { ...item, status: nextStatus }
@@ -297,8 +276,8 @@ export default function OrderTableTemplate({
 
                         setEditingStatusRowId(null);
                         setPendingStatus("");
-                      } catch (error) {
-                        setStatusError("Unable to update status.");
+                      } catch {
+                        setStatusError("Unable to update product status.");
                       }
                     });
                   }}
@@ -323,44 +302,11 @@ export default function OrderTableTemplate({
           }
 
           return (
-            <Badge
-              className="text-xs font-medium"
-              variant={statusColorMap[row.original.status] ?? "outline"}
-            >
+            <Badge variant={statusColorMap[row.original.status] ?? "outline"}>
               {row.original.status}
             </Badge>
           );
         },
-      }),
-
-      columnHelper.accessor("date", {
-        header: "Date",
-        cell: ({ row }) => (
-          <div>
-            <p className="text-sm text-ld font-normal">{row.original.date}</p>
-            <p className="text-xs text-black/60 dark:text-white/60">
-              {row.original.time}
-            </p>
-          </div>
-        ),
-      }),
-
-      columnHelper.accessor("amount", {
-        header: "Amount",
-        cell: ({ row }) => (
-          <p className="text-sm font-medium text-ld">
-            {row.original.amountFormatted}
-          </p>
-        ),
-      }),
-
-      columnHelper.accessor("address", {
-        header: "Address",
-        cell: ({ row }) => (
-          <p className="text-sm text-ld font-medium line-clamp-2">
-            {row.original.address}
-          </p>
-        ),
       }),
 
       columnHelper.display({
@@ -368,31 +314,6 @@ export default function OrderTableTemplate({
         header: "Actions",
         cell: ({ row }) => (
           <div className="flex items-center gap-2">
-            {row.getCanExpand() && (
-              <button
-                onClick={row.getToggleExpandedHandler()}
-                className="p-1 rounded-full hover:bg-lightprimary dark:hover:bg-darkprimary hover:cursor-pointer"
-                aria-label={row.getIsExpanded() ? "Collapse row" : "Expand row"}
-                type="button"
-              >
-                {row.getIsExpanded() ? (
-                  <Icon
-                    icon="solar:alt-arrow-up-linear"
-                    width={20}
-                    height={20}
-                    className="text-ld"
-                  />
-                ) : (
-                  <Icon
-                    icon="solar:alt-arrow-down-linear"
-                    width={20}
-                    height={20}
-                    className="text-ld"
-                  />
-                )}
-              </button>
-            )}
-
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
@@ -404,17 +325,12 @@ export default function OrderTableTemplate({
                     icon="solar:menu-dots-bold"
                     width={18}
                     height={18}
-                    aria-hidden="true"
                     className="text-ld"
                   />
                 </button>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent
-                align="end"
-                sideOffset={4}
-                className="min-w-[150px]"
-              >
+              <DropdownMenuContent align="end" sideOffset={4} className="min-w-[150px]">
                 <DropdownMenuItem asChild>
                   <Link href={row.original.href} className="flex items-center">
                     <Icon
@@ -466,22 +382,17 @@ export default function OrderTableTemplate({
   );
 
   const table = useReactTable({
-    data: filteredOrderData,
+    data: filteredProducts,
     columns: visibleColumns,
     state: {
       sorting,
-      expanded,
       rowSelection,
     },
     onSortingChange: setSorting,
-    onExpandedChange: setExpanded,
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getExpandedRowModel: getExpandedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    getRowCanExpand: () => true,
   });
 
   const visibleExportKeys = useMemo(
@@ -493,7 +404,7 @@ export default function OrderTableTemplate({
             col.id !== "select" &&
             col.id !== "actions"
         )
-        .map((col) => (col as any).accessorKey as keyof TemplateOrder),
+        .map((col) => (col as any).accessorKey as keyof Product),
     [visibleColumns]
   );
 
@@ -515,7 +426,7 @@ export default function OrderTableTemplate({
   );
 
   const handleExportCSV = useCallback(() => {
-    const rows = filteredOrderData.map((row) =>
+    const rows = filteredProducts.map((row) =>
       visibleExportKeys.map((key) => row[key] ?? "")
     );
 
@@ -529,44 +440,43 @@ export default function OrderTableTemplate({
     const blob = new Blob([csvContent], {
       type: "text/csv;charset=utf-8;",
     });
+
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", "orders.csv");
+    link.setAttribute("download", "products.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }, [filteredOrderData, visibleExportKeys, exportHeaders]);
+  }, [filteredProducts, visibleExportKeys, exportHeaders]);
 
   return (
     <div>
       <h3 className="text-lg font-semibold text-dark dark:text-white mb-4">
-        Orders History
+        Products History
       </h3>
 
-      <div className="grid lg:grid-cols-6 sm:grid-cols-3 grid-cols-2 gap-3">
-        {statsCards.map((statusCard) => (
-          <div key={statusCard.status}>
+      <div className="grid lg:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-3">
+        {statsCards.map((card) => (
+          <div key={card.status}>
             <div
               className={`rounded-xl p-4 border ${
-                miniCardBgMap[statusCard.cardColor] ?? "bg-muted"
+                miniCardBgMap[card.cardColor] ?? "bg-muted"
               }`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h4 className="text-lg font-bold">{statusCard.title}</h4>
+                  <h4 className="text-lg font-bold">{card.title}</h4>
                   <p className="text-sm text-muted-foreground mt-1">
-                    {statusCard.status}
+                    {card.status}
                   </p>
                 </div>
 
                 <div className="h-10 w-10 rounded-lg bg-white dark:bg-slate-900 flex items-center justify-center">
                   <Icon
-                    icon={statusCard.icon}
+                    icon={card.icon}
                     height={20}
-                    className={
-                      miniIconTextMap[statusCard.iconColor] ?? "text-primary"
-                    }
+                    className={miniIconTextMap[card.iconColor] ?? "text-primary"}
                   />
                 </div>
               </div>
@@ -578,7 +488,7 @@ export default function OrderTableTemplate({
       <CardBox className="mt-5 p-5">
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between my-1">
           <h3 className="text-lg font-semibold text-dark dark:text-white mb-4 md:mb-0">
-            Orders Table
+            Products Table
           </h3>
 
           <div className="flex flex-wrap items-center gap-1 md:gap-2">
@@ -604,7 +514,7 @@ export default function OrderTableTemplate({
                 onBlur={() => {
                   if (!globalFilter) setShowSearch(false);
                 }}
-                aria-label="Search orders"
+                aria-label="Search products"
               />
             )}
 
@@ -621,11 +531,7 @@ export default function OrderTableTemplate({
                   height={18}
                 />
               ) : (
-                <Icon
-                  icon="solar:filter-line-duotone"
-                  width={18}
-                  height={18}
-                />
+                <Icon icon="solar:filter-line-duotone" width={18} height={18} />
               )}
             </button>
 
@@ -645,11 +551,7 @@ export default function OrderTableTemplate({
                 </button>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent
-                align="end"
-                sideOffset={4}
-                className="min-w-[150px]"
-              >
+              <DropdownMenuContent align="end" sideOffset={4} className="min-w-[150px]">
                 {Object.keys(columnVisibility).map((col) => (
                   <DropdownMenuItem
                     key={col}
@@ -677,10 +579,7 @@ export default function OrderTableTemplate({
                   </DropdownMenuItem>
                 ))}
 
-                <DropdownMenuItem
-                  disabled
-                  className="flex items-center select-none"
-                >
+                <DropdownMenuItem disabled className="flex items-center select-none">
                   <Checkbox checked disabled className="mr-2" />
                   <span className="capitalize text-gray-400">actions</span>
                 </DropdownMenuItem>
@@ -706,27 +605,25 @@ export default function OrderTableTemplate({
           <div className="mb-4 p-4 grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-3">
             <div className="flex-1">
               <Input
-                placeholder="Order ID"
-                value={columnFilters.orderId}
-                onChange={(e) => handleFilterChange("orderId", e.target.value)}
+                placeholder="Product or slug"
+                value={filters.title}
+                onChange={(e) => handleFilterChange("title", e.target.value)}
                 className="w-full !form-control"
               />
             </div>
 
             <div className="flex-1">
               <Input
-                placeholder="Customer Name"
-                value={columnFilters.customerName}
-                onChange={(e) =>
-                  handleFilterChange("customerName", e.target.value)
-                }
+                placeholder="Type"
+                value={filters.type}
+                onChange={(e) => handleFilterChange("type", e.target.value)}
                 className="w-full !form-control"
               />
             </div>
 
             <div className="flex-1">
               <Select
-                value={columnFilters.status || "ALL"}
+                value={filters.status || "ALL"}
                 onValueChange={(value) =>
                   handleFilterChange("status", value === "ALL" ? "" : value)
                 }
@@ -740,70 +637,21 @@ export default function OrderTableTemplate({
 
                 <SelectContent>
                   <SelectItem value="ALL">All Status</SelectItem>
-                  <SelectItem value="PENDING">Pending</SelectItem>
-                  <SelectItem value="PAID">Paid</SelectItem>
-                  <SelectItem value="PROCESSING">Processing</SelectItem>
-                  <SelectItem value="COMPLETED">Completed</SelectItem>
-                  <SelectItem value="CANCELED">Canceled</SelectItem>
-                  <SelectItem value="REFUNDED">Refunded</SelectItem>
+                  <SelectItem value="DRAFT">Draft</SelectItem>
+                  <SelectItem value="PUBLISHED">Published</SelectItem>
+                  <SelectItem value="ARCHIVED">Archived</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="flex-1">
               <Input
-                placeholder="Amount"
-                value={columnFilters.amount}
-                onChange={(e) => handleFilterChange("amount", e.target.value)}
+                placeholder="Stock"
+                value={filters.stockQty}
+                onChange={(e) => handleFilterChange("stockQty", e.target.value)}
                 type="number"
                 className="w-full !form-control"
               />
-            </div>
-
-            <div className="flex-1">
-              <Input
-                placeholder="Address"
-                value={columnFilters.address}
-                onChange={(e) => handleFilterChange("address", e.target.value)}
-                className="w-full !form-control"
-              />
-            </div>
-
-            <div className="flex-1">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={`justify-start text-left w-full border border-ld text-ld hover:bg-transparent hover:border-primary ${
-                      !columnFilters.date
-                        ? "text-muted-foreground hover:text-muted-foreground"
-                        : "text-ld hover:text-ld"
-                    }`}
-                  >
-                    {columnFilters.date
-                      ? format(parseISO(columnFilters.date), "PPP")
-                      : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={
-                      columnFilters.date
-                        ? parseISO(columnFilters.date)
-                        : undefined
-                    }
-                    onSelect={(date) => {
-                      handleFilterChange(
-                        "date",
-                        date ? format(date, "yyyy-MM-dd") : ""
-                      );
-                    }}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
             </div>
           </div>
         ) : null}
@@ -859,103 +707,26 @@ export default function OrderTableTemplate({
                         colSpan={visibleColumns.length}
                         className="text-center py-4"
                       >
-                        No orders found.
+                        No products found.
                       </td>
                     </tr>
                   ) : (
                     table.getRowModel().rows.map((row) => (
-                      <React.Fragment key={row.id}>
-                        <tr className="border-b last:border-b-0 border-ld">
-                          {row.getVisibleCells().map((cell) => (
-                            <td
-                              key={cell.id}
-                              className={`px-4 py-2 ${
-                                cell.column.id === "customerName"
-                                  ? "min-w-[160px]"
-                                  : ""
-                              }`}
-                            >
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
-                              )}
-                            </td>
-                          ))}
-                        </tr>
-
-                        {row.getIsExpanded() ? (
-                          <tr>
-                            <td
-                              colSpan={row.getVisibleCells().length}
-                              className="bg-gray-100 dark:bg-dark px-4 py-4"
-                            >
-                              <h6 className="font-semibold mb-2">
-                                Customer Order Details
-                              </h6>
-
-                              <div className="overflow-x-auto">
-                                <table className="min-w-full text-sm">
-                                  <thead className="bg-gray-200 dark:bg-white/10">
-                                    <tr className="text-ld">
-                                      <th className="text-left px-4 py-2">
-                                        Name
-                                      </th>
-                                      <th className="text-left px-4 py-2">
-                                        SKU
-                                      </th>
-                                      <th className="text-left px-4 py-2">
-                                        Quantity
-                                      </th>
-                                      <th className="text-left px-4 py-2">
-                                        Status
-                                      </th>
-                                      <th className="text-left px-4 py-2">
-                                        Total
-                                      </th>
-                                    </tr>
-                                  </thead>
-
-                                  <tbody>
-                                    {row.original.items.length ? (
-                                      row.original.items.map((item) => (
-                                        <tr
-                                          key={item.id}
-                                          className="border-b border-ld text-ld"
-                                        >
-                                          <td className="px-4 py-2">
-                                            {item.name}
-                                          </td>
-                                          <td className="px-4 py-2">
-                                            {item.sku}
-                                          </td>
-                                          <td className="px-4 py-2">
-                                            {item.quantity}
-                                          </td>
-                                          <td className="px-4 py-2">
-                                            {item.fulfillmentStatus}
-                                          </td>
-                                          <td className="px-4 py-2">
-                                            {item.totalFormatted}
-                                          </td>
-                                        </tr>
-                                      ))
-                                    ) : (
-                                      <tr>
-                                        <td
-                                          colSpan={5}
-                                          className="px-4 py-2 text-center text-gray-500"
-                                        >
-                                          No items found.
-                                        </td>
-                                      </tr>
-                                    )}
-                                  </tbody>
-                                </table>
-                              </div>
-                            </td>
-                          </tr>
-                        ) : null}
-                      </React.Fragment>
+                      <tr key={row.id} className="border-b last:border-b-0 border-ld">
+                        {row.getVisibleCells().map((cell) => (
+                          <td
+                            key={cell.id}
+                            className={`px-4 py-2 ${
+                              cell.column.id === "title" ? "min-w-[260px]" : ""
+                            }`}
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </td>
+                        ))}
+                      </tr>
                     ))
                   )}
                 </tbody>
@@ -981,7 +752,7 @@ export default function OrderTableTemplate({
                 </SelectTrigger>
 
                 <SelectContent>
-                  {[3, 10, 20, 30, 40, 50].map((pageSize) => (
+                  {[5, 10, 20, 30, 40, 50].map((pageSize) => (
                     <SelectItem key={pageSize} value={String(pageSize)}>
                       {pageSize}
                     </SelectItem>
