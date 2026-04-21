@@ -33,7 +33,7 @@ const ProductOverviewCard = ({
   service,
 }: ProductOverviewCardProps) => {
   return (
-    <CardBox className="p-5 h-full">
+    <CardBox className="p-5">
       <h2 className="text-lg font-semibold mb-4">Overview</h2>
 
       <div className="space-y-3 text-sm">

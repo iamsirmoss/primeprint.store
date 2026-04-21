@@ -8,7 +8,7 @@ import BreadcrumbComp from "@/components/Admin/layout/shared/breadcrumb/Breadcru
 import ProductsTableTemplate from "@/components/Admin/products/ProductsTableTemplate";
 
 import { getAdminProducts } from "@/server/queries/products";
-import { updateProductStatusAction } from "./actions";
+import { updateProductStatusAction, deleteProductAction } from "./actions";
 
 const BCrumb = [
   { to: "/admin/dashboard", title: "Home" },
@@ -122,6 +122,7 @@ const ProductsPage = async () => {
         data={transformedProducts}
         statsCards={statsCards}
         onStatusChange={updateProductStatusAction}
+        onDeleteProduct={deleteProductAction}
       />
     </>
   );

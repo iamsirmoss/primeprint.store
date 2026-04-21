@@ -60,6 +60,7 @@ interface Props {
     productId: string,
     status: string
   ) => Promise<void | { success: boolean }>;
+  onDeleteProduct?: (formData: FormData) => Promise<void>;
 }
 
 const columnHelper = createColumnHelper<Product>();
@@ -95,6 +96,7 @@ export default function ProductsTableTemplate({
   data,
   statsCards,
   onStatusChange,
+  onDeleteProduct,
 }: Props) {
   const [productData, setProductData] = useState(data);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -105,6 +107,8 @@ export default function ProductsTableTemplate({
   const [editingStatusRowId, setEditingStatusRowId] = useState<string | null>(null);
   const [pendingStatus, setPendingStatus] = useState("");
   const [statusError, setStatusError] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [deletingProductId, setDeletingProductId] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const [columnVisibility, setColumnVisibility] = useState<
@@ -156,13 +160,7 @@ export default function ProductsTableTemplate({
         item.slug.toLowerCase().includes(globalFilter.toLowerCase()) ||
         item.type.toLowerCase().includes(globalFilter.toLowerCase());
 
-      return (
-        titleMatch &&
-        typeMatch &&
-        statusMatch &&
-        stockMatch &&
-        searchMatch
-      );
+      return titleMatch && typeMatch && statusMatch && stockMatch && searchMatch;
     });
   }, [productData, filters, globalFilter]);
 
@@ -312,60 +310,121 @@ export default function ProductsTableTemplate({
       columnHelper.display({
         id: "actions",
         header: "Actions",
-        cell: ({ row }) => (
-          <div className="flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  className="btn-circle-hover cursor-pointer p-0 h-7 w-7"
-                  aria-label="menu"
-                  type="button"
-                >
-                  <Icon
-                    icon="solar:menu-dots-bold"
-                    width={18}
-                    height={18}
-                    className="text-ld"
-                  />
-                </button>
-              </DropdownMenuTrigger>
+        cell: ({ row }) => {
+          const isDeleting = deletingProductId === row.original.id;
 
-              <DropdownMenuContent align="end" sideOffset={4} className="min-w-[150px]">
-                <DropdownMenuItem asChild>
-                  <Link href={row.original.href} className="flex items-center">
+          return (
+            <div className="flex items-center gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className="btn-circle-hover cursor-pointer p-0 h-7 w-7"
+                    aria-label="menu"
+                    type="button"
+                  >
                     <Icon
-                      icon="solar:eye-linear"
+                      icon="solar:menu-dots-bold"
+                      width={18}
+                      height={18}
+                      className="text-ld"
+                    />
+                  </button>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent
+                  align="end"
+                  sideOffset={4}
+                  className="min-w-[170px]"
+                >
+                  <DropdownMenuItem asChild>
+                    <Link href={row.original.href} className="flex items-center">
+                      <Icon
+                        icon="solar:eye-linear"
+                        width={20}
+                        height={20}
+                        className="me-2"
+                      />
+                      View details
+                    </Link>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    onSelect={() => {
+                      setEditingStatusRowId(row.original.id);
+                      setPendingStatus(row.original.status);
+                      setStatusError(null);
+                    }}
+                    className="flex items-center"
+                  >
+                    <Icon
+                      icon="solar:pen-2-linear"
                       width={20}
                       height={20}
                       className="me-2"
                     />
-                    View details
-                  </Link>
-                </DropdownMenuItem>
+                    Change status
+                  </DropdownMenuItem>
 
-                <DropdownMenuItem
-                  onSelect={() => {
-                    setEditingStatusRowId(row.original.id);
-                    setPendingStatus(row.original.status);
-                    setStatusError(null);
-                  }}
-                  className="flex items-center"
-                >
-                  <Icon
-                    icon="solar:pen-2-linear"
-                    width={20}
-                    height={20}
-                    className="me-2"
-                  />
-                  Change status
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        ),
+                  <DropdownMenuItem
+                    disabled={isDeleting}
+                    onSelect={(event) => {
+                      event.preventDefault();
+
+                      const confirmed = window.confirm(
+                        `Are you sure you want to delete "${row.original.title}"? This action cannot be undone.`
+                      );
+
+                      if (!confirmed || !onDeleteProduct) return;
+
+                      startTransition(async () => {
+                        try {
+                          setDeleteError(null);
+                          setDeletingProductId(row.original.id);
+
+                          const fd = new FormData();
+                          fd.set("productId", row.original.id);
+
+                          await onDeleteProduct(fd);
+
+                          setProductData((prev) =>
+                            prev.filter((item) => item.id !== row.original.id)
+                          );
+                        } catch (err) {
+                          setDeleteError(
+                            err instanceof Error
+                              ? err.message
+                              : "Unable to delete product."
+                          );
+                        } finally {
+                          setDeletingProductId(null);
+                        }
+                      });
+                    }}
+                    className="flex items-center text-red-600 dark:text-red-400"
+                  >
+                    <Icon
+                      icon="solar:trash-bin-trash-linear"
+                      width={20}
+                      height={20}
+                      className="me-2"
+                    />
+                    {isDeleting ? "Deleting..." : "Delete"}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          );
+        },
       }),
     ],
-    [editingStatusRowId, pendingStatus, isPending, onStatusChange]
+    [
+      editingStatusRowId,
+      pendingStatus,
+      isPending,
+      onStatusChange,
+      deletingProductId,
+      onDeleteProduct,
+    ]
   );
 
   const visibleColumns = useMemo(
@@ -659,6 +718,12 @@ export default function ProductsTableTemplate({
         {statusError ? (
           <div className="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/30 dark:text-red-300">
             {statusError}
+          </div>
+        ) : null}
+
+        {deleteError ? (
+          <div className="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/30 dark:text-red-300">
+            {deleteError}
           </div>
         ) : null}
 
